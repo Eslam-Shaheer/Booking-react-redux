@@ -4,7 +4,7 @@ export const axiosInstance = axios.create({
   baseURL: "https://iti-g3-booking-backend.herokuapp.com/",
 });
 
-axios.interceptors.request.use(
+axiosInstance.interceptors.request.use(
   function (config) {
     config.headers["authentication"] = localStorage.getItem("authentication");
     return config;
@@ -13,3 +13,4 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+ 
