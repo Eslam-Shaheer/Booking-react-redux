@@ -55,6 +55,7 @@ function App() {
       )
     );
   }, []);
+
   const fun = () => {
     console.log(allapartments);
      
