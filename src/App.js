@@ -1,23 +1,8 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-// import {
-//   getHotelById,
-//   getHotels,
-//   createBooking,
-//   getBookingByHotelId,
-//   deleteBooking,
-//   updateBooking,
-//   createReview,
-//   getReviewsByHotelId,
-//   updateReview,
-//   deleteReview,
-//   creatMessage,
-//   getAllMessages,
-//   updateMessage,
-//   deleteMessage,
-// } from "./Redux/actions/hotel";
+import { getHotels } from "./Redux/actions/hotel";
+import { getHotelById } from "./Redux/actions/hotel";
 
 function App() {
   const upload = (event) => {
@@ -25,6 +10,7 @@ function App() {
 
     console.log(event);
   };
+
   return (
     <div className="App">
       <input
@@ -35,5 +21,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
