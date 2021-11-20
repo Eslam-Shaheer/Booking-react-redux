@@ -15,45 +15,60 @@ import { getCampGrounds,getCampById, createCampBooking ,getBookingByCampId,delet
 
 } from "./Redux/actions/campground";
 
-
 function App() {
-  localStorage.setItem('authentication','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxOGZlYTIyMDdmNzA4MWQ3YzFlMmRhMyIsImVtYWlsIjoiYWhtZWRAei5jb20iLCJ0eXBlIjoiYWRtaW4iLCJpYXQiOjE2MzczMjc3Nzl9.Vl-EaNNwZDVxr95Gf2X9ApVTij1AIX_9G5qptgL0d2g')
-  const [hotels, setHotels] = useState([]);
-  const [camps, setCamps] = useState([]);
-  const allHotels = useSelector((state) => state.hotel);
-  const allCamps = useSelector((state) => state.campGround);
-  
+  const allapartments = useSelector((state) => state.apartment);
+
+  const [getAllApartments, setApartment] = useState([]);
+  const [getApartmentsById, setApartmentById] = useState();
   const dispatch = useDispatch();
 
- 
-  const booking = {
-    startAt: new Date("12-2-2024").toLocaleString(),
-    endAt: new Date("12-3-2024").toLocaleString(),
-    days:7,
-    guestsNum:77
-  };
   useEffect(() => {
-  
-     dispatch(getCampGrounds());
-     dispatch(updateCampBooking("61952c198238a36b2873c731","61952c198238a36b2873c732","61980748f7ffc2cb8698dd19",booking));
-     dispatch(getReviewsByCampId("61952c198238a36b2873c731"));
-     dispatch(deleteCampMessage("61952c198238a36b2873c731","61980c33f7ffc2cb8698e2f1"));
-   
-     dispatch(getAllCampMessages("61952c198238a36b2873c731"));
-   
-    // dispatch(deleteCampBooking("61912002225eb08084430cef","619120d1225eb08084430d41","6197aad3948f63868139e73b"));
+    setApartment(allapartments.getApartments);
+    console.log("Aaaa", allapartments.getApartments);
+  }, [allapartments]);
 
-  //  dispatch(getCamplById("619525daae7ed27ca84f669a"));
+  useEffect(() => {
+    setApartmentById(allapartments.displayApartmentById);
+  }, [allapartments.displayApartmentById]);
+
+  var date8 = new Date("7-2-2015");
+  var date10 = new Date("9-2-2015");
+
+  const bookingObject = {
+    startAt: date8,
+    endAt: date10,
+    days: 22,
+    guestsNum: 1000,
+  };
+  const messageObject = {
+    body: "Created Success",
+    replay: ["a", "b"],
+  };
+
+  const replayObject = {
+    replay: "Replay Created",
+  };
+
+  const reviewObject = {
+    body: "review Created",
+    starRating: 4,
+  };
+
+  useEffect(() => {
+    dispatch(getApartments());
+    dispatch(displayApartmentById("61910b31225eb0808442f7bf"));
   }, []);
   const fun = () => {
 
     console.log(allCamps.getAllCampMessages,"msg")
+    console.log(allapartments);
   };
+
   return (
     <div className="App">
-      <button onClick={fun}>Add to count</button>
+      <button onClick={fun}>Click To Test</button>
     </div>
   );
+  
 }
-
 export default App;
