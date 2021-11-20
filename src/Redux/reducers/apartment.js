@@ -1,35 +1,35 @@
 export default function apartmentReducer(state = [], action) {
   switch (action.type) {
     case "GET_APARTMENT":
-      return { ...action.payload };
+      return { ...state, getApartments: action.payload };
     case "GET_APARTMENT_BY_ID":
-      return { ...action.payload };
+      return { ...state, displayApartmentById: action.payload };
     case "CREATE_BOOKING":
-      return { ...action.payload };
+      return { ...state, createBooking: action.payload };
     case "UPDATE_BOOKING":
-      return { ...action.payload };
+      return { ...state, updateBooking: action.payload };
     case "DELETE_BOOKING":
-      return { ...action.payload };
+      return { ...state, deleteBooking: action.payload };
     case "DISPLAY_BOOKING":
-      return { ...action.payload };
+      return { ...state, displayAllBookings: action.payload };
     case "GET_MESSAGE":
-      return { ...action.payload };
+      return { ...state, displayAllMessages: action.payload };
     case "CREATE_MESSAGE":
-      return { ...action.payload };
+      return { ...state, createMessage: action.payload };
     case "UPDATE_MESSAGE":
-      return { ...action.payload };
+      return { ...state, updateMessage: action.payload };
     case "DELETE_MESSAGE":
-      return { ...action.payload };
+      return { ...state, deleteMessage: action.payload };
     case "CREATE_REPLAY":
-      return { ...action.payload };
+      return { ...state, createReplay: action.payload };
     case "CREATE_REVIEW":
-      return { ...action.payload };
+      return { ...state, createReview: action.payload };
     case "DISPLAY_REVIEW":
-      return { ...action.payload };
+      return { ...state, displayAllReviews: action.payload };
     case "UPDATE_REIVEW":
-      return { ...action.payload };
+      return { ...state, updateReview: action.payload };
     case "DELETE_REVIEW":
-      return { ...action.payload };
+      return { ...state, deleteReview: action.payload };
     default:
       return state;
   }
