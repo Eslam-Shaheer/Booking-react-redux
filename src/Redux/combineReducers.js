@@ -4,6 +4,7 @@ import hotelReducer from "./reducers/hotel";
 import campGroundReducer from "./reducers/campground";
 import userReducer from "./reducers/user";
 import imagesReducer from "./reducers/images";
+import propertysFilter from "./reducers/PopsFilter";
 
 
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   campGround:campGroundReducer,
   user: userReducer,
   images: imagesReducer,
+  reviewSorting:propertysFilter,
 
 });
 
