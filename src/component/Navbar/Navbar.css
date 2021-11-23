@@ -1,3 +1,4 @@
+ 
 .bg-primary_color {
     background-color: #003580 !important;
 }
@@ -57,5 +58,20 @@
     font-weight: 400;
     margin-bottom: -1px;
 }
+.NavStyle {
+ border-radius: 999px;
+
+ }
+.NavStyle:hover {
+    background-color: hsla(0, 0%, 100%, .1);
+    border-radius: 999px;
+ 
+ }
+ .NavStyle.active{
+     background-color: hsla(0, 0%, 100%, .1);
+      border: 2px solid rgba(255, 255, 255, 0.685);
+   }
+ 
+ 
 
  
