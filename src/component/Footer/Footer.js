@@ -14,12 +14,12 @@ export default function Footer() {
                     <div className="form-outline mx-md-2 mx-auto">
                         <input type="search" placeholder="Your Email" className="form-control footer-btn-search " />
                     </div>
-                    <a href="#" className="btn btn-primary btn-lg rounded-2 mx-auto mx-md-2 " tabindex="-1" role="button"
+                    <a href="#" className="btn btn-primary btn-lg rounded-2 mx-auto mx-md-2 " tabIndex="-1" role="button"
                         aria-disabled="true">Search</a>
                 </div>
                 <div className="form-check form-check-inline mx-2 my-2 fs-6">
                     <input className="form-check-input " type="checkbox" id="inlineCheckbox2" value="option2"/>
-                    <label className="form-check-label " for="inlineCheckbox2"> Send me a link to get the FREE
+                    <label className="form-check-label " htmlFor="inlineCheckbox2"> Send me a link to get the FREE
                         Booking.com
                         app!</label>
                 </div>

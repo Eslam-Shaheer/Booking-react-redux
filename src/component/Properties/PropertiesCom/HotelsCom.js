@@ -54,7 +54,7 @@ export default function Properties() {
   }, [])
     return (
         <>
-           <div className="col-sm-9   rounded">
+           <div className="col-md-9   rounded">
                 <div className="text d-flex justify-content-between">
                     <h3 className="align-self-center">Austin: 473 properties found</h3>
                     <div className="mapbtn ">

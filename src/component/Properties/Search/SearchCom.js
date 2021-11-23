@@ -4,23 +4,23 @@ import './SearchCom.css'
 export default function SearchCom() {
     return (
         <>
-              <div className="col-sm-3 mb-4 ">
+              <div className="col-md-3 mb-4 ">
                 <div className="search p-3 rounded ">
                     <h3 >Search</h3>
                     <form action="" className="search-form ">
-                    <label for="coun-input" >Destination/property name:</label>
+                    <label htmlFor="coun-input" >Destination/property name:</label>
                     <div className="inp mb-2">
                         <svg aria-hidden="true" className="inp-icon " fill="#333333" focusable="false" height="20" role="presentation" width="20" viewBox="0 0 24 24"><path d="M17.464 6.56a8.313 8.313 0 1 1-15.302 6.504A8.313 8.313 0 0 1 17.464 6.56zm1.38-.586C16.724.986 10.963-1.339 5.974.781.988 2.9-1.337 8.662.783 13.65c2.12 4.987 7.881 7.312 12.87 5.192 4.987-2.12 7.312-7.881 5.192-12.87zM15.691 16.75l7.029 7.03a.75.75 0 0 0 1.06-1.06l-7.029-7.03a.75.75 0 0 0-1.06 1.06z"></path></svg>
-                        <input className="w-100   px-4 py-2" type="search" value="Search-Value" placeholder="Search-Value" id="coun-input"/>
+                        <input className="w-100   px-4 py-2" type="search" placeholder="Search-Value" placeholder="Search-Value" id="coun-input"/>
                     </div>
-                    <label for="check-in" className="fs-6 ">Check-in date</label>
+                    <label htmlFor="check-in" className="fs-6 ">Check-in date</label>
                     <div className="inp mb-2">
                         <input className="px-4 py-2 w-100" type="date"  id="check-in"/>
                     </div>
-                    <label for="check-out" className="fs-6">Check-out date</label>
+                    <label htmlFor="check-out" className="fs-6">Check-out date</label>
                     <div className="inp mb-2">
                         <input className="px-4 py-2 w-100" type="date"  id="check-out"/>
-                        <label for="check-out" className="fs-6 ">7 nights stay</label>
+                        <label htmlFor="check-out" className="fs-6 ">7 nights stay</label>
                     </div>
                     <div className="dropdown mb-2">
                         <button className="btn bg-white w-100  dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -38,7 +38,7 @@ export default function SearchCom() {
 
                       
                       <div className="checkbox mb-1">
-                          <input type="checkbox" id="entier"/> <label for="entier ">Entire homes & apartments</label>
+                          <input  type="checkbox" id="entier"/> <label htmlFor="entier ">Entire homes & apartments</label>
                           
 
                               <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
@@ -48,7 +48,7 @@ export default function SearchCom() {
                       
                       </div>
                       <div className="checkbox mb-1 ">
-                        <input type="checkbox" id="workk"/> <label for="workk ">I'm traveling for work</label>
+                        <input  type="checkbox" id="workk"/> <label htmlFor="workk ">I'm traveling for work</label>
                       
 
                             <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"  viewBox="0 0 16 16">
@@ -58,7 +58,7 @@ export default function SearchCom() {
                         
                   
                     </div>
-                    <input className="btn-primary w-100 p-2 fs-5 my-2" type="submit" value="Search"/>
+                    <input  className="btn-primary w-100 p-2 fs-5 my-2" type="submit" value="Search"/>
                     </form>
     
                     
