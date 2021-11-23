@@ -5,7 +5,9 @@ import Footer from "./component/Footer/Footer";
 import HotelsList from "./Pages/Properties/HotelsList";
 import CampsList from "./Pages/Properties/CampgroundList";
 import ApartmentsList from "./Pages/Properties/ApartmentsList";
-
+import Post from "./Pages/Posts/Post";
+import Example from "./component/Posts/PostStructure/PostStructure";
+  
 
 
 function App() {
@@ -16,8 +18,9 @@ function App() {
       {/* <Home /> */}
       {/* <HotelsList/> */}
     {/*   <CampsList/> */}
-    <ApartmentsList/>
-      <Footer />
+    {/* <ApartmentsList/> */}
+      <Post/>
+       <Footer />
      </div>
   );
 }

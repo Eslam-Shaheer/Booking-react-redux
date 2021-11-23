@@ -1,0 +1,15 @@
+.Border{
+    border-bottom: 1px dotted rgb(0, 0, 0);
+}
+
+.Btn {
+  width: 100%;
+  border: 1px solid #0071c2;
+  color: #0071c2;
+  background-color: white;
+  font-size: 15px;
+}
+ 
+.Background{
+    background-color: cornflowerblue;
+}

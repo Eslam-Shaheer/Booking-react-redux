@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./HomesGustesLove.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { getHotels } from "../../Redux/actions/hotel";
+import { getHotels } from "../../../Redux/actions/hotel";
 
 export default function HomesGustesLove() {
    const Hotels = useSelector((state) => state.hotel.getHotels);
