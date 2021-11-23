@@ -16,11 +16,18 @@ function App() {
     <div className="App">
       <Navbar />
       {/* <Home /> */}
+<<<<<<< HEAD
       {/* <HotelsList/> */}
     {/*   <CampsList/> */}
     {/* <ApartmentsList/> */}
       <Post/>
        <Footer />
+=======
+      <HotelsList/>
+      {/* <CampsList/> */}
+     {/* <ApartmentsList/>  */}
+      <Footer />
+>>>>>>> 9253646f7b31983b9d0189a92b9bfc1af46fc58b
      </div>
   );
 }

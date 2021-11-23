@@ -41,7 +41,7 @@ export default function Header() {
               id="inlineCheckbox1"
               value="option1"
             />
-            <label className="form-check-label" for="inlineCheckbox1">
+            <label className="form-check-label" htmlFor="inlineCheckbox1">
               I'm looking for an entire home or apartment
             </label>
           </div>
@@ -52,7 +52,7 @@ export default function Header() {
               id="inlineCheckbox2"
               value="option2"
             />
-            <label className="form-check-label" for="inlineCheckbox2">
+            <label className="form-check-label" htmlFor="inlineCheckbox2">
               I'm traveling for work
             </label>
           </div>
