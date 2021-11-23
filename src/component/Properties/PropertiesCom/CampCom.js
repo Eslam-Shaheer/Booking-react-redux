@@ -71,8 +71,9 @@ export default function CampGrounds() {
                 <div className="properties">
                 {
                   allProps && allProps.data.map((prop)=>{
+                    if(prop.status=="accepted"){
                    return  <CampGround prop={prop}/>
-
+                    }
                   })
                 }
                 </div>

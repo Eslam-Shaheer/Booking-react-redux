@@ -75,7 +75,9 @@ export default function Properties() {
                 <div className="properties">
                 {
                   allProps && allProps.data.map((prop)=>{
+                    if(prop.status=="accepted"){
                    return  <Hotel prop={prop}/>
+                  }
 
                   })
                 }

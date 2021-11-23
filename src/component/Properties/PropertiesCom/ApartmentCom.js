@@ -65,7 +65,10 @@ export default function Apartments() {
                 <div className="properties">
                 {
                   allProps && allProps.data.map((prop)=>{
-                   return  <Apartment prop={prop}/>
+                    if(prop.status=="accepted"){
+
+                      return  <Apartment prop={prop}/>
+                    }
 
                   })
                 }
