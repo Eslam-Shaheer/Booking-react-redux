@@ -1,36 +1,64 @@
+import Button from "@restart/ui/esm/Button";
 import React, { useEffect, useState } from "react";
-import { Card, Container, Modal } from "react-bootstrap";
+import { Card, Container, FloatingLabel, Form, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCommentByPostId } from "../../../../Redux/actions/comment";
 import { axiosInstance } from "../../../../Redux/network";
 import "./SinglePost.css";
+
 export default function SinglePost(props) {
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState(props.post);
+  const [btnComment, setbtnComment] = useState(false);
   const [comment, setComment] = useState();
+  const [newComment, setNewComment] = useState();
 
   // const comment = useSelector((state) => state.comment.getCommentByPostId);
   // const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch(getCommentByPostId(posts._id));
- 
   }, []);
-    let getComments =(id)=>{
-      console.log(id);
-      axiosInstance.get("comment/post/" + id).then((result) => {
-        setComment(result.data.data);
-            console.log(result);
+  let getComments = (id) => {
+    console.log(id);
+    axiosInstance.get("comment/post/" + id).then((result) => {
+      setComment(result.data.data);
+    });
+  };
 
-      });
-  }
+  const saveComment = (id) => {
+    axiosInstance.post("comment/" + id, newComment).then((result) => {
+      // if (result.data.success) {
+      //    if(comment){setComment([...comment, newComment])}else{
+      //      setComment([newComment])
+      //    } 
+      //  } else {
+      //   alert(result.data.msg);
+      // }
+      console.log(result);
+    });
+    
+  };
+
+  const onChangeComment = (e) => {
+    setNewComment({ ...newComment, [e.target.name]: e.target.value });
+    console.log(newComment);
+  };
+
   return (
     <>
       <div className="card border mb-3">
         <Container>
           <div class="d-flex flex-row bd-highlight my-3  Border">
             <div class="p-2 bd-highlight">
-              <img src={posts.userId.personalImage} className="imgStyle"></img>
+              <img
+                src={
+                  posts.userId.personalImage
+                    ? posts.userId.personalImage
+                    : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+                }
+                className="imgStyle"
+              ></img>
             </div>
             <div class="p-2 bd-highlight ">
               <h6>{posts.userId.username}</h6>
@@ -152,7 +180,11 @@ export default function SinglePost(props) {
                     <div class="d-flex flex-row bd-highlight my-3  Border">
                       <div class="p-2 bd-highlight">
                         <img
-                          src={posts.userId.personalImage}
+                          src={
+                            posts.userId.personalImage
+                              ? posts.userId.personalImage
+                              : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+                          }
                           className="imgStyle"
                         ></img>
                       </div>
@@ -231,18 +263,71 @@ export default function SinglePost(props) {
                     </div>
 
                     <div className="text-center">
-                      <img
-                        className="my-3 responsive"
-                        src={posts.postImage}
-                        width="100%"
-                      ></img>
+                      {posts.postImage && (
+                        <img
+                          className="my-3 responsive"
+                          src={posts.postImage}
+                          width="100%"
+                        ></img>
+                      )}
                     </div>
                   </div>
                 </div>
                 <div className="col-6 overflow-auto">
-                  <button className="btn btn-outline-primary w-100 mb-3">
+                  {/* <button className="btn btn-outline-primary w-100 mb-3">
                     Leave comment
+                  </button> */}
+
+                  <button
+                    className="btn btn-outline-primary w-100 mb-3"
+                    onClick={() => setbtnComment(true)}
+                  >
+                    Leave Comment
                   </button>
+
+                  <Modal
+                    show={btnComment}
+                    onHide={() => setbtnComment(false)}
+                    dialogClassName="modal-90w"
+                    aria-labelledby="example-custom-modal-styling-title"
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="example-custom-modal-styling-title">
+                        Leave Comment
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <FloatingLabel
+                        controlId="floatingTextarea2"
+                        label="comment"
+                      >
+                        <Form.Control
+                          as="textarea"
+                          onChange={onChangeComment}
+                          name="body"
+                          placeholder="Type your comment here"
+                          style={{ height: "200px" }}
+                        />
+                      </FloatingLabel>
+
+                      <Form.Group controlId="formFile" className="mb-3">
+                        <Form.Label>Upload Image</Form.Label>
+                        <Form.Control type="file" />
+                      </Form.Group>
+
+                      <button
+                        onClick={() => saveComment(posts._id)}
+                        className="btn btn-primary"
+                      >
+                        <Button
+                          className="btn btn-primary"
+                          onClick={() => setbtnComment(false)}
+                        >
+                          Comment
+                        </Button>
+                      </button>
+                    </Modal.Body>
+                  </Modal>
 
                   {comment &&
                     comment.map((com) => {

@@ -19,13 +19,13 @@ useEffect(() => {
 
 useEffect(() => {
 setPosts(Posts);
-console.log(Posts);
+
  }, [Posts]);
 
 
   return (
     <div className="col-8">
-      {allPosts && allPosts.data.map(pst=>{
+      {allPosts && allPosts.data.reverse().map(pst=>{
         return <SinglePost post={pst} />;
       })}
      
