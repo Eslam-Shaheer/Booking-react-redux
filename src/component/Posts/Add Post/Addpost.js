@@ -22,8 +22,9 @@ export default function Addpost() {
       formData.append("multiple_images", selectedFile, selectedFile.name);
       axiosInstance.post("upload/image/multiple", formData).then((result) => {
         let image = result.data.data[0];
-        setPost({ ...Post, postImage: image });
-
+        let newPost = Post;
+        newPost.postImage = image;
+        setPost(newPost);
         axiosInstance.post("post/", Post).then((result) => {
           if (result.data.success) {
             window.location.reload();

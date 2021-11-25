@@ -42,6 +42,7 @@ export default function SinglePost(props) {
       } else {
         setisOwner(false);
       }
+      console.log(posts);
     });
   }, []);
 
@@ -56,6 +57,9 @@ export default function SinglePost(props) {
     axiosInstance.delete("comment/" + id).then((result) => {
       let comments = comment.filter((item) => item._id != id);
       setComment(comments);
+      axiosInstance.get("comment/post/" + id).then((result) => {
+        setCommentLength(result.data.data.length);
+      });
     });
   };
   const updatePost = (id) => {
@@ -109,7 +113,10 @@ export default function SinglePost(props) {
       axiosInstance.get("user/loggedIn/").then((result) => {
         for (let com of allComment) {
           console.log(allComment);
-          if (com.userId._id == result.data.data._id) {
+          if (
+            com.userId._id == result.data.data._id ||
+            result.data.data.type == "admin"
+          ) {
             com.isOwner = true;
           } else {
             com.isOwner = false;
