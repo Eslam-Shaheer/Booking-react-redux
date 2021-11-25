@@ -1,6 +1,15 @@
 import Button from "@restart/ui/esm/Button";
 import React, { useEffect, useState } from "react";
-import { Card, Container, FloatingLabel, Form, Modal } from "react-bootstrap";
+import {
+  Card,
+  Container,
+  DropdownButton,
+  Dropdown,
+  FloatingLabel,
+  Form,
+  Modal,
+  ButtonGroup,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCommentByPostId } from "../../../../Redux/actions/comment";
 import { axiosInstance } from "../../../../Redux/network";
@@ -10,64 +19,281 @@ export default function SinglePost(props) {
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState(props.post);
   const [btnComment, setbtnComment] = useState(false);
-  const [comment, setComment] = useState();
+  const [putPost, setPutPost] = useState(false);
+  const [comment, setComment] = useState([]);
   const [newComment, setNewComment] = useState();
-
-  // const comment = useSelector((state) => state.comment.getCommentByPostId);
-  // const dispatch = useDispatch();
+  const [commentLength, setCommentLength] = useState(0);
+  const [isOwner, setisOwner] = useState();
+  const [isCommentOwner, setisCommentOwner] = useState();
+  const [selectedFile, setSelectedFile] = useState();
+  const [postImageChange, setPostImageChange] = useState();
+  const [updatedPost, setUpdatedPost] = useState(posts);
 
   useEffect(() => {
-    // dispatch(getCommentByPostId(posts._id));
+    axiosInstance.get("comment/post/" + props.post._id).then((result) => {
+      setCommentLength(result.data.data.length);
+    });
+    axiosInstance.get("user/loggedIn/").then((result) => {
+      if (
+        posts.userId._id == result.data.data._id ||
+        result.data.data.type == "admin"
+      ) {
+        setisOwner(true);
+      } else {
+        setisOwner(false);
+      }
+    });
   }, []);
+
+  const deletePost = (id) => {
+    if (window.confirm("Are you sure you want delete thi post!!")) {
+      axiosInstance.delete("post/" + id).then((result) => {
+        window.location.reload();
+      });
+    }
+  };
+  const deleteComment = (id) => {
+    axiosInstance.delete("comment/" + id).then((result) => {
+      let comments = comment.filter((item) => item._id != id);
+      setComment(comments);
+    });
+  };
+  const updatePost = (id) => {
+    if (postImageChange) {
+      const formData = new FormData();
+      formData.append("multiple_images", postImageChange, postImageChange.name);
+      console.log(postImageChange);
+      axiosInstance.post("upload/image/multiple", formData).then((result) => {
+        let image = result.data.data[0];
+        console.log(result, image);
+        let newPost = updatedPost;
+        newPost.postImage = image;
+        console.log(newPost, "new post");
+
+        axiosInstance.put("post/" + id, newPost).then((result) => {
+          if (result.data.success) {
+            window.location.reload();
+          } else {
+            alert(result.data.msg);
+          }
+        });
+      });
+    } else {
+      axiosInstance.put("post/" + id, updatedPost).then((result) => {
+        if (result.data.success) {
+          window.location.reload();
+        } else {
+          alert(result.data.msg);
+        }
+      });
+    }
+  };
+  const handelChangePost = (event) => {
+    console.log(updatedPost);
+    let name = event.target.name;
+    let value = event.target.value;
+    setUpdatedPost({ ...updatedPost, [name]: value });
+  };
+
+  const onFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+  const onPostImageChange = (event) => {
+    setPostImageChange(event.target.files[0]);
+  };
+
   let getComments = (id) => {
-    console.log(id);
     axiosInstance.get("comment/post/" + id).then((result) => {
-      setComment(result.data.data);
+      let allComment = result.data.data;
+
+      axiosInstance.get("user/loggedIn/").then((result) => {
+        for (let com of allComment) {
+          console.log(allComment);
+          if (com.userId._id == result.data.data._id) {
+            com.isOwner = true;
+          } else {
+            com.isOwner = false;
+          }
+        }
+        console.log(allComment);
+        setComment(allComment);
+      });
     });
   };
 
   const saveComment = (id) => {
-    axiosInstance.post("comment/" + id, newComment).then((result) => {
-      // if (result.data.success) {
-      //    if(comment){setComment([...comment, newComment])}else{
-      //      setComment([newComment])
-      //    } 
-      //  } else {
-      //   alert(result.data.msg);
-      // }
-      console.log(result);
-    });
-    
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("multiple_images", selectedFile, selectedFile.name);
+      axiosInstance.post("upload/image/multiple", formData).then((result) => {
+        console.log(result);
+        let image = result.data.data[0];
+        let newcomment = newComment;
+        newcomment.commentImg = image;
+
+        setNewComment(newcomment);
+
+        axiosInstance.post("comment/" + id, newComment).then((result) => {
+          if (result.data.success) {
+            axiosInstance.get("comment/post/" + id).then((result) => {
+              let allComment = result.data.data;
+              axiosInstance.get("user/loggedIn/").then((result) => {
+                for (let com of allComment) {
+                  console.log(allComment);
+                  if (com.userId._id == result.data.data._id) {
+                    com.isOwner = true;
+                  } else {
+                    com.isOwner = false;
+                  }
+                }
+
+                setComment(allComment);
+                setCommentLength(allComment.length);
+              });
+            });
+          } else {
+            alert(result.data.msg);
+          }
+        });
+      });
+    } else {
+      axiosInstance.post("comment/" + id, newComment).then((result) => {
+        if (result.data.success) {
+          axiosInstance.get("comment/post/" + id).then((result) => {
+            setComment(result.data.data);
+            setCommentLength(result.data.data.length);
+          });
+        } else {
+          alert(result.data.msg);
+        }
+      });
+    }
   };
 
   const onChangeComment = (e) => {
     setNewComment({ ...newComment, [e.target.name]: e.target.value });
-    console.log(newComment);
   };
 
   return (
     <>
-      <div className="card border mb-3">
-        <Container>
-          <div class="d-flex flex-row bd-highlight my-3  Border">
-            <div class="p-2 bd-highlight">
-              <img
-                src={
-                  posts.userId.personalImage
-                    ? posts.userId.personalImage
-                    : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
-                }
-                className="imgStyle"
-              ></img>
-            </div>
-            <div class="p-2 bd-highlight ">
-              <h6>{posts.userId.username}</h6>
-              <span>3 Posts</span> | <span> 4 Comment</span>
-            </div>
+      <div className="card border mb-3 postCard">
+        <div class="d-flex flex-row bd-highlight my-2 px-3 pb-1  Border">
+          <div class="p-0 bd-highlight">
+            <img
+              src={
+                posts.userId.personalImage
+                  ? posts.userId.personalImage
+                  : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
+              }
+              className="imgStyle"
+            ></img>
           </div>
+          <div class="p-2  bd-highlight me-auto">
+            <h6>{posts.userId.username}</h6>
+          </div>
+          <div>
+            {isOwner && (
+              <ButtonGroup>
+                <DropdownButton
+                  as={ButtonGroup}
+                  title={
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-three-dots"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                    </svg>
+                  }
+                  id="bg-nested-dropdown"
+                  className=""
+                  size="sm"
+                >
+                  <Dropdown.Item onClick={() => setPutPost(true)}>
+                    Edit
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={() => deletePost(posts._id)}>
+                    Delete
+                  </Dropdown.Item>
+                </DropdownButton>
+              </ButtonGroup>
+            )}
+            <Modal
+              show={putPost}
+              onHide={() => setPutPost(false)}
+              dialogClassName="modal-90w"
+              aria-labelledby="example-custom-modal-styling-title"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="example-custom-modal-styling-title">
+                  Edit Post
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Label>Add Location</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="location"
+                    value={updatedPost.location}
+                    onChange={handelChangePost}
+                    placeholder="e.g. city ,region ,district or specific hotel"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formGroupPassword">
+                  <Form.Label>
+                    title <span className="text-danger">*</span>
+                  </Form.Label>
+
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={updatedPost.title}
+                    onChange={handelChangePost}
+                    placeholder="e.g. 'When is the best time to visit the Colosseum?' "
+                  />
+                  <Form.Label>
+                    What kind of advice are you looking for ?
+                    <span className="text-danger"> *</span>
+                  </Form.Label>
+                  <FloatingLabel controlId="floatingTextarea2" label="">
+                    <Form.Control
+                      as="textarea"
+                      placeholder="Leave a comment here"
+                      name="body"
+                      value={updatedPost.body}
+                      onChange={handelChangePost}
+                      style={{ height: "100px" }}
+                    />
+                  </FloatingLabel>
+                </Form.Group>
+
+                <Form.Group controlId="formFileLg" className="mb-3">
+                  <Form.Control
+                    type="file"
+                    size="sm"
+                    name="postImage"
+                    onChange={onPostImageChange}
+                  />
+                </Form.Group>
+                <Button
+                  onClick={() => updatePost(updatedPost._id)}
+                  className="btn btn-primary"
+                  type="submit"
+                >
+                  Add Post
+                </Button>
+              </Modal.Body>
+            </Modal>
+          </div>
+        </div>
+        <Container>
           <div class="d-flex flex-row bd-highlight mb-3">
             <div class="p-2 bd-highlight w-25 ">
-              <button className="btn btn-outline-primary fs-6">
+              <button className="btn btn-outline-primary fs-6 d-flex align-items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="23"
@@ -79,15 +305,17 @@ export default function SinglePost(props) {
                   <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                   <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                 </svg>
-                {posts.location}
+                <div className="d-felx align-items-center p-0">
+                  <p className="p-0 my-auto">{posts.location}</p>
+                </div>
               </button>
             </div>
           </div>
           <div onClick={() => getComments(posts._id)}>
             <div className="primary mb-3" onClick={() => setShow(true)}>
-              <h2>{posts.title}</h2>
+              <h3>{posts.title}</h3>
               <div className="text-secondary">{posts.createdAt}</div>
-              <span>
+              <span className="fs-6">
                 {posts.body.substring(0, 150)} ...
                 <a href="#">Read more</a>
               </span>
@@ -99,13 +327,17 @@ export default function SinglePost(props) {
             </div>
           </div>
 
-          <div class="d-flex flex-row bd-highlight mb-3">
-            <div class="p-2 bd-highlight"></div>
-          </div>
-          <div class="d-flex bd-highlight bg-light mb-2 rounded-5 p-1">
-            <div class="p-2 flex-grow-1 bd-highlight">
-              <a className="text-decoration-none" href="#">
-                Comment
+          <div class="d-flex bd-highlight bg-light mb-2 commentDiv p-1">
+            <div class="p-2  flex-grow-1 ">
+              <a
+                style={{ cursor: "pointer" }}
+                className="text-decoration-none"
+                onClick={() => {
+                  setShow(true);
+                  getComments(posts._id);
+                }}
+              >
+                Comments {commentLength}
               </a>
               <span>
                 <svg
@@ -170,14 +402,14 @@ export default function SinglePost(props) {
           >
             <Modal.Header closeButton>
               <Modal.Title id="example-custom-modal-styling-title">
-                {posts.title.substring(0, 25)} ...
+                {posts.title.substring(0, 90)} ...
               </Modal.Title>
             </Modal.Header>
             <Modal.Body className="bg-light">
               <div className="row justify-content-between">
                 <div className="col-6">
                   <div className="card p-3 ">
-                    <div class="d-flex flex-row bd-highlight my-3  Border">
+                    <div class="d-flex flex-row bd-highlight   Border">
                       <div class="p-2 bd-highlight">
                         <img
                           src={
@@ -188,14 +420,13 @@ export default function SinglePost(props) {
                           className="imgStyle"
                         ></img>
                       </div>
-                      <div class="p-2 bd-highlight ">
+                      <div class="p-2 bd-highlight d-flex align-items-center">
                         <h6>{posts.userId.username}</h6>
-                        <span>3 Posts</span> | <span> 4 Comment</span>
                       </div>
                     </div>
                     <div class="d-flex flex-row bd-highlight mb-3">
                       <div class="p-2 bd-highlight w-25 ">
-                        <button className="btn btn-outline-primary fs-6">
+                        <button className="btn btn-outline-primary fs-6 d-flex align-items-center ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="23"
@@ -207,17 +438,17 @@ export default function SinglePost(props) {
                             <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z" />
                             <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                           </svg>
-                          {posts.location}
+                          <p className="my-auto">{posts.location}</p>
                         </button>
                       </div>
                     </div>
 
                     <div className="text-secondary">{posts.createdAt}</div>
-                    <span className="fs-4 ">{posts.body}</span>
+                    <span className="fs-5 ">{posts.body}</span>
                     <div class="d-flex bd-highlight bg-light mb-2 rounded-5 p-1">
                       <div class="p-2 flex-grow-1 bd-highlight">
                         <a className="text-decoration-none" href="#">
-                          Comment
+                          Comment {commentLength}
                         </a>
                       </div>
                       <div class="p-2 bd-highlight">
@@ -225,11 +456,7 @@ export default function SinglePost(props) {
                           <svg
                             data-component="communities/common/collect-icon"
                             data-selected="0"
-                            class="
-        collect-icon
-        collect-icon--empty
-        js-bookmark-icon
-    "
+                            class=" collect-icon collect-icon--empty js-bookmark-icon"
                             xmlns="http://www.w3.org/2000/svg"
                             height="22"
                             width="22"
@@ -279,7 +506,7 @@ export default function SinglePost(props) {
                   </button> */}
 
                   <button
-                    className="btn btn-outline-primary w-100 mb-3"
+                    className="btn btn-outline-primary mt-2 w-100 mb-3"
                     onClick={() => setbtnComment(true)}
                   >
                     Leave Comment
@@ -312,20 +539,18 @@ export default function SinglePost(props) {
 
                       <Form.Group controlId="formFile" className="mb-3">
                         <Form.Label>Upload Image</Form.Label>
-                        <Form.Control type="file" />
+                        <Form.Control type="file" onChange={onFileChange} />
                       </Form.Group>
 
-                      <button
-                        onClick={() => saveComment(posts._id)}
-                        className="btn btn-primary"
+                      <Button
+                        className="btn w-100 h-100 btn-primary"
+                        onClick={() => {
+                          setbtnComment(false);
+                          saveComment(posts._id);
+                        }}
                       >
-                        <Button
-                          className="btn btn-primary"
-                          onClick={() => setbtnComment(false)}
-                        >
-                          Comment
-                        </Button>
-                      </button>
+                        Comment
+                      </Button>
                     </Modal.Body>
                   </Modal>
 
@@ -334,17 +559,55 @@ export default function SinglePost(props) {
                       return (
                         <Card className="mb-3 commentCard">
                           <Card.Header className="bg-white commentHeader">
-                            <div className="d-flex">
-                              <img
-                                src={posts.userId.personalImage}
-                                className="imgStyle me-2"
-                              ></img>
-                              <h6 className="mt-2">{com.userId.username} </h6>
+                            <div className="d-flex justify-content-between">
+                              <div className="d-flex">
+                                <img
+                                  src={com.userId.personalImage}
+                                  className="imgStyle me-2"
+                                ></img>
+                                <h6 className="mt-2">{com.userId.username} </h6>
+                              </div>
+
+                              <div>
+                                {com.isOwner && (
+                                  <ButtonGroup>
+                                    <DropdownButton
+                                      as={ButtonGroup}
+                                      title={
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="16"
+                                          height="16"
+                                          fill="currentColor"
+                                          class="bi bi-three-dots"
+                                          viewBox="0 0 16 16"
+                                        >
+                                          <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                        </svg>
+                                      }
+                                      id="bg-nested-dropdown"
+                                      className=""
+                                      size="sm"
+                                    >
+                                      <Dropdown.Item
+                                        onClick={() => deleteComment(com._id)}
+                                      >
+                                        Delete comment
+                                      </Dropdown.Item>
+                                    </DropdownButton>
+                                  </ButtonGroup>
+                                )}
+                              </div>
                             </div>
                           </Card.Header>
 
                           <Card.Body>
                             <Card.Text>{com.body}</Card.Text>
+                            <img
+                              className="w-100 rounded-3"
+                              src={com.commentImg && com.commentImg}
+                              alt=""
+                            />
                           </Card.Body>
                         </Card>
                       );
