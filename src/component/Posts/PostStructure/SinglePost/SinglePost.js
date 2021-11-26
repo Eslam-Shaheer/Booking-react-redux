@@ -13,13 +13,16 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getCommentByPostId } from "../../../../Redux/actions/comment";
 import { axiosInstance } from "../../../../Redux/network";
+import Comment from "../../Comment/Comment";
 import "./SinglePost.css";
 
 export default function SinglePost(props) {
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState(props.post);
   const [btnComment, setbtnComment] = useState(false);
+
   const [putPost, setPutPost] = useState(false);
+
   const [comment, setComment] = useState([]);
   const [newComment, setNewComment] = useState();
   const [commentLength, setCommentLength] = useState(0);
@@ -42,7 +45,7 @@ export default function SinglePost(props) {
       } else {
         setisOwner(false);
       }
-      console.log(posts);
+      // console.log(posts);
     });
   }, []);
 
@@ -53,26 +56,18 @@ export default function SinglePost(props) {
       });
     }
   };
-  const deleteComment = (id) => {
-    axiosInstance.delete("comment/" + id).then((result) => {
-      let comments = comment.filter((item) => item._id != id);
-      setComment(comments);
-      axiosInstance.get("comment/post/" + id).then((result) => {
-        setCommentLength(result.data.data.length);
-      });
-    });
-  };
+
   const updatePost = (id) => {
     if (postImageChange) {
       const formData = new FormData();
       formData.append("multiple_images", postImageChange, postImageChange.name);
-      console.log(postImageChange);
+      // console.log(postImageChange);
       axiosInstance.post("upload/image/multiple", formData).then((result) => {
         let image = result.data.data[0];
-        console.log(result, image);
+        // console.log(result, image);
         let newPost = updatedPost;
         newPost.postImage = image;
-        console.log(newPost, "new post");
+        // console.log(newPost, "new post");
 
         axiosInstance.put("post/" + id, newPost).then((result) => {
           if (result.data.success) {
@@ -92,8 +87,11 @@ export default function SinglePost(props) {
       });
     }
   };
+
+  //  myWork
+
   const handelChangePost = (event) => {
-    console.log(updatedPost);
+    // console.log(updatedPost);
     let name = event.target.name;
     let value = event.target.value;
     setUpdatedPost({ ...updatedPost, [name]: value });
@@ -102,6 +100,7 @@ export default function SinglePost(props) {
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
+
   const onPostImageChange = (event) => {
     setPostImageChange(event.target.files[0]);
   };
@@ -112,7 +111,7 @@ export default function SinglePost(props) {
 
       axiosInstance.get("user/loggedIn/").then((result) => {
         for (let com of allComment) {
-          console.log(allComment);
+          // console.log(allComment);
           if (
             com.userId._id == result.data.data._id ||
             result.data.data.type == "admin"
@@ -122,7 +121,7 @@ export default function SinglePost(props) {
             com.isOwner = false;
           }
         }
-        console.log(allComment);
+        // console.log(allComment);
         setComment(allComment);
       });
     });
@@ -133,7 +132,7 @@ export default function SinglePost(props) {
       const formData = new FormData();
       formData.append("multiple_images", selectedFile, selectedFile.name);
       axiosInstance.post("upload/image/multiple", formData).then((result) => {
-        console.log(result);
+        // console.log(result);
         let image = result.data.data[0];
         let newcomment = newComment;
         newcomment.commentImg = image;
@@ -146,7 +145,7 @@ export default function SinglePost(props) {
               let allComment = result.data.data;
               axiosInstance.get("user/loggedIn/").then((result) => {
                 for (let com of allComment) {
-                  console.log(allComment);
+                  // console.log(allComment);
                   if (com.userId._id == result.data.data._id) {
                     com.isOwner = true;
                   } else {
@@ -508,10 +507,6 @@ export default function SinglePost(props) {
                   </div>
                 </div>
                 <div className="col-6 overflow-auto">
-                  {/* <button className="btn btn-outline-primary w-100 mb-3">
-                    Leave comment
-                  </button> */}
-
                   <button
                     className="btn btn-outline-primary mt-2 w-100 mb-3"
                     onClick={() => setbtnComment(true)}
@@ -564,59 +559,13 @@ export default function SinglePost(props) {
                   {comment &&
                     comment.map((com) => {
                       return (
-                        <Card className="mb-3 commentCard">
-                          <Card.Header className="bg-white commentHeader">
-                            <div className="d-flex justify-content-between">
-                              <div className="d-flex">
-                                <img
-                                  src={com.userId.personalImage}
-                                  className="imgStyle me-2"
-                                ></img>
-                                <h6 className="mt-2">{com.userId.username} </h6>
-                              </div>
-
-                              <div>
-                                {com.isOwner && (
-                                  <ButtonGroup>
-                                    <DropdownButton
-                                      as={ButtonGroup}
-                                      title={
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          width="16"
-                                          height="16"
-                                          fill="currentColor"
-                                          class="bi bi-three-dots"
-                                          viewBox="0 0 16 16"
-                                        >
-                                          <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                                        </svg>
-                                      }
-                                      id="bg-nested-dropdown"
-                                      className=""
-                                      size="sm"
-                                    >
-                                      <Dropdown.Item
-                                        onClick={() => deleteComment(com._id)}
-                                      >
-                                        Delete comment
-                                      </Dropdown.Item>
-                                    </DropdownButton>
-                                  </ButtonGroup>
-                                )}
-                              </div>
-                            </div>
-                          </Card.Header>
-
-                          <Card.Body>
-                            <Card.Text>{com.body}</Card.Text>
-                            <img
-                              className="w-100 rounded-3"
-                              src={com.commentImg && com.commentImg}
-                              alt=""
-                            />
-                          </Card.Body>
-                        </Card>
+                        <Comment
+                          com={com}
+                          posts={posts}
+                          comment={comment}
+                          setComment={setComment}
+                          setCommentLength={setCommentLength}
+                        />
                       );
                     })}
                 </div>
