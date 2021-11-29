@@ -11,16 +11,19 @@ import {
 } from "react-bootstrap";
 import { axiosInstance } from "../../../Redux/network";
 export default function Comment(props) {
-  const [newComment, setNewComment] = useState();
   const [postImageChange, setPostImageChange] = useState();
   const [editComment, seteditComment] = useState(false);
-
+  let commentImage;
+  let newComment = {};
   const onPostImageChange = (event) => {
-    setPostImageChange(event.target.files[0]);
+    commentImage = event.target.files[0];
   };
-
+  const clearCommentImage = () => {
+    commentImage = undefined;
+    newComment = {};
+  };
   const onChangeComment = (e) => {
-    setNewComment({ ...newComment, [e.target.name]: e.target.value });
+    newComment = { ...newComment, [e.target.name]: e.target.value };
   };
 
   const deleteComment = (id) => {
@@ -37,43 +40,51 @@ export default function Comment(props) {
     
     if (postImageChange) {
       const formData = new FormData();
-      formData.append("multiple_images", postImageChange, postImageChange.name);
-      console.log(postImageChange);
+      formData.append("multiple_images", commentImage);
+      console.log("image");
       axiosInstance.post("upload/image/multiple", formData).then((result) => {
         if (result.data.success) {
           let image = result.data.data[0];
-          console.log(result, image);
+
           let Comment = newComment;
           Comment.commentImg = image;
-        }
+          console.log(newComment);
+          axiosInstance.put("comment/" + id, newComment).then((res) => {
+            if (res.data.success) {
+              axiosInstance.get("comment/post/" + postId).then((result) => {
+                let allComment = result.data.data;
 
-        axiosInstance.put("comment/" + id, newComment).then((res) => {
-          if (res.data.success) {
-            axiosInstance.get("comment/post/" + postId).then((result) => {
-              let allComment = result.data.data;
-
-              for (let com of allComment) {
-                // console.log(allComment);
-                if (com.userId._id == res.data.data.userId) {
-                  com.isOwner = true;
-                } else {
-                  com.isOwner = false;
+                for (let com of allComment) {
+                  if (com.userId._id == res.data.data.userId) {
+                    com.isOwner = true;
+                  } else {
+                    com.isOwner = false;
+                  }
                 }
-              }
-              // console.log(allComment);
-              props.setComment(allComment);
-            });
-          } else {
-            alert(result.data.msg);
-          }
-        });
+
+                props.setComment(allComment);
+              });
+            } else {
+              alert(result.data.msg);
+            }
+          });
+        }
       });
     } else {
+<<<<<<< HEAD
       axiosInstance.put("comment/" + id, newComment).then((res) => {
         if (res.data.success) {
           axiosInstance.get("comment/post/" + postId).then((result) => {
             let allComment = result.data.data;
             console.log(result)
+=======
+      console.log(newComment);
+      axiosInstance.put("comment/" + id, newComment).then((result) => {
+        if (result.data.success) {
+          axiosInstance.get("comment/post/" + postId).then((result) => {
+            let allComment = result.data.data;
+            console.log(result);
+>>>>>>> 42ec924b45d18305b0b9eb0eaf4cb994dc691e5c
             axiosInstance.get("user/loggedIn/").then((result) => {
               for (let com of allComment) {
                 // console.log(allComment);
@@ -134,7 +145,12 @@ export default function Comment(props) {
                     Delete comment
                   </Dropdown.Item>
 
-                  <Dropdown.Item onClick={() => seteditComment(true)}>
+                  <Dropdown.Item
+                    onClick={() => {
+                      clearCommentImage();
+                      seteditComment(true);
+                    }}
+                  >
                     Update comment
                   </Dropdown.Item>
                 </DropdownButton>

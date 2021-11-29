@@ -20,9 +20,7 @@ export default function SinglePost(props) {
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState(props.post);
   const [btnComment, setbtnComment] = useState(false);
-
   const [putPost, setPutPost] = useState(false);
-
   const [comment, setComment] = useState([]);
   const [newComment, setNewComment] = useState();
   const [commentLength, setCommentLength] = useState(0);
@@ -96,6 +94,9 @@ export default function SinglePost(props) {
     let value = event.target.value;
     setUpdatedPost({ ...updatedPost, [name]: value });
   };
+  const clearCommentImage = () => {
+    setSelectedFile(false);
+  };
 
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -166,8 +167,20 @@ export default function SinglePost(props) {
       axiosInstance.post("comment/" + id, newComment).then((result) => {
         if (result.data.success) {
           axiosInstance.get("comment/post/" + id).then((result) => {
-            setComment(result.data.data);
-            setCommentLength(result.data.data.length);
+            let allComment = result.data.data;
+            axiosInstance.get("user/loggedIn/").then((result) => {
+              for (let com of allComment) {
+                // console.log(allComment);
+                if (com.userId._id == result.data.data._id) {
+                  com.isOwner = true;
+                } else {
+                  com.isOwner = false;
+                }
+              }
+
+              setComment(allComment);
+              setCommentLength(allComment.length);
+            });
           });
         } else {
           alert(result.data.msg);
@@ -509,7 +522,11 @@ export default function SinglePost(props) {
                 <div className="col-6 overflow-auto">
                   <button
                     className="btn btn-outline-primary mt-2 w-100 mb-3"
-                    onClick={() => setbtnComment(true)}
+                    onClick={() => {
+                      setbtnComment(true);
+                      setSelectedFile(false);
+                      setNewComment({});
+                    }}
                   >
                     Leave Comment
                   </button>
