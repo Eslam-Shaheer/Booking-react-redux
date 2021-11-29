@@ -37,7 +37,6 @@ export default function Comment(props) {
   };
 
   const updateComment = (id, postId) => {
-    
     if (postImageChange) {
       const formData = new FormData();
       formData.append("multiple_images", commentImage);
@@ -71,20 +70,11 @@ export default function Comment(props) {
         }
       });
     } else {
-<<<<<<< HEAD
       axiosInstance.put("comment/" + id, newComment).then((res) => {
         if (res.data.success) {
           axiosInstance.get("comment/post/" + postId).then((result) => {
             let allComment = result.data.data;
-            console.log(result)
-=======
-      console.log(newComment);
-      axiosInstance.put("comment/" + id, newComment).then((result) => {
-        if (result.data.success) {
-          axiosInstance.get("comment/post/" + postId).then((result) => {
-            let allComment = result.data.data;
             console.log(result);
->>>>>>> 42ec924b45d18305b0b9eb0eaf4cb994dc691e5c
             axiosInstance.get("user/loggedIn/").then((result) => {
               for (let com of allComment) {
                 // console.log(allComment);

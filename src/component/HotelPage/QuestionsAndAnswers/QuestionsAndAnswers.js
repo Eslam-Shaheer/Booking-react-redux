@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Form, Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./QuestionsAndAnswers.css";
 export default function QuestionsAndAnswers() {
-const [maxChar, setmaxChar] = useState(300);
-const [show, setShow] = useState(false);
+  const [maxChar, setmaxChar] = useState(300);
+  const [show, setShow] = useState(false);
   return (
     <>
       <div className="border mt-5">
@@ -59,7 +59,7 @@ const [show, setShow] = useState(false);
                     rows={3}
                     maxLength="300"
                     placeholder="e.g do you offer room service"
-                    onChange={(e) => setmaxChar(e.target.value.length - 300)}
+                    onChange={(e) => setmaxChar(300 - e.target.value.length)}
                   />
                   <p>{maxChar} characters left</p>
                 </Form.Group>
