@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Availability from "../../component/HotelPage/All-Availability/Availability";
 import BodyCom from "../../component/HotelPage/BodyCom/BodyCom";
-import NavBanner from "../../component/HotelPage/Book-Banner/NavBanner";
-import Covid from "../../component/HotelPage/Covid/Covid";
+ import Covid from "../../component/HotelPage/Covid/Covid";
 import HotelImg from "../../component/HotelPage/HotelImg/HotelImg";
 import NavHotel from "../../component/HotelPage/NavHotel/NavHotel";
 import Search from "../../component/HotelPage/Search/Search";
@@ -17,7 +16,7 @@ import Faqs from "../../component/HotelPage/Faqs/Faqs";
 
 export default function HotelPage() {
   const [hotel, setHotel] = useState();
-
+  const [reviews, setReviews] = useState();
   useEffect(() => {
     axiosInstance.get("hotel/619cd61add2d1495a56e550b").then((result) => {
       setHotel(result.data.data);
@@ -34,16 +33,17 @@ export default function HotelPage() {
         <div className="col-md-9">
           {hotel && <NavHotel hotel={hotel} />}
           {hotel && <HotelImg hotel={hotel} />}
-          {/* <NavBanner /> */}
-          {hotel && <BodyCom hotel={hotel} />}
-          <MostPopularFacilities />
-          <Availability />
-          <WhyChose />
-          <GuestReviews />
+
+          {hotel && <BodyCom rate={reviews} hotel={hotel} />}
+          {hotel && <MostPopularFacilities hotel={hotel} />}
+          {hotel && <Availability hotel={hotel} />}
+          {hotel && <WhyChose hotel={hotel} />}
+
+          {hotel && <GuestReviews hotel={hotel} setReviews={setReviews} />}
           <QuestionsAndAnswers />
-          <Facilities />
-          <HouseRules />
-          <Faqs />
+          {hotel && <Facilities hotel={hotel} />}
+          {hotel && <HouseRules hotel={hotel} />}
+          {hotel && <Faqs hotel={hotel} />}
         </div>
       </div>
     </>

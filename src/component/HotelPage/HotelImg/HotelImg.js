@@ -48,26 +48,24 @@ export default function HotelImg(props) {
 
         <span className="me-2 pt-1">
           <svg
-            aria-hidden="true"
-            class="bk-icon -iconset-thumbs_up_square 
-pp-icon-valign--initial"
-            data-bui-component="Tooltip"
-            data-et-mouseenter="
-customGoal:TPOaXGZCHQGPGJIMADXRT:1
-"
-            data-tooltip-position="bottom"
-            data-tooltip-text="
-This is a Preferred Partner property. It is committed to providing guests with a positive experience thanks to its commendable service and good value. This property may pay Booking.com a bit more to be in this Programme. 
-"
-            fill="#FEBB02"
-            height="24"
-            rel="300"
-            width="24"
-            viewBox="0 0 128 128"
-            role="presentation"
-            focusable="false"
+          aria-hidden="true"
+          data-bui-component="Tooltip"
+          data-et-mouseenter="
+          customGoal:TPOaXGZCHQGPGJIMADXRT:1
+          "
+          data-tooltip-position="bottom"
+          data-tooltip-text="
+          This is a Preferred Partner property. It is committed to providing guests with a positive experience thanks to its commendable service and good value. This property may pay Booking.com a bit more to be in this Programme. 
+          "
+          fill="#FEBB02"
+          height="24"
+          rel="300"
+          width="24"
+          viewBox="0 0 128 128"
+          role="presentation"
+          focusable="false"
           >
-            <path d="M112 8H16a8 8 0 0 0-8 8v96a8 8 0 0 0 8 8h96a8 8 0 0 0 8-8V16a8 8 0 0 0-8-8zM48 96H24V58h24zm56-25a8.7 8.7 0 0 1-2 6 8.9 8.9 0 0 1 1 4 6.9 6.9 0 0 1-5 7c-.5 4-4.8 8-9 8H56V58l10.3-23.3a5.4 5.4 0 0 1 10.1 2.7 10.3 10.3 0 0 1-.6 2.7L72 52h23c4.5 0 9 3.5 9 8a9.2 9.2 0 0 1-2 5.3 7.5 7.5 0 0 1 2 5.7z"></path>
+          <path d="M112 8H16a8 8 0 0 0-8 8v96a8 8 0 0 0 8 8h96a8 8 0 0 0 8-8V16a8 8 0 0 0-8-8zM48 96H24V58h24zm56-25a8.7 8.7 0 0 1-2 6 8.9 8.9 0 0 1 1 4 6.9 6.9 0 0 1-5 7c-.5 4-4.8 8-9 8H56V58l10.3-23.3a5.4 5.4 0 0 1 10.1 2.7 10.3 10.3 0 0 1-.6 2.7L72 52h23c4.5 0 9 3.5 9 8a9.2 9.2 0 0 1-2 5.3 7.5 7.5 0 0 1 2 5.7z"></path>
           </svg>
         </span>
       </div>
@@ -76,6 +74,7 @@ This is a Preferred Partner property. It is committed to providing guests with a
         <div className="me-2">
           <p>
             <svg
+            className="me-1"
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"

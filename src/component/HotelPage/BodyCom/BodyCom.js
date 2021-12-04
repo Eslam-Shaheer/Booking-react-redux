@@ -10,7 +10,7 @@ export default function BodyCom(props) {
             <Description description={props.hotel.description} />
           </div>
           <div className="col-md-4">
-            <Reservation hotel={props.hotel} />
+            <Reservation hotel={props.hotel} rate={props.rate} />
           </div>
         </div>
       </>

@@ -11,7 +11,7 @@ console.log(hotel);
   useEffect(() => {
 
        setHotel(props.hotel);
-      setPostsToShow(hotel.images.slice(0, 4));
+      setPostsToShow(hotel.images.slice(0, 9));
  
   }, []);
   

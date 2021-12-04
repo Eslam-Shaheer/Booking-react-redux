@@ -1,10 +1,10 @@
 import React from 'react'
 import "./WhyChose.css"
-export default function WhyChose() {
+export default function WhyChose(props) {
     return (
       <>
         <div className="my-4">
-          <h2>5 reasons to choose Grand Hotel Qena</h2>
+          <h2>5 reasons to choose {props.hotel.hotelName}</h2>
         </div>
 
         <div class="d-flex flex-wrap">

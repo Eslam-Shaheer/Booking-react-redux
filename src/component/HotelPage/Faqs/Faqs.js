@@ -1,14 +1,14 @@
 import React from 'react'
 import { Accordion } from 'react-bootstrap';
 import './Faqs.css'
-export default function Faqs() {
+export default function Faqs(props) {
     return (
       <>
         <div className="mt-5">
           <div class="d-flex flex-row mb-3">
             <div className="col-4 bg-div">
               <div class="p-3">
-                <h3>FAQs about Dreams Land Hotel New Qena</h3>
+                <h3>FAQs about {props.hotel.hotelName}</h3>
               </div>
             </div>
             <div class="col-8">

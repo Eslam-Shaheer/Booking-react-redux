@@ -9,7 +9,9 @@ import Post from "./Pages/Posts/Post";
 import Example from "./component/Posts/PostStructure/PostStructure";
 import Covid from "./component/HotelPage/Covid/Covid";
 import HotelPage from "./Pages/HotelPage/HotelPage";
-   
+import ApartmentPage from "./Pages/ApartmentComponents/ApartmentPage";
+import Campground from "./Pages/CampgroundPage/Campground";
+
 function App() {
   return (
     <div className="App">
@@ -19,8 +21,10 @@ function App() {
       {/* <CampsList/> */}
       {/* <ApartmentsList/>  */}
       {/* <Post /> */}
-      <HotelPage/>
-       <Footer />
+      <HotelPage />  
+      <ApartmentPage />
+      <Campground />
+      <Footer />
     </div>
   );
 }
