@@ -74,8 +74,8 @@ export default function ReviewCanavas() {
         aria-labelledby="example-custom-modal-styling-title"
       >
         <Modal.Header closeButton>
-          <h5 className="fw-bold mt-2">
-            Please leave a review and say what your opinion about this hotel
+          <h5 className="mt-2">
+            Please leave a review and say what your opinion about this hotel.
           </h5>
         </Modal.Header>
         <Modal.Body>
@@ -88,18 +88,21 @@ export default function ReviewCanavas() {
               onChange={onChange}
             />
           </Form.Group>
-          <Rating
-            onClick={handleRating}
-            ratingValue={rating}
-            name="starRating"
-          />
+          <div className="my-3 text-center">
+            Rate by star
+            <Rating
+              onClick={handleRating}
+              ratingValue={rating}
+              name="starRating"
+            />
+          </div>
 
           <button
             onClick={() => {
               setShow(false);
               leaveReview();
             }}
-            className="rounded-0 w-100"
+            className="rounded-0 w-100 btn btn-outline-primary"
             type="submit"
             variant="primary"
           >

@@ -25,7 +25,10 @@ export default function ReviewCanavas() {
      setRating(rate);
    };
     const leaveReview = () => {
-      reviews.starRating = rating / 20;
+      // console.log(reviews.starRating);
+      if (!reviews.starRating){
+      reviews.starRating = rating / 20;   
+      }  
       axiosInstance
         .post("apartment/review/" + "61a7c6008f06602964caad9b", reviews)
         .then((result) => {

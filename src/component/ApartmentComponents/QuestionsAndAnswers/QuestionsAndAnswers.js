@@ -80,10 +80,10 @@ export default function QuestionsAndAnswers() {
             aria-labelledby="example-custom-modal-styling-title"
           >
             <Modal.Header closeButton>
-              <h5 className="fw-bold mt-2">
+              <h6 className="mt-2">
                 Didn't find the answer you were looking for? Ask a question
                 about the property
-              </h5>
+              </h6>
             </Modal.Header>
             <Modal.Body>
               <Form.Group

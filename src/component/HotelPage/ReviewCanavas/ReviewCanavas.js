@@ -1,67 +1,58 @@
 import { axiosInstance } from "../../../Redux/network";
 import React, { useEffect, useState } from "react";
- import "./ReviewCanavas.css";
+import "./ReviewCanavas.css";
 import { Rating } from "react-simple-star-rating";
 import { Card, Form, Modal } from "react-bootstrap";
 
 export default function ReviewCanavas() {
   const [review, setReview] = useState();
-const [rating, setRating] = useState(0);
-const [show, setShow] = useState(false);
-const [reviews, setReviews] = useState();
- const [msg, setMsg] = useState(false);
- 
+  const [rating, setRating] = useState(0);
+  const [show, setShow] = useState(false);
+  const [reviews, setReviews] = useState({});
+  const [msg, setMsg] = useState(false);
 
-   useEffect(() => {
+  useEffect(() => {
     axiosInstance
       .get("hotel/review/619cd61add2d1495a56e550b")
       .then((result) => {
         setReview(result.data.data);
         console.log(result.data.data);
-    
       });
   }, []);
 
-
- const handleRating = (rate = 0) => {
-   setRating(rate);
- };
-
-
- const leaveReview = () => {
-   reviews.starRating = rating / 20;
-   axiosInstance
-     .post("hotel/review/" + "619cd61add2d1495a56e550b", reviews)
-     .then((result) => {
-       if (!result.data.success) {
-         alert(result.data.msg);
-       } else {
-         setMsg(true);
-         setTimeout(() => {
-           setMsg(false);
-         }, 3000);
-       }
-
-       axiosInstance
-         .get("hotel/review/619cd61add2d1495a56e550b")
-         .then((result) => {
-           setReview(result.data.data);
-         });
-     });
- };
-
- 
-  const onChange = (e) => {
-    setReviews({ ...reviews, [e.target.name]: e.target.value });
-   
+  const handleRating = (rate = 0) => {
+    setRating(rate);
   };
 
+  const leaveReview = () => {
+ 
+      reviews.starRating = rating / 20;
+   
+     
 
+    axiosInstance
+      .post("hotel/review/" + "619cd61add2d1495a56e550b", reviews)
+      .then((result) => {
+        if (!result.data.success) {
+          alert(result.data.msg);
+        } else {
+          setMsg(true);
+          setTimeout(() => {
+            setMsg(false);
+          }, 3000);
+        }
 
+        axiosInstance
+          .get("hotel/review/619cd61add2d1495a56e550b")
+          .then((result) => {
+            setReview(result.data.data);
+          });
+      });
+  };
 
-
-
-
+  const onChange = (e) => {
+    setReviews({ ...reviews, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="containr-fluid">
@@ -100,18 +91,22 @@ const [reviews, setReviews] = useState();
               onChange={onChange}
             />
           </Form.Group>
-          <Rating
-            onClick={handleRating}
-            ratingValue={rating}
-            name="starRating"
-          />
+          <div className="text-center">
+            Rate by star
+            <Rating
+              className="my-3"
+              onClick={handleRating}
+              ratingValue={rating}
+              name="starRating"
+            />
+          </div>
 
           <button
             onClick={() => {
               setShow(false);
               leaveReview();
             }}
-            className="rounded-0 w-100"
+            className="rounded-0 w-100 btn btn-outline-primary "
             type="submit"
             variant="primary"
           >

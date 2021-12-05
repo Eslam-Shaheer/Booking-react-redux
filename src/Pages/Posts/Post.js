@@ -5,6 +5,7 @@ import Communities from "../../component/Posts/Communities/Communities";
 import Example from "../../component/Posts/PostStructure/PostStructure";
 
 export default function Post() {
+
   return (
     <div style={{ backgroundColor: "#F5F5F5" }}>
       <Container>
@@ -12,7 +13,7 @@ export default function Post() {
           <Communities />
           <div className="row py-3 justify-content-between mx-1">
             <Addpost />
-            <Example />
+            <Example isUser={false} />
           </div>
         </Container>
       </Container>

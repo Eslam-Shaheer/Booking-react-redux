@@ -11,16 +11,16 @@ export default function GuestReviews(props) {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    if (hotel.avgReviews >= 1 && hotel.avgReviews <= 3) {
+    if (hotel.avgReviews.toString().split('').splice(0,3).join('') >= 1 && hotel.avgReviews.toString().split('').splice(0,3).join('') <= 3) {
       setReviewScore("bad");
       props.setReviews("bad");
-    } else if (hotel.avgReviews > 3 && hotel.avgReviews <= 6) {
+    } else if (hotel.avgReviews.toString().split('').splice(0,3).join('') > 3 && hotel.avgReviews.toString().split('').splice(0,3).join('') <= 6) {
       setReviewScore("good");
       props.setReviews("good");
-    } else if (hotel.avgReviews > 6 && hotel.avgReviews <= 8) {
+    } else if (hotel.avgReviews.toString().split('').splice(0,3).join('') > 6 && hotel.avgReviews.toString().split('').splice(0,3).join('') <= 8) {
       setReviewScore("very good");
       props.setReviews("very good");
-    } else if (hotel.avgReviews > 8 && hotel.avgReviews <= 10) {
+    } else if (hotel.avgReviews.toString().split('').splice(0,3).join('') > 8 && hotel.avgReviews.toString().split('').splice(0,3).join('') <= 10) {
       setReviewScore("excellent");
       props.setReviews("excellent");
     }
@@ -35,7 +35,7 @@ export default function GuestReviews(props) {
 
         <div>
           <div className="d-flex">
-            <span class="badge-rating me-2"> {hotel.avgReviews} </span>
+            <span class="badge-rating me-2"> {hotel.avgReviews.toString().split('').splice(0,3).join('')} </span>
             {reviewScore && reviewScore}
             <span className="text-secondary fw-bold ms-2">
               {hotel.totalReviews} Reviews{" "}
@@ -54,7 +54,7 @@ export default function GuestReviews(props) {
                     <span>{hotel.totalReviews} Reviews </span>
                   </div>
                   <div class="p-2 flex-shrink-1">
-                    <span class="badge-rating">{hotel.avgReviews}</span>
+                    <span class="badge-rating">{hotel.avgReviews.toString().split('').splice(0,3).join('')}</span>
                   </div>
                 </div>
               </Offcanvas.Title>

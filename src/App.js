@@ -11,6 +11,7 @@ import Covid from "./component/HotelPage/Covid/Covid";
 import HotelPage from "./Pages/HotelPage/HotelPage";
 import ApartmentPage from "./Pages/ApartmentComponents/ApartmentPage";
 import Campground from "./Pages/CampgroundPage/Campground";
+import UserDashboard from "./Pages/UserDashBoard/UserDashboard";
 
 function App() {
   return (
@@ -20,10 +21,11 @@ function App() {
       {/* <HotelsList/>   */}
       {/* <CampsList/> */}
       {/* <ApartmentsList/>  */}
-      {/* <Post /> */}
-      <HotelPage />  
-      <ApartmentPage />
-      <Campground />
+      <Post />  
+      <UserDashboard/>
+      {/* <HotelPage />   */}
+      {/* <ApartmentPage /> */}
+      {/* <Campground /> */}
       <Footer />
     </div>
   );

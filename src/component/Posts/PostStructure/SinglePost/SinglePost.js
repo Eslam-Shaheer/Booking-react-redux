@@ -86,11 +86,9 @@ export default function SinglePost(props) {
     }
   };
 
-  //  myWork
-
+ 
   const handelChangePost = (event) => {
-    // console.log(updatedPost);
-    let name = event.target.name;
+     let name = event.target.name;
     let value = event.target.value;
     setUpdatedPost({ ...updatedPost, [name]: value });
   };
@@ -214,18 +212,50 @@ export default function SinglePost(props) {
             {isOwner && (
               <ButtonGroup>
                 <DropdownButton
+                  variant="white"
                   as={ButtonGroup}
                   title={
                     <svg
+                      version="1.1"
+                      width="22"
+                      height="22"
                       xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-three-dots"
-                      viewBox="0 0 16 16"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 1000 1000"
+                      enable-background="new 0 0 1000 1000"
+                      xmlSpace="preserve"
                     >
-                      <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                      
+                      <g>
+                        <path d="M941,402h-98c-27.1,0-49,21.9-49,49v98c0,27.1,21.9,49,49,49h98c27.1,0,49-21.9,49-49v-98C990,423.9,968.1,402,941,402z M549,402h-98c-27.1,0-49,21.9-49,49v98c0,27.1,21.9,49,49,49h98c27.1,0,49-21.9,49-49v-98C598,423.9,576.1,402,549,402z M157,402H59c-27.1,0-49,21.9-49,49v98c0,27.1,21.9,49,49,49h98c27.1,0,49-21.9,49-49v-98C206,423.9,184.1,402,157,402z" />
+                      </g>
                     </svg>
+
+                          // Pen
+  // <svg
+  //                     version="1.1"
+  //                     xmlns="http://www.w3.org/2000/svg"
+  //                     xmlnsXlink="http://www.w3.org/1999/xlink"
+  //                     x="0px"
+  //                     y="0px"
+  //                     viewBox="0 0 1000 1000"
+  //                     enable-background="new 0 0 1000 1000"
+  //                     xmlSpace="preserve"
+  //                     width="25"
+  //                     height="25"
+  //                   >
+                     
+  //                     <g>
+  //                       <g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">
+  //                         <path d="M8175.3,4869.1c-172.4-40.6-400.6-152.1-540-263.7c-53.2-43.1-1592.2-1536.4-3415.1-3316.2L903.9-1945.9l-60.8-192.7C632.6-2815.6,87.5-4679.1,100.2-4689.2c15.2-15.2,2646.9,694.7,2733.1,737.8c65.9,35.5,6505.7,6310.5,6721.2,6551.4c65.9,73.5,154.6,202.8,197.8,289c268.7,547.7,164.8,1173.9-263.7,1604.9C9136.2,4846.3,8649.4,4985.7,8175.3,4869.1z M8791.4,4463.4c278.9-83.7,491.9-271.3,626.2-560.3c58.3-126.8,68.5-177.5,68.5-390.4c0-228.2-5.1-251-93.8-431c-169.9-342.3-91.3-380.3-872.1,420.9c-375.2,385.4-682,712.5-682,730.2c0,45.7,228.2,190.2,365.1,230.7C8360.4,4514.1,8624.1,4511.6,8791.4,4463.4z M8228.6,3223.6l692.1-709.9l-304.2-291.6c-169.9-159.7-1551.6-1506-3072.9-2991.7C4022.4-2255.3,2770-3472.2,2759.8-3477.3c-10.2-2.5-329.6,311.8-707.4,702.3l-689.6,704.8l372.7,370.2c981.2,973.6,5775.5,5643.7,5785.7,5638.6C7528.8,3936.1,7848.3,3614.1,8228.6,3223.6z M1778.6-3071.6c316.9-324.5,573-595.8,565.4-600.9c-20.3-22.8-1655.6-458.9-1663.2-443.7c-2.5,7.6,103.9,377.8,235.8,821.5c131.8,443.7,240.9,813.8,240.9,818.9C1157.5-2440.3,1258.9-2536.7,1778.6-3071.6z" />
+  //                       </g>
+  //                     </g>
+  //                   </svg>
+
+
+
                   }
                   id="bg-nested-dropdown"
                   className=""
@@ -240,6 +270,7 @@ export default function SinglePost(props) {
                 </DropdownButton>
               </ButtonGroup>
             )}
+
             <Modal
               show={putPost}
               onHide={() => setPutPost(false)}

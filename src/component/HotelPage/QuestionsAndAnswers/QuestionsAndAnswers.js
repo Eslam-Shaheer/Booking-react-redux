@@ -10,31 +10,28 @@ export default function QuestionsAndAnswers() {
   const [show, setShow] = useState(false);
   const [Show, setshow] = useState(false);
   const [questions, setQuestions] = useState();
- const [msg, setMsg] = useState(false);
+  const [msg, setMsg] = useState(false);
 
   const funShow = () => setshow(true);
   const funClose = () => setshow(false);
 
   const askQuestion = () => {
-   
     axiosInstance
       .post("hotel/message/" + "619cd61add2d1495a56e550b", questions)
       .then((result) => {
-         if (!result.data.success) {
-           alert(result.data.msg);
-         } else {
-           setMsg(true);
-           setTimeout(() => {
-             setMsg(false);
-           }, 3000);
-         }
-          axiosInstance
-            .get("hotel/message/" + "619cd61add2d1495a56e550b")
-            .then((result) => {
-              setQuestions(result.data.data);
-            });
-      
-     
+        if (!result.data.success) {
+          alert(result.data.msg);
+        } else {
+          setMsg(true);
+          setTimeout(() => {
+            setMsg(false);
+          }, 3000);
+        }
+        axiosInstance
+          .get("hotel/message/" + "619cd61add2d1495a56e550b")
+          .then((result) => {
+            setQuestions(result.data.data);
+          });
       });
   };
 
@@ -80,10 +77,10 @@ export default function QuestionsAndAnswers() {
             aria-labelledby="example-custom-modal-styling-title"
           >
             <Modal.Header closeButton>
-              <h5 className="fw-bold mt-2">
+              <h6 className="mt-2">
                 Didn't find the answer you were looking for? Ask a question
                 about the property
-              </h5>
+              </h6>
             </Modal.Header>
             <Modal.Body>
               <Form.Group
@@ -155,7 +152,7 @@ export default function QuestionsAndAnswers() {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <MessageOffcanvas />
+              <MessageOffcanvas/>
             </Offcanvas.Body>
           </Offcanvas>
         </div>

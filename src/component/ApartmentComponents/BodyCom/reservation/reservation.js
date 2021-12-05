@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./reservation.css";
 export default function Reservation(props) {
   const [ApartlWith, setApartlWith] = useState([]);
- 
+
   useEffect(() => {
     let viewElement = [];
     for (let view of props.apartment.facilities.view) {
@@ -42,7 +42,6 @@ export default function Reservation(props) {
               <svg
                 height="16"
                 width="16"
-                
                 viewBox="0 0 24 24"
                 role="presentation"
                 aria-hidden="true"
@@ -78,16 +77,15 @@ export default function Reservation(props) {
           break;
       }
     }
-    
   }, []);
-let Name;
-if (props.apartment) {
-  Name = "apartment";
-}
+  let Name;
+  if (props.apartment) {
+    Name = "apartment";
+  }
   return (
     <>
       <div>
-        <div className="Reservation">
+        <div className="Reservation mt-3">
           <div className="p-3">
             <h6>Perfect for a 1-night stay!</h6>
             <div className="d-flex">
@@ -105,8 +103,8 @@ if (props.apartment) {
               </p>
               <p>
                 {" "}
-                Located in {props.apartment.country} this {Name} has {props.rate}{" "}
-                location score of {props.apartment.avgReviews}
+                Located in {props.apartment.country} this {Name} has{" "}
+                {props.rate} location score of {props.apartment.avgReviews}
               </p>{" "}
             </div>
 

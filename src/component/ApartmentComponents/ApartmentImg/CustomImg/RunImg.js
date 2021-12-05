@@ -8,14 +8,12 @@ const Run = (props) => {
   const [postsToShow, setPostsToShow] = useState([]);
  
   useEffect(() => {
-
        setApartment(props.apartment);
       setPostsToShow(apartment.images.slice(0, 8));
- 
   }, []);
    
   return (
-    <div className="grid">
+    <div className="gridApart">
       {postsToShow.map((post, index) => (
         <img key={index} src={post}></img>
       ))}
