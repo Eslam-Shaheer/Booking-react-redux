@@ -11,17 +11,16 @@ export default function GuestReviews(props) {
   const [reviewScore, setReviewScore] = useState();
 
   useEffect(() => {
-        console.log(typeof campground.avgReviews);
-    if (campground.avgReviews >= 1 && campground.avgReviews <= 3) {
+     if (campground.avgReviews.toString().split('').splice(0,3).join('') >= 1 && campground.avgReviews.toString().split('').splice(0,3).join('') <= 3) {
       setReviewScore("bad");
       props.setReviews("bad");
-    } else if (campground.avgReviews > 3 && campground.avgReviews <= 6) {
+    } else if (campground.avgReviews.toString().split('').splice(0,3).join('') > 3 && campground.avgReviews.toString().split('').splice(0,3).join('') <= 6) {
       setReviewScore("good");
        props.setReviews("good");
-    } else if (campground.avgReviews > 6 && campground.avgReviews <= 8) {
+    } else if (campground.avgReviews.toString().split('').splice(0,3).join('') > 6 && campground.avgReviews.toString().split('').splice(0,3).join('') <= 8) {
       setReviewScore("very good");
       props.setReviews("very good");
-    } else if (campground.avgReviews > 8 && campground.avgReviews <= 10) {
+    } else if (campground.avgReviews.toString().split('').splice(0,3).join('') > 8 && campground.avgReviews.toString().split('').splice(0,3).join('') <= 10) {
       setReviewScore("excellent");
       props.setReviews("excellent");
     }
@@ -36,7 +35,7 @@ export default function GuestReviews(props) {
 
         <div>
           <div className="d-flex">
-            <span class="badge-rating me-2"> {campground.avgReviews} </span>
+            <span class="badge-rating me-2"> {campground.avgReviews.toString().split('').splice(0,3).join('')} </span>
             {reviewScore && reviewScore}
             <span className="text-secondary fw-bold ms-2">
               {campground.totalReviews} Reviews{" "}
@@ -55,7 +54,7 @@ export default function GuestReviews(props) {
                     <span>{campground.totalReviews} Reviews </span>
                   </div>
                   <div class="p-2 flex-shrink-1">
-                    <span class="badge-rating">{campground.avgReviews}</span>
+                    <span class="badge-rating">{campground.avgReviews.toString().split('').splice(0,3).join('')}</span>
                   </div>
                 </div>
               </Offcanvas.Title>

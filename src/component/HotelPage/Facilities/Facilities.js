@@ -10,11 +10,7 @@ export default function Facilities(props) {
           <div class="me-auto ">
             <h3>Facilities of {props.hotel.hotelName}</h3>
           </div>
-          <div class="p-2">
-            <button className="btn btn-primary rounded-0">
-              See availability
-            </button>
-          </div>
+          
         </div>
 
         <div class="d-flex flex-row  mb-3 flex-wrap">
@@ -158,7 +154,7 @@ export default function Facilities(props) {
               })}
           </div>
 
-          <div className="d-flex flex-column mt-3">
+          <div className="d-flex flex-column mt-3 col-3">
             <p className="fw-bold">
               <svg
               className="me-2"

@@ -177,14 +177,14 @@ export default function Reservation(props) {
       setParking(parking);
     }
   }, []);
-let Name;
-if (props.hotel) {
-  Name = "hotel";
-}
+  let Name;
+  if (props.hotel) {
+    Name = "hotel";
+  }
   return (
     <>
       <div>
-        <div className="Reservation">
+        <div className="Reservation mt-3">
           <div className="p-3">
             <h6>Perfect for a 1-night stay!</h6>
             <div className="d-flex">
@@ -202,8 +202,8 @@ if (props.hotel) {
               </p>
               <p>
                 {" "}
-                Located in {props.hotel.country} this {Name} has{" "}
-                {props.rate} location score of {props.hotel.avgReviews}
+                Located in {props.hotel.country} this {Name} has {props.rate}{" "}
+                location score of {props.hotel.avgReviews}
               </p>
             </div>
 

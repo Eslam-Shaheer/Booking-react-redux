@@ -1,4 +1,4 @@
-.grid { 
+.gridHotel { 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1px;
@@ -6,10 +6,10 @@
   justify-items: center;
   cursor: pointer;
   }
-.grid img {
+.gridHotel img {
   max-width: 100%;
 }
-.grid img:nth-child(1) {
+.gridHotel img:nth-child(1) {
   grid-column: span 2;
   grid-row: span 2;
   }

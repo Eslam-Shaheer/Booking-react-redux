@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../../Redux/actions/post";
+import { axiosInstance } from "../../../Redux/network";
 import "./PostStructure.css";
 import SinglePost from "./SinglePost/SinglePost";
-export default function Example() {
-  let Posts = useSelector((state) => state.post.getPosts);
-  let [allPosts, setPosts] = useState();
-  const dispatch = useDispatch();
+export default function Example(props) {
 
+  let [allPosts, setPosts] = useState();
+  
+ 
   useEffect(() => {
-    dispatch(getPosts());
+    if(props.isUser){
+      axiosInstance.get("post/user/all").then((result)=>{
+          setPosts(result.data)
+      })
+
+      }else{
+        axiosInstance.get("post").then((result) => {
+          setPosts(result.data);
+        });
+      }
+    
   }, []);
 
-  useEffect(() => {
-    setPosts(Posts);
-  }, [Posts]);
-
+ 
   return (
     <div className="col-7">
       {allPosts &&

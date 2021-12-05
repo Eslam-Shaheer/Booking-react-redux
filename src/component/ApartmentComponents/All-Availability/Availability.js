@@ -6,7 +6,7 @@ export default function Availability(props) {
  
     return (
       <>
-        <div className="d-flex" id="infoPrices">
+        <div className="d-flex my-2" id="infoPrices">
           <div>
             <h3>Availability</h3>
           </div>

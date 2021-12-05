@@ -4,14 +4,13 @@ import React, { useState, useEffect } from "react";
 const RunAllImg = (props) => {
   const [campground, setCampground] = useState(props.campground);
   const [postsToShow, setPostsToShow] = useState([]);
-  
-  useEffect(() => {
+   useEffect(() => {
     setPostsToShow(props.campground.images);
  
   }, []);
 
   return (
-    <div className="grid2">
+    <div className="gridApart2">
       {postsToShow.map((post, index) => (
         <img key={index} src={post}></img>
       ))}

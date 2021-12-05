@@ -6,7 +6,7 @@ export default function Description(props) {
 
       <p>{props.description}</p>
 
-      <p className="text-primary text-end">
+      <p className="text-primary text-center">
         Missing some information? <a className="text-decoration-none fw-bold" href="#">
           Yes
         </a>

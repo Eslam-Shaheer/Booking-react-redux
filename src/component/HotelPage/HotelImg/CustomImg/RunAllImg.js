@@ -12,7 +12,7 @@ const RunAllImg = (props) => {
   }, []);
 
   return (
-    <div className="grid2">
+    <div className="gridHotel2">
       {postsToShow.map((post, index) => (
         <img key={index} src={post}></img>
       ))}

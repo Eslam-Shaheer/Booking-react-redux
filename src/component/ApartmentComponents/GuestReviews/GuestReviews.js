@@ -11,16 +11,16 @@ export default function GuestReviews(props) {
   const [reviewScore, setReviewScore] = useState();
 
   useEffect(() => {
-      if (apartment.avgReviews >= 1 && apartment.avgReviews <= 3) {
+      if (apartment.avgReviews.toString().split('').splice(0,3).join('') >= 1 && apartment.avgReviews.toString().split('').splice(0,3).join('') <= 3) {
         setReviewScore("bad");
         props.setReviews("bad");
-      } else if (apartment.avgReviews > 3 && apartment.avgReviews <= 6) {
+      } else if (apartment.avgReviews.toString().split('').splice(0,3).join('') > 3 && apartment.avgReviews.toString().split('').splice(0,3).join('') <= 6) {
         setReviewScore("good");
         props.setReviews("good");
-      } else if (apartment.avgReviews > 6 && apartment.avgReviews <= 8) {
+      } else if (apartment.avgReviews.toString().split('').splice(0,3).join('') > 6 && apartment.avgReviews.toString().split('').splice(0,3).join('') <= 8) {
         setReviewScore("very good");
         props.setReviews("very good");
-      } else if (apartment.avgReviews > 8 && apartment.avgReviews <= 10) {
+      } else if (apartment.avgReviews.toString().split('').splice(0,3).join('') > 8 && apartment.avgReviews.toString().split('').splice(0,3).join('') <= 10) {
         setReviewScore("excellent");
         props.setReviews("excellent");
       }
@@ -35,7 +35,7 @@ export default function GuestReviews(props) {
 
         <div>
           <div className="d-flex">
-            <span class="badge-rating me-2"> {apartment.avgReviews} </span>
+            <span class="badge-rating me-2"> {apartment.avgReviews.toString().split('').splice(0,3).join('')} </span>
             {reviewScore && reviewScore}
             <span className="text-secondary fw-bold ms-2">
               {apartment.totalReviews} Reviews{" "}
@@ -54,7 +54,7 @@ export default function GuestReviews(props) {
                     <span>{apartment.totalReviews} Reviews </span>
                   </div>
                   <div class="p-2 flex-shrink-1">
-                    <span class="badge-rating">{apartment.avgReviews}</span>
+                    <span class="badge-rating">{apartment.avgReviews.toString().split('').splice(0,3).join('')}</span>
                   </div>
                 </div>
               </Offcanvas.Title>

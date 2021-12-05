@@ -27,3 +27,22 @@
 .commentDiv {
   border-radius: 20px;
 }
+
+
+/* dropDown */
+.dropdown-toggle::after{
+  content: none !important;
+}
+ 
+ 
+.btn-primary:active:focus:not(:disabled):not(.disabled),
+.btn:focus, .btn:active, .btn:hover{
+    box-shadow: none!important;
+    outline: 0;
+}
+ 
+
+.btn-group:active {
+    transform: translateY(3px);
+}
+ 

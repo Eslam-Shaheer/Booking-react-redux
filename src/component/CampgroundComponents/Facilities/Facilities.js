@@ -10,11 +10,7 @@ export default function Facilities(props) {
           <div class="me-auto ">
             <h3>Facilities of {props.campground.campgroundName}</h3>
           </div>
-          <div class="p-2">
-            <button className="btn btn-primary rounded-0">
-              See availability
-            </button>
-          </div>
+       
         </div>
 
         <div class="d-flex flex-row  mb-3 flex-wrap">
