@@ -11,20 +11,22 @@ import Covid from "./component/HotelPage/Covid/Covid";
 import HotelPage from "./Pages/HotelPage/HotelPage";
 import ApartmentPage from "./Pages/ApartmentComponents/ApartmentPage";
 import Campground from "./Pages/CampgroundPage/Campground";
+import HotelBooking from "./Pages/Checkout/hotelBooking";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
+      <HotelBooking />
       {/* <Home /> */}
       {/* <HotelsList/>   */}
       {/* <CampsList/> */}
       {/* <ApartmentsList/>  */}
       {/* <Post /> */}
-      <HotelPage />  
+      {/* <HotelPage />  
       <ApartmentPage />
       <Campground />
-      <Footer />
+      <Footer /> */}
     </div>
   );
 }

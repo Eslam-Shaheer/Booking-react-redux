@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://iti-g3-booking-backend.herokuapp.com/",
+  baseURL: "http://localhost:3000/",
 });
 
 axiosInstance.interceptors.request.use(
@@ -13,4 +13,3 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
- 
