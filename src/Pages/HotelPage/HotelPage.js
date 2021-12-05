@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Availability from "../../component/HotelPage/All-Availability/Availability";
 import BodyCom from "../../component/HotelPage/BodyCom/BodyCom";
- import Covid from "../../component/HotelPage/Covid/Covid";
+import Covid from "../../component/HotelPage/Covid/Covid";
 import HotelImg from "../../component/HotelPage/HotelImg/HotelImg";
 import NavHotel from "../../component/HotelPage/NavHotel/NavHotel";
 import Search from "../../component/HotelPage/Search/Search";
@@ -13,12 +13,14 @@ import QuestionsAndAnswers from "../../component/HotelPage/QuestionsAndAnswers/Q
 import Facilities from "../../component/HotelPage/Facilities/Facilities";
 import HouseRules from "../../component/HotelPage/HouseRules/HouseRules";
 import Faqs from "../../component/HotelPage/Faqs/Faqs";
+import { useParams } from "react-router-dom";
 
-export default function HotelPage() {
+export default function HotelPage(props) {
   const [hotel, setHotel] = useState();
   const [reviews, setReviews] = useState();
+  const { id } = useParams();
   useEffect(() => {
-    axiosInstance.get("hotel/619cd61add2d1495a56e550b").then((result) => {
+    axiosInstance.get("hotel/" + id).then((result) => {
       setHotel(result.data.data);
     });
   }, []);

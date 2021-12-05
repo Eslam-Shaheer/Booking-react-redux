@@ -1,101 +1,153 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { axiosInstance } from "../../../Redux/network";
 import "./Grid-section.css";
 
 export default function Gridsection() {
-    return (
-        <>
-    <div className="container">
+  const [sharmHotels, setSharmHotels] = useState();
+  const [alamainHotels, setAlamainHotels] = useState();
+  const [hurghadaHotels, setHurghadaHotels] = useState();
+  const [alexHotels, setAlexHotels] = useState();
+  const [cairoHotels, setCairoHotels] = useState();
+  useEffect(() => {
+    axiosInstance
+      .get("/filter/search/hotel/egypt/sharmelshiekh")
+      .then((result) => {
+        if (result.data.success) setSharmHotels(result.data.data);
+      });
+    axiosInstance.get("/filter/search/hotel/egypt/alamain").then((result) => {
+      if (result.data.success) {
+        setAlamainHotels(result.data.data);
+      }
+      console.log(result);
+    });
+    axiosInstance.get("/filter/search/hotel/egypt/hurghada").then((result) => {
+      if (result.data.success) setHurghadaHotels(result.data.data);
+    });
+    axiosInstance
+      .get("/filter/search/hotel/egypt/alexandria")
+      .then((result) => {
+        if (result.data.success) setAlexHotels(result.data.data);
+      });
+    axiosInstance.get("/filter/search/hotel/egypt/cairo").then((result) => {
+      if (result.data.success) setCairoHotels(result.data.data);
+    });
+  }, []);
+  return (
+    <>
+      <div className="container my-3">
         <div className="grid-images">
-            <div className="row">
-                <div className="col-lg-6 col-12  position-relative  ">
-                    <div className="unified-postcard__header first-img-row">
-                        <h3>
-                            <a href="">Kavoúsion
-                                <img src="https://cf.bstatic.com/static/img/flags/24/gr/6863a8c81b841fd9a738f543550ec32c87bfafc0.png"
-                                    alt="Greece" valign="middle"/>
-                            </a>
-                        </h3>
-                        <p>
-                            7 properties
-                        </p>
-                    </div>
-                    <img className="grid-country-img w-100 mb-4"
-                        src="https://cf.bstatic.com/xdata/images/city/540x270/844103.webp?k=b4ff3d17a962184dfa8823beec573fa3f679306e8b3fa897b901ba0dedb157bd&o="
-                        alt=""/>
-                </div>
-                <div className="col-lg-6 col-12  position-relative ">
-                    <div className="unified-postcard__header first-img-row">
-                        <h3>
-                            <a href="">Kavoúsion
-                                <img src="https://cf.bstatic.com/static/img/flags/24/gr/6863a8c81b841fd9a738f543550ec32c87bfafc0.png"
-                                    alt="Greece" valign="middle"/>
-                            </a>
-                        </h3>
-                        <p>
-                            7 properties
-                        </p>
-                    </div>
-                    <img className="grid-country-img w-100 mb-4"
-                        src="https://cf.bstatic.com/xdata/images/city/540x270/693535.webp?k=39f09e1a64b76dc38b82fae5e51dd9728a68c06b8a0a26c2e6254a80eb792e72&o="
-                        alt=""/>
-                </div>
-                <div className="col-lg-4 col-12 position-relative secound-img-row ">
-                    <div className="unified-postcard__header secound-img-row">
-                        <h3>
-                            <a href="">Kavoúsion
-                                <img src="https://cf.bstatic.com/static/img/flags/24/gr/6863a8c81b841fd9a738f543550ec32c87bfafc0.png"
-                                    alt="Greece" valign="middle"/>
-                            </a>
-                        </h3>
-                        <p>
-                            7 properties
-                        </p>
-                    </div>
-                    <img className="grid-country-img w-100 mb-4"
-                        src="https://cf.bstatic.com/xdata/images/city/540x270/810971.webp?k=34cb40f6b8444cb6f23969737d2c6a3d91b31bba1f8aa9ccf79bdc807d9b1dd1&o="
-                        alt=""/>
-                </div>
-                <div className="col-lg-4 col-12 position-relative secound-img-row">
-                    <div className="unified-postcard__overlay">
-                        <div className="unified-postcard__header secound-img-row">
-                            <h3>
-                                <a href="">
-                                    Pieve Di Ledro
-                                    <img src="https://cf.bstatic.com/static/img/flags/24/it/b539a003f197845e447b9d00d91cd74dd57bf3dd.png"
-                                        alt="Italy" valign="middle"/>
-                                </a>
-                            </h3>
-                            <p>
-                                30 properties
-                            </p>
-                        </div>
-                        <img className="grid-country-img w-100 mb-4 secound-img-row"
-                            src="https://cf.bstatic.com/xdata/images/city/540x270/882469.webp?k=fca6ffc78aa7dd45be134b893556a76248ae24ddb3edda23a6fb8f118faa660f&o="
-                            alt=""/>
-                    </div>
-                </div>
-                <div className="col-lg-4 col-12 position-relative">
-                    <div className="unified-postcard__overlay">
-                        <div className="unified-postcard__header secound-img-row">
-                            <h3>
-                                <a href="">Kavoúsion
-                                    <img src="https://cf.bstatic.com/static/img/flags/24/gr/6863a8c81b841fd9a738f543550ec32c87bfafc0.png"
-                                        alt="Greece" valign="middle"/>
-                                </a>
-                            </h3>
-                            <p>
-                                7 properties
-                            </p>
-                        </div>
-                    </div>
-                    <img className="grid-country-img w-100 mb-4"
-                        src="https://cf.bstatic.com/xdata/images/city/540x270/877703.webp?k=045b05cfe6db19d279059e7864898ff3dc2f367d20500d9c824cbcea696c85d7&o="
-                        alt=""/>
-                </div>
+          <div className="row">
+            <div className="col-lg-6 col-12  position-relative  ">
+              <div className="unified-postcard__header first-img-row">
+                <h3>
+                  <a href="">
+                    Sharm El Shiekh
+                    <img
+                      src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
+                      alt="Egypt"
+                      valign="middle"
+                    />
+                  </a>
+                </h3>
+                {sharmHotels && <p> {sharmHotels.length} Hotels</p>}
+              </div>
+              <img
+                className="grid-country-img w-100 mb-4"
+                src="https://upload.wikimedia.org/wikipedia/commons/d/d1/8_A_resort_in_Sharm_El_Sheikh.jpg"
+                alt=""
+              />
             </div>
+            <div className="col-lg-6 col-12  position-relative ">
+              <div className="unified-postcard__header first-img-row">
+                <h3>
+                  <a href="">
+                    Al almain
+                    <img
+                      className="ms-2"
+                      src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
+                      alt="Egypt"
+                      valign="middle"
+                    />
+                  </a>
+                </h3>
+                {alamainHotels && <p> {alamainHotels.length} Hotels</p>}
+              </div>
+              <img
+                className="grid-country-img w-100 mb-4"
+                src="https://almalnews.com/wp-content/uploads/2019/08/Alalameen.png"
+                alt=""
+              />
+            </div>
+            <div className="col-lg-4 col-12 position-relative secound-img-row ">
+              <div className="unified-postcard__header secound-img-row">
+                <h3>
+                  <a href="">
+                    Hurghada
+                    <img
+                      className="ms-2"
+                      src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
+                      alt="Egypt"
+                      valign="middle"
+                    />
+                  </a>
+                </h3>
+                {hurghadaHotels && <p> {hurghadaHotels.length} Hotels</p>}
+              </div>
+              <img
+                className="grid-country-img2 w-100 mb-4"
+                src="https://tourflag.com/wp-content/uploads/%D9%85%D9%86%D8%AA%D8%AC%D8%B9%D8%A7%D8%AA-%D8%B5%D9%86%D9%8A-%D8%AF%D8%A7%D9%8A%D8%B2-%D8%A7%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D9%8A%D9%88-1.jpg"
+                alt=""
+              />
+            </div>
+            <div className="col-lg-4 col-12 position-relative secound-img-row">
+              <div className="unified-postcard__overlay">
+                <div className="unified-postcard__header secound-img-row">
+                  <h3>
+                    <a href="">
+                      Alexandria
+                      <img
+                        className="ms-2"
+                        src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
+                        alt="Egypt"
+                        valign="middle"
+                      />
+                    </a>
+                  </h3>
+                  {alexHotels && <p> {alexHotels.length} Hotels</p>}
+                </div>
+                <img
+                  className="grid-country-img2 w-100 mb-4 secound-img-row"
+                  src="https://images.memphistours.com/large/42fdf09a747ff19d3e2e64928cdd23cb.jpg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="col-lg-4 col-12 position-relative">
+              <div className="unified-postcard__overlay">
+                <div className="unified-postcard__header secound-img-row">
+                  <h3>
+                    <a href="">
+                      Cairo
+                      <img
+                        className="ms-2"
+                        src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
+                        alt="Egypt"
+                        valign="middle"
+                      />
+                    </a>
+                  </h3>
+                  {cairoHotels && <p> {cairoHotels.length} Hotels</p>}
+                </div>
+              </div>
+              <img
+                className="grid-country-img2 w-100 mb-4"
+                src="https://media.istockphoto.com/photos/mosque-and-pyramids-picture-id1174818077?k=20&m=1174818077&s=612x612&w=0&h=vAutxzWDTokCJkf6010sguiHP6yc8Nzt8qePG9DEew0="
+                alt=""
+              />
+            </div>
+          </div>
         </div>
-    </div>
-   
-        </>
-    )
+      </div>
+    </>
+  );
 }

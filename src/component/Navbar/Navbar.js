@@ -1,5 +1,6 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 import "./Navbar.css";
 
@@ -107,20 +108,50 @@ export default function Navbar() {
       <div className="navbar navbar-expand-lg bg-primary_color text-white ">
         <div className="container ">
           <Nav>
-            <Nav.Link className="text-white NavStyle" href="#home">
-              Home
+            <Nav.Link className="text-white NavStyle">
+              <NavLink
+                className="text-white text-decoration-none "
+                to="/"
+                activeClassName="active"
+              >
+                Home
+              </NavLink>
             </Nav.Link>
-            <Nav.Link className="text-white NavStyle" href="#hotel">
-              Hotel
+            <Nav.Link className="text-white NavStyle">
+              <NavLink
+                className="text-white text-decoration-none"
+                activeClassName="active"
+                to="/hotels"
+              >
+                Hotels
+              </NavLink>
             </Nav.Link>
-            <Nav.Link className="text-white NavStyle" href="#apartment">
-              Apartment
+            <Nav.Link className="text-white NavStyle">
+              <NavLink
+                activeClassName="active"
+                className="text-white text-decoration-none"
+                to="/apartments"
+              >
+                Apartments
+              </NavLink>
             </Nav.Link>
-            <Nav.Link className="text-white NavStyle" href="#campground">
-              Campground
+            <Nav.Link className="text-white NavStyle">
+              <NavLink
+                activeClassName="active"
+                className="text-white text-decoration-none"
+                to="/campgrounds"
+              >
+                Campgrounds
+              </NavLink>
             </Nav.Link>
-            <Nav.Link className="text-white NavStyle" href="#community">
-              Community
+            <Nav.Link className="text-white NavStyle">
+              <NavLink
+                activeClassName="active"
+                className="text-white text-decoration-none"
+                to="/post"
+              >
+                Community
+              </NavLink>
             </Nav.Link>
           </Nav>
         </div>
@@ -128,4 +159,3 @@ export default function Navbar() {
     </>
   );
 }
-

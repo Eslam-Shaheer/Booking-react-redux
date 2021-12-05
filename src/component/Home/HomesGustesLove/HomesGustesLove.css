@@ -1,4 +1,7 @@
-.CustomImg{
-    width: 16rem;
-    height: 22rem;
+.CustomImg {
+  width: 16rem;
+  height: 22rem;
+}
+.card img {
+  height: 250px;
 }

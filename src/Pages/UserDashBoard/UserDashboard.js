@@ -12,7 +12,7 @@ export default function UserDashboard() {
   return (
     <>
       <div className="color ">
-        <div className="container bg-white py-3">
+        <div className="container bg-white py-3  ">
           <Tabs defaultActiveKey="Profile" id="uncontrolled-tab-example">
             <Tab eventKey="Profile" title="Profile">
               <Profile />

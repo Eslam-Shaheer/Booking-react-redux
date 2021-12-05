@@ -9,17 +9,18 @@ import HouseRules from "../../component/ApartmentComponents/HouseRules/HouseRule
 import MostPopularFacilities from "../../component/ApartmentComponents/Mostpopularfacilities/MostPopularFacilities";
 import QuestionsAndAnswers from "../../component/ApartmentComponents/QuestionsAndAnswers/QuestionsAndAnswers";
 import WhyChose from "../../component/ApartmentComponents/WhyChose/WhyChose";
- import Covid from "../../component/HotelPage/Covid/Covid";
+import Covid from "../../component/HotelPage/Covid/Covid";
 import NavHotel from "../../component/HotelPage/NavHotel/NavHotel";
 import Search from "../../component/HotelPage/Search/Search";
 import { axiosInstance } from "../../Redux/network";
+import { useParams } from "react-router-dom";
 
 export default function ApartmentPage() {
   const [apartment, setApartment] = useState();
   const [reviews, setReviews] = useState();
-
+  const { id } = useParams();
   useEffect(() => {
-    axiosInstance.get("apartment/61a7c6008f06602964caad9b").then((result) => {
+    axiosInstance.get("apartment/" + id).then((result) => {
       setApartment(result.data.data);
     });
   }, []);

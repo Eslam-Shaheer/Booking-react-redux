@@ -1,10 +1,23 @@
-import React from "react";
 import "./Property.css";
 import StaticHotel from "../../images/img.jpg";
 import Like from "../../images/like.svg";
-
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 export default function Property(props) {
   let star = [];
+  const [Review, setReviewScore] = useState();
+
+  useEffect(() => {
+    if (props.prop.avgReviews >= 1 && props.prop.avgReviews <= 3) {
+      setReviewScore("bad");
+    } else if (props.prop.avgReviews > 3 && props.prop.avgReviews <= 6) {
+      setReviewScore("good");
+    } else if (props.prop.avgReviews > 6 && props.prop.avgReviews <= 8) {
+      setReviewScore("very good");
+    } else if (props.prop.avgReviews > 8 && props.prop.avgReviews <= 10) {
+      setReviewScore("excellent");
+    }
+  }, []);
   for (let i = 0; i < props.prop.starRating; i++) {
     star.push(
       <svg
@@ -25,41 +38,42 @@ export default function Property(props) {
         <div className="col-md-3 img">
           <img
             src={props.prop.images[0]}
-            className="img-fluid rounded-start h-100 "
+            className="img-fluid rounded-3 w-100 "
             alt="..."
           />
           <i className="far fa-heart"></i>
         </div>
-        <div className="col-md-7">
-          <div className="card-body">
-            <h5 className="card-title ">
-              <a href="#" className="text-decoration-none">
-                {props.prop.hotelName}
-              </a>
-            </h5>
+        <div className="col-md-7 ">
+          <div className="card-body py-0">
+            <NavLink
+              to={props.prop._id}
+              className="text-decoration-none"
+              style={{ color: "#0071c2" }}
+            >
+              <h5 className="card-title mt-0">
+                {props.prop[props.type + "Name"]}
+              </h5>
+            </NavLink>
             <div className="stars">
               {star}
-              <img src={Like} alt="" />
+              <img src={Like} style={{ height: "20px" }} alt="" />
             </div>
-            <div>
+            <div style={{ fontSize: "13px" }}>
               <a href="#" className="card-text ">
                 {props.prop.city} , {props.prop.streetAddress}
               </a>{" "}
               <span className="dotspan "></span>{" "}
-              <a href="#" className="card-text">
+              <a href="#" className="card-text ">
                 {" "}
                 Show on map{" "}
               </a>{" "}
               <span className="dotspan"></span>
-              <p className="card-text ">
-                <small>0.3 km from center</small>
-              </p>
+              <p className="card-text "></p>
             </div>
             <p className="p-desc">
-              Only steps from Austin's State Capitol building and within walking
-              distance of other attractions, this hotel features spacious
-              guestrooms furnished with coffeemakers and knowledgeable
-              on-site...
+              {props.prop.description &&
+                props.prop.description.substring(1, 250)}
+              ...
             </p>
           </div>
         </div>
@@ -67,7 +81,7 @@ export default function Property(props) {
           <div className="row">
             <div className="reviews col-lg-8 ">
               <a className="text-muted " href="#">
-                {" "}
+                <h6 className="p-0 text-success">{Review}</h6>
                 reviews {props.prop.totalReviews}
               </a>
             </div>
@@ -80,9 +94,15 @@ export default function Property(props) {
           <div className="row">
             <div className="col-lg-2 "></div>
           </div>
-          <button className="btn btn-primary fw-bold mt-3" type="button">
-            Show Details
-          </button>
+          <NavLink to={props.prop._id}>
+            <button
+              className="btn btn-primary fw-bold mt-3"
+              style={{ backgroundColor: "#0071c2" }}
+              type="button"
+            >
+              Show Details
+            </button>
+          </NavLink>
         </div>
       </div>
     </div>
