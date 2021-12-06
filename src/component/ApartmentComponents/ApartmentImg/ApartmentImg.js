@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
- import Modal from "react-bootstrap/Modal";
+import Modal from "react-bootstrap/Modal";
 import Run from "./CustomImg/RunImg";
 import RunAllImg from "./CustomImg/RunAllImg";
 export default function ApartmentImg(props) {
   const [show, setShow] = useState(false);
   let [apartment, setApartment] = useState(props.apartment);
-
- 
 
   useEffect(() => {
     setApartment(props.apartment);
@@ -21,7 +19,7 @@ export default function ApartmentImg(props) {
           </h6>
         </div>
         <div className="me-2">
-          <h3> {props.apartment.apartmentlName} </h3>
+          <h3> {props.apartment.apartmentName} </h3>
         </div>
         <div className="me-2">
           <h6 className="pt-2">

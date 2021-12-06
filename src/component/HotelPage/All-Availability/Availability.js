@@ -1,62 +1,89 @@
-import React from 'react'
-import { Form } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
 import "./Availability.css";
+import { axiosInstance } from "../../../Redux/network";
+import { useParams } from "react-router-dom";
 export default function Availability(props) {
-  console.log(props.hotel.rooms);
- 
-    return (
-      <>
-        <div className="d-flex my-2" id="infoPrices">
+  const [available, setAvailable] = useState();
+  const [availableRooms, setAvailableRooms] = useState();
+  const [isSelect, setIsSelect] = useState(false);
+
+  const { id } = useParams();
+  const handleDateChange = (e) => {
+    setAvailable({ ...available, [e.target.name]: e.target.value });
+    console.log(available);
+  };
+  const checkAvailability = () => {
+    axiosInstance.post("filter/rooms/hotel/" + id, available).then((result) => {
+      setAvailableRooms(result.data.data);
+      setIsSelect(true);
+    });
+  };
+
+  return (
+    <>
+      <div className="d-flex my-2" id="infoPrices">
+        <div>
+          <h3>Availability</h3>
+        </div>
+      </div>
+
+      <div className="border d-flex">
+        <div className="d-flex flex-column p-3">
           <div>
-            <h3>Availability</h3>
+            <h6>
+              <p>Check In</p>
+              <input
+                name="startAt"
+                type="date"
+                class="form-control"
+                onChange={handleDateChange}
+              />
+            </h6>
+            <h6 className="text-primary">{available && available.startAt}</h6>
           </div>
         </div>
 
-        <div className="border d-flex">
-          <div className="d-flex flex-column p-3">
-            <div>
-              <h6>
-                <p>Check In</p>
-                <input type="date" class="form-control" />
-              </h6>
-              <h6 className="text-primary">Sun 28 Nov 2021</h6>
-              <span className="me-2">From 00:00 until 00:00</span>
-            </div>
-          </div>
-
-          <div className="d-flex flex-column p-3">
-            <div>
-              <h6>
-                <p>Check Out</p>
-                <input type="date" class="form-control" />
-              </h6>
-              <h6 className="text-primary">Sun 28 Nov 2021</h6>
-              <span>1-night stay</span>
-            </div>
-          </div>
-
-          <div className="d-flex ms-auto p-3">
-            <div>
-              <button className="btn btn-primary rounded-0">
-                Check Availability
-              </button>
-            </div>
+        <div className="d-flex flex-column p-3">
+          <div>
+            <h6>
+              <p>Check Out</p>
+              <input
+                name="endAt"
+                type="date"
+                class="form-control"
+                onChange={handleDateChange}
+              />
+            </h6>
+            <h6 className="text-primary">{available && available.endAt}</h6>
           </div>
         </div>
 
-        {/* الجدول */}
+        <div className="d-flex ms-auto p-3">
+          <button
+            className="btn btn-primary rounded-0 my-auto"
+            onClick={checkAvailability}
+          >
+            Check Availability
+          </button>
+        </div>
+      </div>
 
-        <div className="mt-4 TableDev">
-          <table id="customers">
-            <tr>
-              <th>Room type</th>
-              <th>Sleeps</th>
-              <th>Today's price</th>
-              <th>Your choices </th>
-              <th>Select rooms</th>
-              <th className="text-center">Reserve</th>
-            </tr>
-            {props.hotel.rooms.map((room) => {
+      {/* الجدول */}
+
+      <div className="mt-4 TableDev">
+        <table id="customers">
+          <tr>
+            <th>Room type</th>
+            <th>Sleeps</th>
+            <th>Today's price</th>
+            <th>Your choices </th>
+            <th>Select rooms</th>
+            <th className="text-center">Reserve</th>
+          </tr>
+          {!isSelect && <tr>Choose</tr>}
+          {isSelect &&
+            availableRooms.map((room) => {
               return (
                 <tr>
                   <td>{room.type}</td>
@@ -87,29 +114,22 @@ export default function Availability(props) {
                   <td>
                     <Form.Select size="sm">
                       <option>0</option>
-                      <option>0</option>
-                      <option>0</option>
+                      {[...Array(room.availableRooms)].map((item, index) => {
+                        return <option>{index + 1}</option>;
+                      })}
                     </Form.Select>
                   </td>
 
                   <td className="text-center">
                     <buttun className="btn btn-primary   rounded-0">
-                      I`ll Reserve
+                      Reserve
                     </buttun>
                   </td>
                 </tr>
               );
             })}
-          </table>
-        </div>
-      </>
-    );
+        </table>
+      </div>
+    </>
+  );
 }
-
- 
- 
- 
- 
-
-
- 

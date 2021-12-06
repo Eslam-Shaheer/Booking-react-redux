@@ -13,15 +13,14 @@ import QuestionsAndAnswers from "../../component/CampgroundComponents/QuestionsA
 import Facilities from "../../component/CampgroundComponents/Facilities/Facilities";
 import HouseRules from "../../component/CampgroundComponents/HouseRules/HouseRules";
 import Faqs from "../../component/CampgroundComponents/Faqs/Faqs";
-
+import { useParams } from "react-router-dom";
 export default function Campground() {
   const [campground, setCampground] = useState();
-   const [reviews, setReviews] = useState();
- 
+  const [reviews, setReviews] = useState();
+  const { id } = useParams();
   useEffect(() => {
-    axiosInstance.get("campground/61a9686369692796a2797f50").then((result) => {
+    axiosInstance.get("campground/" + id).then((result) => {
       setCampground(result.data.data);
-       
     });
   }, []);
 
@@ -40,11 +39,7 @@ export default function Campground() {
           {campground && <Availability campground={campground} />}
           {campground && <WhyChose campground={campground} />}
           {campground && (
-            <GuestReviews
-              campground={campground}
-              setReviews={setReviews}
-               
-            />
+            <GuestReviews campground={campground} setReviews={setReviews} />
           )}
           <QuestionsAndAnswers />
           {campground && <Facilities campground={campground} />}

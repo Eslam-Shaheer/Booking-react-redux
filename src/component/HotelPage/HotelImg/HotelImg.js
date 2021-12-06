@@ -7,26 +7,25 @@ export default function HotelImg(props) {
   const [show, setShow] = useState(false);
   let [hotel, setHotel] = useState(props.hotel);
 
+  let star = [];
+  for (let i = 0; i < props.hotel.starRating; i++) {
+    star.push(
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="#febb02"
+        className="bi bi-star-fill"
+        viewBox="0 0 16 16"
+      >
+        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+      </svg>
+    );
+  }
 
-      let star = [];
-      for (let i = 0; i < props.hotel.starRating; i++) {
-        star.push(
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="#febb02"
-            className="bi bi-star-fill"
-            viewBox="0 0 16 16"
-          >
-            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-          </svg>
-        );
-      }
- 
   useEffect(() => {
     setHotel(props.hotel);
-   }, []);
+  }, []);
 
   return (
     <>
@@ -48,24 +47,24 @@ export default function HotelImg(props) {
 
         <span className="me-2 pt-1">
           <svg
-          aria-hidden="true"
-          data-bui-component="Tooltip"
-          data-et-mouseenter="
+            aria-hidden="true"
+            data-bui-component="Tooltip"
+            data-et-mouseenter="
           customGoal:TPOaXGZCHQGPGJIMADXRT:1
           "
-          data-tooltip-position="bottom"
-          data-tooltip-text="
+            data-tooltip-position="bottom"
+            data-tooltip-text="
           This is a Preferred Partner property. It is committed to providing guests with a positive experience thanks to its commendable service and good value. This property may pay Booking.com a bit more to be in this Programme. 
           "
-          fill="#FEBB02"
-          height="24"
-          rel="300"
-          width="24"
-          viewBox="0 0 128 128"
-          role="presentation"
-          focusable="false"
+            fill="#FEBB02"
+            height="24"
+            rel="300"
+            width="24"
+            viewBox="0 0 128 128"
+            role="presentation"
+            focusable="false"
           >
-          <path d="M112 8H16a8 8 0 0 0-8 8v96a8 8 0 0 0 8 8h96a8 8 0 0 0 8-8V16a8 8 0 0 0-8-8zM48 96H24V58h24zm56-25a8.7 8.7 0 0 1-2 6 8.9 8.9 0 0 1 1 4 6.9 6.9 0 0 1-5 7c-.5 4-4.8 8-9 8H56V58l10.3-23.3a5.4 5.4 0 0 1 10.1 2.7 10.3 10.3 0 0 1-.6 2.7L72 52h23c4.5 0 9 3.5 9 8a9.2 9.2 0 0 1-2 5.3 7.5 7.5 0 0 1 2 5.7z"></path>
+            <path d="M112 8H16a8 8 0 0 0-8 8v96a8 8 0 0 0 8 8h96a8 8 0 0 0 8-8V16a8 8 0 0 0-8-8zM48 96H24V58h24zm56-25a8.7 8.7 0 0 1-2 6 8.9 8.9 0 0 1 1 4 6.9 6.9 0 0 1-5 7c-.5 4-4.8 8-9 8H56V58l10.3-23.3a5.4 5.4 0 0 1 10.1 2.7 10.3 10.3 0 0 1-.6 2.7L72 52h23c4.5 0 9 3.5 9 8a9.2 9.2 0 0 1-2 5.3 7.5 7.5 0 0 1 2 5.7z"></path>
           </svg>
         </span>
       </div>
@@ -74,7 +73,7 @@ export default function HotelImg(props) {
         <div className="me-2">
           <p>
             <svg
-            className="me-1"
+              className="me-1"
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
@@ -84,14 +83,14 @@ export default function HotelImg(props) {
             >
               <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
             </svg>
-            {props.hotel.streetAddress} , {props.hotel.city} ,{" "}
+            {props.hotel.streetAddress} , {props.hotel.city} ,
             {props.hotel.country}
           </p>
         </div>
       </div>
 
       <div variant="primary" onClick={() => setShow(true)}>
-        <Run hotel={props.hotel}/>
+        <Run hotel={props.hotel} />
       </div>
 
       <Modal
@@ -107,7 +106,7 @@ export default function HotelImg(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <RunAllImg hotel={props.hotel}/>
+          <RunAllImg hotel={props.hotel} />
         </Modal.Body>
       </Modal>
       <div className="d-flex mt-3 border">
