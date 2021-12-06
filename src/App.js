@@ -12,6 +12,8 @@ import HotelPage from "./Pages/HotelPage/HotelPage";
 import ApartmentPage from "./Pages/ApartmentComponents/ApartmentPage";
 import Campground from "./Pages/CampgroundPage/Campground";
 import UserDashboard from "./Pages/UserDashBoard/UserDashboard";
+ 
+ 
 
 function App() {
   return (
@@ -21,11 +23,12 @@ function App() {
       {/* <HotelsList/>   */}
       {/* <CampsList/> */}
       {/* <ApartmentsList/>  */}
-      <Post />  
-      <UserDashboard/>
+      {/* <Post />  
+      <UserDashboard/> */}
       {/* <HotelPage />   */}
-      {/* <ApartmentPage /> */}
+ <ApartmentPage />  
       {/* <Campground /> */}
+      
       <Footer />
     </div>
   );
