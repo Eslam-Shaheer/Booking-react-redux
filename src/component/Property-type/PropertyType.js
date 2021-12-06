@@ -34,7 +34,7 @@ export default function PropertyType() {
           <div className="card border-0 mb-3 mx-auto CustomWodth">
             <img
               src="https://media.timbu.com/img/h1411628/391/281/b1/siwa-shali-resort-1411628-1.jpg"
-              className="card-img-top"
+              className="card-img-prop"
               alt="..."
             />
             <div className="card-body my-2 p-0 ">
@@ -47,7 +47,7 @@ export default function PropertyType() {
           <div className="card border-0 mb-3 mx-auto CustomWodth">
             <img
               src="https://images.squarespace-cdn.com/content/v1/5ad52897d274cbe2478e13e5/1602273922921-8AQIZQ53QIIWKNCPW9LM/_DSC7754.jpg?format=1500w"
-              className="card-img-top"
+              className="card-img-prop"
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
@@ -60,7 +60,7 @@ export default function PropertyType() {
           <div className="card border-0 mb-3 mx-auto CustomWodth">
             <img
               src="https://cf.bstatic.com/static/img/theme-index/carousel_320x240/bg_campsite/6d40bef46964b8841a84cd88793fc8f0fa6663d9.jpg"
-              className="card-img-top"
+              className="card-img-prop"
               alt="..."
             />
             <div className="card-body my-2 p-0 ">

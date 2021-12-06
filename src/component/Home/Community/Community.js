@@ -38,7 +38,7 @@ export default function Community() {
             <img
               className="h-75 rounded-2"
               src="https://cf.bstatic.com/static/img/communities/cover-photo/300x300/egypt/b7888ca3a1aeb3abbf6e965427e5ee717fb7f591.jpg"
-              className="card-img-top"
+              className="communityImg"
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
@@ -55,7 +55,7 @@ export default function Community() {
             <img
               className="h-75 rounded-2"
               src="https://rockpowerbusiness.org/wp-content/uploads/2018/12/France.jpg"
-              className="card-img-top"
+              className="communityImg"
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
@@ -72,7 +72,7 @@ export default function Community() {
             <img
               className="h-75 rounded-2"
               src="https://idsb.tmgrup.com.tr/ly/uploads/images/2021/09/08/142845.jpg"
-              className="card-img-top"
+              className="communityImg"
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
@@ -89,7 +89,7 @@ export default function Community() {
             <img
               className="h-75 rounded-2"
               src="https://cf.bstatic.com/static/img/communities/communities-index/photo-300x300/b2d5ae20ed65039fe73edbeea8b34ccfddbd63b4.png"
-              className="card-img-top"
+              className="communityImg"
               alt="..."
             />
             <div className="card-body my-2 p-0  ">

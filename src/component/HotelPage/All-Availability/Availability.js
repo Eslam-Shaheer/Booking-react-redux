@@ -81,6 +81,7 @@ export default function Availability(props) {
             <th>Select rooms</th>
             <th className="text-center">Reserve</th>
           </tr>
+          {!isSelect && <tr>Choose</tr>}
           {isSelect &&
             availableRooms.map((room) => {
               return (

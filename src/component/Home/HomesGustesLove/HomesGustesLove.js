@@ -27,9 +27,9 @@ export default function HomesGustesLove(props) {
               return (
                 <div className="card border-0 mb-3 mx-2 CustomImg">
                   <img
-                    className="h-75 rounded-2 "
+                    className="h-75 rounded-2 loveImg"
                     src={item.images[0]}
-                    className="card-img-top"
+                    className="loveImg"
                     alt="..."
                   />
                   <div className="card-body my-2 p-0  ">

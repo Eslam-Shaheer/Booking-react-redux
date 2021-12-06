@@ -38,7 +38,7 @@ export default function Property(props) {
         <div className="col-md-3 img">
           <img
             src={props.prop.images[0]}
-            className="img-fluid rounded-3 w-100 "
+            className=" propImg rounded-3 w-100 "
             alt="..."
           />
           <i className="far fa-heart"></i>
