@@ -1,69 +1,78 @@
 .bg-primary_color {
-  background-color: #003580 !important;
+	background-color: #003580 !important;
 }
 
 .bg-secoundry_color {
-  background-color: #febb02 !important;
+	background-color: #febb02 !important;
 }
 
 .font-white {
-  color: white !important;
+	color: white !important;
 }
 
 .font-secoundry_color {
-  color: #febb02;
+	color: #febb02;
 }
 
 .font-third_color {
-  color: #0071c2;
+	color: #0071c2;
 }
 
 .bg-white {
-  background-color: white !important;
+	background-color: white !important;
 }
 
 .nav-item a {
-  color: white;
+	color: white;
 }
 
 .lang-img {
-  width: 25px;
-  height: 25px;
+	width: 30px;
+	height: 30px;
 }
+ 
 
 .list-property {
-  border: 1px solid #fff !important;
-  border-radius: 2px;
+	border: 1px solid #fff !important;
+	border-radius: 2px;
 }
 
 .nav-personal-img {
-  width: 37px;
-  height: 37px;
-  border: 2px solid #febb02;
-  background-size: cover;
-  -ms-flex-preferred-size: 50%;
-  flex-basis: 50%;
+	width: 37px;
+	height: 37px;
+	border: 2px solid #febb02;
+	background-size: cover;
+	-ms-flex-preferred-size: 50%;
+	flex-basis: 50%;
 }
 
 .person-name {
-  font-size: 14px;
-  margin-bottom: -1px;
-  font-weight: bold;
+	font-size: 14px;
+	margin-bottom: -1px;
+	font-weight: bold;
 }
 
 .membership {
-  font-size: 12px;
-  font-weight: 400;
-  margin-bottom: -1px;
+	font-size: 12px;
+	font-weight: 400;
+	margin-bottom: -1px;
 }
 .NavStyle {
-  border-radius: 999px;
+	border-radius: 999px;
 }
 .NavStyle:hover {
-  background-color: hsla(0, 0%, 100%, 0.1);
-  border-radius: 999px;
+	background-color: hsla(0, 0%, 100%, 0.1);
+	border-radius: 999px;
 }
 .active {
-  font-weight: bold;
-  font-size: 17px;
+	font-weight: bold;
+	font-size: 17px;
 }
+.btnBackground {
+	background-color: #003580 !important;
+}
+
+.secondNav {
+	margin-left: 44px !important;
+}
+ 

@@ -38,5 +38,9 @@
 .btn:active,
 .btn:hover {
   box-shadow: none !important;
-  outline: 0;
+  outline: 0 !important;
+}
+
+.modalHeader{
+  background-color: #F8F9FA;
 }

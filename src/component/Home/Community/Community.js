@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../../Redux/network";
 import "./Community.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Community() {
   const [uae, setUae] = useState();
   const [france, setFrance] = useState();
   const [egypt, setEgypt] = useState();
   const [allPosts, setAllPosts] = useState();
+    const navigate = useNavigate();
+
   useEffect(() => {
     axiosInstance.get("filter/posts/uae").then((result) => {
       if (result.data.success) {
@@ -93,7 +96,9 @@ export default function Community() {
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
-              <p className="card-title  mb-2">More communities</p>
+              <p className="card-title cardStyle mb-2" onClick={() => navigate("/post")}>
+                More communities
+              </p>
               <p className="card-text text-muted mb-0">Travel community</p>
               {allPosts && (
                 <p className="card-text text-muted mb-0">

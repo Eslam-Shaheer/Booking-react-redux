@@ -20,10 +20,15 @@ export default function HotelPage(props) {
   const [reviews, setReviews] = useState();
   const { id } = useParams();
   useEffect(() => {
-    axiosInstance.get("hotel/" + id).then((result) => {
+ window.scrollTo({
+   top: 0,
+   left: 0,
+   behavior: "instant",
+ });    axiosInstance.get("hotel/" + id).then((result) => {
       setHotel(result.data.data);
     });
   }, []);
+
 
   return (
     <>

@@ -50,3 +50,21 @@
   margin-bottom: 10px;
   width: 100%;
 }
+
+.imgDiv {
+  position: relative;
+  margin-top: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.089);
+  cursor: pointer;
+}
+.imgDiv:hover {
+  background-color: #ebf3ff36;
+  border: 1px solid #febb02;
+}
+
+.btnDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

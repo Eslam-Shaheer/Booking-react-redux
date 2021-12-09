@@ -17,10 +17,9 @@ export default function Comment(props) {
   let newComment = {};
   const onPostImageChange = (event) => {
     setPostImageChange(event.target.files[0]);
-    console.log(event.target.files[0]);
   };
   const clearCommentImage = () => {
-    commentImage = undefined;
+    setPostImageChange(undefined);
     newComment = {};
   };
   const onChangeComment = (e) => {
@@ -76,7 +75,7 @@ export default function Comment(props) {
         if (res.data.success) {
           axiosInstance.get("comment/post/" + postId).then((result) => {
             let allComment = result.data.data;
-            console.log(result);
+
             axiosInstance.get("user/loggedIn/").then((result) => {
               for (let com of allComment) {
                 // console.log(allComment);

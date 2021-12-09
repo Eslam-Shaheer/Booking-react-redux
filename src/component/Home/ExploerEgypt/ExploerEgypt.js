@@ -16,7 +16,7 @@ export default function ExploerEgypt() {
       if (result.data.success) {
         setMarsaalam(result.data.data);
       }
-      console.log(result);
+       
     });
     axiosInstance.get("/filter/search/hotel/egypt/aswan").then((result) => {
       if (result.data.success) setAswan(result.data.data);

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../Redux/network";
 import "./PropertyType.css";
+import { useNavigate } from "react-router-dom";
 
 export default function PropertyType() {
+  const navigate = useNavigate();
   const [hotel, setHotel] = useState();
   const [apartmetnt, setApartment] = useState();
   const [campground, setCampground] = useState();
@@ -38,7 +40,12 @@ export default function PropertyType() {
               alt="..."
             />
             <div className="card-body my-2 p-0 ">
-              <p className="card-title fw-bold">Hotels</p>
+              <p
+                className="card-title fw-bold pStyle"
+                onClick={() => navigate("/hotels")}
+              >
+                Hotels
+              </p>
               <p className="card-text text-muted">
                 {hotel && hotel.length} hotels
               </p>
@@ -51,7 +58,12 @@ export default function PropertyType() {
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
-              <p className="card-title fw-bold">Apartmetnts</p>
+              <p
+                onClick={() => navigate("/apartments")}
+                className="card-title fw-bold pStyle"
+              >
+                Apartmetnts
+              </p>
               <p className="card-text text-muted">
                 {apartmetnt && apartmetnt.length} Apartmetnts
               </p>
@@ -64,7 +76,12 @@ export default function PropertyType() {
               alt="..."
             />
             <div className="card-body my-2 p-0 ">
-              <p className="card-title fw-bold">Campground</p>
+              <p
+                className="card-title fw-bold pStyle"
+                onClick={() => navigate("/campgrounds")}
+              >
+                Campground
+              </p>
               <p className="card-text text-muted">
                 {campground && campground.length} campground
               </p>

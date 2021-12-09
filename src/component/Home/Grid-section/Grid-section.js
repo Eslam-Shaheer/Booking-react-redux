@@ -18,7 +18,7 @@ export default function Gridsection() {
       if (result.data.success) {
         setAlamainHotels(result.data.data);
       }
-      console.log(result);
+      
     });
     axiosInstance.get("/filter/search/hotel/egypt/hurghada").then((result) => {
       if (result.data.success) setHurghadaHotels(result.data.data);
