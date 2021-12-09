@@ -3,14 +3,14 @@ import { Modal } from "react-bootstrap";
 import RunAllImg from "../../CampgroundComponents/CampgroundImg/CustomImg/RunAllImg";
 import "./CampgroundImg.css";
 import Run from "./CustomImg/RunImg";
- 
+
 export default function CampgroundImg(props) {
   const [show, setShow] = useState(false);
   let [campground, setCampground] = useState(props.campground);
- 
+
   useEffect(() => {
     setCampground(props.campground);
-   }, []);
+  }, []);
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function CampgroundImg(props) {
           </h6>
         </div>
         <div className="me-2">
-          <h3> {props.campground.hotelName} </h3>
+          <h3> {props.campground.campgroundName} </h3>
         </div>
         <div className="me-2">
           <h6 className="pt-2">

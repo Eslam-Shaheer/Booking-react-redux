@@ -2,7 +2,7 @@ import "./Property.css";
 import StaticHotel from "../../images/img.jpg";
 import Like from "../../images/like.svg";
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 export default function Property(props) {
   let star = [];
   const [Review, setReviewScore] = useState();
@@ -46,7 +46,7 @@ export default function Property(props) {
         <div className="col-md-7 ">
           <div className="card-body py-0">
             <NavLink
-              to={props.prop._id}
+              to={"/" + props.type + "s/" + props.prop._id}
               className="text-decoration-none"
               style={{ color: "#0071c2" }}
             >
@@ -94,7 +94,7 @@ export default function Property(props) {
           <div className="row">
             <div className="col-lg-2 "></div>
           </div>
-          <NavLink to={props.prop._id}>
+          <Link to={"/" + props.type + "s/" + props.prop._id}>
             <button
               className="btn btn-primary fw-bold mt-3"
               style={{ backgroundColor: "#0071c2" }}
@@ -102,7 +102,7 @@ export default function Property(props) {
             >
               Show Details
             </button>
-          </NavLink>
+          </Link>
         </div>
       </div>
     </div>

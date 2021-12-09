@@ -16,7 +16,8 @@ export default function Comment(props) {
   let commentImage;
   let newComment = {};
   const onPostImageChange = (event) => {
-    commentImage = event.target.files[0];
+    setPostImageChange(event.target.files[0]);
+    console.log(event.target.files[0]);
   };
   const clearCommentImage = () => {
     commentImage = undefined;
@@ -39,10 +40,11 @@ export default function Comment(props) {
   const updateComment = (id, postId) => {
     if (postImageChange) {
       const formData = new FormData();
-      formData.append("multiple_images", commentImage);
+      formData.append("multiple_images", postImageChange);
       console.log("image");
       axiosInstance.post("upload/image/multiple", formData).then((result) => {
         if (result.data.success) {
+          console.log(result.data);
           let image = result.data.data[0];
 
           let Comment = newComment;
@@ -173,7 +175,11 @@ export default function Comment(props) {
 
             <Form.Group controlId="formFile" className="mb-3">
               <Form.Label>Upload Image</Form.Label>
-              <Form.Control type="file" onChange={onPostImageChange} />
+              <Form.Control
+                type="file"
+                name="commentImg"
+                onChange={onPostImageChange}
+              />
             </Form.Group>
 
             <Button

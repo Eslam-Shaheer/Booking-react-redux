@@ -10,7 +10,7 @@ export default function HotelBooking(props) {
     <div className="container py-3">
       <div className="row py-3">
         <div className="col-md-4">
-          <BookingDetails info={reservationInfo} property={prop} />
+          <BookingDetails info={reservationInfo} property={prop} type={type} />
         </div>
         <div className="col-md-8">
           <Booking info={reservationInfo} property={prop} type={type} />

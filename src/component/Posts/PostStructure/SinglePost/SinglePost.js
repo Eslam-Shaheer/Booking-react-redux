@@ -61,7 +61,7 @@ export default function SinglePost(props) {
   const updatePost = (id) => {
     if (postImageChange) {
       const formData = new FormData();
-      formData.append("multiple_images", postImageChange, postImageChange.name);
+      formData.append("multiple_images", postImageChange);
       // console.log(postImageChange);
       axiosInstance.post("upload/image/multiple", formData).then((result) => {
         let image = result.data.data[0];
@@ -69,9 +69,10 @@ export default function SinglePost(props) {
         let newPost = updatedPost;
         newPost.postImage = image;
         // console.log(newPost, "new post");
-
+        console.log(newPost);
         axiosInstance.put("post/" + id, newPost).then((result) => {
           if (result.data.success) {
+            console.log(result);
             window.location.reload();
           } else {
             alert(result.data.msg);

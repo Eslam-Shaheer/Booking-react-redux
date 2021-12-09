@@ -33,9 +33,13 @@ export default function BookingDetails(props) {
         <div className="">
           <strong>You selected:</strong>
           <br />
-          <span>
-            {props.info.roomsNum} {props.info.roomType}
-          </span>
+          {props.type != "apartment" ? (
+            <span>
+              {props.info.roomsNum} {props.info.roomType}
+            </span>
+          ) : (
+            <span>{props.property.apartmentName}</span>
+          )}
         </div>
       </div>
       <div className="border p-3 my-3">
@@ -43,12 +47,16 @@ export default function BookingDetails(props) {
 
         <div>
           <div className="d-flex justify-content-between mb-1">
-            <span>{props.info.roomsNum} rooms</span>
+            {props.type != "apartment" && (
+              <span>{props.info.roomsNum} rooms</span>
+            )}
+            <strong>Days</strong>
             <span>{props.info.days} Days</span>
           </div>
         </div>
         <div className="d-flex justify-content-between my-3">
           <strong>Price</strong>
+
           <strong>{props.info.totalPrice}$</strong>
         </div>
       </div>

@@ -5,14 +5,17 @@ import Footer from "./component/Footer/Footer";
 import HotelsList from "./Pages/Properties/HotelsList";
 import CampsList from "./Pages/Properties/CampgroundList";
 import ApartmentsList from "./Pages/Properties/ApartmentsList";
+import HotelsSearch from "./Pages/PropertiesSearch/HotelsList";
+import CampsSearch from "./Pages/PropertiesSearch/CampgroundList";
+import ApartmentsSearch from "./Pages/PropertiesSearch/ApartmentsList";
 import Post from "./Pages/Posts/Post";
-
 import HotelPage from "./Pages/HotelPage/HotelPage";
 import HotelBooking from "./Pages/Checkout/hotelBooking";
 import ApartmentPage from "./Pages/ApartmentComponents/ApartmentPage";
 import Campground from "./Pages/CampgroundPage/Campground";
 import UserDashboard from "./Pages/UserDashBoard/UserDashboard";
 import { Route, Routes } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
@@ -27,6 +30,18 @@ function App() {
         <Route path="/apartments" element={<ApartmentsList />} />
         <Route path="/hotels" element={<HotelsList />} />
         <Route path="/campgrounds" element={<CampsList />} />
+        <Route
+          path="/search/apartments/:country/:city?"
+          element={<ApartmentsSearch />}
+        />
+        <Route
+          path="/search/hotels/:country/:city?"
+          element={<HotelsSearch />}
+        />
+        <Route
+          path="/search/campgrounds/:country/:city?"
+          element={<CampsSearch />}
+        />
         <Route path="/checkout" element={<HotelBooking />} />
       </Routes>
       <Footer />
