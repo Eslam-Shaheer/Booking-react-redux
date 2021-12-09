@@ -1,17 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   PayPalScriptProvider,
   PayPalButtons,
   usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
+import { propTypes } from "react-bootstrap/esm/Image";
+import { axiosInstance } from "../../Redux/network";
 
 // This values are the props in the UI
-const amount = 10;
+let amount;
 const currency = "USD";
 const style = { layout: "vertical" };
-
 // Custom component to wrap the PayPalButtons and handle currency changes
-const ButtonWrapper = ({ currency, showSpinner }) => {
+const ButtonWrapper = ({
+  currency,
+  showSpinner,
+  reservation,
+  room,
+  prop,
+  info,
+}) => {
+  console.log(prop);
+  amount = info.totalPrice;
   // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
   // This is the main reason to wrap the PayPalButtons in a new component
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
@@ -53,7 +63,11 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
         }}
         onApprove={function (data, actions) {
           return actions.order.capture().then(function () {
-            // Your code here after capture the order
+            axiosInstance
+              .post("hotel/booking/" + prop._id + "/" + room._id, reservation)
+              .then((result) => {
+                console.log(result);
+              });
           });
         }}
       />
@@ -61,7 +75,15 @@ const ButtonWrapper = ({ currency, showSpinner }) => {
   );
 };
 
-export default function App() {
+export default function App(props) {
+  const reservation = {
+    ...props.reservation,
+    totalPrice: props.info.totalPrice - props.info.totalPrice * 0.17,
+    startAt: props.info.startAt,
+    endAt: props.info.endAt,
+  };
+  console.log(reservation);
+
   return (
     <div style={{ maxWidth: "750px", minHeight: "200px" }}>
       <PayPalScriptProvider
@@ -72,48 +94,15 @@ export default function App() {
           currency: "USD",
         }}
       >
-        <ButtonWrapper currency={currency} showSpinner={false} />
+        <ButtonWrapper
+          currency={currency}
+          showSpinner={false}
+          reservation={reservation}
+          room={props.room}
+          prop={props.property}
+          info={props.info}
+        />
       </PayPalScriptProvider>
     </div>
   );
 }
-
-// import React, { useEffect, useRef } from "react";
-
-// export default function Paypal() {
-//   const paypal = useRef();
-//   useEffect(() => {
-
-//     window.paypal
-//       .Buttons({
-//         createOrder: (data, actions, err) => {
-//           return actions.order.create({
-//             intent: "CAPTURE",
-//             purchase_units: [
-//               {
-//                 description: "cool loking tablesssssss",
-//                 amount: {
-//                   currency_code: "USD",
-//                   value: 300.0,
-//                 },
-//               },
-//             ],
-//           });
-//         },
-//         onApprove: async (data, actions) => {
-//           const order = await actions.order.capture();
-//           console.log(order, "done yastaaaaa");
-//         },
-//         onError: (err) => {
-//           console.log(err, "errrrrrr");
-//         },
-//       })
-//       .render(paypal.current);
-//   }, []);
-
-//   return (
-//     <div>
-//       <div ref={paypal}></div>
-//     </div>
-//   );
-// }

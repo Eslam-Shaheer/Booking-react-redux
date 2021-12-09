@@ -7,6 +7,7 @@ import CampsList from "./Pages/Properties/CampgroundList";
 import ApartmentsList from "./Pages/Properties/ApartmentsList";
 import Post from "./Pages/Posts/Post";
 import HotelPage from "./Pages/HotelPage/HotelPage";
+import HotelBooking from "./Pages/Checkout/hotelBooking";
 import ApartmentPage from "./Pages/ApartmentComponents/ApartmentPage";
 import Campground from "./Pages/CampgroundPage/Campground";
 import UserDashboard from "./Pages/UserDashBoard/UserDashboard";
