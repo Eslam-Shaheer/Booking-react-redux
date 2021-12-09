@@ -19,6 +19,11 @@ export default function Campground() {
   const [reviews, setReviews] = useState();
   const { id } = useParams();
   useEffect(() => {
+   window.scrollTo({
+     top: 0,
+     left: 0,
+     behavior: "instant",
+   });
     axiosInstance.get("campground/" + id).then((result) => {
       setCampground(result.data.data);
     });

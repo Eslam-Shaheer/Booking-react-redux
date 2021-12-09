@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Destination.css";
 import img1 from "../img/3.1.jpg";
 import img2 from "../img/3.2.jpg";
@@ -6,6 +6,13 @@ import img3 from "../img/3.3.jpg";
 import img4 from "../img/3.4.jpg";
 import img5 from "../img/3.5.jpg";
 export default function Destination() {
+    useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+    }, []);
     return (
       <div className="container-fluid">
         <div className="cover"></div>

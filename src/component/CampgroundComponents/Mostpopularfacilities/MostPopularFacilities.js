@@ -31,7 +31,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Fitness center":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3">
+            <div className="d-flex justify-content-between ">
               <div className="me-2">
                 <svg
                   height="25"
@@ -54,7 +54,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Terrace":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3">
+            <div className="d-flex justify-content-between ">
               <div className="me-2">
                 <svg
                   height="25"
@@ -77,7 +77,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Restaurant":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3">
+            <div className="d-flex justify-content-between ">
               <div className="me-2">
                 <svg
                   height="25"
@@ -100,7 +100,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Room service":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3">
+            <div className="d-flex justify-content-between ">
               <div className="me-2">
                 <svg
                   height="25"
@@ -123,7 +123,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Family rooms":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3">
+            <div className="d-flex justify-content-between ">
               <div className="me-2">
                 <svg
                   version="1.1"
@@ -183,7 +183,8 @@ export default function MostPopularFacilities(props) {
               <div className="me-2">
                 <svg
                   height="25"
-                  width="25"fill="green"
+                  width="25"
+                  fill="green"
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -217,18 +218,30 @@ export default function MostPopularFacilities(props) {
           break;
         case "Water park":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3  mt-3">
+            <div className="d-flex justify-content-between   mt-3">
               <div className="me-2">
                 <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="25"
                   height="25"
-                  fill="currentColor"
-                  class="bi bi-water"
-                  viewBox="0 0 16 16"
+                  width="25"
                   fill="green"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnsXlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 1000 1000"
+                  enable-background="new 0 0 1000 1000"
+                  xmlSpace="preserve"
                 >
-                  <path d="M.036 3.314a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 3.964a.5.5 0 0 1-.278-.65zm0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 6.964a.5.5 0 0 1-.278-.65zm0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0L.314 9.964a.5.5 0 0 1-.278-.65zm0 3a.5.5 0 0 1 .65-.278l1.757.703a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.014-.406a2.5 2.5 0 0 1 1.857 0l1.015.406a1.5 1.5 0 0 0 1.114 0l1.757-.703a.5.5 0 1 1 .372.928l-1.758.703a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.014-.406a1.5 1.5 0 0 0-1.114 0l-1.015.406a2.5 2.5 0 0 1-1.857 0l-1.757-.703a.5.5 0 0 1-.278-.65z" />
+                  <g>
+                    <path d="M448,10c0.8,2.9,1.7,5.8,2.5,8.8c6,23.5,16.8,84.2-18.3,178.1c-15.4,41.2-50.3,94.4-83.9,143.9c0,0,0.1,0,0.1,0.1c-21.4,31.6-32.4,70.4-28.4,111.1c9.4,94.2,95.2,163.1,191.6,153.9c96.3-9.2,175.4-92.1,168.8-212C666.8,147.7,448,10,448,10" />
+                    <path d="M208.4,989.7c-54.7,0-109.5-44.4-151.2-133.3c-2.9-6.3-2.9-16.5,0-22.8c2.9-6.3,7.7-6.3,10.7,0c77.5,165.2,203.5,165.2,281,0c2.9-6.3,7.7-6.3,10.7,0c2.9,6.3,2.9,16.5,0,22.8C317.9,945.2,263.1,989.7,208.4,989.7z" />
+                    <path d="M500,990c-57.1,0-110.7-47.5-151.2-133.6c-2.9-6.3-2.9-16.5,0-22.8c2.9-6.3,7.7-6.3,10.7,0C397.1,913.7,447,957.8,500,957.8c53,0,102.9-44.1,140.5-124.2c2.9-6.3,7.7-6.3,10.7,0c2.9,6.3,2.9,16.5,0,22.8C610.8,942.5,557.1,990,500,990z" />
+                    <path d="M791.6,989.7c-54.7,0-109.5-44.4-151.2-133.3c-2.9-6.3-2.9-16.5,0-22.8c2.9-6.3,7.7-6.3,10.7,0c77.4,165.2,203.5,165.2,280.9,0c2.9-6.3,7.7-6.3,10.7,0c2.9,6.3,2.9,16.5,0,22.8C901.1,945.2,846.4,989.7,791.6,989.7z" />
+                    <path d="M208.4,822.6c-54.7,0-109.5-44.4-151.2-133.3c-2.9-6.3-2.9-16.5,0-22.8c2.9-6.3,7.7-6.3,10.7,0c77.5,165.2,203.5,165.2,281,0c2.9-6.3,7.7-6.3,10.7,0c2.9,6.3,2.9,16.5,0,22.8C317.9,778.2,263.1,822.6,208.4,822.6z" />
+                    <path d="M500,822.9c-57.1,0-110.7-47.5-151.2-133.6c-2.9-6.3-2.9-16.5,0-22.8c2.9-6.3,7.7-6.3,10.7,0C397.1,746.6,447,790.7,500,790.7c53,0,102.9-44.1,140.5-124.2c2.9-6.3,7.7-6.3,10.7,0c2.9,6.3,2.9,16.5,0,22.8C610.8,775.5,557.1,822.9,500,822.9z" />
+                    <path d="M791.6,822.6c-54.7,0-109.5-44.4-151.2-133.3c-2.9-6.3-2.9-16.5,0-22.8c2.9-6.3,7.7-6.3,10.7,0c77.4,165.2,203.5,165.2,280.9,0c2.9-6.3,7.7-6.3,10.7,0s2.9,16.5,0,22.8C901.1,778.2,846.4,822.6,791.6,822.6z" />
+                  </g>
                 </svg>
               </div>
               <div>
@@ -240,7 +253,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Swimming pool":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3  mt-3">
+            <div className="d-flex justify-content-between   mt-3">
               <div className="me-2">
                 <svg
                   height="25"
@@ -263,7 +276,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Spa":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3  mt-3">
+            <div className="d-flex justify-content-between   mt-3">
               <div className="me-2">
                 <svg
                   height="25"
@@ -286,7 +299,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "24-hour front desk":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3  mt-3">
+            <div className="d-flex justify-content-between   mt-3">
               <div className="me-2">
                 <svg
                   version="1.1"
@@ -372,7 +385,7 @@ export default function MostPopularFacilities(props) {
 
         case "Garden":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3  mt-3">
+            <div className="d-flex justify-content-between   mt-3">
               <div className="me-2">
                 <svg
                   version="1.1"
@@ -404,7 +417,7 @@ export default function MostPopularFacilities(props) {
 
         case "Air conditioning":
           allFacilities.push(
-            <div className="d-flex justify-content-between ms-3  mt-3">
+            <div className="d-flex justify-content-between   mt-3">
               <div className="me-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -439,22 +452,21 @@ export default function MostPopularFacilities(props) {
       <div className="my-4">
         <h4>Most popular facilities </h4>
       </div>
-      
-        <div className="d-flex align-items-center me-3 flex-wrap">
-          {facilities.map((item) => {
-            return item;
-          })}
-
-          
-        </div>
-
-        
+      <div className="d-flex align-items-center me-3 flex-wrap">
+        {facilities.map((item) => {
+          return (
+            <div className="d-flex align-items-center me-3 flex-wrap">
+              {item}
+            </div>
+          );
+        })}
+      </div>
 
       <div
         class="alert alert-success border border-success rounded-0 mt-3"
         role="alert"
       >
-        <div className="d-flex align-items-center ms-3 p-2">
+        <div className="d-flex align-items-center  p-2">
           <div className="me-2">
             <svg
               fill="#008009"
@@ -481,7 +493,7 @@ export default function MostPopularFacilities(props) {
         class="alert alert-success border border-success rounded-0"
         role="alert"
       >
-        <div className="d-flex align-items-center ms-3 ">
+        <div className="d-flex align-items-center  ">
           <div className="Svg">
             <svg
               fill="#008009"
@@ -496,7 +508,7 @@ export default function MostPopularFacilities(props) {
             </svg>
           </div>
           <div>
-            <p className="text-dark ms-3">
+            <p className="text-dark ms-3 ">
               Lock in a great price for your upcoming stay
             </p>
             <p className="text-dark ms-3">

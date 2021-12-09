@@ -5,7 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../../Redux/actions/post";
 import { axiosInstance } from "../../../Redux/network";
 import "./Addpost.css";
-export default function Addpost() {
+
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+ 
+
+
+export default function Addpost(props) {
+  const [countries, setCountries] = useState();
+  const [countryData, setCountryData] = useState();
+
   const [show, setShow] = useState(false);
   const [Display, setDisplay] = useState(false);
   const [Post, setPost] = useState({});
@@ -14,6 +23,8 @@ export default function Addpost() {
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
+
+ 
 
   const savePost = (e) => {
     e.preventDefault();
@@ -150,17 +161,29 @@ export default function Addpost() {
                 <Form onSubmit={savePost}>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Label>Add Location</Form.Label>
-                    <Form.Control
-                      type="text"
+
+                    <Autocomplete
                       name="location"
-                      value={Post.location}
-                      onChange={onChange}
-                      placeholder="e.g. city ,region ,district or specific hotel"
+                      disablePortal
+                      id="combo-box-demo"
+                      options={props.listCountry && props.listCountry}
+                      sx={{
+                        width: 300,
+                      }}
+                      onChange={(e) => {
+                        setPost({
+                          ...Post,
+                          location: e.target.innerText,
+                        });
+                      }}
+                      renderInput={(params) => (
+                        <TextField {...params} label="Country" />
+                      )}
                     />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formGroupPassword">
                     <Form.Label>
-                      title <span className="text-danger">*</span>
+                      Title <span className="text-danger">*</span>
                     </Form.Label>
 
                     <Form.Control
@@ -207,11 +230,17 @@ export default function Addpost() {
 
           <div className="p-2 bd-highlight">
             <form className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
+              <Autocomplete
+                name="country"
+                disablePortal
+                id="combo-box-demo"
+                sx={{
+                  width: 300,
+                }}
+                options={props.listCountry && props.listCountry}
+                renderInput={(params) => (
+                  <TextField {...params} label="Location" />
+                )}
               />
               <button className="btn btn-outline-primary" type="submit">
                 <svg

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Yoga.css";
 import img0 from "../img/2.1.jpg";
 import img1 from "../img/2.2.jpg";
@@ -8,6 +8,13 @@ import img4 from "../img/2.5.jpg";
  import last from "../img/last.webp";
 
 export default function Yoga() {
+    useEffect(() => {
+   window.scrollTo({
+     top: 0,
+     left: 0,
+     behavior: "instant",
+   });
+    }, []);
     return (
       <div className="container-fluid">
         <div className="cover"></div>

@@ -3,6 +3,7 @@ import "./HomesGustesLove.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getHotels } from "../../../Redux/actions/hotel";
 import { axiosInstance } from "../../../Redux/network";
+import { Link } from "react-router-dom";
 
 export default function HomesGustesLove(props) {
   const [properties, setProps] = useState();
@@ -23,9 +24,9 @@ export default function HomesGustesLove(props) {
         <h3 className="mb-4">{props.prop}s guests love</h3>
         <div className="d-flex justify-content-between flex-column  flex-md-row">
           {properties &&
-            properties.map((item) => {
+            properties.map((item, index) => {
               return (
-                <div className="card border-0 mb-3 mx-2 CustomImg">
+                <div key={index} className="card border-0 mb-3 mx-2 CustomImg">
                   <img
                     className="h-75 rounded-2 loveImg"
                     src={item.images[0]}
@@ -33,16 +34,20 @@ export default function HomesGustesLove(props) {
                     alt="..."
                   />
                   <div className="card-body my-2 p-0  ">
-                    <p className="card-title text-muted mb-0">
-                      {item[props.prop + "Name"]}
-                    </p>
+                    <Link
+                      className="text-decoration-none "
+                      to={"/" +props.prop + "s/" + item._id}
+                    >
+                      <p className="card-title text-muted mb-0">
+                        {item[props.prop + "Name"]}
+                      </p>
+                    </Link>
                     <p className="card-text text-muted mb-2">{item.country}</p>
 
                     <div className="d-flex justify-content-between align-items-center w-75">
                       <span className=" bg-primary_color badge-rating ">
                         {item.avgReviews}
                       </span>{" "}
-                      <span className="fw-normal">Wonderful</span>{" "}
                       <span className="text-muted number-reviews">
                         {item.totalReviews} reviews
                       </span>

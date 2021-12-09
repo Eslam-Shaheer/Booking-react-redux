@@ -16,10 +16,10 @@ export default function Comment(props) {
   let commentImage;
   let newComment = {};
   const onPostImageChange = (event) => {
-    commentImage = event.target.files[0];
+    setPostImageChange(event.target.files[0])
   };
   const clearCommentImage = () => {
-    commentImage = undefined;
+    setPostImageChange(undefined)
     newComment = {};
   };
   const onChangeComment = (e) => {
@@ -39,7 +39,7 @@ export default function Comment(props) {
   const updateComment = (id, postId) => {
     if (postImageChange) {
       const formData = new FormData();
-      formData.append("multiple_images", commentImage);
+      formData.append("multiple_images", postImageChange);
       console.log("image");
       axiosInstance.post("upload/image/multiple", formData).then((result) => {
         if (result.data.success) {
@@ -74,7 +74,7 @@ export default function Comment(props) {
         if (res.data.success) {
           axiosInstance.get("comment/post/" + postId).then((result) => {
             let allComment = result.data.data;
-            console.log(result);
+           
             axiosInstance.get("user/loggedIn/").then((result) => {
               for (let com of allComment) {
                 // console.log(allComment);

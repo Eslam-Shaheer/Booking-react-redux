@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./LasVegas.css";
 import img0 from "../img/1.jpg";
 import img1 from "../img/1.1.jpg";
@@ -7,6 +7,13 @@ import img3 from "../img/1.3.jpg";
 import img4 from "../img/1.4.jpg";
 import img5 from "../img/1.5.jpg";
 export default function LasVegas() {
+    useEffect(() => {
+       window.scrollTo({
+         top: 0,
+         left: 0,
+         behavior: "instant",
+       });
+    }, []);
     return (
       <div className="container-fluid">
         <div className="cover"></div>

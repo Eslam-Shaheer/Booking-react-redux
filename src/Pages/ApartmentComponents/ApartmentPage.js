@@ -20,6 +20,11 @@ export default function ApartmentPage() {
   const [reviews, setReviews] = useState();
   const { id } = useParams();
   useEffect(() => {
+     window.scrollTo({
+       top: 0,
+       left: 0,
+       behavior: "instant",
+     });
     axiosInstance.get("apartment/" + id).then((result) => {
       setApartment(result.data.data);
     });

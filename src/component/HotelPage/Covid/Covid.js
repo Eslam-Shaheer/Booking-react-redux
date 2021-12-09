@@ -1,12 +1,32 @@
 import React from "react";
-import { Accordion, Container } from "react-bootstrap";
-import './Covid.css'
+import "./Covid.css";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 export default function Covid() {
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
-    <div className="sss">
-      <Accordion>
-        <Accordion.Item eventKey="0">
-          <Accordion.Header>
+    <>
+      <Accordion
+        sx={{ bgcolor: "#FFF0E0" }}
+        expanded={expanded === "panel1"}
+        onChange={handleChange("panel1")}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
+        >
+          <Typography sx={{ width: "33%", flexShrink: 0 }}>
             <p className="ms-5 my-1 fw-bold">
               {" "}
               <svg
@@ -23,8 +43,11 @@ export default function Covid() {
               </svg>{" "}
               Coronavirus (COVID-19) Support
             </p>
-          </Accordion.Header>
-          <Accordion.Body>
+          </Typography>
+          <Typography sx={{ color: "text.secondary" }}></Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
             <p className="ms-5 my-1">
               Get the travel advice you need Read more about possible travel
               restrictions before you go
@@ -34,9 +57,9 @@ export default function Covid() {
                 Read More
               </a>
             </div>
-          </Accordion.Body>
-        </Accordion.Item>
+          </Typography>
+        </AccordionDetails>
       </Accordion>
-    </div>
+    </>
   );
 }

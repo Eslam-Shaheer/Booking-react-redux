@@ -8,6 +8,11 @@ export default function Example(props) {
   let [allPosts, setPosts] = useState();
 
   useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "instant",
+  });
     if (props.isUser) {
       axiosInstance.get("post/user/all").then((result) => {
         setPosts(result.data);
@@ -21,9 +26,10 @@ export default function Example(props) {
 
   return (
     <div className="col-7">
+      
       {allPosts &&
         allPosts.data.reverse().map((pst) => {
-          return <SinglePost post={pst} isUser={props.isUser} />;
+          return <SinglePost post={pst} isUser={props.isUser} listCountry={props.listCountry}/>;
         })}
     </div>
   );

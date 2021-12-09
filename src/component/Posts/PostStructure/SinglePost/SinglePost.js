@@ -10,12 +10,12 @@ import {
   Modal,
   ButtonGroup,
 } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { getCommentByPostId } from "../../../../Redux/actions/comment";
 import { axiosInstance } from "../../../../Redux/network";
 import Comment from "../../Comment/Comment";
 import "./SinglePost.css";
-
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+ 
 export default function SinglePost(props) {
   const [show, setShow] = useState(false);
   const [posts, setPosts] = useState(props.post);
@@ -29,9 +29,15 @@ export default function SinglePost(props) {
   const [selectedFile, setSelectedFile] = useState();
   const [postImageChange, setPostImageChange] = useState();
   const [updatedPost, setUpdatedPost] = useState(posts);
-
+  const[currentDate, setCurrentDate] =useState()
   useEffect(() => {
-    axiosInstance.get("comment/post/" + props.post._id).then((result) => {
+ 
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "instant",
+        });
+         axiosInstance.get("comment/post/" + props.post._id).then((result) => {
       setCommentLength(result.data.data.length);
     });
     if (props.isUser) {
@@ -48,15 +54,21 @@ export default function SinglePost(props) {
         }
       });
     }
+
+     setCurrentDate(new Date(posts.createdAt).toLocaleString()); 
+    
   }, []);
 
   const deletePost = (id) => {
     if (window.confirm("Are you sure you want delete thi post!!")) {
       axiosInstance.delete("post/" + id).then((result) => {
+     
         window.location.reload();
+       
       });
     }
   };
+
 
   const updatePost = (id) => {
     if (postImageChange) {
@@ -196,8 +208,8 @@ export default function SinglePost(props) {
   return (
     <>
       <div className="card border mb-3 postCard">
-        <div class="d-flex flex-row bd-highlight my-2 px-3 pb-1  Border">
-          <div class="p-0 bd-highlight">
+        <div class="d-flex flex-row  my-2 px-3 pb-1  Border">
+          <div class="p-0 ">
             <img
               src={
                 posts.userId.personalImage
@@ -207,7 +219,7 @@ export default function SinglePost(props) {
               className="imgStyle"
             ></img>
           </div>
-          <div class="p-2  bd-highlight me-auto">
+          <div class="p-2   me-auto">
             <h6>{posts.userId.username}</h6>
           </div>
           <div>
@@ -233,27 +245,6 @@ export default function SinglePost(props) {
                         <path d="M941,402h-98c-27.1,0-49,21.9-49,49v98c0,27.1,21.9,49,49,49h98c27.1,0,49-21.9,49-49v-98C990,423.9,968.1,402,941,402z M549,402h-98c-27.1,0-49,21.9-49,49v98c0,27.1,21.9,49,49,49h98c27.1,0,49-21.9,49-49v-98C598,423.9,576.1,402,549,402z M157,402H59c-27.1,0-49,21.9-49,49v98c0,27.1,21.9,49,49,49h98c27.1,0,49-21.9,49-49v-98C206,423.9,184.1,402,157,402z" />
                       </g>
                     </svg>
-
-                    // Pen
-                    // <svg
-                    //                     version="1.1"
-                    //                     xmlns="http://www.w3.org/2000/svg"
-                    //                     xmlnsXlink="http://www.w3.org/1999/xlink"
-                    //                     x="0px"
-                    //                     y="0px"
-                    //                     viewBox="0 0 1000 1000"
-                    //                     enable-background="new 0 0 1000 1000"
-                    //                     xmlSpace="preserve"
-                    //                     width="25"
-                    //                     height="25"
-                    //                   >
-
-                    //                     <g>
-                    //                       <g transform="translate(0.000000,511.000000) scale(0.100000,-0.100000)">
-                    //                         <path d="M8175.3,4869.1c-172.4-40.6-400.6-152.1-540-263.7c-53.2-43.1-1592.2-1536.4-3415.1-3316.2L903.9-1945.9l-60.8-192.7C632.6-2815.6,87.5-4679.1,100.2-4689.2c15.2-15.2,2646.9,694.7,2733.1,737.8c65.9,35.5,6505.7,6310.5,6721.2,6551.4c65.9,73.5,154.6,202.8,197.8,289c268.7,547.7,164.8,1173.9-263.7,1604.9C9136.2,4846.3,8649.4,4985.7,8175.3,4869.1z M8791.4,4463.4c278.9-83.7,491.9-271.3,626.2-560.3c58.3-126.8,68.5-177.5,68.5-390.4c0-228.2-5.1-251-93.8-431c-169.9-342.3-91.3-380.3-872.1,420.9c-375.2,385.4-682,712.5-682,730.2c0,45.7,228.2,190.2,365.1,230.7C8360.4,4514.1,8624.1,4511.6,8791.4,4463.4z M8228.6,3223.6l692.1-709.9l-304.2-291.6c-169.9-159.7-1551.6-1506-3072.9-2991.7C4022.4-2255.3,2770-3472.2,2759.8-3477.3c-10.2-2.5-329.6,311.8-707.4,702.3l-689.6,704.8l372.7,370.2c981.2,973.6,5775.5,5643.7,5785.7,5638.6C7528.8,3936.1,7848.3,3614.1,8228.6,3223.6z M1778.6-3071.6c316.9-324.5,573-595.8,565.4-600.9c-20.3-22.8-1655.6-458.9-1663.2-443.7c-2.5,7.6,103.9,377.8,235.8,821.5c131.8,443.7,240.9,813.8,240.9,818.9C1157.5-2440.3,1258.9-2536.7,1778.6-3071.6z" />
-                    //                       </g>
-                    //                     </g>
-                    //                   </svg>
                   }
                   id="bg-nested-dropdown"
                   className=""
@@ -283,17 +274,29 @@ export default function SinglePost(props) {
               <Modal.Body>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                   <Form.Label>Add Location</Form.Label>
-                  <Form.Control
-                    type="text"
+
+                  <Autocomplete
                     name="location"
-                    value={updatedPost.location}
-                    onChange={handelChangePost}
-                    placeholder="e.g. city ,region ,district or specific hotel"
+                    disablePortal
+                    id="combo-box-demo"
+                    options={props.listCountry && props.listCountry}
+                    sx={{
+                      width: 300,
+                    }}
+                    onChange={(e) => {
+                      setUpdatedPost({
+                        ...updatedPost,
+                        location: e.target.innerText,
+                      });
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Country" />
+                    )}
                   />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGroupPassword">
                   <Form.Label>
-                    title <span className="text-danger">*</span>
+                    Title <span className="text-danger">*</span>
                   </Form.Label>
 
                   <Form.Control
@@ -332,16 +335,16 @@ export default function SinglePost(props) {
                   className="btn btn-primary"
                   type="submit"
                 >
-                  Add Post
+                  Update Post
                 </Button>
               </Modal.Body>
             </Modal>
           </div>
         </div>
         <Container>
-          <div class="d-flex flex-row bd-highlight mb-3">
-            <div class="p-2 bd-highlight w-25 ">
-              <button className="btn btn-outline-primary fs-6 d-flex align-items-center">
+          <div class="d-flex flex-row mb-3">
+            <div class="w-25 mt-2">
+              <button className="btn btn-outline-primary fs-6 d-flex align-items-center rounded-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="23"
@@ -354,18 +357,21 @@ export default function SinglePost(props) {
                   <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                 </svg>
                 <div className="d-felx align-items-center p-0">
-                  <p className="p-0 my-auto">{posts.location}</p>
+                  <p className="my-auto">{posts.location}</p>
                 </div>
               </button>
             </div>
           </div>
           <div onClick={() => getComments(posts._id)}>
             <div className="primary mb-3" onClick={() => setShow(true)}>
-              <h3>{posts.title}</h3>
-              <div className="text-secondary">{posts.createdAt}</div>
+              <h5>{posts.title}</h5>
+              <div className="text-secondary">{currentDate}</div>
               <span className="fs-6">
                 {posts.body.substring(0, 150)} ...
-                <a href="#">Read more</a>
+                <a className="text-decoration-none" href="#">
+                  {" "}
+                  Read more
+                </a>
               </span>
               <img
                 className="my-3 responsive"
@@ -375,7 +381,7 @@ export default function SinglePost(props) {
             </div>
           </div>
 
-          <div class="d-flex bd-highlight bg-light mb-2 commentDiv p-1">
+          <div class="d-flex  bg-light mb-2 commentDiv p-1">
             <div class="p-2  flex-grow-1 ">
               <a
                 style={{ cursor: "pointer" }}
@@ -400,7 +406,7 @@ export default function SinglePost(props) {
                 0{" "}
               </span>
             </div>
-            <div class="p-2 bd-highlight">
+            <div class="p-2 ">
               <span>
                 <svg
                   data-component="communities/common/collect-icon"
@@ -425,7 +431,7 @@ export default function SinglePost(props) {
                 0
               </span>
             </div>
-            <div class="p-2 bd-highlight">
+            <div class="p-2 ">
               <span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -448,17 +454,18 @@ export default function SinglePost(props) {
             dialogClassName="modal-90w"
             aria-labelledby="example-modal-sizes-title-lg"
           >
-            <Modal.Header closeButton>
-              <Modal.Title id="example-custom-modal-styling-title">
-                {posts.title.substring(0, 90)} ...
-              </Modal.Title>
+            <Modal.Header closeButton className="modalHeader">
+              <Modal.Title
+                className="bg-dark"
+                id="example-custom-modal-styling-title"
+              ></Modal.Title>
             </Modal.Header>
             <Modal.Body className="bg-light">
               <div className="row justify-content-between">
                 <div className="col-6">
                   <div className="card p-3 ">
-                    <div class="d-flex flex-row bd-highlight   Border">
-                      <div class="p-2 bd-highlight">
+                    <div className="d-flex flex-row Border">
+                      <div className=" my-3">
                         <img
                           src={
                             posts.userId.personalImage
@@ -468,12 +475,12 @@ export default function SinglePost(props) {
                           className="imgStyle"
                         ></img>
                       </div>
-                      <div class="p-2 bd-highlight d-flex align-items-center">
+                      <div class="p-2 d-flex align-items-center">
                         <h6>{posts.userId.username}</h6>
                       </div>
                     </div>
-                    <div class="d-flex flex-row bd-highlight mb-3">
-                      <div class="p-2 bd-highlight w-25 ">
+                    <div class="d-flex flex-row  mb-3">
+                      <div class=" mt-3 w-25 ">
                         <button className="btn btn-outline-primary fs-6 d-flex align-items-center ">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -490,16 +497,21 @@ export default function SinglePost(props) {
                         </button>
                       </div>
                     </div>
+                    <div>
+                      <h5>{posts.title.substring(0, 90)} ...</h5>{" "}
+                    </div>
 
-                    <div className="text-secondary">{posts.createdAt}</div>
-                    <span className="fs-5 ">{posts.body}</span>
-                    <div class="d-flex bd-highlight bg-light mb-2 rounded-5 p-1">
-                      <div class="p-2 flex-grow-1 bd-highlight">
+                    <span className="text-secondary">{currentDate}</span>
+                    <div>
+                      <p className="fs-5">{posts.body}</p>
+                    </div>
+                    <div class="d-flex  bg-light mb-2 rounded-5 p-1">
+                      <div class="p-2 flex-grow-1 ">
                         <a className="text-decoration-none" href="#">
                           Comment {commentLength}
                         </a>
                       </div>
-                      <div class="p-2 bd-highlight">
+                      <div class="p-2 ">
                         <span>
                           <svg
                             data-component="communities/common/collect-icon"
@@ -520,7 +532,7 @@ export default function SinglePost(props) {
                           0
                         </span>
                       </div>
-                      <div class="p-2 bd-highlight">
+                      <div class="p-2 ">
                         <span>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
