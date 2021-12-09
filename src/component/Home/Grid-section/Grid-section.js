@@ -18,7 +18,6 @@ export default function Gridsection() {
       if (result.data.success) {
         setAlamainHotels(result.data.data);
       }
-      
     });
     axiosInstance.get("/filter/search/hotel/egypt/hurghada").then((result) => {
       if (result.data.success) setHurghadaHotels(result.data.data);
@@ -36,7 +35,7 @@ export default function Gridsection() {
     <>
       <div className="container my-3">
         <div className="grid-images">
-          <div className="row">
+          <div className="row d-flex flex-wrap">
             <div className="col-lg-6 col-12  position-relative  ">
               <div className="unified-postcard__header first-img-row">
                 <h3>
@@ -78,7 +77,7 @@ export default function Gridsection() {
                 alt=""
               />
             </div>
-            <div className="col-lg-4 col-12 position-relative secound-img-row ">
+            <div className="col-lg-4 col-3 position-relative secound-img-row ">
               <div className="unified-postcard__header secound-img-row">
                 <h3>
                   <a href="">

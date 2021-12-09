@@ -20,6 +20,7 @@
   cursor: pointer;
   height: 100%;
   background-size: cover;
+  width: 100%;
 }
 
 .unified-postcard__header a {
@@ -31,13 +32,15 @@
   width: 96%;
 }
 
-.secound-img-row {
-  width: 93.6%;
-}
-
-.unified-postcard__header:hover {
+.first-img-row.unified-postcard__header:hover {
   -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 50px 36px -28px inset;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 50px 36px -28px inset;
+  width: 96%;
+}
+.secound-img-row.unified-postcard__header:hover {
+  -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0px 50px 36px -28px inset;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 50px 36px -28px inset;
+  width: 93.8%;
 }
 
 .inspiration-img {
