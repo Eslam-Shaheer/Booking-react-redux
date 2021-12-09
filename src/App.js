@@ -15,15 +15,12 @@ import ApartmentPage from "./Pages/ApartmentComponents/ApartmentPage";
 import Campground from "./Pages/CampgroundPage/Campground";
 import UserDashboard from "./Pages/UserDashBoard/UserDashboard";
 import { Route, Routes } from "react-router-dom";
-<<<<<<< HEAD
 
-=======
 import BestCoffee from "./component/articles/article1/BestCoffee";
 import LasVegas from "./component/articles/article2/LasVegas";
 import Yoga from "./component/articles/article3/Yoga";
 import Destination from "./component/articles/article4/Destination";
 import Unmissable from "./component/articles/article5/Unmissable";
->>>>>>> 7a85d35313d867b92527f6a9a5120e76abba157f
 function App() {
   return (
     <div className="App">
