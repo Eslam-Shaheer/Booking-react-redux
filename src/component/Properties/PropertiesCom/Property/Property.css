@@ -68,6 +68,7 @@
 .card-body h5:hover {
   color: #bc5b01;
 }
-button:hover {
+
+/* button:hover {
   background-color: #0071c2 !important;
-}
+} */

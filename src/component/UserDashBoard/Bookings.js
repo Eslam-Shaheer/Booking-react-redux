@@ -75,7 +75,6 @@ export default function Bookings() {
               let startdate= new Date( hotelBooking.booking.startAt);
               let enddate= new Date( hotelBooking.booking.endAt);
               let cancelAvailable=false;
-            
               let today=new Date().getUTCDate();
               let year=new Date().getYear();
               let month=new Date().getMonth()+1;
@@ -98,47 +97,92 @@ export default function Bookings() {
              
 
             return (
-            <tr>
-            <th scope="row">{index+1}</th>
-            <td>{hotelBooking.hotelName}</td>
-            <td>{hotelBooking.roomName}</td>
-            <td>{startdate.toDateString()}</td>
-            <td>{enddate.toDateString()}</td>           
-            <td>{hotelBooking.booking.totalPrice}$</td>
-
-            <td> {cancelAvailable?['top'].map((placement) => (
-    <OverlayTrigger
-      key={placement}
-      placement={placement}
-      overlay={
-        <Tooltip id={`tooltip-${placement}`}>
-          <span>You Can Cancel Before({hotelBooking.cancellation}) Days from the Start Day</span>
-        </Tooltip>
-      }
-    >
-      <Button variant="btn text-danger fw-bold" onClick={()=>hotelCancelBooking(hotelBooking)}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-  <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-</svg></Button>
-    </OverlayTrigger>
-  )):['top'].map((placement) => (
-    <OverlayTrigger
-      key={placement}
-      placement={placement}
-      overlay={
-        <Tooltip id={`tooltip-${placement}`}>
-          <span>Cancellation Not Available</span>
-        </Tooltip>
-      }
-    >
-      <Button variant="btn text-secondar fw-bold"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-  <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-</svg></Button>
-    </OverlayTrigger>
-  ))}</td>
-  
-         </tr>)
+              <tr>
+                <th className="fw-normal" scope="row">
+                  {index + 1}
+                </th>
+                <td className="fw-normal">{hotelBooking.hotelName}</td>
+                <td className="fw-normal">{hotelBooking.roomName}</td>
+                <td className="fw-normal">{startdate.toDateString()}</td>
+                <td className="fw-normal">{enddate.toDateString()}</td>
+                <td className="fw-normal">
+                  {hotelBooking.booking.totalPrice}$
+                </td>
+                <td className="fw-normal">
+                  {" "}
+                  {cancelAvailable
+                    ? ["top"].map((placement) => (
+                        <OverlayTrigger
+                          key={placement}
+                          placement={placement}
+                          overlay={
+                            <Tooltip id={`tooltip-${placement}`}>
+                              <span>
+                                You Can Cancel Before(
+                                {hotelBooking.cancellation}) Days from the Start
+                                Day
+                              </span>
+                            </Tooltip>
+                          }
+                        >
+                          <Button
+                            variant="btn text-danger fw-bold"
+                            onClick={() => hotelCancelBooking(hotelBooking)}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-x-lg"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+                              />
+                            </svg>
+                          </Button>
+                        </OverlayTrigger>
+                      ))
+                    : ["top"].map((placement) => (
+                        <OverlayTrigger
+                          key={placement}
+                          placement={placement}
+                          overlay={
+                            <Tooltip id={`tooltip-${placement}`}>
+                              <span>Cancellation Not Available</span>
+                            </Tooltip>
+                          }
+                        >
+                          <Button variant="btn text-secondar fw-bold">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-x-lg"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+                              />
+                            </svg>
+                          </Button>
+                        </OverlayTrigger>
+                      ))}
+                </td>
+              </tr>
+            );
         
         })
       } 
@@ -192,48 +236,97 @@ export default function Bookings() {
              
 
             return (
-            <tr>
-            <th scope="row">{index+1}</th>
-            <td>{campBooking.campgroundName}</td>
-            <td>{campBooking.roomName}</td>
-            <td>{startdate.toDateString()}</td>
-            <td>{enddate.toDateString()}</td>
-            <td>{campBooking.booking.totalPrice}$</td>
-            <td> {cancelAvailable?['top'].map((placement) => (
-    <OverlayTrigger
-      key={placement}
-      placement={placement}
-      overlay={
-        <Tooltip id={`tooltip-${placement}`}>
-          <span>You Can Cancel Before({campBooking.cancellation}) Days from the Start Day</span>
-        </Tooltip>
-      }
-    >
-      <Button variant="btn text-danger fw-bold" onClick={()=>campCancelBooking(campBooking)}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-  <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-</svg></Button>
-    </OverlayTrigger>
-  )):['top'].map((placement) => (
-    <OverlayTrigger
-      key={placement}
-      placement={placement}
-      overlay={
-        <Tooltip id={`tooltip-${placement}`}>
-          <span>Cancellation Not Available</span>
-        </Tooltip>
-      }
-    >
-      <Button variant="btn text-secondar fw-bold"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-  <path fill-rule="evenodd" d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-</svg></Button>
-    </OverlayTrigger>
-  ))}</td>
-            
-         
-             
-          </tr>)
+              <tr>
+                <th className="fw-normal" scope="row">
+                  {index + 1}
+                </th>
+                <td className="fw-normal">{campBooking.campgroundName}</td>
+                <td className="fw-normal" className="fw-normal">
+                  {campBooking.roomName}
+                </td>
+                <td className="fw-normal" className="fw-normal">
+                  {startdate.toDateString()}
+                </td>
+                <td className="fw-normal" className="fw-normal">
+                  {enddate.toDateString()}
+                </td>
+                <td className="fw-normal" className="fw-normal">
+                  {campBooking.booking.totalPrice}$
+                </td>
+                <td className="fw-normal" className="fw-normal">
+                  {" "}
+                  {cancelAvailable
+                    ? ["top"].map((placement) => (
+                        <OverlayTrigger
+                          key={placement}
+                          placement={placement}
+                          overlay={
+                            <Tooltip id={`tooltip-${placement}`}>
+                              <span>
+                                You Can Cancel Before({campBooking.cancellation}
+                                ) Days from the Start Day
+                              </span>
+                            </Tooltip>
+                          }
+                        >
+                          <Button
+                            variant="btn text-danger fw-bold"
+                            onClick={() => campCancelBooking(campBooking)}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-x-lg"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+                              />
+                            </svg>
+                          </Button>
+                        </OverlayTrigger>
+                      ))
+                    : ["top"].map((placement) => (
+                        <OverlayTrigger
+                          key={placement}
+                          placement={placement}
+                          overlay={
+                            <Tooltip id={`tooltip-${placement}`}>
+                              <span>Cancellation Not Available</span>
+                            </Tooltip>
+                          }
+                        >
+                          <Button variant="btn text-secondar fw-bold">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              fill="currentColor"
+                              class="bi bi-x-lg"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                fill-rule="evenodd"
+                                d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+                              />
+                              <path
+                                fill-rule="evenodd"
+                                d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+                              />
+                            </svg>
+                          </Button>
+                        </OverlayTrigger>
+                      ))}
+                </td>
+              </tr>
+            );
         
         })
       } 
@@ -285,15 +378,15 @@ export default function Bookings() {
 
             return (
             <tr>
-            <th scope="row">{index+1}</th>
-            <td>{apartBooking.apartmentName}</td>
+            <th className="fw-normal" scope="row">{index+1}</th>
+            <td className="fw-normal">{apartBooking.apartmentName}</td>
             
-            <td></td>
-            <td>{startdate.toDateString()}</td>
-            <td>{enddate.toDateString()}</td>
-            <td>{apartBooking.booking.totalPrice}$</td>
+            <td className="fw-normal"></td>
+            <td className="fw-normal">{startdate.toDateString()}</td>
+            <td className="fw-normal">{enddate.toDateString()}</td>
+            <td className="fw-normal">{apartBooking.booking.totalPrice}$</td>
             
-            <td> {cancelAvailable?['top'].map((placement) => (
+            <td className="fw-normal"> {cancelAvailable?['top'].map((placement) => (
     <OverlayTrigger
       key={placement}
       placement={placement}
