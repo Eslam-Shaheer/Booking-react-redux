@@ -1,65 +1,155 @@
-import React from 'react'
-import { Form } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
+import { NavLink, useNavigate } from "react-router-dom";
+
 import "./Availability.css";
+import { axiosInstance } from "../../../Redux/network";
+import { useParams } from "react-router-dom";
 export default function Availability(props) {
-  
- 
-    return (
-      <>
-        <div className="d-flex my-2" id="infoPrices">
+  const [available, setAvailable] = useState();
+  const [availableRooms, setAvailableRooms] = useState();
+  const [isSelect, setIsSelect] = useState(false);
+  const [reservationInfo, setReservationInfo] = useState();
+
+  const { id } = useParams();
+  const handleDateChange = (e) => {
+    setAvailable({ ...available, [e.target.name]: e.target.value });
+  };
+  const checkAvailability = () => {
+    axiosInstance
+      .post("filter/rooms/campground/" + id, available)
+      .then((result) => {
+        setAvailableRooms(result.data.data);
+        setIsSelect(true);
+        console.log(result);
+      });
+  };
+  const handleRoomNumbChange = (event, room) => {
+    let start = new Date(available.startAt).getTime();
+    let end = new Date(available.endAt).getTime();
+    let days = (end - start) / 86400000;
+    let totalPrice = event.target.value * days * room.price;
+    setReservationInfo({
+      totalPrice,
+      days,
+      roomType: room.type,
+      roomName: room.roomName,
+      roomsNum: event.target.value,
+      startAt: available.startAt,
+      endAt: available.endAt,
+      roomId: room._id,
+      room,
+    });
+  };
+  const navigate = useNavigate();
+  const checkout = () => {
+    navigate("/checkout", {
+      state: { reservationInfo, prop: props.campground, type: "campground" },
+    });
+  };
+
+  return (
+    <>
+      <div className="d-flex my-2" id="infoPrices">
+        <div>
+          <h3>Availability</h3>
+        </div>
+      </div>
+
+      <div className="border d-flex">
+        <div className="d-flex flex-column p-3">
           <div>
-            <h3>Availability</h3>
+            <h6>
+              <p>Check In</p>
+              <input
+                name="startAt"
+                type="date"
+                class="form-control"
+                onChange={handleDateChange}
+              />
+            </h6>
+            <h6 className="text-primary">{available && available.startAt}</h6>
           </div>
         </div>
 
-        <div className="border d-flex">
-          <div className="d-flex flex-column p-3">
-            <div>
-              <h6>
-                <p>Check In</p>
-                <input type="date" class="form-control" />
-              </h6>
-              <h6 className="text-primary">Sun 28 Nov 2021</h6>
-              <span className="me-2">From 00:00 until 00:00</span>
-            </div>
+        <div className="d-flex flex-column p-3">
+          <div>
+            <h6>
+              <p>Check Out</p>
+              <input
+                name="endAt"
+                type="date"
+                class="form-control"
+                onChange={handleDateChange}
+              />
+            </h6>
+            <h6 className="text-primary">{available && available.endAt}</h6>
           </div>
+        </div>
 
-          <div className="d-flex flex-column p-3">
-            <div>
-              <h6>
-                <p>Check Out</p>
-                <input type="date" class="form-control" />
-              </h6>
-              <h6 className="text-primary">Sun 28 Nov 2021</h6>
-              <span>1-night stay</span>
-            </div>
-          </div>
+        <div className="d-flex ms-auto p-3">
+          <button
+            className="btn btn-primary rounded-0 my-auto"
+            onClick={checkAvailability}
+          >
+            Check Availability
+          </button>
+        </div>
+      </div>
 
-          <div className="d-flex ms-auto p-3">
-            <div>
-              <button className="btn btn-primary rounded-0">
-                Check Availability
+      {/* الجدول */}
+
+      <div className="mt-4 TableDev">
+        {reservationInfo && (
+          <div
+            style={{ backgroundColor: "#EBF3FF" }}
+            className=" reserveCard d-flex w-50 mx-auto rounded-3 justify-content-between align-items-center mb-3  p-3"
+          >
+            <div className="w-100">
+              <div className="d-flex justify-content-between mb-3 ">
+                <div>
+                  <h6>Room type:</h6>
+                  <h6>Room name:</h6>
+                  <h6>Number of rooms:</h6>
+                  <h6>Days:</h6>
+                  <h6>Total price:</h6>
+                </div>
+                <div>
+                  <h6>{reservationInfo.roomType}</h6>
+                  <h6>{reservationInfo.roomName}</h6>
+                  <h6>{reservationInfo.roomsNum}</h6>
+                  <h6>{reservationInfo.days}</h6>
+                  <h6 className="text-success">
+                    {reservationInfo.totalPrice}$
+                  </h6>
+                </div>
+              </div>
+
+              <button
+                className="btn btn-outline-primary w-100"
+                onClick={checkout}
+              >
+                Reserve
               </button>
             </div>
           </div>
-        </div>
+        )}
+        <table id="customers" className="rooms-table">
+          <tr>
+            <th>Room type</th>
+            <th>Room name</th>
+            <th>Sleeps</th>
+            <th>Price</th>
+            <th>Your choices </th>
+            <th>Select rooms</th>
+          </tr>
 
-        {/* الجدول */}
-
-        <div className="mt-4 TableDev">
-          <table id="customers">
-            <tr>
-              <th className="text-center">Room type</th>
-              <th className="text-center">Sleeps</th>
-              <th className="text-center">Today's price</th>
-              <th className="text-center">Your choices </th>
-              <th className="text-center">Select rooms</th>
-              <th className="text-center">Reserve</th>
-            </tr>
-            {props.campground.rooms.map((room) => {
+          {isSelect &&
+            availableRooms.map((room, index) => {
               return (
-                <tr>
-                  <td className="text-center">{room.type}</td>
+                <tr key={index}>
+                  <td className="roomType">{room.type}</td>
+                  <td>{room.roomName}</td>
                   <td>
                     {[...Array(room.guestsNumber)].map((item) => {
                       return (
@@ -76,7 +166,10 @@ export default function Availability(props) {
                       );
                     })}
                   </td>
-                  <td className="text-center">{room.price}</td>
+                  <td>
+                    <span className="text-success">{room.price}$ </span>
+                    <span className="text-muted">per day</span>
+                  </td>
                   <td>
                     <ul>
                       <li>Coffee</li>
@@ -85,31 +178,31 @@ export default function Availability(props) {
                     </ul>
                   </td>
                   <td>
-                    <Form.Select size="sm">
+                    <Form.Select
+                      size="sm"
+                      onChange={(event) => handleRoomNumbChange(event, room)}
+                    >
                       <option>0</option>
-                      <option>0</option>
-                      <option>0</option>
+                      {[...Array(room.availableRooms)].map((item, index) => {
+                        return <option value={index + 1}>{index + 1}</option>;
+                      })}
                     </Form.Select>
-                  </td>
-
-                  <td className="text-center">
-                    <buttun className="btn btn-primary   rounded-0">
-                      I`ll Reserve
-                    </buttun>
                   </td>
                 </tr>
               );
             })}
-          </table>
-        </div>
-      </>
-    );
+        </table>
+        {!isSelect && (
+          <div className="bg-light text-center py-3">
+            <h4 className="">Choose booking date</h4>
+          </div>
+        )}
+        {isSelect && availableRooms.length == 0 && (
+          <div className="bg-light text-danger text-center py-3">
+            <h4 className="">Sorry no available rooms for this date</h4>
+          </div>
+        )}
+      </div>
+    </>
+  );
 }
-
- 
- 
- 
- 
-
-
- 

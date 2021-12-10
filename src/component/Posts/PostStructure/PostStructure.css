@@ -1,7 +1,6 @@
-.Border{
-border-bottom: 1px dashed #bdbdbd;
+.Border {
+  border-bottom: 1px dashed #bdbdbd;
 }
-
 
 .Btn {
   width: 100%;
@@ -9,8 +8,4 @@ border-bottom: 1px dashed #bdbdbd;
   color: #0071c2;
   background-color: white;
   font-size: 15px;
-}
- 
-.Background{
-    background-color: cornflowerblue;
 }

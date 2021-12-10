@@ -6,6 +6,33 @@ import {
 } from "@paypal/react-paypal-js";
 import { propTypes } from "react-bootstrap/esm/Image";
 import { axiosInstance } from "../../Redux/network";
+import { useNavigate } from "react-router-dom";
+
+export default function App(props) {
+  return (
+    <div style={{ maxWidth: "750px", minHeight: "200px" }}>
+      <PayPalScriptProvider
+        options={{
+          "client-id":
+            "AeNpjyX90THpGtncSaEYbZlxRrcXkM5o0MLbD8-1WPpVIgNL88yeVRhMqIJ6lPN5u7V1QFGHv6ol0J1X",
+          components: "buttons",
+          currency: "USD",
+        }}
+      >
+        <ButtonWrapper
+          currency={currency}
+          showSpinner={false}
+          reservation={props.reservation}
+          room={props.room}
+          prop={props.property}
+          info={props.info}
+          type={props.type}
+          setIsReserved={props.setIsReserved}
+        />
+      </PayPalScriptProvider>
+    </div>
+  );
+}
 
 // This values are the props in the UI
 let amount;
@@ -19,13 +46,15 @@ const ButtonWrapper = ({
   room,
   prop,
   info,
+  type,
+  setIsReserved,
 }) => {
-  console.log(prop);
+  console.log(reservation);
   amount = info.totalPrice;
   // usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
   // This is the main reason to wrap the PayPalButtons in a new component
   const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
-
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch({
       type: "resetOptions",
@@ -61,48 +90,32 @@ const ButtonWrapper = ({
               return orderId;
             });
         }}
-        onApprove={function (data, actions) {
-          return actions.order.capture().then(function () {
+        onApprove={async (data, actions) => {
+          console.log(reservation);
+          await actions.order.capture();
+          if (type != "apartment") {
             axiosInstance
-              .post("hotel/booking/" + prop._id + "/" + room._id, reservation)
-              .then((result) => {
-                console.log(result);
+              .post(type + "/booking/" + prop._id + "/" + room._id, reservation)
+              .then((result_1) => {
+                console.log(result_1);
+                setIsReserved(true);
+                setTimeout(() => {
+                  navigate("/" + type + "s/" + prop._id);
+                }, 4000);
               });
-          });
+          } else {
+            axiosInstance
+              .post(type + "/booking/" + prop._id, reservation)
+              .then((result_1) => {
+                console.log(result_1);
+                setIsReserved(true);
+                setTimeout(() => {
+                  navigate("/" + type + "s/" + prop._id);
+                }, 4000);
+              });
+          }
         }}
       />
     </>
   );
 };
-
-export default function App(props) {
-  const reservation = {
-    ...props.reservation,
-    totalPrice: props.info.totalPrice - props.info.totalPrice * 0.17,
-    startAt: props.info.startAt,
-    endAt: props.info.endAt,
-  };
-  console.log(reservation);
-
-  return (
-    <div style={{ maxWidth: "750px", minHeight: "200px" }}>
-      <PayPalScriptProvider
-        options={{
-          "client-id":
-            "AeNpjyX90THpGtncSaEYbZlxRrcXkM5o0MLbD8-1WPpVIgNL88yeVRhMqIJ6lPN5u7V1QFGHv6ol0J1X",
-          components: "buttons",
-          currency: "USD",
-        }}
-      >
-        <ButtonWrapper
-          currency={currency}
-          showSpinner={false}
-          reservation={reservation}
-          room={props.room}
-          prop={props.property}
-          info={props.info}
-        />
-      </PayPalScriptProvider>
-    </div>
-  );
-}

@@ -11,8 +11,9 @@ import {
 } from "../../../Redux/actions/propsFilter";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
+import { axiosInstance } from "../../../Redux/network";
 
-export default function Apartments() {
+export default function Apartments(props) {
   let aparts = useSelector((state) => state.apartment.getApartments);
   let revProps = useSelector((state) => state.reviewSorting);
   let [allProps, setaparts] = useState();
@@ -30,11 +31,20 @@ export default function Apartments() {
   }, [aparts]);
 
   useEffect(() => {
-    dispatch(getApartments());
-    dispatch(getTopRev("apartment"));
-    dispatch(getTopStars("apartment"));
-    dispatch(getLowStars("apartment"));
-    console.log(revProps);
+    if (!props.country && !props.city) {
+      dispatch(getApartments());
+      dispatch(getTopRev("apartment"));
+      dispatch(getTopStars("apartment"));
+      dispatch(getLowStars("apartment"));
+    } else {
+      axiosInstance
+        .get("filter/search/apartment/" + props.country + "/" + props.city)
+        .then((result) => {
+          if (result.data.success) {
+            setaparts(result.data);
+          }
+        });
+    }
   }, []);
   return (
     <>

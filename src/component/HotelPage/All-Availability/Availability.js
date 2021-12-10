@@ -195,6 +195,11 @@ export default function Availability(props) {
             <h4 className="">Choose booking date</h4>
           </div>
         )}
+        {isSelect && availableRooms.length == 0 && (
+          <div className="bg-light text-danger text-center py-3">
+            <h4 className="">Sorry no available rooms for this date</h4>
+          </div>
+        )}
       </div>
     </>
   );

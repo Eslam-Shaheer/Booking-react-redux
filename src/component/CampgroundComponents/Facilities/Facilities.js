@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Facilities.css";
 export default function Facilities(props) {
-   let [campground, setCampground] = useState(props.campground);
-  
+  let [campground, setCampground] = useState(props.campground);
+
   return (
     <>
       <div className="mt-5" id="Facilities">
@@ -10,7 +10,6 @@ export default function Facilities(props) {
           <div class="me-auto ">
             <h3>Facilities of {props.campground.campgroundName}</h3>
           </div>
-       
         </div>
 
         <div class="d-flex flex-row  mb-3 flex-wrap">

@@ -1,18 +1,17 @@
 import React from "react";
- import "./Communities.css";
+import "./Communities.css";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-
 export default function Communities() {
-    const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false);
 
-    const handleChange = (panel) => (event, isExpanded) => {
-      setExpanded(isExpanded ? panel : false);
-    };
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
   return (
     <div className="container">
       <Accordion
@@ -60,7 +59,7 @@ export default function Communities() {
         </AccordionDetails>
       </Accordion>
 
-      <div className="text-center mt-3 mb-3">
+      <div className="text-center  mb-3">
         <img
           src="https://cf.bstatic.com/static/img/communities/cover-photo/united-kingdom/c4930cac4a08547ea13daab3b928d47e04eb728c.jpg"
           className="w-100"
