@@ -65,7 +65,7 @@ export default function Addpost(props) {
     <div className="col-5 ">
       <div className="pe-5">
         <div className="d-flex flex-column  bd-highlight mb-3">
-          <h4 className="text">Create a post</h4>
+          <h5 className="text">Create a post</h5>
 
           <div className="p-2 bd-highlight">
             <Button className="Btn py-2" onClick={() => setDisplay(true)}>
@@ -106,7 +106,7 @@ export default function Addpost(props) {
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formGroupPassword">
                     <Form.Label>
-                      title <span className="text-danger">*</span>
+                      Title <span className="text-danger">*</span>
                     </Form.Label>
 
                     <Form.Control
@@ -226,10 +226,10 @@ export default function Addpost(props) {
         </div>
 
         <div className="d-flex flex-column bd-highlight mb-3">
-          <h4 className="text">Search</h4>
+          <h5 className="text">Search</h5>
 
           <div className="p-2 bd-highlight">
-            <form className="d-flex">
+            <form className="d-flex justify-content-between">
               <Autocomplete
                 name="country"
                 disablePortal
@@ -242,19 +242,20 @@ export default function Addpost(props) {
                   <TextField {...params} label="Location" />
                 )}
               />
-              <button className="btn btn-outline-primary" type="submit">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-search"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-              </button>
-            </form>
+         
+                <button className="btn btn-outline-primary" type="submit">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    className="bi bi-search"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                  </svg>
+                </button>
+             </form>
 
             <div className="bd-highlight mt-1 text2">
               <span>
@@ -264,7 +265,7 @@ export default function Addpost(props) {
           </div>
           <div className="d-flex flex-column bd-highlight mb-3">
             <div className="bd-highlight">
-              <h4 className="text">Filter by</h4>
+              <h5 className="text">Filter by</h5>
             </div>
             <div className=" p-2 bd-highlight">
               <select

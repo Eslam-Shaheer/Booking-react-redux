@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import Like from "../Properties/images/like.svg";
 import Paypal from "./Paypal";
 import { axiosInstance } from "../../Redux/network";
-
+ import "animate.css";
+ import Alert from "@mui/material/Alert";
+ import Stack from "@mui/material/Stack";
 export default function Booking(props) {
   const [checkout, setCheckout] = useState(false);
   const [reviewScore, setReviewScore] = useState();
@@ -38,6 +40,11 @@ export default function Booking(props) {
     console.log(reservation);
   };
   useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "instant",
+      });
     let cancelDays = props.property.cancellation * 86400000;
     let startAt = +new Date(props.info.startAt);
     setCancelDate(new Date(startAt - cancelDays).toDateString());
@@ -881,9 +888,16 @@ export default function Booking(props) {
             </button>
           )}
           {isReserved && (
-            <div className="alert-success p-4 my-5 rounded-3">
-              Congratulations, your reservation has been successfully confirmed
-            </div>
+            <Stack
+              sx={{ width: "100%" }}
+              spacing={2}
+              className="my-5 animate__animated animate__fadeInLeft"
+            >
+              <Alert variant="filled" severity="success">
+                Congratulations, your reservation has been successfully
+                confirmed
+              </Alert>
+            </Stack>
           )}
 
           {paypalButton && (
@@ -898,6 +912,7 @@ export default function Booking(props) {
           )}
         </div>
       </div>
+   
     </>
   );
 }

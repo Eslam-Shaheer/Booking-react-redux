@@ -3,8 +3,10 @@ import "./WhyChose.css"
 export default function WhyChose(props) {
     return (
       <>
-        <div className="my-4">
-          <h2>5 reasons to choose {props.apartment.apartmentName}</h2>
+        <div className="my-4 mt-5">
+          <h4 className="fw-bold">
+            5 Reasons to choose {props.apartment.apartmentName}
+          </h4>
         </div>
 
         <div class="d-flex flex-wrap">

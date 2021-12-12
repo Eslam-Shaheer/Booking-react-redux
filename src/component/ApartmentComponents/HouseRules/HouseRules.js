@@ -6,11 +6,11 @@ export default function HouseRules(props) {
         <div className="mt-5" id="houseRules">
           <div className="d-flex mb-3">
             <div className="me-auto p-2">
-              <h3>House rules</h3>
-              <p>
+              <h5 className="fw-bold">House rules</h5>
+              <span>
                 {props.apartment.apartmentName} takes special requests - add in
                 the next step!
-              </p>
+              </span>
             </div>
           </div>
 

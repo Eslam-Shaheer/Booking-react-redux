@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Header(props) {
   const [allData, setAllData] = useState();
@@ -46,6 +47,7 @@ export default function Header(props) {
 
   return (
     <>
+     
       <header>
         <div className="container py-5 search-container">
           <h3>

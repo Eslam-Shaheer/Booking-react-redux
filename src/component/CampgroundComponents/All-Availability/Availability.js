@@ -10,20 +10,48 @@ export default function Availability(props) {
   const [availableRooms, setAvailableRooms] = useState();
   const [isSelect, setIsSelect] = useState(false);
   const [reservationInfo, setReservationInfo] = useState();
-
+  const [isBtn, setIsBtn] = useState(false);
   const { id } = useParams();
-  const handleDateChange = (e) => {
-    setAvailable({ ...available, [e.target.name]: e.target.value });
-  };
+   
   const checkAvailability = () => {
     axiosInstance
       .post("filter/rooms/campground/" + id, available)
       .then((result) => {
         setAvailableRooms(result.data.data);
+
         setIsSelect(true);
-        console.log(result);
       });
   };
+
+  const handleDateChange = (e) => {
+    console.log(available, "aaaa");
+    if (e.target.name == "startAt") {
+      if (new Date(e.target.value) < Date.now()) {
+        alert("Please choose a valid date");
+        e.target.value = "";
+      } else {
+        setAvailable({ ...available, [e.target.name]: e.target.value });
+      }
+    } else if (e.target.name == "endAt") {
+      if (available.hasOwnProperty("startAt")) {
+        if (available.startAt < e.target.value) {
+          setAvailable({ ...available, [e.target.name]: e.target.value });
+          setIsBtn(true);
+        } else {
+          alert("Choose valid date");
+          e.target.value = "";
+        }
+      } else {
+        alert("Choose check in date first");
+        e.target.value = "";
+      }
+    }
+  };
+
+
+
+
+
   const handleRoomNumbChange = (event, room) => {
     let start = new Date(available.startAt).getTime();
     let end = new Date(available.endAt).getTime();
@@ -48,12 +76,137 @@ export default function Availability(props) {
     });
   };
 
+  
+
+   const bedTypeFun = (type, bedsNumber) => {
+     switch (type) {
+       case "Twin bed(s) / 90-130 cm wide":
+         return (
+           <div className="ms-1 bedType ">
+             <span className="me-2">{bedsNumber}</span>
+
+             <span className="me-2">Twin bed</span>
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 96 96"
+               fill="#003580"
+               width="20px"
+             >
+               <path d="M81 54.9v30.34C81 86.9 79.9 88 78.25 88s-2.75-1.1-2.75-2.76v-8.27h-55v8.27c0 1.66-1.1 2.76-2.75 2.76S15 86.9 15 85.24V10.76C15 9.1 16.1 8 17.75 8s2.75 1.1 2.75 2.76v19.3h55v-5.5c0-1.66 1.1-2.77 2.75-2.77S81 22.9 81 24.54V54.9zm-60.5-4.14v9.65h55V46.63h-55v4.14z"></path>
+             </svg>
+           </div>
+         );
+
+       case "Full bed(s) / 131-150 cm wide":
+         return (
+           <div className="bedType ms-1">
+             <span className="me-2">{bedsNumber}</span>
+
+             <span className="me-2">Full bed</span>
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 96 96"
+               fill="#003580"
+               width="20px"
+             >
+               <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
+             </svg>
+           </div>
+         );
+
+       case "Queen bed(s) / 151-180 cm wide":
+         return (
+           <div className="bedType ms-1">
+             <span className="me-2">{bedsNumber}</span>
+
+             <span className="me-2">Queen bed</span>
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 96 96"
+               fill="#003580"
+               width="20px"
+             >
+               <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
+             </svg>
+           </div>
+         );
+
+       case "King bed(s) / 181-210 cm wide":
+         return (
+           <div className="bedType ms-1">
+             <span className="me-2">{bedsNumber}</span>
+
+             <span className="me-2">King bed</span>
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 96 96"
+               fill="#003580"
+               width="20px"
+             >
+               <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
+             </svg>
+           </div>
+         );
+
+       case "Bunk bed(s) / Variable size":
+         return (
+           <div className="bedType ms-1">
+             <span className="me-2">{bedsNumber}</span>
+
+             <span className="me-2">Bunk bed</span>
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 96 96"
+               fill="#003580"
+               width="20px"
+             >
+               <path d="M81 54.9v30.34C81 86.9 79.9 88 78.25 88s-2.75-1.1-2.75-2.76v-8.27h-55v8.27c0 1.66-1.1 2.76-2.75 2.76S15 86.9 15 85.24V10.76C15 9.1 16.1 8 17.75 8s2.75 1.1 2.75 2.76v19.3h55v-5.5c0-1.66 1.1-2.77 2.75-2.77S81 22.9 81 24.54V54.9zm-60.5-4.14v9.65h55V46.63h-55v4.14z"></path>
+             </svg>
+           </div>
+         );
+
+       case "Sofa bed(s) / Variable size":
+         return (
+           <div className="bedType ms-1">
+             <span className="me-2">{bedsNumber}</span>
+
+             <span className="me-2">Sofa bed</span>
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 96 96"
+               fill="#003580"
+               width="22px"
+             >
+               <path d="M78.25 45.75h-5.5c-1.65 0-2.75 1.1-2.75 2.75v8.25H26V48.5c0-1.65-1.1-2.75-2.75-2.75h-5.5c-1.65 0-2.75 1.1-2.75 2.75v19.25c0 1.65 1.1 2.75 2.75 2.75h2.75v2.75c0 1.65 1.1 2.75 2.75 2.75S26 74.9 26 73.25V70.5h44v2.75C70 74.9 71.1 76 72.75 76s2.75-1.1 2.75-2.75V70.5h2.75c1.65 0 2.75-1.1 2.75-2.75V48.5c0-1.65-1.1-2.75-2.75-2.75z"></path>
+               <path d="M45.25 51.25V21h-22c-1.65 0-2.75 1.1-2.75 2.75v16.5h8.25c1.65 0 2.75 1.1 2.75 2.75v8.25h13.75zm30.25-27.5c0-1.65-1.1-2.75-2.75-2.75h-22v30.25H64.5V43c0-1.65 1.1-2.75 2.75-2.75h8.25v-16.5z"></path>
+             </svg>
+           </div>
+         );
+
+       case "Futon bed(s) / Variable size":
+         return (
+           <div className="bedType ms-1">
+             <span className="me-2">{bedsNumber}</span>
+
+             <span className="me-2">Futon bed</span>
+             <svg
+               xmlns="http://www.w3.org/2000/svg"
+               viewBox="0 0 96 96"
+               fill="#003580"
+               width="20px"
+             >
+               <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
+             </svg>
+           </div>
+         );
+       default:
+     }
+   };
+
   return (
     <>
-      <div className="d-flex my-2" id="infoPrices">
-        <div>
-          <h3>Availability</h3>
-        </div>
+      <div className="d-flex my-2 mt-5" id="infoPrices">
+        <h5 className="fw-bold">Availability</h5>
       </div>
 
       <div className="border d-flex">
@@ -88,12 +241,22 @@ export default function Availability(props) {
         </div>
 
         <div className="d-flex ms-auto p-3">
-          <button
-            className="btn btn-primary rounded-0 my-auto"
-            onClick={checkAvailability}
-          >
-            Check Availability
-          </button>
+          {isBtn ? (
+            <button
+              className="btn btn-primary rounded-0 my-auto"
+              onClick={checkAvailability}
+            >
+              Check Availability
+            </button>
+          ) : (
+            <button
+              disabled
+              className="btn btn-primary rounded-0 my-auto"
+              onClick={checkAvailability}
+            >
+              Check Availability
+            </button>
+          )}{" "}
         </div>
       </div>
 
@@ -140,7 +303,7 @@ export default function Availability(props) {
             <th>Room name</th>
             <th>Sleeps</th>
             <th>Price</th>
-            <th>Your choices </th>
+            <th>Beds Type</th>
             <th>Select rooms</th>
           </tr>
 
@@ -170,13 +333,7 @@ export default function Availability(props) {
                     <span className="text-success">{room.price}$ </span>
                     <span className="text-muted">per day</span>
                   </td>
-                  <td>
-                    <ul>
-                      <li>Coffee</li>
-                      <li>Tea</li>
-                      <li>Milk</li>
-                    </ul>
-                  </td>
+                  <td>{bedTypeFun(room.bedType, room.bedsNumber)}</td>
                   <td>
                     <Form.Select
                       size="sm"

@@ -30,12 +30,19 @@ export default function GuestReviews(props) {
     <>
       <div className="mt-5">
         <div className="my-3">
-          <h4>Guest reviews</h4>
+          <h5 className="fw-bold">Guest reviews</h5>
         </div>
 
         <div>
           <div className="d-flex">
-            <span class="badge-rating me-2"> {campground.avgReviews.toString().split('').splice(0,3).join('')} </span>
+            <span class="badge-rating me-2">
+              {" "}
+              {campground.avgReviews
+                .toString()
+                .split("")
+                .splice(0, 3)
+                .join("")}{" "}
+            </span>
             {reviewScore && reviewScore}
             <span className="text-secondary fw-bold ms-2">
               {campground.totalReviews} Reviews{" "}
@@ -54,13 +61,19 @@ export default function GuestReviews(props) {
                     <span>{campground.totalReviews} Reviews </span>
                   </div>
                   <div class="p-2 flex-shrink-1">
-                    <span class="badge-rating">{campground.avgReviews.toString().split('').splice(0,3).join('')}</span>
+                    <span class="badge-rating">
+                      {campground.avgReviews
+                        .toString()
+                        .split("")
+                        .splice(0, 3)
+                        .join("")}
+                    </span>
                   </div>
                 </div>
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <ReviewCanavas/>
+              <ReviewCanavas />
             </Offcanvas.Body>
           </Offcanvas>
         </div>

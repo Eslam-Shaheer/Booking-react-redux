@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import "./ReviewCanavas.css";
 import { Rating } from "react-simple-star-rating";
 import { Card, Form, Modal } from "react-bootstrap";
-
+import "animate.css";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
 export default function ReviewCanavas() {
   const [review, setReview] = useState();
   const [rating, setRating] = useState(0);
@@ -15,8 +19,8 @@ export default function ReviewCanavas() {
     axiosInstance
       .get("hotel/review/619cd61add2d1495a56e550b")
       .then((result) => {
-        setReview(result.data.data);
-        console.log(result.data.data);
+        setReview(result.data.data.reverse());
+     
       });
   }, []);
 
@@ -45,7 +49,7 @@ export default function ReviewCanavas() {
         axiosInstance
           .get("hotel/review/619cd61add2d1495a56e550b")
           .then((result) => {
-            setReview(result.data.data);
+            setReview(result.data.data.reverse());
           });
       });
   };
@@ -57,17 +61,28 @@ export default function ReviewCanavas() {
   return (
     <div className="containr-fluid">
       <div className="my-3">
-        {" "}
-        <button
-          className="btn btn-outline-primary  rounded-0"
-          onClick={() => setShow(true)}
-        >
-          Leave Review
-        </button>{" "}
+        <div className="text-center">
+          <Button
+            onClick={() => setShow(true)}
+            color="info"
+            variant="outlined"
+            size="small"
+          >
+            {" "}
+            Leave Review
+          </Button>
+        </div>
+
         {msg && (
-          <div className="alert alert-success mt-2" role="alert">
-            Thank you for your review
-          </div>
+          <Stack
+            sx={{ width: "100%" }}
+            spacing={2}
+            className="my-5 animate__animated animate__slideInLeft"
+          >
+            <Alert variant="filled" severity="success">
+              Thank you for your review
+            </Alert>
+          </Stack>
         )}
       </div>
       <Modal
@@ -77,9 +92,9 @@ export default function ReviewCanavas() {
         aria-labelledby="example-custom-modal-styling-title"
       >
         <Modal.Header closeButton>
-          <h5 className="fw-bold mt-2">
+          <h6 className="fw-bold mt-2">
             Please leave a review and say what your opinion about this hotel
-          </h5>
+          </h6>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -101,23 +116,24 @@ export default function ReviewCanavas() {
             />
           </div>
 
-          <button
-            onClick={() => {
-              setShow(false);
-              leaveReview();
-            }}
-            className="rounded-0 w-100 btn btn-outline-primary "
-            type="submit"
-            variant="primary"
-          >
-            Send your review
-          </button>
+          <Stack direction="row" spacing={2}>
+            <Button
+              onClick={() => {
+                setShow(false);
+                leaveReview();
+              }}
+              variant="contained"
+              endIcon={<SendIcon />}
+            >
+              Send
+            </Button>
+          </Stack>
         </Modal.Body>
       </Modal>
       {review &&
         review.map((x) => {
           return (
-            <div className="container">
+            <div className="container my-5">
               <div className="d-flex align-items-center">
                 <div>
                   <Card.Img
@@ -137,7 +153,10 @@ export default function ReviewCanavas() {
                   <span class="badge-rating">{x.starRating}</span>
                 </div>
               </div>
-              <div className="col-12 mt-3">{x.body}</div>
+              <div className="col-12 mt-3">
+                {" "}
+                <p className="ms-5">{x.body}</p>
+              </div>
               <hr />
             </div>
           );

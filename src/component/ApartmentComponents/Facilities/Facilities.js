@@ -8,7 +8,7 @@ export default function Facilities(props) {
       <div className="mt-5" id="Facilities">
         <div class="d-flex mb-3">
           <div class="me-auto ">
-            <h3>Facilities of {props.apartment.apartmentName}</h3>
+            <h4 className="fw-bold">Facilities of {props.apartment.apartmentName}</h4>
           </div>
          
         </div>

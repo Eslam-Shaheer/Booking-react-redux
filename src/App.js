@@ -15,12 +15,14 @@ import ApartmentPage from "./Pages/ApartmentComponents/ApartmentPage";
 import Campground from "./Pages/CampgroundPage/Campground";
 import UserDashboard from "./Pages/UserDashBoard/UserDashboard";
 import { Route, Routes } from "react-router-dom";
-
 import BestCoffee from "./component/articles/article1/BestCoffee";
 import LasVegas from "./component/articles/article2/LasVegas";
 import Yoga from "./component/articles/article3/Yoga";
 import Destination from "./component/articles/article4/Destination";
 import Unmissable from "./component/articles/article5/Unmissable";
+import { useEffect, useState } from "react";
+import React, { Suspense } from "react";
+
 function App() {
   return (
     <div className="App">
@@ -48,7 +50,13 @@ function App() {
           element={<CampsSearch />}
         />
         <Route path="/checkout" element={<HotelBooking />} />
+        <Route path="/BestCoffee" element={<BestCoffee />} />
+        <Route path="/LasVegas" element={<LasVegas />} />
+        <Route path="/Yoga" element={<Yoga />} />
+        <Route path="/Destination" element={<Destination />} />
+        <Route path="/Unmissable" element={<Unmissable />} />
       </Routes>
+
       <Footer />
     </div>
   );

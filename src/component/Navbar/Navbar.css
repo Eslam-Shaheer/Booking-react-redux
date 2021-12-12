@@ -57,17 +57,17 @@
 	font-weight: 400;
 	margin-bottom: -1px;
 }
-.NavStyle {
+ .NavStyle {
 	border-radius: 999px;
-}
-.NavStyle:hover {
+} 
+ .NavStyle:hover {
 	background-color: hsla(0, 0%, 100%, 0.1);
 	border-radius: 999px;
-}
-.active {
+}  
+ .active {
 	font-weight: bold;
 	font-size: 17px;
-}
+}  
 .btnBackground {
 	background-color: #003580 !important;
 }
