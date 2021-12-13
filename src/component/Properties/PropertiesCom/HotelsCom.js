@@ -11,8 +11,9 @@ import {
 } from "../../../Redux/actions/propsFilter";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
+import { axiosInstance } from "../../../Redux/network";
 
-export default function Properties() {
+export default function Properties(props) {
   let hotels = useSelector((state) => state.hotel.getHotels);
   let revProps = useSelector((state) => state.reviewSorting);
   let [allProps, setHotels] = useState();
@@ -38,11 +39,21 @@ export default function Properties() {
   }, [hotels]);
 
   useEffect(() => {
-    dispatch(getHotels());
-    dispatch(getTopRev("hotel"));
-    dispatch(getTopStars("hotel"));
-    dispatch(getLowStars("hotel"));
-    console.log(revProps);
+    let city = props.city || "";
+    if (!props.country && !props.city) {
+      dispatch(getHotels());
+      dispatch(getTopRev("hotel"));
+      dispatch(getTopStars("hotel"));
+      dispatch(getLowStars("hotel"));
+    } else {
+      axiosInstance
+        .get("filter/search/hotel/" + props.country + "/" + city)
+        .then((result) => {
+          if (result.data.success) {
+            setHotels(result.data);
+          }
+        });
+    }
   }, []);
   return (
     <>

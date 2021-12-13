@@ -8,7 +8,7 @@ export default function Community() {
   const [france, setFrance] = useState();
   const [egypt, setEgypt] = useState();
   const [allPosts, setAllPosts] = useState();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosInstance.get("filter/posts/uae").then((result) => {
@@ -96,7 +96,10 @@ export default function Community() {
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
-              <p className="card-title cardStyle mb-2" onClick={() => navigate("/post")}>
+              <p
+                className="card-title cardStyle mb-2"
+                onClick={() => navigate("/post")}
+              >
                 More communities
               </p>
               <p className="card-text text-muted mb-0">Travel community</p>

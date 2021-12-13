@@ -3,13 +3,13 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-
+import { useNavigate } from "react-router";
 export default function Header(props) {
   const [allData, setAllData] = useState();
   const [city, setCity] = useState();
   const [countries, setCountries] = useState();
-
-  const [countryData, setCountryData] = useState();
+  const [countryData, setCountryData] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("https://countriesnow.space/api/v0.1/countries").then((res) => {
@@ -40,8 +40,21 @@ export default function Header(props) {
     console.log(e.target.innerText);
   };
 
-  const saveData = () => {
-    console.log(countryData);
+  const search = () => {
+    let city = countryData.city || "";
+    if (
+      countryData.hasOwnProperty("country") &&
+      countryData.hasOwnProperty("property")
+    ) {
+      navigate(
+        "/search/" +
+          countryData.property +
+          "s/" +
+          countryData.country +
+          "/" +
+          city
+      );
+    }
   };
 
   return (
@@ -53,7 +66,7 @@ export default function Header(props) {
           </h3>
           <p>Find exclusive Genius rewards in every corner of the world!</p>
 
-          <div className="input-group search-group justify-content-between">
+          <div className="input-group search-group d-flex justify-content-between">
             <div className="me-2">
               <Autocomplete
                 name="country"
@@ -111,7 +124,7 @@ export default function Header(props) {
             </div>
 
             <button
-              onClick={saveData}
+              onClick={search}
               type="button"
               className="btn btn-primary  ms-5 rounded"
             >

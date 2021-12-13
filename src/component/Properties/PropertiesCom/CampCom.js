@@ -12,8 +12,8 @@ import {
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import { getCampGrounds } from "../../../Redux/actions/campground";
-
-export default function CampGrounds() {
+import { axiosInstance } from "../../../Redux/network";
+export default function CampGrounds(props) {
   let camps = useSelector((state) => state.campGround.getCampGrounds);
   let revProps = useSelector((state) => state.reviewSorting);
   let [allProps, setCamps] = useState();
@@ -39,9 +39,20 @@ export default function CampGrounds() {
   }, [camps]);
 
   useEffect(() => {
-    dispatch(getCampGrounds());
-    dispatch(getTopRev("campground"));
-    console.log(revProps);
+    let city = props.city || "";
+    if (!props.country && !props.city) {
+      dispatch(getCampGrounds());
+      dispatch(getTopRev("campground"));
+    } else {
+      axiosInstance
+        .get("filter/search/campground/" + props.country + "/" + city)
+        .then((result) => {
+          console.log(result);
+          if (result.data.success) {
+            setCamps(result.data);
+          }
+        });
+    }
   }, []);
   return (
     <>

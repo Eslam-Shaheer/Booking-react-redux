@@ -1,31 +1,39 @@
 import Button from "@restart/ui/esm/Button";
 import React, { useEffect, useState } from "react";
-import { Container, FloatingLabel, Form, Modal } from "react-bootstrap";
+import {
+  Container,
+  FloatingLabel,
+  Form,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../../Redux/actions/post";
 import { axiosInstance } from "../../../Redux/network";
 import "./Addpost.css";
-
+import { useNavigate } from "react-router";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
- 
-
 
 export default function Addpost(props) {
   const [countries, setCountries] = useState();
   const [countryData, setCountryData] = useState();
-
+  const [postLocation, setLocation] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [Display, setDisplay] = useState(false);
   const [Post, setPost] = useState({});
   const [selectedFile, setSelectedFile] = useState();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-
- 
-
+  const search = () => {
+    if (postLocation) {
+      navigate("/post/" + postLocation);
+    }
+  };
   const savePost = (e) => {
     e.preventDefault();
     if (selectedFile) {
@@ -38,7 +46,8 @@ export default function Addpost(props) {
         setPost(newPost);
         axiosInstance.post("post/", Post).then((result) => {
           if (result.data.success) {
-            window.location.reload();
+            console.log(result.data);
+            props.setNewPost(result.data);
           } else {
             alert(result.data.msg);
           }
@@ -59,6 +68,10 @@ export default function Addpost(props) {
 
   const onChange = (e) => {
     setPost({ ...Post, [e.target.name]: e.target.value });
+  };
+  const setLocFun = (e) => {
+    console.log(e);
+    setLocation(e.target.innerText);
   };
 
   return (
@@ -158,68 +171,70 @@ export default function Addpost(props) {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Form onSubmit={savePost}>
-                  <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Label>Add Location</Form.Label>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Label>Add Location</Form.Label>
 
-                    <Autocomplete
-                      name="location"
-                      disablePortal
-                      id="combo-box-demo"
-                      options={props.listCountry && props.listCountry}
-                      sx={{
-                        width: 300,
-                      }}
-                      onChange={(e) => {
-                        setPost({
-                          ...Post,
-                          location: e.target.innerText,
-                        });
-                      }}
-                      renderInput={(params) => (
-                        <TextField {...params} label="Country" />
-                      )}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>
-                      Title <span className="text-danger">*</span>
-                    </Form.Label>
+                  <Autocomplete
+                    name="location"
+                    disablePortal
+                    id="combo-box-demo"
+                    className="w-100"
+                    options={props.listCountry && props.listCountry}
+                    sx={{
+                      width: 300,
+                    }}
+                    onChange={(e) => {
+                      setPost({
+                        ...Post,
+                        location: e.target.innerText,
+                      });
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Location" />
+                    )}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formGroupPassword">
+                  <Form.Label>
+                    Title <span className="text-danger">*</span>
+                  </Form.Label>
 
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={Post.title}
+                    onChange={onChange}
+                    placeholder="e.g. 'When is the best time to visit the Colosseum?' "
+                  />
+                  <Form.Label>
+                    What kind of advice are you looking for ?
+                    <span className="text-danger"> *</span>
+                  </Form.Label>
+                  <FloatingLabel controlId="floatingTextarea2" label="">
                     <Form.Control
-                      type="text"
-                      name="title"
-                      value={Post.title}
+                      as="textarea"
+                      placeholder="Leave a comment here"
+                      name="body"
+                      value={Post.body}
                       onChange={onChange}
-                      placeholder="e.g. 'When is the best time to visit the Colosseum?' "
+                      style={{ height: "100px" }}
                     />
-                    <Form.Label>
-                      What kind of advice are you looking for ?
-                      <span className="text-danger"> *</span>
-                    </Form.Label>
-                    <FloatingLabel controlId="floatingTextarea2" label="">
-                      <Form.Control
-                        as="textarea"
-                        placeholder="Leave a comment here"
-                        name="body"
-                        value={Post.body}
-                        onChange={onChange}
-                        style={{ height: "100px" }}
-                      />
-                    </FloatingLabel>
-                  </Form.Group>
+                  </FloatingLabel>
+                </Form.Group>
 
-                  <Form.Group controlId="formFileLg" className="mb-3">
-                    <Form.Control
-                      type="file"
-                      size="lg"
-                      onChange={onFileChange}
-                    />
-                  </Form.Group>
-                  <Button className="btn btn-primary" type="submit">
-                    Add Post
-                  </Button>
-                </Form>
+                <Form.Group controlId="formFileLg" className="mb-3">
+                  <Form.Control type="file" size="lg" onChange={onFileChange} />
+                </Form.Group>
+                <Button
+                  className="btn btn-primary"
+                  type="submit"
+                  onClick={(e) => {
+                    savePost(e);
+                    setShow(false);
+                  }}
+                >
+                  Add Post
+                </Button>
               </Modal.Body>
             </Modal>
           </div>
@@ -229,7 +244,7 @@ export default function Addpost(props) {
           <h4 className="text">Search</h4>
 
           <div className="p-2 bd-highlight">
-            <form className="d-flex">
+            <form className="d-flex justify-content-between">
               <Autocomplete
                 name="country"
                 disablePortal
@@ -237,12 +252,13 @@ export default function Addpost(props) {
                 sx={{
                   width: 300,
                 }}
+                onChange={setLocFun}
                 options={props.listCountry && props.listCountry}
                 renderInput={(params) => (
                   <TextField {...params} label="Location" />
                 )}
               />
-              <button className="btn btn-outline-primary" type="submit">
+              <button className="btn btn-outline-primary" onClick={search}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -272,7 +288,7 @@ export default function Addpost(props) {
                 aria-label="Default select example"
               >
                 <option selected>All</option>
-                <option value="1">All</option>
+
                 <option value="2">Unaswered</option>
                 <option value="3">Questions</option>
                 <option value="3">Tips</option>
