@@ -12,9 +12,6 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 
 export default function Addpost(props) {
-  const [countries, setCountries] = useState();
-  const [countryData, setCountryData] = useState();
-
   const [show, setShow] = useState(false);
   const [Display, setDisplay] = useState(false);
   const [Post, setPost] = useState({});
@@ -23,8 +20,6 @@ export default function Addpost(props) {
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-
- 
 
   const savePost = (e) => {
     e.preventDefault();

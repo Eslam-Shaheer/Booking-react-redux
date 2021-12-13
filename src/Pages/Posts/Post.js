@@ -25,7 +25,6 @@ export default function Post() {
       <Container>
         <Container>
           <Communities />
-
           <div className="row py-3 justify-content-between mx-1">
             <Addpost listCountry={listCountry} />
             <Example isUser={false} listCountry={listCountry} />

@@ -29,14 +29,38 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [toggel, setToggel] = useState(0);
+  // const [toggel, setToggel] = useState(0);
   const [loggedInUser, setloggedInUser] = useState();
   const [allFalseNotifications, setAllFalseNotifications] = useState(0);
   const [showNotifications, setShowNotifications] = useState();
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState();
 
+  // const [hiddenFirstBtn, setHiddenFirstBtn] = useState(false);
+  // const [hiddenSecondBtn, setHiddenSecondBtn] = useState(true);
+
+  const [switchLang , setSwitchLang] = useState()
+
+
+  const changeLang =()=>{
+ localStorage.setItem("key", "arabic");
+         
+
+  }
+
+  
+  const changeLang2 = () => {
+    console.log("object")
+    localStorage.setItem("key", "english");
+  };
+
+
+
+
   useEffect(() => {
+
+   
+
     axiosInstance.get("user/loggedin").then((result) => {
       setShowNotifications(
         result.data.data.notifications.reverse().slice(0, 20)
@@ -84,7 +108,7 @@ export default function Navbar() {
           <div className="collapse navbar-collapse " id="navbarText">
             <div className="d-flex align-items-center  ms-auto">
               <Button onClick={handleOpen}>
-                {toggel === 0 && (
+                {localStorage.getItem("key") == "english" && (
                   <Tooltip title="Choose your language" arrow>
                     <div>
                       <a className="nav-link" href="#">
@@ -98,7 +122,7 @@ export default function Navbar() {
                   </Tooltip>
                 )}
 
-                {toggel === 1 && (
+                {localStorage.getItem("key") == "arabic" && (
                   <Tooltip title="Chose your language" arrow>
                     <div>
                       <a className="nav-link" href="#">
@@ -130,8 +154,9 @@ export default function Navbar() {
                     <div className="d-flex justify-content-center">
                       <div
                         onClick={() => {
-                          setToggel(0);
                           handleClose();
+                          changeLang2();
+
                         }}
                       >
                         <a className="nav-link" href="#">
@@ -142,10 +167,11 @@ export default function Navbar() {
                           />
                         </a>
                       </div>
+
                       <div
                         onClick={() => {
-                          setToggel(1);
                           handleClose();
+                          changeLang();
                         }}
                       >
                         <a className="nav-link" href="#">

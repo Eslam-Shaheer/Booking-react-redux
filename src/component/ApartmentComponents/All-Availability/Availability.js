@@ -1,9 +1,11 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import { axiosInstance } from "../../../Redux/network";
 import { useNavigate } from "react-router-dom";
 import "./Availability.css";
+
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+
 export default function Availability(props) {
   const [bedType, setBedType] = useState([]);
   const [available, setAvailable] = useState({});
@@ -219,6 +221,7 @@ export default function Availability(props) {
       }
     }
   }, []);
+
   return (
     <>
       <div className="d-flex my-2 mt-5" id="infoPrices">
@@ -269,13 +272,19 @@ export default function Availability(props) {
         <div className="d-flex flex-column p-3">
           <div>
             <h6>
-              <p>Check In</p>
-              <input
-                name="startAt"
-                type="date"
-                class="form-control"
-                onChange={handleDateChange}
-              />
+              {/* <p>Check In</p> */}
+              <Stack component="form" noValidate spacing={3}>
+                <TextField
+                  label="Check in"
+                  type="date"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="startAt"
+                  onChange={handleDateChange}
+                />
+              </Stack>
             </h6>
             <h6 className="text-primary">{available && available.startAt}</h6>
           </div>
@@ -284,13 +293,20 @@ export default function Availability(props) {
         <div className="d-flex flex-column p-3">
           <div>
             <h6>
-              <p>Check Out</p>
-              <input
-                name="endAt"
-                type="date"
-                class="form-control"
-                onChange={handleDateChange}
-              />
+              {/* <p>Check Out</p> */}
+
+              <Stack component="form" noValidate spacing={3}>
+                <TextField
+                  name="endAt"
+                  label="Check out"
+                  type="date"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={handleDateChange}
+                />
+              </Stack>
             </h6>
             <h6 className="text-primary">{available && available.endAt}</h6>
           </div>
@@ -306,7 +322,7 @@ export default function Availability(props) {
           ) : (
             <button
               disabled
-              className="btn btn-primary rounded-0 my-auto"
+              className="btn btn-primary rounded-0 my-auto "
               onClick={checkAvailability}
             >
               Check Availability

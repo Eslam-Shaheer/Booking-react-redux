@@ -8,6 +8,7 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack"; 
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import { useParams } from "react-router-dom";
 
 export default function ReviewCanavas() {
   
@@ -16,10 +17,11 @@ export default function ReviewCanavas() {
       const [reviews, setReviews] = useState();
   const [show, setShow] = useState(false);
     const [rating, setRating] = useState(0);
+  const { id } = useParams();
 
   useEffect(() => {
     axiosInstance
-      .get("apartment/review/61a7c6008f06602964caad9b")
+      .get("apartment/review/" + id)
       .then((result) => {
         setReview(result.data.data.reverse());
       
@@ -35,7 +37,7 @@ export default function ReviewCanavas() {
       reviews.starRating = rating / 20;   
       }  
       axiosInstance
-        .post("apartment/review/" + "61a7c6008f06602964caad9b", reviews)
+        .post("apartment/review/" + id, reviews)
         .then((result) => {
           if (!result.data.success) {
             alert(result.data.msg);
@@ -47,7 +49,7 @@ export default function ReviewCanavas() {
           }
 
           axiosInstance
-            .get("apartment/review/61a7c6008f06602964caad9b")
+            .get("apartment/review/" + id)
             .then((result) => {
               setReview(result.data.data.reverse());
             });

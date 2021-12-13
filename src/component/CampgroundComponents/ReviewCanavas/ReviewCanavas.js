@@ -7,6 +7,8 @@ import "animate.css";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useParams } from "react-router-dom";
+
 import SendIcon from "@mui/icons-material/Send";
 export default function ReviewCanavas() {
   const [rating, setRating] = useState(0);
@@ -14,11 +16,12 @@ export default function ReviewCanavas() {
   const [reviews, setReviews] = useState();
   const [review, setReview] = useState();
   const [msg, setMsg] =useState(false)
+  const { id } = useParams();
 
 
   useEffect(() => {
     axiosInstance
-      .get("campground/review/61a9686369692796a2797f50")
+      .get("campground/review/" + id)
       .then((result) => {
         setReview(result.data.data.reverse());
       });
@@ -32,7 +35,7 @@ export default function ReviewCanavas() {
   const leaveReview = () => {
     reviews.starRating = rating / 20;
     axiosInstance
-      .post("campground/review/" + "61a9686369692796a2797f50", reviews)
+      .post("campground/review/" + id, reviews)
       .then((result) => {
         if (!result.data.success) {
           alert(result.data.msg);
@@ -44,7 +47,7 @@ export default function ReviewCanavas() {
         }
 
         axiosInstance
-          .get("campground/review/61a9686369692796a2797f50")
+          .get("campground/review/" + id)
           .then((result) => {
             setReview(result.data.data.reverse());
           });
