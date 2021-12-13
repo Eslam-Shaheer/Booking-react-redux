@@ -156,7 +156,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Airport shuttle":
           allFacilities.push(
-            <div className="d-flex justify-content-between mt-3 me-1">
+            <div className="d-flex justify-content-between   me-1">
               <div className="me-2">
                 <svg  
                   height="25"
@@ -179,7 +179,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Sauna":
           allFacilities.push(
-            <div className="d-flex justify-content-between mt-3">
+            <div className="d-flex justify-content-between  ">
               <div className="me-2">
                 <svg
                   height="25"
@@ -218,7 +218,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Water park":
           allFacilities.push(
-            <div className="d-flex justify-content-between   mt-3">
+            <div className="d-flex justify-content-between    ">
               <div className="me-2">
                 <svg
                   height="25"
@@ -253,7 +253,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Swimming pool":
           allFacilities.push(
-            <div className="d-flex justify-content-between   mt-3">
+            <div className="d-flex justify-content-between    ">
               <div className="me-2">
                 <svg
                   height="25"
@@ -276,7 +276,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "Spa":
           allFacilities.push(
-            <div className="d-flex justify-content-between   mt-3">
+            <div className="d-flex justify-content-between    ">
               <div className="me-2">
                 <svg
                   height="25"
@@ -299,7 +299,7 @@ export default function MostPopularFacilities(props) {
           break;
         case "24-hour front desk":
           allFacilities.push(
-            <div className="d-flex justify-content-between   mt-3">
+            <div className="d-flex justify-content-between    ">
               <div className="me-2">
                 <svg
                   version="1.1"
@@ -332,7 +332,7 @@ export default function MostPopularFacilities(props) {
 
         case "Hot tub/Jacuzzi":
           allFacilities.push(
-            <div className="d-flex justify-content-between  mt-3">
+            <div className="d-flex justify-content-between   ">
               <div className="me-2">
                 <svg
                   version="1.1"
@@ -385,7 +385,7 @@ export default function MostPopularFacilities(props) {
 
         case "Garden":
           allFacilities.push(
-            <div className="d-flex justify-content-between   mt-3">
+            <div className="d-flex justify-content-between    ">
               <div className="me-2">
                 <svg
                   version="1.1"
@@ -417,7 +417,7 @@ export default function MostPopularFacilities(props) {
 
         case "Air conditioning":
           allFacilities.push(
-            <div className="d-flex justify-content-between   mt-3">
+            <div className="d-flex justify-content-between    ">
               <div className="me-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -450,12 +450,12 @@ export default function MostPopularFacilities(props) {
   return (
     <>
       <div className="my-4">
-        <h4>Most popular facilities </h4>
+        <h5 className="fw-bold">Most popular facilities </h5>
       </div>
       <div className="d-flex align-items-center me-3 flex-wrap">
         {facilities.map((item) => {
           return (
-            <div className="d-flex align-items-center me-3 flex-wrap">
+            <div className="d-flex align-items-center me-3 flex-wrap mt-3">
               {item}
             </div>
           );
@@ -463,7 +463,7 @@ export default function MostPopularFacilities(props) {
       </div>
 
       <div
-        class="alert alert-success border border-success rounded-0 mt-3"
+        class="alert alert-success border border-success rounded-0  "
         role="alert"
       >
         <div className="d-flex align-items-center  p-2">

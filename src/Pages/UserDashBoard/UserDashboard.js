@@ -77,7 +77,7 @@ export default function UserDashboard() {
       <div className="color ">
         <div className="container bg-white py-3  ">
           <Tabs defaultActiveKey="Profile" id="uncontrolled-tab-example">
-            <Tab eventKey="Profile" title="Profile">
+            <Tab className="tabs" eventKey="Profile" title="Profile">
               <Profile />
             </Tab>
             <Tab eventKey="Bookings" title="Bookings">

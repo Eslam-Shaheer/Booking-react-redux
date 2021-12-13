@@ -1,17 +1,40 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Form } from "react-bootstrap";
 import { axiosInstance } from "../../../Redux/network";
 import { useNavigate } from "react-router-dom";
 import "./Availability.css";
+
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+
 export default function Availability(props) {
   const [bedType, setBedType] = useState([]);
   const [available, setAvailable] = useState({});
   const [reservationInfo, setReservationInfo] = useState();
   const [isBooked, setIsBooked] = useState(false);
+  const [isBtn, setIsBtn] = useState(false);
 
   const handleDateChange = (e) => {
-    setAvailable({ ...available, [e.target.name]: e.target.value });
+    if (e.target.name == "startAt") {
+      if (new Date(e.target.value) < Date.now()) {
+        alert("Please choose a valid date");
+        e.target.value = "";
+      } else {
+        setAvailable({ ...available, [e.target.name]: e.target.value });
+      }
+    } else if (e.target.name == "endAt") {
+      if (available.hasOwnProperty("startAt")) {
+        if (available.startAt < e.target.value) {
+          setAvailable({ ...available, [e.target.name]: e.target.value });
+          setIsBtn(true);
+        } else {
+          alert("Choose valid date");
+          e.target.value = "";
+        }
+      } else {
+        alert("Choose check in date first");
+        e.target.value = "";
+      }
+    }
   };
   const checkAvailability = () => {
     console.log(available);
@@ -51,6 +74,7 @@ export default function Availability(props) {
     let i = 1;
 
     for (let item of props.apartment.bedRooms) {
+      console.log(props.apartment.bedRooms);
       let beds = [];
       beds.push(<span className="bedType fw-bold">Bed room {index}: </span>);
       if (item.bunkBed) {
@@ -197,12 +221,11 @@ export default function Availability(props) {
       }
     }
   }, []);
+
   return (
     <>
-      <div className="d-flex my-2" id="infoPrices">
-        <div>
-          <h3>Availability</h3>
-        </div>
+      <div className="d-flex my-2 mt-5" id="infoPrices">
+        <h5 className="fw-bold">Availability</h5>
       </div>
       {reservationInfo && (
         <div
@@ -249,13 +272,19 @@ export default function Availability(props) {
         <div className="d-flex flex-column p-3">
           <div>
             <h6>
-              <p>Check In</p>
-              <input
-                name="startAt"
-                type="date"
-                class="form-control"
-                onChange={handleDateChange}
-              />
+              {/* <p>Check In</p> */}
+              <Stack component="form" noValidate spacing={3}>
+                <TextField
+                  label="Check in"
+                  type="date"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="startAt"
+                  onChange={handleDateChange}
+                />
+              </Stack>
             </h6>
             <h6 className="text-primary">{available && available.startAt}</h6>
           </div>
@@ -264,25 +293,41 @@ export default function Availability(props) {
         <div className="d-flex flex-column p-3">
           <div>
             <h6>
-              <p>Check Out</p>
-              <input
-                name="endAt"
-                type="date"
-                class="form-control"
-                onChange={handleDateChange}
-              />
+              {/* <p>Check Out</p> */}
+
+              <Stack component="form" noValidate spacing={3}>
+                <TextField
+                  name="endAt"
+                  label="Check out"
+                  type="date"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={handleDateChange}
+                />
+              </Stack>
             </h6>
             <h6 className="text-primary">{available && available.endAt}</h6>
           </div>
         </div>
-
         <div className="d-flex ms-auto p-3">
-          <button
-            className="btn btn-primary rounded-0 my-auto"
-            onClick={checkAvailability}
-          >
-            Check Availability
-          </button>
+          {isBtn ? (
+            <button
+              className="btn btn-primary rounded-0 my-auto"
+              onClick={checkAvailability}
+            >
+              Check Availability
+            </button>
+          ) : (
+            <button
+              disabled
+              className="btn btn-primary rounded-0 my-auto "
+              onClick={checkAvailability}
+            >
+              Check Availability
+            </button>
+          )}{" "}
         </div>
       </div>
 

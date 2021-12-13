@@ -4,7 +4,7 @@ export default function MostPopularFacilities(props) {
   const [facilities, setFacilities] = useState([]);
   useEffect(() => {
     let allFacilities = [];
-   
+
     for (let Facilities of props.apartment.facilities.general) {
       switch (Facilities) {
         case "Air conditioning":
@@ -84,7 +84,8 @@ export default function MostPopularFacilities(props) {
           allFacilities.push(
             <div className="d-flex justify-content-between">
               <div className="ms-3">
-                <svg className="me-2"
+                <svg
+                  className="me-2"
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
                   xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -114,27 +115,22 @@ export default function MostPopularFacilities(props) {
           break;
       }
     }
-    
   }, []);
 
   return (
     <>
       <div className="my-4">
-        <h4>Most popular facilities </h4>
+        <h5 className="fw-bold">Most popular facilities </h5>
       </div>
-      
-        <div className="d-flex align-items-center me-3 flex-wrap">
-          {facilities.map((item) => {
-            return item;
-          })}
 
-          
-        </div>
-
-        
+      <div className="d-flex align-items-center me-3 flex-wrap">
+        {facilities.map((item) => {
+          return item;
+        })}
+      </div>
 
       <div
-        class="alert alert-success border border-success rounded-0 mt-3"
+        class="alert alert-success border border-success rounded-0 mt-5"
         role="alert"
       >
         <div className="d-flex align-items-center ms-3 p-2">

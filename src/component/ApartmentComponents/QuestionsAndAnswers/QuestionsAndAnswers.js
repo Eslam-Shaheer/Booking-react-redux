@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import { Form, Modal, Offcanvas } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+import ButtonBootStrap from "react-bootstrap/Button";
 import { axiosInstance } from "../../../Redux/network";
 import MessageOffcanvas from "../QuestionsAndAnswers/MessageOffcanvas/MessageOffcanvas";
  import "./QuestionsAndAnswers.css";
+import "animate.css";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+ import LiveHelpIcon from "@mui/icons-material/LiveHelp"; 
+import Button from "@mui/material/Button";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import { useParams } from "react-router-dom";
+
 
 export default function QuestionsAndAnswers() {
   const [maxChar, setmaxChar] = useState(300);
@@ -11,6 +19,7 @@ export default function QuestionsAndAnswers() {
   const [Show, setshow] = useState(false);
   const [questions, setQuestions] = useState();
   const [msg, setMsg] = useState(false);
+  const { id } = useParams();
 
 
   const funShow = () => setshow(true);
@@ -18,23 +27,19 @@ export default function QuestionsAndAnswers() {
 
   const askQuestion = () => {
  
-    axiosInstance
-      .post("apartment/message/" + "61a7c6008f06602964caad9b", questions)
-      .then((result) => {
-         if (!result.data.success) {
-           alert(result.data.msg);
-         } else {
-           setMsg(true);
-           setTimeout(() => {
-             setMsg(false);
-           }, 3000);
-         }
+    axiosInstance.post("apartment/message/" + id, questions).then((result) => {
+      if (!result.data.success) {
+        alert(result.data.msg);
+      } else {
+        setMsg(true);
+        setTimeout(() => {
+          setMsg(false);
+        }, 3000);
+      }
+    });
+      axiosInstance.get("apartment/message/" + id ).then((result) => {
+        setQuestions(result.data.data);
       });
-      axiosInstance
-        .get("apartment/message/" + "61a7c6008f06602964caad9b")
-        .then((result) => {
-          setQuestions(result.data.data);
-        });
       
   };
 
@@ -44,7 +49,11 @@ export default function QuestionsAndAnswers() {
 
   return (
     <>
-      <div className="border mt-5">
+      <div className="mt-5 my-3">
+        {" "}
+        <h5 className="fw-bold">Got a question?</h5>
+      </div>
+      <div className="border">
         <div class="d-flex mt-3">
           <div class="p-3">
             <svg
@@ -68,9 +77,17 @@ export default function QuestionsAndAnswers() {
             </p>
           </div>
           <div class="ms-auto p-2 ">
-            <Button variant="outline-primary" onClick={() => setShow(true)}>
-              Ask a question
-            </Button>
+            <Stack direction="row" spacing={2}>
+              <Button
+                variant="contained"
+                endIcon={<LiveHelpIcon />}
+                onClick={() => setShow(true)}
+                color="primary"
+                size="small"
+              >
+                <span className="text-capitalize">Ask a questionss</span>
+              </Button>
+            </Stack>
           </div>
 
           <Modal
@@ -105,7 +122,7 @@ export default function QuestionsAndAnswers() {
                 <p>{maxChar} characters left</p>
               </Form.Group>
 
-              <Button
+              <ButtonBootStrap
                 className="rounded-0 w-100"
                 type="submit"
                 variant="primary"
@@ -115,7 +132,7 @@ export default function QuestionsAndAnswers() {
                 }}
               >
                 Submit your question
-              </Button>
+              </ButtonBootStrap>
 
               <div className="p-0">
                 <p className="mt-3">
@@ -130,9 +147,18 @@ export default function QuestionsAndAnswers() {
           </Modal>
 
           <div class="ms-auto p-2 ">
-            <Button variant="success" onClick={funShow} className="me-2">
-              Read all questions
-            </Button>
+            <Stack direction="row" spacing={2}>
+              <Button
+                onClick={funShow}
+                variant="contained"
+                endIcon={<QuestionAnswerIcon />}
+                onClick={funShow}
+                color="success"
+                size="small"
+              >
+                <span className="text-capitalize"> Read all questions</span>
+              </Button>
+            </Stack>
           </div>
 
           <Offcanvas show={Show} onHide={funClose} placement={"end"}>
@@ -156,15 +182,21 @@ export default function QuestionsAndAnswers() {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              <MessageOffcanvas />
+              <MessageOffcanvas id={id} />
             </Offcanvas.Body>
           </Offcanvas>
         </div>
       </div>
       {msg && (
-        <div className="alert alert-success" role="alert">
-          Your question has been successfully posted
-        </div>
+        <Stack
+          sx={{ width: "100%" }}
+          spacing={2}
+          className="my-5 animate__animated animate__lightSpeedInLeft"
+        >
+          <Alert variant="filled" severity="success">
+            Your question has been successfully posted
+          </Alert>
+        </Stack>
       )}
     </>
   );

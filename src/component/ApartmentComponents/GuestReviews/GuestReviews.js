@@ -30,7 +30,7 @@ export default function GuestReviews(props) {
     <>
       <div className="mt-5">
         <div className="my-3">
-          <h4>Guest reviews</h4>
+          <h5 className="fw-bold">Guest reviews</h5>
         </div>
 
         <div>

@@ -2,29 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { axiosInstance } from "../../../Redux/network";
  
-export default function MessageOffcanvas() {
+export default function MessageOffcanvas(props) {
   const [message, setMessage] = useState();
   const [allMessage, setallMessage] = useState();
   const [msg, setMsg] = useState(false);
   const [msg1, setMsg1] = useState(true);
 
   useEffect(() => {
-    
-    axiosInstance
-      .get("hotel/message/" + "619cd61add2d1495a56e550b")
-      .then((result) => {
-        setMessage(result.data.data.slice(0, 3));
-      });
+    axiosInstance.get("hotel/message/" + props.id).then((result) => {
+      setMessage(result.data.data.reverse().slice(0, 3));
+    });
   }, []);
 
   const readAllMessages = () => {
-    axiosInstance
-      .get("hotel/message/" + "619cd61add2d1495a56e550b")
-      .then((result) => {
-        setallMessage(result.data.data);
-        setMsg(true);
-        setMsg1(false);
-      });
+    axiosInstance.get("hotel/message/" + props.id).then((result) => {
+      setallMessage(result.data.data.reverse());
+      setMsg(true);
+      setMsg1(false);
+    });
   };
 
   return (

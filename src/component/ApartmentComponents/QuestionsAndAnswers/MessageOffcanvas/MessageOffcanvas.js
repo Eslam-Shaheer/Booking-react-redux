@@ -2,28 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { axiosInstance } from "../../../../Redux/network";
  
-export default function MessageOffcanvas() {
+export default function MessageOffcanvas(props) {
   const [message, setMessage] = useState();
   const [allMessage, setallMessage] = useState();
   const [msg, setMsg] = useState(false);
   const [msg1, setMsg1] = useState(true);
 
   useEffect(() => {
-    axiosInstance
-      .get("apartment/message/" + "61a7c6008f06602964caad9b")
-      .then((result) => {
-        setMessage(result.data.data.slice(0, 3));
-      });
+    axiosInstance.get("apartment/message/" + props.id).then((result) => {
+      setMessage(result.data.data.reverse().slice(0, 4));
+    });
   }, []);
 
   const readAllMessages = () => {
-    axiosInstance
-      .get("apartment/message/" + "61a7c6008f06602964caad9b")
-      .then((result) => {
-        setallMessage(result.data.data);
-        setMsg(true);
-        setMsg1(false);
-      });
+    axiosInstance.get("apartment/message/" + props.id).then((result) => {
+      setallMessage(result.data.data.reverse());
+      setMsg(true);
+      setMsg1(false);
+    });
   };
 
   return (

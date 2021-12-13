@@ -4,6 +4,8 @@ import "./Header.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useNavigate } from "react-router";
+import Spinner from "react-bootstrap/Spinner";
+
 export default function Header(props) {
   const [allData, setAllData] = useState();
   const [city, setCity] = useState();

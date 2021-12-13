@@ -11,7 +11,6 @@ import { axiosInstance } from "../../Redux/network";
 import { Spinner } from "react-bootstrap";
 export default function Home() {
   const [loggedInUser, setloggedInUser] = useState();
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     window.scrollTo({
@@ -19,6 +18,7 @@ export default function Home() {
       left: 0,
       behavior: "instant",
     });
+
     axiosInstance.get("user/loggedin").then((result) => {
       setloggedInUser(result.data.data);
     });

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
+import Search from '../../component/HotelPage/Search/Search';
 import HotelsCom from '../../component/Properties/PropertiesCom/HotelsCom'
-import SearchCom from '../../component/Properties/Search/SearchCom'
+ 
 
 
 export default function HotelsList() {
@@ -15,15 +16,15 @@ useEffect(() => {
 
 
     return (
-        <>
+      <>
         <div className="container-lg mt-5">
-           
-            <div className="row">
-                <SearchCom/>
-                <HotelsCom/>
+          <div className="row">
+            <div className="col-md-3 mb-4 ">
+              <Search />
             </div>
-
+            <HotelsCom />
+          </div>
         </div>
-        </>
-    )
+      </>
+    );
 }

@@ -14,7 +14,6 @@ import Popover from "@mui/material/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import { useNavigate } from "react-router-dom";
 
-
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,19 +29,48 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [toggel, setToggel] = useState(0);
+  // const [toggel, setToggel] = useState(0);
   const [loggedInUser, setloggedInUser] = useState();
   const [allFalseNotifications, setAllFalseNotifications] = useState(0);
   const [showNotifications, setShowNotifications] = useState();
   const navigate = useNavigate();
+  const [currentDate, setCurrentDate] = useState();
+
+  // const [hiddenFirstBtn, setHiddenFirstBtn] = useState(false);
+  // const [hiddenSecondBtn, setHiddenSecondBtn] = useState(true);
+
+  const [switchLang , setSwitchLang] = useState()
+
+
+  const changeLang =()=>{
+ localStorage.setItem("key", "arabic");
+         
+
+  }
+
+  
+  const changeLang2 = () => {
+    console.log("object")
+    localStorage.setItem("key", "english");
+  };
+
+
+
 
   useEffect(() => {
+
+   
+
     axiosInstance.get("user/loggedin").then((result) => {
-      setShowNotifications(result.data.data.notifications.reverse().slice(0,20));
+      setShowNotifications(
+        result.data.data.notifications.reverse().slice(0, 20)
+      );
       setloggedInUser(result.data.data);
       if (result.data.success) {
         let falseNotifications = 0;
         for (let noti of result.data.data.notifications) {
+          setCurrentDate(new Date(noti.createdAt).toLocaleString());
+
           if (noti.isRead == false) {
             falseNotifications++;
           }
@@ -53,9 +81,9 @@ export default function Navbar() {
   }, []);
 
   const readNotifications = () => {
-    axiosInstance.get("user/read/notifications").then((res) => {
-      console.log(res);
-    });
+    // // axiosInstance.get("user/read/notifications").then((res) => {
+    // //   console.log(res);
+    // });
   };
 
   return (
@@ -80,7 +108,7 @@ export default function Navbar() {
           <div className="collapse navbar-collapse " id="navbarText">
             <div className="d-flex align-items-center  ms-auto">
               <Button onClick={handleOpen}>
-                {toggel === 0 && (
+                {localStorage.getItem("key") == "english" && (
                   <Tooltip title="Choose your language" arrow>
                     <div>
                       <a className="nav-link" href="#">
@@ -94,7 +122,7 @@ export default function Navbar() {
                   </Tooltip>
                 )}
 
-                {toggel === 1 && (
+                {localStorage.getItem("key") == "arabic" && (
                   <Tooltip title="Chose your language" arrow>
                     <div>
                       <a className="nav-link" href="#">
@@ -126,8 +154,9 @@ export default function Navbar() {
                     <div className="d-flex justify-content-center">
                       <div
                         onClick={() => {
-                          setToggel(0);
                           handleClose();
+                          changeLang2();
+
                         }}
                       >
                         <a className="nav-link" href="#">
@@ -138,10 +167,11 @@ export default function Navbar() {
                           />
                         </a>
                       </div>
+
                       <div
                         onClick={() => {
-                          setToggel(1);
                           handleClose();
+                          changeLang();
                         }}
                       >
                         <a className="nav-link" href="#">
@@ -197,9 +227,14 @@ export default function Navbar() {
                             d="M9.28 21.961a2.837 2.837 0 0 0 5.445 0 .75.75 0 1 0-1.44-.422 1.337 1.337 0 0 1-2.565 0 .75.75 0 1 0-1.44.422zM12.75 3V.75a.75.75 0 0 0-1.5 0V3a.75.75 0 0 0 1.5 0zm-.75.75a6.75 6.75 0 0 1 6.75 6.75c0 3.154.29 5.436.785 6.994.323 1.02.684 1.59.995 1.84L21 18H3l.59 1.212c.248-.315.572-.958.88-2 .49-1.66.78-3.872.78-6.712A6.75 6.75 0 0 1 12 3.75zm0-1.5a8.25 8.25 0 0 0-8.25 8.25c0 2.702-.272 4.772-.72 6.288-.254.864-.493 1.336-.62 1.5A.75.75 0 0 0 3 19.5h18c.708 0 1.022-.892.47-1.335.019.016-.008-.015-.07-.113-.14-.223-.29-.553-.435-1.012-.443-1.396-.715-3.529-.715-6.54A8.25 8.25 0 0 0 12 2.25z"
                           ></path>
                         </svg>
-                        <span className="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-danger my-2">
-                          {allFalseNotifications}
-                        </span>
+
+                        {allFalseNotifications ? (
+                          <span className="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-danger my-2">
+                            {allFalseNotifications}
+                          </span>
+                        ) : (
+                          ""
+                        )}
                       </button>
                       <Popover
                         {...bindPopover(popupState)}
@@ -213,9 +248,10 @@ export default function Navbar() {
                         }}
                       >
                         <Typography
+                          className="bg-light"
                           sx={{
                             p: 2,
-                            bgcolor: "#F0F0F0",
+
                             width: "600px",
                             height: "50%",
                           }}
@@ -230,11 +266,20 @@ export default function Navbar() {
                                       href={elment.link}
                                     >
                                       <Alert
-                                        variant="filled"
+                                        className="text-dark AlERT"
+                                        variant="outlined"
                                         severity="success"
-                                        sx={{ marginBottom: "10px" }}
+                                        sx={{
+                                          marginBottom: "10px",
+                                          bgcolor: "#fff",
+                                          boxShadow:
+                                            "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+                                        }}
                                       >
-                                        {elment.body}
+                                        {elment.body} <br />{" "}
+                                        <span className="text-muted">
+                                          {currentDate}
+                                        </span>
                                       </Alert>
                                     </a>
                                   ) : (
@@ -244,14 +289,21 @@ export default function Navbar() {
                                     >
                                       {" "}
                                       <Alert
-                                        variant="filled"
+                                        className="AlERT text-dark"
                                         severity="info"
                                         sx={{
+                                          boxShadow:
+                                            "rgba(6, 24, 44, 0.4) 0px 0px 0px 1px, rgba(6, 24, 44, 0.65) 0px 2px 2px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset",
                                           marginBottom: "10px",
-                                          bgcolor: "#5D726B",
+                                          bgcolor: "#f0f8ff",
                                         }}
+                                        variant="outlined"
                                       >
                                         {elment.body}
+                                        <br />{" "}
+                                        <span className="text-muted">
+                                          {currentDate}
+                                        </span>
                                       </Alert>
                                     </a>
                                   )}
