@@ -68,8 +68,8 @@ const Unmissable = React.lazy(() =>
 );
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem("authentication"));
   const isAuthenticated = () => {
-    const token = localStorage.getItem("authentication");
     try {
       if (token) {
         return true;
