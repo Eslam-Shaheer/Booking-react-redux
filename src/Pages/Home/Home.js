@@ -23,27 +23,9 @@ export default function Home() {
       setloggedInUser(result.data.data);
     });
   }, []);
-  useEffect(() => {
-    return () => {
-      setIsLoading(false);
-    };
-  }, []);
 
   return (
     <>
-      {/* {isLoading ? (
-        <div
-          style={{ height: "500px" }}
-          className="d-flex justify-content-center align-items-center"
-        >
-          <Spinner
-            style={{ width: "100px", height: "100px" }}
-            animation="border"
-            role="status"
-          ></Spinner>
-        </div>
-      ) : (
-        <div> */}
       <Header loggedInUser={loggedInUser} />
       <Gridsection />
       <PropertyType />
