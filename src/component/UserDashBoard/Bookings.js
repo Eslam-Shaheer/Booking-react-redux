@@ -55,14 +55,9 @@ export default function Bookings() {
                 "/" +
                 BK.roomId +
                 "/" +
-<<<<<<< HEAD
-                BK.booking._id+'/'+
-              paypalAccount.paypalAccount
-=======
                 BK.booking._id +
                 "/" +
                 paypalAccount.paypalAccount
->>>>>>> 4799c869b19dfbc9afe4bb8947a0cd0b0475a0a1
             )
             .then((result) => {
               let newarr = userBookings.hotels.filter((item) => {
@@ -80,14 +75,9 @@ export default function Bookings() {
                 "/" +
                 BK.roomId +
                 "/" +
-<<<<<<< HEAD
-                BK.booking._id+'/'+
-              paypalAccount.paypalAccount
-=======
                 BK.booking._id +
                 "/" +
                 paypalAccount.paypalAccount
->>>>>>> 4799c869b19dfbc9afe4bb8947a0cd0b0475a0a1
             )
             .then((result) => {
               console.log(result);
@@ -102,17 +92,12 @@ export default function Bookings() {
       
           axiosInstance
             .delete(
-<<<<<<< HEAD
-              "apartment/booking/" + BK.apartmentId + "/" + BK.booking._id+'/'+
-              paypalAccount.paypalAccount
-=======
               "apartment/booking/" +
                 BK.apartmentId +
                 "/" +
                 BK.booking._id +
                 "/" +
                 paypalAccount.paypalAccount
->>>>>>> 4799c869b19dfbc9afe4bb8947a0cd0b0475a0a1
             )
             .then((result) => {
               let newarr = userBookings.apartments.filter((item) => {
