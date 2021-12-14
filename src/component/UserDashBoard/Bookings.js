@@ -47,8 +47,9 @@ export default function Bookings() {
                 "/" +
                 BK.roomId +
                 "/" +
-                BK.booking._id,
-              paypalAccount
+                BK.booking._id +
+                "/" +
+                paypalAccount.paypalAccount
             )
             .then((result) => {
               let newarr = userBookings.hotels.filter((item) => {
@@ -71,10 +72,12 @@ export default function Bookings() {
                 "/" +
                 BK.roomId +
                 "/" +
-                BK.booking._id,
-              paypalAccount
+                BK.booking._id +
+                "/" +
+                paypalAccount.paypalAccount
             )
             .then((result) => {
+              console.log(result);
               let newarr = userBookings.campgrounds.filter((item) => {
                 return item.booking._id != BK.booking._id;
               });
@@ -90,8 +93,12 @@ export default function Bookings() {
         ) {
           axiosInstance
             .delete(
-              "apartment/booking/" + BK.apartmentId + "/" + BK.booking._id,
-              paypalAccount
+              "apartment/booking/" +
+                BK.apartmentId +
+                "/" +
+                BK.booking._id +
+                "/" +
+                paypalAccount.paypalAccount
             )
             .then((result) => {
               let newarr = userBookings.apartments.filter((item) => {
@@ -547,7 +554,7 @@ export default function Bookings() {
                               variant="btn text-danger fw-bold"
                               onClick={() => {
                                 handleShow();
-                                setPropClick("hotel");
+                                setPropClick("apartment");
                                 setBK(apartBooking);
                               }}
                             >
