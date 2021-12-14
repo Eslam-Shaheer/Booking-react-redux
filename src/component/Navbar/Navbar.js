@@ -55,7 +55,11 @@ export default function Navbar() {
   };
 
 
-
+ const logOut=()=>{
+    localStorage.removeItem("authentication");
+    // window.location.replace("localhost:4200/")
+    window.location.reload();
+ }
 
   useEffect(() => {
 
@@ -186,6 +190,7 @@ export default function Navbar() {
                   </Typography>
                 </Box>
               </Modal>
+             
               <div className="nav-item mx-lg-2">
                 <a className="nav-link font-white" href="#">
                   <svg
@@ -203,7 +208,7 @@ export default function Navbar() {
                   </svg>
                 </a>
               </div>
-
+            
               <div className="nav-item mx-lg-2">
                 <PopupState variant="popover" popupId="demo-popup-popover">
                   {(popupState) => (
@@ -316,8 +321,13 @@ export default function Navbar() {
                   )}
                 </PopupState>
               </div>
-
+              <div className="nav-item mx-lg-2">
+              <span class="logOut"  role="button" tabindex="0" onClick={logOut}>
+            <svg _ngcontent-vfw-c316="" height="20" width="20" viewBox="0 0 128 128" role="presentation" fill="white" aria-hidden="true" focusable="false" class="bk-icon -streamline-sign_out"><path _ngcontent-vfw-c316="" d="M1.19 66.83l20 20a4.002 4.002 0 1 0 5.66-5.66L13.67 68H88a4 4 0 0 0 0-8H13.67l13.18-13.17a4.002 4.002 0 1 0-5.66-5.66l-20 20c-.183.186-.35.387-.5.6 0 0 0 .11-.08.16a3 3 0 0 0-.28.53 2.25 2.25 0 0 0-.08.24 3 3 0 0 0-.15.51 3.94 3.94 0 0 0 0 1.58c.036.174.086.344.15.51.022.081.049.162.08.24.076.182.17.357.28.52 0 .06.05.11.08.16.15.216.317.42.5.61zm31.13 35c20.876 19.722 53.787 18.787 73.509-2.089 14.874-15.743 18.432-39.058 8.931-58.521-10.77-22.12-42-37.41-69.52-24a52 52 0 0 0-12.91 8.93 4.004 4.004 0 0 1-5.49-5.83 60.002 60.002 0 0 1 14.9-10.29C67.26-2.37 106.48 6 122 37.74c14.519 29.787 2.142 65.704-27.645 80.223-22.44 10.938-49.308 6.839-67.465-10.293a4 4 0 0 1 5.48-5.82z"></path></svg>
+            </span>
+              </div>
               <div className="nav-item mx-lg-2 d-flex align-items-center">
+              
                 <a className="text-decoration-none " href="">
                   <div className="d-flex align-items-center ">
                     <div className="mx-lg-2">
@@ -341,6 +351,7 @@ export default function Navbar() {
                   </div>
                 </a>
               </div>
+                   
             </div>
           </div>
         </div>

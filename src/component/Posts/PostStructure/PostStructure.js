@@ -8,9 +8,11 @@ import { useParams } from "react-router-dom";
 
 export default function Example(props) {
   let [allPosts, setPosts] = useState();
+  let [NoPosts, setNoPosts] = useState(false);
   let [newPost, setNewPost] = useState(props.newPost);
   const { location } = useParams();
-  console.log(location);
+  let test=false;
+  
 
   useEffect(() => {
     window.scrollTo({
@@ -21,6 +23,11 @@ export default function Example(props) {
     if (props.isUser) {
       axiosInstance.get("post/user/all").then((result) => {
         setPosts(result.data);
+        console.log(result.data.data,"sspostss")
+        if(result.data.length>=1)
+        {
+          setNoPosts(true);
+        }
       });
     } else {
       axiosInstance.get("post").then((result) => {
@@ -33,13 +40,14 @@ export default function Example(props) {
           };
 
           setPosts(posts);
-          console.log(allPosts);
+         
         }
       });
     }
   }, []);
-
+  
   return (
+    
     <div className="col-7">
       {allPosts &&
         allPosts.data.reverse().map((pst) => {
@@ -51,6 +59,5 @@ export default function Example(props) {
             />
           );
         })}
-    </div>
-  );
+    </div> );
 }

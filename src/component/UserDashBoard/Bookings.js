@@ -19,6 +19,7 @@ import PaymentIcon from "@mui/icons-material/Payment";
 export default function Bookings() {
   let [userBookings, setUserBookings] = useState();
   let [paypalAccount, setPaypalAccount] = useState();
+  let [empty, setEmpty] = useState(true);
 
   const [show, setShow] = useState(false);
   const [propClick, setPropClick] = useState();
@@ -29,17 +30,24 @@ export default function Bookings() {
   useEffect(() => {
     axiosInstance.get("filter/booking").then((result) => {
       setUserBookings(result.data.data);
+      console.log(result.data.data,"ssss");
+      if(result.data.data.apartments.length==0&&result.data.data.hotels.length==0&&result.data.data.campgrounds.length==0)
+      {
+        setEmpty(false)
+      }
     });
   }, []);
+
+ const paypalFn=(e)=>{
+    setPaypalAccount({ paypalAccount: e.target.value });
+    console.log(paypalAccount)
+  }
 
   const cancel = () => {
     switch (propClick) {
       case "hotel":
-        if (
-          window.confirm(
-            "Are you sure !! you will get your money back in 72 hours"
-          )
-        ) {
+        
+     
           axiosInstance
             .delete(
               "hotel/booking/" +
@@ -47,8 +55,8 @@ export default function Bookings() {
                 "/" +
                 BK.roomId +
                 "/" +
-                BK.booking._id,
-              paypalAccount
+                BK.booking._id+'/'+
+              paypalAccount.paypalAccount
             )
             .then((result) => {
               let newarr = userBookings.hotels.filter((item) => {
@@ -56,14 +64,9 @@ export default function Bookings() {
               });
               setUserBookings({ ...userBookings, hotels: newarr });
             });
-        }
+        
         break;
       case "campground":
-        if (
-          window.confirm(
-            "Are you sure !! you will get your money back in 72 hours"
-          )
-        ) {
           axiosInstance
             .delete(
               "campground/booking/" +
@@ -71,8 +74,8 @@ export default function Bookings() {
                 "/" +
                 BK.roomId +
                 "/" +
-                BK.booking._id,
-              paypalAccount
+                BK.booking._id+'/'+
+              paypalAccount.paypalAccount
             )
             .then((result) => {
               let newarr = userBookings.campgrounds.filter((item) => {
@@ -80,18 +83,14 @@ export default function Bookings() {
               });
               setUserBookings({ ...userBookings, campgrounds: newarr });
             });
-        }
+        
         break;
       case "apartment":
-        if (
-          window.confirm(
-            "Are you sure !! you will get your money back in 72 hours"
-          )
-        ) {
+      
           axiosInstance
             .delete(
-              "apartment/booking/" + BK.apartmentId + "/" + BK.booking._id,
-              paypalAccount
+              "apartment/booking/" + BK.apartmentId + "/" + BK.booking._id+'/'+
+              paypalAccount.paypalAccount
             )
             .then((result) => {
               let newarr = userBookings.apartments.filter((item) => {
@@ -99,7 +98,7 @@ export default function Bookings() {
               });
               setUserBookings({ ...userBookings, apartments: newarr });
             });
-        }
+        
         break;
       default:
         break;
@@ -107,7 +106,7 @@ export default function Bookings() {
   };
 
   const hotelCancelBooking = (BK) => {
-    if (window.confirm("Are U Sure To Cancel This Booking !!")) {
+    
       axiosInstance
         .delete(
           "hotel/booking/" + BK.hotelId + "/" + BK.roomId + "/" + BK.booking._id
@@ -118,11 +117,11 @@ export default function Bookings() {
           });
           setUserBookings({ ...userBookings, hotels: newarr });
         });
-    }
+    
   };
 
   const campCancelBooking = (BK) => {
-    if (window.confirm("Are U Sure To Cancel This Booking !!")) {
+  
       axiosInstance
         .delete(
           "campground/booking/" +
@@ -138,11 +137,11 @@ export default function Bookings() {
           });
           setUserBookings({ ...userBookings, campgrounds: newarr });
         });
-    }
+    
   };
 
   const apartCancelBooking = (BK) => {
-    if (window.confirm("Are U Sure To Cancel This Booking !!")) {
+    
       axiosInstance
         .delete("apartment/booking/" + BK.apartmentId + "/" + BK.booking._id)
         .then((result) => {
@@ -151,11 +150,11 @@ export default function Bookings() {
           });
           setUserBookings({ ...userBookings, apartments: newarr });
         });
-    }
+    
   };
 
   return (
-    <div className="container">
+    empty?<div className="container">
       <table className="table">
         <thead className="thead-dark">
           <tr>
@@ -626,8 +625,7 @@ export default function Bookings() {
                 label="Paypal account"
                 className="w-100"
                 variant="standard"
-                onChange={(e) =>
-                  setPaypalAccount({ paypalAccount: e.target.value })
+                onChange={(e) =>paypalFn(e)
                 }
               />
             </Box>
@@ -651,6 +649,12 @@ export default function Bookings() {
           </Stack>
         </Modal.Footer>
       </Modal>
-    </div>
+    </div>:
+     <div class="d-flex py-5 my-5 justify-content-lg-center align-items-center flex-column"> 
+    <svg data-test-id="default-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="70px" 
+     fill="#888888" height="70px" className="bui-empty-state__icon"> 
+     <path 
+      d="M13.629 22.5H2.25a.75.75 0 0 1-.75-.75V2.25a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v11.379a.75.75 0 0 1-.22.53L14.16 22.28a.75.75 0 0 1-.53.219zm0 1.5a2.25 2.25 0 0 0 1.59-.659l8.122-8.122A2.25 2.25 0 0 0 24 13.63V2.25A2.25 2.25 0 0 0 21.75 0H2.25A2.25 2.25 0 0 0 0 2.25v19.5A2.25 2.25 0 0 0 2.25 24h11.379zM15 23.115V15.75a.75.75 0 0 1 .75-.75h7.365a.75.75 0 0 0 0-1.5H15.75a2.25 2.25 0 0 0-2.25 2.25v7.365a.75.75 0 0 0 1.5 0z">  </path> </svg>   <h4 className="my-4 text-muted" >No Bookings</h4>        </div>
+    
   );
 }

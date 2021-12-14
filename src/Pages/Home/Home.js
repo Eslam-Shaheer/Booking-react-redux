@@ -35,8 +35,7 @@ export default function Home() {
       <HomesGustesLove prop={"campground"} />
       <HomesGustesLove prop={"apartment"} />
       <Community />
-      {/* </div>
-      )} */}
+   
     </>
   );
 }
