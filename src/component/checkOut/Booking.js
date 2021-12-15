@@ -40,7 +40,7 @@ export default function Booking(props) {
   const beforePaypal = () => {
     setReservation({
       ...reservation,
-      totalPrice: props.info.totalPrice - props.info.totalPrice * 0.17,
+      totalPrice: props.info.totalPrice,
       startAt: props.info.startAt,
       endAt: props.info.endAt,
       days: props.info.days,
@@ -49,11 +49,11 @@ export default function Booking(props) {
     console.log(reservation);
   };
   useEffect(() => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "instant",
-      });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
     let cancelDays = props.property.cancellation * 86400000;
     let startAt = +new Date(props.info.startAt);
     setCancelDate(new Date(startAt - cancelDays).toDateString());

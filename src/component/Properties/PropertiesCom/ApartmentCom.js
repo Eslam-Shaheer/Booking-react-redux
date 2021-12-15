@@ -33,6 +33,8 @@ export default function Apartments(props) {
   }, [aparts]);
 
   useEffect(() => {
+    let city = props.city || "";
+
     if (!props.country && !props.city) {
       dispatch(getApartments());
       dispatch(getTopRev("apartment"));
@@ -40,8 +42,9 @@ export default function Apartments(props) {
       dispatch(getLowStars("apartment"));
     } else {
       axiosInstance
-        .get("filter/search/apartment/" + props.country + "/" + props.city)
+        .get("filter/search/apartment/" + props.country + "/" + city)
         .then((result) => {
+          console.log(result);
           if (result.data.success) {
             setaparts(result.data);
           }

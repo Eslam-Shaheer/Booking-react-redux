@@ -16,25 +16,27 @@ export default function Gridsection() {
     i18n.changeLanguage(lang);
   }
   useEffect(() => {
-    axiosInstance
-      .get("/filter/search/hotel/egypt/sharmelshiekh")
-      .then((result) => {
-        if (result.data.success) setSharmHotels(result.data.data);
-      });
-    axiosInstance.get("/filter/search/hotel/egypt/alamain").then((result) => {
+    trackPromise(
+      axiosInstance
+        .get("/filter/search/hotel/Egypt/sharmelshiekh")
+        .then((result) => {
+          if (result.data.success) setSharmHotels(result.data.data);
+        })
+    );
+    axiosInstance.get("/filter/search/hotel/Egypt/alamain").then((result) => {
       if (result.data.success) {
         setAlamainHotels(result.data.data);
       }
     });
-    axiosInstance.get("/filter/search/hotel/egypt/hurghada").then((result) => {
+    axiosInstance.get("/filter/search/hotel/Egypt/Hurghada").then((result) => {
       if (result.data.success) setHurghadaHotels(result.data.data);
     });
     axiosInstance
-      .get("/filter/search/hotel/egypt/alexandria")
+      .get("/filter/search/hotel/Egypt/Alexandria")
       .then((result) => {
         if (result.data.success) setAlexHotels(result.data.data);
       });
-    axiosInstance.get("/filter/search/hotel/egypt/cairo").then((result) => {
+    axiosInstance.get("/filter/search/hotel/Egypt/Cairo").then((result) => {
       if (result.data.success) setCairoHotels(result.data.data);
     });
   }, []);

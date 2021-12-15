@@ -52,21 +52,23 @@ export default function Availability(props) {
     });
   };
   const handleRoomNumbChange = (event, room) => {
-    let start = new Date(available.startAt).getTime();
-    let end = new Date(available.endAt).getTime();
-    let days = (end - start) / 86400000;
-    let totalPrice = event.target.value * days * room.price;
-    setReservationInfo({
-      totalPrice,
-      days,
-      roomType: room.type,
-      roomName: room.roomName,
-      roomsNum: event.target.value,
-      startAt: available.startAt,
-      endAt: available.endAt,
-      roomId: room._id,
-      room,
-    });
+    if (props.hotel.status != "pending") {
+      let start = new Date(available.startAt).getTime();
+      let end = new Date(available.endAt).getTime();
+      let days = (end - start) / 86400000;
+      let totalPrice = event.target.value * days * room.price;
+      setReservationInfo({
+        totalPrice,
+        days,
+        roomType: room.type,
+        roomName: room.roomName,
+        roomsNum: event.target.value,
+        startAt: available.startAt,
+        endAt: available.endAt,
+        roomId: room._id,
+        room,
+      });
+    }
   };
   const navigate = useNavigate();
   const checkout = () => {
@@ -75,7 +77,12 @@ export default function Availability(props) {
     });
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (props.hotel.status == "pending") {
+      setAvailableRooms(props.hotel.rooms);
+      setIsSelect(true);
+    }
+  }, []);
 
   const bedTypeFun = (type, bedsNumber) => {
     switch (type) {

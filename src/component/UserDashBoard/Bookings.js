@@ -19,65 +19,108 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../i18next";
 
 export default function Bookings() {
-  let [userBookings, setUserBookings] = useState();
-  const [show, setShow] = useState(false);
 
+
+
+  let [userBookings, setUserBookings] = useState();
+  let [paypalAccount, setPaypalAccount] = useState();
+  let [empty, setEmpty] = useState(true);
+
+  const [show, setShow] = useState(false);
+  const [propClick, setPropClick] = useState();
+  const [BK, setBK] = useState();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
     axiosInstance.get("filter/booking").then((result) => {
       setUserBookings(result.data.data);
+      console.log(result.data.data,"ssss");
+      if(result.data.data.apartments.length==0&&result.data.data.hotels.length==0&&result.data.data.campgrounds.length==0)
+      {
+        setEmpty(false)
+      }
     });
   }, []);
 
-  const hotelCancelBooking = (BK) => {
-    if (window.confirm("Are U Sure To Cancel This Booking !!")) {
-      axiosInstance
-        .delete(
-          "hotel/booking/" + BK.hotelId + "/" + BK.roomId + "/" + BK.booking._id
-        )
-        .then((result) => {
-          let newarr = userBookings.hotels.filter((item) => {
-            return item.booking._id != BK.booking._id;
-          });
-          setUserBookings({ ...userBookings, hotels: newarr });
-        });
+ const paypalFn=(e)=>{
+    setPaypalAccount({ paypalAccount: e.target.value });
+    console.log(paypalAccount)
+  }
+
+  const cancel = () => {
+    switch (propClick) {
+      case "hotel":
+        
+     
+          axiosInstance
+            .delete(
+              "hotel/booking/" +
+                BK.hotelId +
+                "/" +
+                BK.roomId +
+                "/" +
+                BK.booking._id +
+                "/" +
+                paypalAccount.paypalAccount
+            )
+            .then((result) => {
+              let newarr = userBookings.hotels.filter((item) => {
+                return item.booking._id != BK.booking._id;
+              });
+              setUserBookings({ ...userBookings, hotels: newarr });
+            });
+        
+        break;
+      case "campground":
+          axiosInstance
+            .delete(
+              "campground/booking/" +
+                BK.campgroundId +
+                "/" +
+                BK.roomId +
+                "/" +
+                BK.booking._id +
+                "/" +
+                paypalAccount.paypalAccount
+            )
+            .then((result) => {
+              console.log(result);
+              let newarr = userBookings.campgrounds.filter((item) => {
+                return item.booking._id != BK.booking._id;
+              });
+              setUserBookings({ ...userBookings, campgrounds: newarr });
+            });
+        
+        break;
+      case "apartment":
+      
+          axiosInstance
+            .delete(
+              "apartment/booking/" +
+                BK.apartmentId +
+                "/" +
+                BK.booking._id +
+                "/" +
+                paypalAccount.paypalAccount
+            )
+            .then((result) => {
+              let newarr = userBookings.apartments.filter((item) => {
+                return item.booking._id != BK.booking._id;
+              });
+              setUserBookings({ ...userBookings, apartments: newarr });
+            });
+        
+        break;
+      default:
+        break;
     }
   };
 
-  const campCancelBooking = (BK) => {
-    if (window.confirm("Are U Sure To Cancel This Booking !!")) {
-      axiosInstance
-        .delete(
-          "campground/booking/" +
-            BK.campgroundId +
-            "/" +
-            BK.roomId +
-            "/" +
-            BK.booking._id
-        )
-        .then((result) => {
-          let newarr = userBookings.campgrounds.filter((item) => {
-            return item.booking._id != BK.booking._id;
-          });
-          setUserBookings({ ...userBookings, campgrounds: newarr });
-        });
-    }
-  };
 
-  const apartCancelBooking = (BK) => {
-    if (window.confirm("Are U Sure To Cancel This Booking !!")) {
-      axiosInstance
-        .delete("apartment/booking/" + BK.apartmentId + "/" + BK.booking._id)
-        .then((result) => {
-          let newarr = userBookings.apartments.filter((item) => {
-            return item.booking._id != BK.booking._id;
-          });
-          setUserBookings({ ...userBookings, apartments: newarr });
-        });
-    }
-  };
+
+ 
+
 
   const { t, i18n } = useTranslation();
   function handleClick(lang) {
@@ -132,6 +175,9 @@ export default function Bookings() {
               if (year > stYear) {
                 cancelAvailable = false;
               }
+              if (hotelBooking.booking.cancelFree) {
+                cancelAvailable = true;
+              }
 
               return (
                 <tr>
@@ -164,7 +210,11 @@ export default function Bookings() {
                           >
                             <Button
                               variant="btn text-danger fw-bold"
-                              onClick={() => hotelCancelBooking(hotelBooking)}
+                              onClick={() => {
+                                handleShow();
+                                setPropClick("hotel");
+                                setBK(hotelBooking);
+                              }}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -280,6 +330,9 @@ export default function Bookings() {
               if (year > stYear) {
                 cancelAvailable = false;
               }
+              if (campBooking.booking.cancelFree) {
+                cancelAvailable = true;
+              }
 
               return (
                 <tr>
@@ -318,7 +371,11 @@ export default function Bookings() {
                           >
                             <Button
                               variant="btn text-danger fw-bold"
-                              onClick={() => campCancelBooking(campBooking)}
+                              onClick={() => {
+                                handleShow();
+                                setPropClick("campground");
+                                setBK(campBooking);
+                              }}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -431,6 +488,9 @@ export default function Bookings() {
               if (year > stYear) {
                 cancelAvailable = false;
               }
+              if (apartBooking.booking.cancelFree) {
+                cancelAvailable = true;
+              }
 
               return (
                 <tr>
@@ -465,7 +525,11 @@ export default function Bookings() {
                           >
                             <Button
                               variant="btn text-danger fw-bold"
-                              onClick={() => apartCancelBooking(apartBooking)}
+                              onClick={() => {
+                                handleShow();
+                                setPropClick("apartment");
+                                setBK(apartBooking);
+                              }}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -541,8 +605,11 @@ export default function Bookings() {
               <PaymentIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
               <TextField
                 id="input-with-sx"
-                label="Required"
+                label="Paypal account"
+                className="w-100"
                 variant="standard"
+                onChange={(e) =>paypalFn(e)
+                }
               />
             </Box>
           </Box>
@@ -551,9 +618,20 @@ export default function Bookings() {
           <Button variant="secondary" onClick={handleClose}>
             {t("UserDashBoard.Bookings.Close")}
           </Button>
+            
+            
+           
+         
           <Stack direction="row" spacing={2}>
-            <ButtonFromMui variant="contained" endIcon={<SendIcon />}>
-              {t("UserDashBoard.Bookings.Send")}
+            <ButtonFromMui
+              variant="contained"
+              endIcon={<SendIcon />}
+              onClick={() => {
+                cancel();
+                handleClose();
+              }}
+            >
+               {t("UserDashBoard.Bookings.Send")}
             </ButtonFromMui>
           </Stack>
         </Modal.Footer>
@@ -561,3 +639,4 @@ export default function Bookings() {
     </div>
   );
 }
+

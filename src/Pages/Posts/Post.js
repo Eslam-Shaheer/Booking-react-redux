@@ -6,6 +6,7 @@ import Example from "../../component/Posts/PostStructure/PostStructure";
 import axios from "axios";
 export default function Post() {
   const [listCountry, setListCountry] = useState();
+  const [newPost, setNewPost] = useState({});
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -26,8 +27,12 @@ export default function Post() {
         <Container>
           <Communities />
           <div className="row py-3 justify-content-between mx-1">
-            <Addpost listCountry={listCountry} />
-            <Example isUser={false} listCountry={listCountry} />
+            <Addpost listCountry={listCountry} setNewPost={setNewPost} />
+            <Example
+              isUser={false}
+              listCountry={listCountry}
+              newPost={newPost}
+            />
           </div>
         </Container>
       </Container>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useNavigate } from "react-router";
 import Spinner from "react-bootstrap/Spinner";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18next";
@@ -11,8 +12,8 @@ export default function Header(props) {
   const [allData, setAllData] = useState();
   const [city, setCity] = useState();
   const [countries, setCountries] = useState();
-
-  const [countryData, setCountryData] = useState();
+  const [countryData, setCountryData] = useState({});
+  const navigate = useNavigate();
 
   const { t, i18n } = useTranslation();
   function handleClick(lang) {
@@ -48,8 +49,21 @@ export default function Header(props) {
     console.log(e.target.innerText);
   };
 
-  const saveData = () => {
-    console.log(countryData);
+  const search = () => {
+    let city = countryData.city || "";
+    if (
+      countryData.hasOwnProperty("country") &&
+      countryData.hasOwnProperty("property")
+    ) {
+      navigate(
+        "/search/" +
+          countryData.property +
+          "s/" +
+          countryData.country +
+          "/" +
+          city
+      );
+    }
   };
 
   return (
@@ -67,7 +81,7 @@ export default function Header(props) {
             )}
           </p>
 
-          <div className="input-group search-group justify-content-between">
+          <div className="input-group search-group d-flex justify-content-between">
             <div className="me-2">
               <Autocomplete
                 name="country"
@@ -125,7 +139,7 @@ export default function Header(props) {
             </div>
 
             <button
-              onClick={saveData}
+              onClick={search}
               type="button"
               className="btn btn-primary  ms-5 rounded"
             >

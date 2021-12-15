@@ -1,26 +1,41 @@
 import Button from "@restart/ui/esm/Button";
 import React, { useEffect, useState } from "react";
-import { Container, FloatingLabel, Form, Modal } from "react-bootstrap";
+import {
+  Container,
+  FloatingLabel,
+  Form,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../../Redux/actions/post";
 import { axiosInstance } from "../../../Redux/network";
 import "./Addpost.css";
-
+import { useNavigate } from "react-router";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18next";
 
 export default function Addpost(props) {
+  const [countries, setCountries] = useState();
+  const [countryData, setCountryData] = useState();
+  const [postLocation, setLocation] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
   const [Display, setDisplay] = useState(false);
   const [Post, setPost] = useState({});
   const [selectedFile, setSelectedFile] = useState();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
-
+  const search = () => {
+    if (postLocation) {
+      navigate("/post/" + postLocation);
+    }
+  };
   const savePost = (e) => {
     e.preventDefault();
     if (selectedFile) {
@@ -33,7 +48,8 @@ export default function Addpost(props) {
         setPost(newPost);
         axiosInstance.post("post/", Post).then((result) => {
           if (result.data.success) {
-            window.location.reload();
+            console.log(result.data);
+            props.setNewPost(result.data);
           } else {
             alert(result.data.msg);
           }
@@ -54,6 +70,10 @@ export default function Addpost(props) {
 
   const onChange = (e) => {
     setPost({ ...Post, [e.target.name]: e.target.value });
+  };
+  const setLocFun = (e) => {
+    console.log(e);
+    setLocation(e.target.innerText);
   };
 
   const { t, i18n } = useTranslation();
@@ -189,19 +209,35 @@ export default function Addpost(props) {
                       <span className="text-danger">*</span>
                     </Form.Label>
 
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={Post.title}
+                    onChange={onChange}
+                    placeholder="e.g. 'When is the best time to visit the Colosseum?' "
+                  />
+                  <Form.Label>
+                    What kind of advice are you looking for ?
+                    <span className="text-danger"> *</span>
+                  </Form.Label>
+                  <FloatingLabel controlId="floatingTextarea2" label="">
                     <Form.Control
-                      type="text"
-                      name="title"
-                      value={Post.title}
+                      as="textarea"
+                      placeholder="Leave a comment here"
+                      name="body"
+                      value={Post.body}
                       onChange={onChange}
-                      placeholder="e.g. 'When is the best time to visit the Colosseum?' "
+                      style={{ height: "100px" }}
                     />
+
                     <Form.Label>
                       {t(
                         "Posts.Addpost.What kind of advice are you looking for ?"
                       )}
                       <span className="text-danger"> *</span>
                     </Form.Label>
+                    </FloatingLabel>
+
                     <FloatingLabel controlId="floatingTextarea2" label="">
                       <Form.Control
                         as="textarea"
@@ -242,13 +278,13 @@ export default function Addpost(props) {
                 sx={{
                   width: 300,
                 }}
+                onChange={setLocFun}
                 options={props.listCountry && props.listCountry}
                 renderInput={(params) => (
                   <TextField {...params} label="Location" />
                 )}
               />
-
-              <button className="btn btn-outline-primary" type="submit">
+              <button className="btn btn-outline-primary" onClick={search}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
