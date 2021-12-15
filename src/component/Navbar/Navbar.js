@@ -20,8 +20,6 @@ import { lang } from "../../Redux/actions/lang";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-
- 
 const style = {
   position: "absolute",
   top: "50%",
@@ -44,31 +42,32 @@ export default function Navbar() {
   const [currentDate, setCurrentDate] = useState();
   const changeLang = () => {
     localStorage.setItem("key", "arabic");
-        window.location.reload();
-
+    window.location.reload();
   };
 
   const changeLang2 = () => {
     console.log("object");
-   
+
     localStorage.setItem("key", "english");
-        window.location.reload();
-
+    window.location.reload();
   };
-  
 
-
- const logOut=()=>{
+  const logOut = () => {
     localStorage.removeItem("authentication");
     // window.location.replace("localhost:4200/")
     window.location.reload();
- }
+  };
 
   useEffect(() => {
     axiosInstance.get("user/loggedin").then((result) => {
-      setShowNotifications(
-        result.data.data.notifications.reverse().slice(0, 20)
-      );
+      console.log(result);
+      if (result.data.success) {
+        if (result.data.data) {
+          setShowNotifications(
+            result.data.data.notifications.reverse().slice(0, 20)
+          );
+        }
+      }
       setloggedInUser(result.data.data);
       if (result.data.success) {
         let falseNotifications = 0;
@@ -87,27 +86,21 @@ export default function Navbar() {
   const readNotifications = () => {
     axiosInstance.get("user/read/notifications").then((res) => {
       console.log(res);
-     });
+    });
   };
 
-//Local
-const language = useSelector((state) => state.lang);
-const dispatch = useDispatch();
-const { t, i18n } = useTranslation();
-function enhandleClick() {
-  dispatch(lang("en"));
-  i18n.changeLanguage("en");
-}
-function arhandleClick() {
-  dispatch(lang("ar"));
-  i18n.changeLanguage("ar");
-}
-
-
-
-
-
-  
+  //Local
+  const language = useSelector((state) => state.lang);
+  const dispatch = useDispatch();
+  const { t, i18n } = useTranslation();
+  function enhandleClick() {
+    dispatch(lang("en"));
+    i18n.changeLanguage("en");
+  }
+  function arhandleClick() {
+    dispatch(lang("ar"));
+    i18n.changeLanguage("ar");
+  }
 
   return (
     <>
@@ -210,7 +203,7 @@ function arhandleClick() {
                   </Typography>
                 </Box>
               </Modal>
-             
+
               <div className="nav-item mx-lg-2">
                 <a className="nav-link font-white" href="#">
                   <svg
@@ -228,7 +221,7 @@ function arhandleClick() {
                   </svg>
                 </a>
               </div>
-            
+
               <div className="nav-item mx-lg-2">
                 <PopupState variant="popover" popupId="demo-popup-popover">
                   {(popupState) => (
@@ -342,12 +335,31 @@ function arhandleClick() {
                 </PopupState>
               </div>
               <div className="nav-item mx-lg-2">
-              <span class="logOut"  role="button" tabindex="0" onClick={logOut}>
-            <svg _ngcontent-vfw-c316="" height="20" width="20" viewBox="0 0 128 128" role="presentation" fill="white" aria-hidden="true" focusable="false" class="bk-icon -streamline-sign_out"><path _ngcontent-vfw-c316="" d="M1.19 66.83l20 20a4.002 4.002 0 1 0 5.66-5.66L13.67 68H88a4 4 0 0 0 0-8H13.67l13.18-13.17a4.002 4.002 0 1 0-5.66-5.66l-20 20c-.183.186-.35.387-.5.6 0 0 0 .11-.08.16a3 3 0 0 0-.28.53 2.25 2.25 0 0 0-.08.24 3 3 0 0 0-.15.51 3.94 3.94 0 0 0 0 1.58c.036.174.086.344.15.51.022.081.049.162.08.24.076.182.17.357.28.52 0 .06.05.11.08.16.15.216.317.42.5.61zm31.13 35c20.876 19.722 53.787 18.787 73.509-2.089 14.874-15.743 18.432-39.058 8.931-58.521-10.77-22.12-42-37.41-69.52-24a52 52 0 0 0-12.91 8.93 4.004 4.004 0 0 1-5.49-5.83 60.002 60.002 0 0 1 14.9-10.29C67.26-2.37 106.48 6 122 37.74c14.519 29.787 2.142 65.704-27.645 80.223-22.44 10.938-49.308 6.839-67.465-10.293a4 4 0 0 1 5.48-5.82z"></path></svg>
-            </span>
+                <span
+                  class="logOut"
+                  role="button"
+                  tabindex="0"
+                  onClick={logOut}
+                >
+                  <svg
+                    _ngcontent-vfw-c316=""
+                    height="20"
+                    width="20"
+                    viewBox="0 0 128 128"
+                    role="presentation"
+                    fill="white"
+                    aria-hidden="true"
+                    focusable="false"
+                    class="bk-icon -streamline-sign_out"
+                  >
+                    <path
+                      _ngcontent-vfw-c316=""
+                      d="M1.19 66.83l20 20a4.002 4.002 0 1 0 5.66-5.66L13.67 68H88a4 4 0 0 0 0-8H13.67l13.18-13.17a4.002 4.002 0 1 0-5.66-5.66l-20 20c-.183.186-.35.387-.5.6 0 0 0 .11-.08.16a3 3 0 0 0-.28.53 2.25 2.25 0 0 0-.08.24 3 3 0 0 0-.15.51 3.94 3.94 0 0 0 0 1.58c.036.174.086.344.15.51.022.081.049.162.08.24.076.182.17.357.28.52 0 .06.05.11.08.16.15.216.317.42.5.61zm31.13 35c20.876 19.722 53.787 18.787 73.509-2.089 14.874-15.743 18.432-39.058 8.931-58.521-10.77-22.12-42-37.41-69.52-24a52 52 0 0 0-12.91 8.93 4.004 4.004 0 0 1-5.49-5.83 60.002 60.002 0 0 1 14.9-10.29C67.26-2.37 106.48 6 122 37.74c14.519 29.787 2.142 65.704-27.645 80.223-22.44 10.938-49.308 6.839-67.465-10.293a4 4 0 0 1 5.48-5.82z"
+                    ></path>
+                  </svg>
+                </span>
               </div>
               <div className="nav-item mx-lg-2 d-flex align-items-center">
-              
                 <a className="text-decoration-none " href="">
                   <div className="d-flex align-items-center ">
                     <div className="mx-lg-2">
@@ -371,7 +383,6 @@ function arhandleClick() {
                   </div>
                 </a>
               </div>
-                   
             </div>
           </div>
         </div>
