@@ -74,10 +74,8 @@ const Unmissable = React.lazy(() =>
 function App() {
   const reduxLang = useSelector((state) => state.lang);
   const [lang, setLang] = useState(reduxLang);
-   
 
-
-   const [token, setToken] = useState(localStorage.getItem("authentication"));
+  const [token, setToken] = useState(localStorage.getItem("authentication"));
   const isAuthenticated = () => {
     try {
       if (token) {
@@ -90,31 +88,21 @@ function App() {
     }
   };
 
-
   useEffect(() => {
+    if (localStorage.getItem("key") == null) {
+      localStorage.setItem("key", "english");
+    }
+    if (localStorage.getItem("key") == "arabic") {
+      setLang("rtl");
+    }
 
- 
-if (localStorage.getItem("key")== null){
-localStorage.setItem("key", "english");
-}
-if (localStorage.getItem("key") == "arabic") {
-setLang("rtl");
-} 
-
-if (localStorage.getItem("key") == "english") {
-setLang("ltr");
-
-} 
- 
+    if (localStorage.getItem("key") == "english") {
+      setLang("ltr");
+    }
   }, [reduxLang]);
 
   return (
-    <div className="App" dir={(lang)}>
-      
-       
- 
-  
-    
+    <div className="App" dir={lang}>
       {isAuthenticated() && <Navbar />}
       <Suspense
         fallback={
