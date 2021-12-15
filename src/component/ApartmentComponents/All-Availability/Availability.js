@@ -339,7 +339,7 @@ export default function Availability(props) {
             </h6>
            </div>
         </div>
-        <div className="d-flex ms-auto p-3">
+        <div className="d-flex ms-auto p-3" id="ReV">
           {isBtn ? (
             <button
               className="btn btn-primary rounded-0 my-auto"

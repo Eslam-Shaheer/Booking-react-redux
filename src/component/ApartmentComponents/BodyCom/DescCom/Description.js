@@ -9,18 +9,7 @@ export default function Description(props) {
   return (
     <div className="my-4">
       <p>{props.description}</p>
-
-      <p className="text-primary text-center">
-        {t("ApartmentComponents.BodyCom.DescCom.Missing some information?")}
-        <a className="text-decoration-none fw-bold" href="#">
-          {t("ApartmentComponents.BodyCom.DescCom.Yes")}
-        </a>
-       
-        <a className="text-decoration-none fw-bold" href="#">
-          
-          {t("ApartmentComponents.BodyCom.DescCom.No")}
-        </a>
-      </p>
+ 
     </div>
   );
 }

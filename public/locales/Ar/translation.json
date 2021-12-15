@@ -596,8 +596,8 @@
  
       "Room name:": "اسم الغرفة:",
       "Number of rooms": "عدد من الغرف:",
-      "Days:": "ايام:",
-      "Total price:": "السعر الاجمالى:",
+      "Days": "ايام:",
+      "Total price": "السعر الاجمالى:",
       "Reserve": "حجز",
       "Room type": "نوع الغرفة",
       "Room name": "اسم الغرفة",
@@ -779,7 +779,7 @@
       "Map": "خريطة"
     },
     "WhyChose": {
-      "5 Reasons to choose": "5 أسباب للاختيار",
+      "5 reasons to choose": "خمس أسباب لإختيار",
       "Prices you can't beat!": "أسعار لا تضاهى!",
       "Booking is safe": "الحجز آمن",
       "Manage your bookings online": "إدارة الحجوزات الخاصة بك على الإنترنت",
@@ -853,19 +853,22 @@
         }
       },
       "ApartmentCom": {
-        "Austin 473 properties found": "أوستن: وجدنا 473 مكان إقامة",
+        "properties found": "يوجد ",
+        "apart":"عقارات",
         "Show on map": "عرض على الخريطة",
         "Latest Apartments": "أحدث الشقق",
         "Top Reviews": "اعلى الاراء"
       },
       "CampCom": {
-        "Austin 473 properties found": "أوستن: وجدنا 473 مكان إقامة",
+        "camP":"مخيمات",
+        "properties found": "يوجد",
         "Show on map": "عرض على الخريطة",
         "Latest Campgrounds": "أحدث المخيمات",
         "Top Reviews": "اعلى الاراء"
       },
       "HotelCom": {
-        "Austin 473 properties found": "أوستن: وجدنا 473 مكان إقامة",
+        "hoteL":"فنادق",
+        "properties found": "يوجد",
         "Show on map": "عرض على الخريطة",
         "Latest Hotels": "أحدث الفنادق",
         "Top Reviews": "اعلى الاراء",

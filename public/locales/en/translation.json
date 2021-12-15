@@ -854,19 +854,22 @@
         }
       },
       "ApartmentCom": {
-        "Austin 473 properties found": "Austin: 473 properties found",
+        "properties found": "Found",
+        "apart":"Apartments",
         "Show on map": "Show on map",
         "Latest Apartments": "Latest Apartments",
         "Top Reviews": "Top Reviews"
       },
       "CampCom": {
-        "Austin 473 properties found": "Austin: 473 properties found",
+         "camP":"Campgrounds",
+        "properties found": "Found",
         "Show on map": "Show on map",
         "Latest Campgrounds": "Latest Campgrounds",
         "Top Reviews": "Top Reviews"
       },
       "HotelCom": {
-        "Austin 473 properties found": "Austin: 473 properties found",
+        "hoteL":"hotels",
+        "properties found": "Found",
         "Show on map": "Show on map",
         "Latest Hotels": "Latest Hotels",
         "Top Reviews": "Top Reviews",
