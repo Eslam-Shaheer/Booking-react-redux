@@ -20,11 +20,11 @@ export default function ApartmentPage() {
   const [reviews, setReviews] = useState();
   const { id } = useParams();
   useEffect(() => {
-     window.scrollTo({
-       top: 0,
-       left: 0,
-       behavior: "instant",
-     });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
     axiosInstance.get("apartment/" + id).then((result) => {
       setApartment(result.data.data);
     });
@@ -35,7 +35,7 @@ export default function ApartmentPage() {
       <Covid />
       <div className="container d-md-flex my-3">
         <div className="col-md-3 me-3">
-          <Search />
+          <Search prop={"apartment"} />
         </div>
         <div className="col-md-9">
           {apartment && <NavHotel apartment={apartment} />}
