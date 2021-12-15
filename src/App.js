@@ -1,5 +1,7 @@
 import "./App.css";
 import React, { Suspense, lazy, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 import Navbar from "./component/Navbar/Navbar";
 import Footer from "./component/Footer/Footer";
@@ -68,8 +70,6 @@ const Unmissable = React.lazy(() =>
 );
 
 // Loc
-import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 
 function App() {
   const reduxLang = useSelector((state) => state.lang);
