@@ -15,7 +15,7 @@
 // import "./SinglePost.css";
 // import TextField from "@mui/material/TextField";
 // import Autocomplete from "@mui/material/Autocomplete";
- 
+
 // export default function SinglePost(props) {
 //   const [show, setShow] = useState(false);
 //   const [posts, setPosts] = useState(props.post);
@@ -31,7 +31,7 @@
 //   const [updatedPost, setUpdatedPost] = useState(posts);
 //   const[currentDate, setCurrentDate] =useState()
 //   useEffect(() => {
- 
+
 //         window.scrollTo({
 //           top: 0,
 //           left: 0,
@@ -55,20 +55,19 @@
 //       });
 //     }
 
-//      setCurrentDate(new Date(posts.createdAt).toLocaleString()); 
-    
+//      setCurrentDate(new Date(posts.createdAt).toLocaleString());
+
 //   }, []);
 
 //   const deletePost = (id) => {
 //     if (window.confirm("Are you sure you want delete thi post!!")) {
 //       axiosInstance.delete("post/" + id).then((result) => {
-     
+
 //         window.location.reload();
-       
+
 //       });
 //     }
 //   };
-
 
 //   const updatePost = (id) => {
 //     if (postImageChange) {
@@ -637,9 +636,6 @@
 //   );
 // }
 
-
-
-
 import Button from "@restart/ui/esm/Button";
 import React, { useEffect, useState } from "react";
 import {
@@ -651,6 +647,7 @@ import {
   Form,
   Modal,
   ButtonGroup,
+  Spinner,
 } from "react-bootstrap";
 import { axiosInstance } from "../../../../Redux/network";
 import Comment from "../../Comment/Comment";
@@ -674,6 +671,7 @@ export default function SinglePost(props) {
   const [postImageChange, setPostImageChange] = useState();
   const [updatedPost, setUpdatedPost] = useState(posts);
   const [currentDate, setCurrentDate] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -781,6 +779,7 @@ export default function SinglePost(props) {
   };
 
   const saveComment = (id) => {
+    setIsLoading(true);
     if (selectedFile) {
       const formData = new FormData();
       formData.append("multiple_images", selectedFile, selectedFile.name);
@@ -805,7 +804,7 @@ export default function SinglePost(props) {
                     com.isOwner = false;
                   }
                 }
-
+                setIsLoading(false);
                 setComment(allComment);
                 setCommentLength(allComment.length);
               });
@@ -1222,7 +1221,16 @@ export default function SinglePost(props) {
                   >
                     {t("Posts.PostStructure.SinglePost.Leave Comment")}
                   </button>
-
+                  {isLoading && (
+                    <div className="d-flex justify-content-center align-items-center mb-2">
+                      <Spinner
+                        style={{ width: "40px", height: "40px" }}
+                        animation="border"
+                        variant="primary"
+                        role="status"
+                      ></Spinner>
+                    </div>
+                  )}
                   <Modal
                     show={btnComment}
                     onHide={() => setbtnComment(false)}

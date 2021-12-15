@@ -11,8 +11,7 @@ export default function Example(props) {
   let [NoPosts, setNoPosts] = useState(false);
   let [newPost, setNewPost] = useState(props.newPost);
   const { location } = useParams();
-  let test=false;
-  
+  let test = false;
 
   useEffect(() => {
     window.scrollTo({
@@ -23,9 +22,8 @@ export default function Example(props) {
     if (props.isUser) {
       axiosInstance.get("post/user/all").then((result) => {
         setPosts(result.data);
-        console.log(result.data.data,"sspostss")
-        if(result.data.length>=1)
-        {
+        console.log(result.data.data, "sspostss");
+        if (result.data.length >= 1) {
           setNoPosts(true);
         }
       });
@@ -40,14 +38,12 @@ export default function Example(props) {
           };
 
           setPosts(posts);
-         
         }
       });
     }
   }, []);
-  
+
   return (
-    
     <div className="col-7">
       {allPosts &&
         allPosts.data.reverse().map((pst) => {
@@ -59,5 +55,6 @@ export default function Example(props) {
             />
           );
         })}
-    </div> );
+    </div>
+  );
 }

@@ -8,13 +8,16 @@ import {
   FloatingLabel,
   Form,
   Modal,
+  Spinner,
 } from "react-bootstrap";
 import { axiosInstance } from "../../../Redux/network";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18next";
+import { LinearProgress } from "@mui/material";
 export default function Comment(props) {
   const [postImageChange, setPostImageChange] = useState();
   const [editComment, seteditComment] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   let commentImage;
   let newComment = {};
   const onPostImageChange = (event) => {
@@ -39,6 +42,7 @@ export default function Comment(props) {
   };
 
   const updateComment = (id, postId) => {
+    setIsLoading(true);
     if (postImageChange) {
       const formData = new FormData();
       formData.append("multiple_images", postImageChange);
@@ -63,7 +67,7 @@ export default function Comment(props) {
                     com.isOwner = false;
                   }
                 }
-
+                setIsLoading(false);
                 props.setComment(allComment);
               });
             } else {
@@ -156,7 +160,7 @@ export default function Comment(props) {
             )}
           </div>
         </div>
-
+        {isLoading && <LinearProgress className="my-2" />}
         <Modal
           show={editComment}
           onHide={() => seteditComment(false)}
@@ -201,8 +205,9 @@ export default function Comment(props) {
         </Modal>
       </Card.Header>
 
-      <Card.Body>
+      <Card.Body className="position-relative">
         <Card.Text>{props.com.body}</Card.Text>
+
         <img
           className="w-100 rounded-3"
           src={props.com.commentImg && props.com.commentImg}
