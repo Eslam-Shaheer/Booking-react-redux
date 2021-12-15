@@ -8,7 +8,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import i18n from "../../../i18next";
-export default function Search() {
+import { axiosInstance } from "../../../Redux/network";
+import { useParams } from "react-router";
+export default function Search(props) {
   const [show, setShow] = useState(false);
   const [countryData, setCountryData] = useState();
   const [city, setCity] = useState();
@@ -46,6 +48,15 @@ export default function Search() {
       }
     }
   };
+  const [property, setProperty] = useState();
+  const { id } = useParams();
+  useEffect(() => {
+    axiosInstance.get(props.prop + "/" + id).then((result) => {
+      if (result.data.success) {
+        setProperty(result.data.data);
+      }
+    });
+  }, []);
 
   const saveData = () => {
     console.log(countryData);
@@ -173,7 +184,7 @@ export default function Search() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <CustomMap />
+          <CustomMap property={property} />
         </Modal.Body>
       </Modal>
     </>

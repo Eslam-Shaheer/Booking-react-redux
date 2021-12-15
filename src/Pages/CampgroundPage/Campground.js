@@ -19,11 +19,11 @@ export default function Campground() {
   const [reviews, setReviews] = useState();
   const { id } = useParams();
   useEffect(() => {
-   window.scrollTo({
-     top: 0,
-     left: 0,
-     behavior: "instant",
-   });
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
     axiosInstance.get("campground/" + id).then((result) => {
       setCampground(result.data.data);
     });
@@ -34,7 +34,7 @@ export default function Campground() {
       <Covid />
       <div className="container d-md-flex my-3">
         <div className="col-md-3 me-3">
-          <Search />
+          <Search prop={"campground"} />
         </div>
         <div className="col-md-9">
           {campground && <NavHotel campground={campground} />}

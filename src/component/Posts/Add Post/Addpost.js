@@ -180,48 +180,46 @@ export default function Addpost(props) {
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Form onSubmit={savePost}>
-                  <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Label>{t("Posts.Addpost.Add Location")}</Form.Label>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Label>{t("Posts.Addpost.Add Location")}</Form.Label>
 
-                    <Autocomplete
-                      name="location"
-                      disablePortal
-                      id="combo-box-demo"
-                      options={props.listCountry && props.listCountry}
-                      sx={{
-                        width: 300,
-                      }}
-                      onChange={(e) => {
-                        setPost({
-                          ...Post,
-                          location: e.target.innerText,
-                        });
-                      }}
-                      renderInput={(params) => (
-                        <TextField {...params} label="Country" />
-                      )}
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>
-                      {t("Posts.Addpost.Title")}{" "}
-                      <span className="text-danger">*</span>
-                    </Form.Label>
+                  <Autocomplete
+                    name="location"
+                    disablePortal
+                    id="combo-box-demo"
+                    className="w-100"
+                    options={props.listCountry && props.listCountry}
+                    sx={{
+                      width: 300,
+                    }}
+                    onChange={(e) => {
+                      setPost({
+                        ...Post,
+                        location: e.target.innerText,
+                      });
+                    }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Country" />
+                    )}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formGroupPassword">
+                  <Form.Label>
+                    {t("Posts.Addpost.Title")}{" "}
+                    <span className="text-danger">*</span>
+                  </Form.Label>
 
                   <Form.Control
                     type="text"
                     name="title"
                     value={Post.title}
                     onChange={onChange}
-                    placeholder="e.g. 'When is the best time to visit the Colosseum?' "
+                    placeholder="e.g. 'When is the best time to visit Egypt?' "
                   />
-                  <Form.Label>
-                    What kind of advice are you looking for ?
-                    <span className="text-danger"> *</span>
-                  </Form.Label>
+
                   <FloatingLabel controlId="floatingTextarea2" label="">
                     <Form.Control
+                      className="my-3"
                       as="textarea"
                       placeholder="Leave a comment here"
                       name="body"
@@ -236,31 +234,21 @@ export default function Addpost(props) {
                       )}
                       <span className="text-danger"> *</span>
                     </Form.Label>
-                    </FloatingLabel>
+                  </FloatingLabel>
+                </Form.Group>
 
-                    <FloatingLabel controlId="floatingTextarea2" label="">
-                      <Form.Control
-                        as="textarea"
-                        placeholder="Leave a comment here"
-                        name="body"
-                        value={Post.body}
-                        onChange={onChange}
-                        style={{ height: "100px" }}
-                      />
-                    </FloatingLabel>
-                  </Form.Group>
-
-                  <Form.Group controlId="formFileLg" className="mb-3">
-                    <Form.Control
-                      type="file"
-                      size="lg"
-                      onChange={onFileChange}
-                    />
-                  </Form.Group>
-                  <Button className="btn btn-primary" type="submit">
-                    {t("Posts.Addpost.Add Post")}
-                  </Button>
-                </Form>
+                <Form.Group controlId="formFileLg" className="my-3">
+                  <Form.Control type="file" size="md" onChange={onFileChange} />
+                </Form.Group>
+                <Button
+                  className="btn btn-primary"
+                  onClick={(e) => {
+                    savePost(e);
+                    setShow(true);
+                  }}
+                >
+                  {t("Posts.Addpost.Add Post")}
+                </Button>
               </Modal.Body>
             </Modal>
           </div>

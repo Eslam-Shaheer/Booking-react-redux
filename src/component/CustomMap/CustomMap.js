@@ -6,16 +6,23 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
+import { useParams } from "react-router";
 
-export default function CustomMap() {
+export default function CustomMap(props) {
   const MapWithAMarker = withScriptjs(
-    withGoogleMap((props) => (
+    withGoogleMap(() => (
       <GoogleMap
-        defaultZoom={10}
-        defaultCenter={{ lat: 26.22017773045157, lng: 33.130859375000014 }}
+        defaultZoom={7}
+        defaultCenter={{
+          lat: props.property.location.lat,
+          lng: props.property.location.lng,
+        }}
       >
         <Marker
-          position={{ lat: 26.22017773045157, lng: 33.130859375000014 }}
+          position={{
+            lat: props.property.location.lat,
+            lng: props.property.location.lng,
+          }}
         />
       </GoogleMap>
     ))
@@ -28,7 +35,6 @@ export default function CustomMap() {
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
-    
     </div>
   );
 }

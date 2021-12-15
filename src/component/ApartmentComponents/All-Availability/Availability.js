@@ -38,13 +38,10 @@ export default function Availability(props) {
     }
   };
 
- const { t, i18n } = useTranslation();
- function handleClick(lang) {
-   i18n.changeLanguage(lang);
- }
-
-
-
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   const checkAvailability = () => {
     console.log(available);
@@ -144,8 +141,7 @@ export default function Availability(props) {
         let bedNum = item.queenBed;
         beds.push(
           <div className="bedType ms-1">
-            
-             {bedNum} {t("ApartmentComponents.All-Availability.queen bed")}{" "}
+            {bedNum} {t("ApartmentComponents.All-Availability.queen bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -161,7 +157,6 @@ export default function Availability(props) {
         let bedNum = item.kingBed;
         beds.push(
           <div className="bedType ms-1">
-            
             {bedNum} {t("ApartmentComponents.All-Availability.king bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +173,6 @@ export default function Availability(props) {
         let bedNum = item.sofaBed;
         beds.push(
           <div className="bedType ms-1">
-            
             {bedNum} {t("ApartmentComponents.All-Availability.sofa bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -196,8 +190,7 @@ export default function Availability(props) {
         let bedNum = item.futonBed;
         beds.push(
           <div className="bedType ms-1">
-            {bedNum} {t("ApartmentComponents.All-Availability.futon bed")}
-            {" "}
+            {bedNum} {t("ApartmentComponents.All-Availability.futon bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -218,14 +211,14 @@ export default function Availability(props) {
       let beds = [];
       beds.push(
         <span className="bedType fw-bold">
-          {t("ApartmentComponents.All-Availability.Livng room")}{i}:{" "}
+          {t("ApartmentComponents.All-Availability.Livng room")}
+          {i}:{" "}
         </span>
       );
       if (item.sofaBed) {
         let bedNum = item.sofaBed;
         beds.push(
           <div className="bedType ms-1">
-            
             {bedNum} {t("ApartmentComponents.All-Availability.sofa bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -297,65 +290,74 @@ export default function Availability(props) {
           )}
         </div>
       )}
-      <div className="border d-flex">
-        <div className="d-flex flex-column p-3">
-          <div>
-            <h6>
-              {/* <p>Check In</p> */}
-              <Stack component="form" noValidate spacing={3}>
-                <TextField
-                  label="Check in"
-                  type="date"
-                  sx={{ width: 220 }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="startAt"
-                  onChange={handleDateChange}
-                />
-              </Stack>
-            </h6>
-            
+      <div className="border " style={{ backgroundColor: "#ffe08a" }}>
+        <div>
+          {" "}
+          <h5 className=" p-2">
+            When would you like to stay at {props.apartment.apartmentName}
+          </h5>
+        </div>
+        <div className="d-flex">
+          <div className="d-flex flex-column p-3">
+            <div>
+              <h6>
+                {/* <p>Check In</p> */}
+                <Stack component="form" noValidate spacing={3}>
+                  <TextField
+                    label="Check in"
+                    type="date"
+                    className="bg-white rounded-2"
+                    sx={{ width: 220 }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="startAt"
+                    onChange={handleDateChange}
+                  />
+                </Stack>
+              </h6>
+            </div>
           </div>
-        </div>
 
-        <div className="d-flex flex-column p-3">
-          <div>
-            <h6>
-              {/* <p>Check Out</p> */}
+          <div className="d-flex flex-column p-3">
+            <div>
+              <h6>
+                {/* <p>Check Out</p> */}
 
-              <Stack component="form" noValidate spacing={3}>
-                <TextField
-                  name="endAt"
-                  label="Check out"
-                  type="date"
-                  sx={{ width: 220 }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={handleDateChange}
-                />
-              </Stack>
-            </h6>
-           </div>
-        </div>
-        <div className="d-flex ms-auto p-3" id="ReV">
-          {isBtn ? (
-            <button
-              className="btn btn-primary rounded-0 my-auto"
-              onClick={checkAvailability}
-            >
-              {t("ApartmentComponents.All-Availability.Check Availability")}
-            </button>
-          ) : (
-            <button
-              disabled
-              className="btn btn-primary rounded-0 my-auto "
-              onClick={checkAvailability}
-            >
-              {t("ApartmentComponents.All-Availability.Check Availability")}
-            </button>
-          )}{" "}
+                <Stack component="form" noValidate spacing={3}>
+                  <TextField
+                    name="endAt"
+                    label="Check out"
+                    type="date"
+                    className="bg-white rounded-2"
+                    sx={{ width: 220 }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={handleDateChange}
+                  />
+                </Stack>
+              </h6>
+            </div>
+          </div>
+          <div className="d-flex ms-auto p-3">
+            {isBtn ? (
+              <button
+                className="btn btn-primary rounded-0 my-auto"
+                onClick={checkAvailability}
+              >
+                {t("ApartmentComponents.All-Availability.Check Availability")}
+              </button>
+            ) : (
+              <button
+                disabled
+                className="btn btn-primary rounded-0 my-auto "
+                onClick={checkAvailability}
+              >
+                {t("ApartmentComponents.All-Availability.Check Availability")}
+              </button>
+            )}{" "}
+          </div>
         </div>
       </div>
 

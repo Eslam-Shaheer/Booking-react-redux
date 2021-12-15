@@ -228,66 +228,76 @@ export default function Availability(props) {
         </h5>
       </div>
 
-      <div className="border d-flex">
-        <div className="d-flex flex-column p-3">
-          <div>
-            <h6>
-              {/* <p>{t("CampgroundComponents.All-Availability.Check In")}</p> */}
-              <Stack component="form" noValidate spacing={3}>
-                <TextField
-                  label="Check in"
-                  type="date"
-                  sx={{ width: 220 }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="startAt"
-                  onChange={handleDateChange}
-                />
-              </Stack>
-            </h6>
-            {/* <h6 className="text-primary">{available && available.startAt}</h6> */}
-          </div>
+      <div className="border " style={{ backgroundColor: "#ffe08a" }}>
+        <div>
+          {" "}
+          <h5 className=" p-2">
+            When would you like to stay at {props.apartment.apartmentName}
+          </h5>
         </div>
-
-        <div className="d-flex flex-column p-3">
-          <div>
-            <h6>
-              {/* <p>{t("CampgroundComponents.All-Availability.Check Out")}</p> */}
-              <Stack component="form" noValidate spacing={3}>
-                <TextField
-                  name="endAt"
-                  label="Check out"
-                  type="date"
-                  sx={{ width: 220 }}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  onChange={handleDateChange}
-                />
-              </Stack>
-            </h6>
-            {/* <h6 className="text-primary">{available && available.endAt}</h6> */}
+        <div className="d-flex">
+          <div className="d-flex flex-column p-3">
+            <div>
+              <h6>
+                {/* <p>{t("CampgroundComponents.All-Availability.Check In")}</p> */}
+                <Stack component="form" noValidate spacing={3}>
+                  <TextField
+                    label="Check in"
+                    type="date"
+                    className="bg-white rounded-2"
+                    sx={{ width: 220 }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    name="startAt"
+                    onChange={handleDateChange}
+                  />
+                </Stack>
+              </h6>
+              {/* <h6 className="text-primary">{available && available.startAt}</h6> */}
+            </div>
           </div>
-        </div>
 
-        <div className="d-flex ms-auto p-3" id="ReV">
-          {isBtn ? (
-            <button
-              className="btn btn-primary rounded-0 my-auto"
-              onClick={checkAvailability}
-            >
-              {t("CampgroundComponents.All-Availability.Check Availability")}
-            </button>
-          ) : (
-            <button
-              disabled
-              className="btn btn-primary rounded-0 my-auto"
-              onClick={checkAvailability}
-            >
-              {t("CampgroundComponents.All-Availability.Check Availability")}
-            </button>
-          )}{" "}
+          <div className="d-flex flex-column p-3">
+            <div>
+              <h6>
+                {/* <p>{t("CampgroundComponents.All-Availability.Check Out")}</p> */}
+                <Stack component="form" noValidate spacing={3}>
+                  <TextField
+                    name="endAt"
+                    label="Check out"
+                    className="bg-white rounded-2"
+                    type="date"
+                    sx={{ width: 220 }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    onChange={handleDateChange}
+                  />
+                </Stack>
+              </h6>
+              {/* <h6 className="text-primary">{available && available.endAt}</h6> */}
+            </div>
+          </div>
+
+          <div className="d-flex ms-auto p-3">
+            {isBtn ? (
+              <button
+                className="btn btn-primary rounded-0 my-auto"
+                onClick={checkAvailability}
+              >
+                {t("CampgroundComponents.All-Availability.Check Availability")}
+              </button>
+            ) : (
+              <button
+                disabled
+                className="btn btn-primary rounded-0 my-auto"
+                onClick={checkAvailability}
+              >
+                {t("CampgroundComponents.All-Availability.Check Availability")}
+              </button>
+            )}{" "}
+          </div>
         </div>
       </div>
 
