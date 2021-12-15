@@ -9,16 +9,20 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useParams } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18next";
 export default function ReviewCanavas() {
   
   const [review, setReview] = useState();
     const [msg, setMsg] = useState(false);
-      const [reviews, setReviews] = useState();
+      const [reviews, setReviews] = useState({});
   const [show, setShow] = useState(false);
     const [rating, setRating] = useState(0);
   const { id } = useParams();
-
+ const { t, i18n } = useTranslation();
+ function handleClick(lang) {
+   i18n.changeLanguage(lang);
+ }
   useEffect(() => {
     axiosInstance
       .get("apartment/review/" + id)
@@ -72,7 +76,7 @@ export default function ReviewCanavas() {
             size="small"
           >
             {" "}
-            Leave Review
+            {t("ApartmentComponents.GuestReviews.ReviewCanavas.Leave Review")}
           </Button>
         </div>
         {msg && (
@@ -82,7 +86,9 @@ export default function ReviewCanavas() {
             className="my-5 animate__animated animate__slideInLeft"
           >
             <Alert variant="filled" severity="success">
-              Thank you for your review
+              {t(
+                "ApartmentComponents.GuestReviews.ReviewCanavas.Thank you for your review"
+              )}
             </Alert>
           </Stack>
         )}
@@ -95,12 +101,18 @@ export default function ReviewCanavas() {
       >
         <Modal.Header closeButton>
           <h6 className="mt-2 fw-bold">
-            Please leave a review and say what your opinion about this Apartment
+            {t(
+              "ApartmentComponents.GuestReviews.ReviewCanavas.Please leave a review and say what your opinion about this apartment"
+            )}
           </h6>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Type your review here:</Form.Label>
+            <Form.Label>
+              {t(
+                "ApartmentComponents.GuestReviews.ReviewCanavas.Type your review here"
+              )}
+            </Form.Label>
             <Form.Control
               name="body"
               as="textarea"
@@ -109,7 +121,7 @@ export default function ReviewCanavas() {
             />
           </Form.Group>
           <div className="text-center">
-            Rate by star
+            {t("ApartmentComponents.GuestReviews.ReviewCanavas.Rate by star")}
             <Rating
               className="my-3"
               onClick={handleRating}
@@ -127,7 +139,9 @@ export default function ReviewCanavas() {
               variant="contained"
               endIcon={<SendIcon />}
             >
-              Send
+              {t(
+                "ApartmentComponents.GuestReviews.ReviewCanavas.Send your review"
+              )}
             </Button>
           </Stack>
         </Modal.Body>
@@ -162,11 +176,6 @@ export default function ReviewCanavas() {
             </div>
           );
         })}
-
-
- 
-
-        
     </div>
   );
 }

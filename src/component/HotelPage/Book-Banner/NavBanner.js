@@ -1,7 +1,13 @@
 import React from "react";
 import "./NavBanner.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
  
 export default function NavBanner() {
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   return (
     <div>
       <div className="d-flex">
@@ -17,7 +23,7 @@ export default function NavBanner() {
           >
             <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
           </svg>
-          Book an all-inclusive rate <pre className="d-inline"> = </pre>
+          {t("HotelPage.Book-Banner.Book an all-inclusive rate")} <pre className="d-inline"> = </pre>
           <svg
             className="ms-2"
             xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +81,7 @@ export default function NavBanner() {
         </div>
 
         <div className="mt-3">
-          <button className="Fix btn btn-primary rounded-0"> Find out </button>
+          <button className="Fix btn btn-primary rounded-0"> {t("HotelPage.Book-Banner.Find out")} </button>
         </div>
       </div>
     </div>

@@ -5,8 +5,15 @@ import img2 from "../img/92967517.jpg";
 import img3 from "../img/138765948.jpg";
 import img4 from "../img/138766017.jpg";
 import img5 from "../img/92967522.jpg";
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function BestCoffee() {
+
+ const { t, i18n } = useTranslation();
+ function handleClick(lang) {
+   i18n.changeLanguage(lang);
+ }
+
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -22,7 +29,9 @@ export default function BestCoffee() {
           <div className="row justify-content-center">
             <div className="col-8">
               <div className="font mt-3">
-                <h1>Best Coffee Cities in the US</h1>
+                <h1>
+                  {t("articles.BestCoffee.Best Coffee Cities in the US")}{" "}
+                </h1>
               </div>
               <div
                 className="btn-group but my-1 "

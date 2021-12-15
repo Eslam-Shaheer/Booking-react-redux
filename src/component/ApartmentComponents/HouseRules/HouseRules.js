@@ -1,15 +1,25 @@
 import React from 'react'
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function HouseRules(props) {
+   const { t, i18n } = useTranslation();
+     function handleClick(lang) {
+       i18n.changeLanguage(lang);
+     }
     return (
       <>
         <div className="mt-5" id="houseRules">
           <div className="d-flex mb-3">
             <div className="me-auto p-2">
-              <h5 className="fw-bold">House rules</h5>
+              <h5 className="fw-bold">
+                {t("ApartmentComponents.HouseRules.House rules")}
+              </h5>
               <span>
-                {props.apartment.apartmentName} takes special requests - add in
-                the next step!
+                {props.apartment.apartmentName}{" "}
+                {t(
+                  "ApartmentComponents.HouseRules.takes special requests - add in the next step!"
+                )}
+               
               </span>
             </div>
           </div>
@@ -44,7 +54,9 @@ export default function HouseRules(props) {
                 </div>
 
                 <div className="me-2">
-                  <span className="fw-bold">Check in :</span>
+                  <span className="fw-bold">
+                   {t("ApartmentComponents.HouseRules.Check in")}
+                  </span>
                 </div>
                 <div>
                   <span>{props.apartment.checkIn}</span>
@@ -81,7 +93,9 @@ export default function HouseRules(props) {
                   </svg>
                 </div>
                 <div className="me-2">
-                  <span className="fw-bold">Check out :</span>
+                  <span className="fw-bold">
+                    {t("ApartmentComponents.HouseRules.Check out")}
+                  </span>
                 </div>
                 <div>
                   <span>{props.apartment.checkOut}</span>
@@ -102,12 +116,20 @@ export default function HouseRules(props) {
                   </svg>
                 </div>
                 <div>
-                  <span className="fw-bold">Cancellation/ prepayment :</span>
+                  <span className="fw-bold">
+                    {t(
+                      "ApartmentComponents.HouseRules.Cancellation/ prepayment"
+                    )}
+                  </span>
                 </div>
                 <div className="ms-2">
                   <span>
-                    You can cancel your reservation and get your money back in{" "}
-                    {props.apartment.cancellation} days
+                    {" "}
+                    {t(
+                      "ApartmentComponents.HouseRules.You can cancel your reservation and get your money back in"
+                    )}
+                    {props.apartment.cancellation}
+                    {t("ApartmentComponents.HouseRules.days")}
                   </span>
                 </div>
               </div>
@@ -126,17 +148,23 @@ export default function HouseRules(props) {
                     width="27"
                     height="27"
                   >
-                
                     <g>
                       <path d="M500,10c137.5,0,248.8,111.1,248.8,248.3C748.8,388.9,637.5,500,500,500c-137.5,0-248.8-111.1-248.8-241.7C251.2,121.1,362.5,10,500,10L500,10z M702.9,526.1c-52.4,26.2-130.9,45.7-209.5,45.7c-85.1,0-150.6-19.6-203-52.2C179.2,598,100.6,728.7,100.6,800.5C100.6,918.1,283.9,990,500,990c222.6,0,399.4-71.9,399.4-189.5C899.4,728.7,820.8,598,702.9,526.1L702.9,526.1z M702.9,526.1L702.9,526.1" />
                     </g>
                   </svg>
                 </div>
                 <div>
-                  <span className="fw-bold">No age restriction :</span>
+                  <span className="fw-bold">
+                    {" "}
+                    {t("ApartmentComponents.HouseRules.No age restriction")}
+                  </span>
                 </div>
                 <div className="ms-2">
-                  <span>There is no age requirement for check-in</span>
+                  <span>
+                    {t(
+                      "ApartmentComponents.HouseRules.There is no age requirement for check-in"
+                    )}
+                  </span>
                 </div>
               </div>
 
@@ -161,14 +189,23 @@ export default function HouseRules(props) {
                   </svg>
                 </div>
                 <div className="me-2">
-                  <span className="fw-bold">Pets :</span>
+                  <span className="fw-bold">
+                    {t("ApartmentComponents.HouseRules.Pets")}
+                  </span>
                 </div>
                 <div>
                   <span>
                     {props.apartment.pets ? (
-                      <span>Pets are allowed </span>
+                      <span>
+                        {t("ApartmentComponents.HouseRules.Pets are allowed")}
+                      </span>
                     ) : (
-                      <span className="text-muted">Pets are not allowed</span>
+                      <span className="text-muted">
+                        {" "}
+                        {t(
+                          "ApartmentComponents.HouseRules.Pets are not allowed"
+                        )}
+                      </span>
                     )}
                   </span>
                 </div>
@@ -188,13 +225,18 @@ export default function HouseRules(props) {
                   </svg>
                 </div>
                 <div>
-                  <span className="fw-bold">Payments by Booking.com :</span>
+                  <span className="fw-bold">
+                    {t(
+                      "ApartmentComponents.HouseRules.Payments by Booking.com"
+                    )}
+                  </span>
                 </div>
                 <div className="me-2">
                   <span>
-                    Booking.com takes your payment on behalf of the property for
-                    this stay, but make sure you have cash for any extras once
-                    you get there.
+                   
+                    {t(
+                      "ApartmentComponents.HouseRules.Booking.com takes your payment on behalf of the property for this stay, but make sure you have cash for any extras once you get there"
+                    )}
                   </span>
                 </div>
               </div>

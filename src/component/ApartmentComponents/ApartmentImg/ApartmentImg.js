@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Run from "./CustomImg/RunImg";
 import RunAllImg from "./CustomImg/RunAllImg";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function ApartmentImg(props) {
   const [show, setShow] = useState(false);
   let [apartment, setApartment] = useState(props.apartment);
-
+ const { t, i18n } = useTranslation();
+ function handleClick(lang) {
+   i18n.changeLanguage(lang);
+ }
   useEffect(() => {
     setApartment(props.apartment);
   }, []);
@@ -15,7 +20,9 @@ export default function ApartmentImg(props) {
       <div className="d-flex my-2">
         <div className="me-2">
           <h6 className="pt-2">
-            <span class="badge bg-success">Apartment</span>
+            <span class="badge bg-success">
+              {t("ApartmentComponents.ApartmentImg.Apartment")}
+            </span>
           </h6>
         </div>
         <div className="me-2">
@@ -23,7 +30,9 @@ export default function ApartmentImg(props) {
         </div>
         <div className="me-2">
           <h6 className="pt-2">
-            <span class="badge bg-warning text-dark">New to Booking.com</span>
+            <span class="badge bg-warning text-dark">
+              {t("ApartmentComponents.ApartmentImg.New to Booking.com")}
+            </span>
           </h6>
         </div>
 
@@ -104,12 +113,20 @@ export default function ApartmentImg(props) {
           </svg>
         </div>
         <div className="p-2">
-          <h4 className="mt-3">Extra health & safety measures</h4>
+          <h4 className="mt-3">
+            {t(
+              "ApartmentComponents.ApartmentImg.Extra health & safety measures"
+            )}
+          </h4>
           <p>
-            This property has taken extra health and hygiene measures to ensure
-            that your safety is their priority{" "}
+            {t(
+              "ApartmentComponents.ApartmentImg.This property has taken extra health and hygiene measures to ensure that your safety is their priority"
+            )}
+            {" "}
             <a className="text-decoration-none" href="#">
-              See health & safety details
+              {t(
+                "ApartmentComponents.ApartmentImg.See health & safety details"
+              )}
             </a>
           </p>
         </div>

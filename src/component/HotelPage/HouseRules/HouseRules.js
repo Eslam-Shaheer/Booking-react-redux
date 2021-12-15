@@ -1,15 +1,24 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function HouseRules(props) {
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   return (
     <>
       <div className="mt-5" id="houseRules">
         <div className="d-flex mb-3">
           <div className="me-auto p-2">
-            <h4 className="fw-bold">House rules</h4>
+            <h4 className="fw-bold">{t("HotelPage.HouseRules.House rules")}</h4>
             <span>
-              {props.hotel.hotelName} takes special requests - add in the next
-              step!
+              {props.hotel.hotelName}{" "}
+              {t(
+                "HotelPage.HouseRules.takes special requests - add in the next step!"
+              )}
+              "
             </span>
           </div>
         </div>
@@ -44,7 +53,9 @@ export default function HouseRules(props) {
               </div>
 
               <div className="me-2">
-                <span className="fw-bold">Check in :</span>
+                <span className="fw-bold">
+                  {t("HotelPage.HouseRules.Check in")}
+                </span>
               </div>
               <div>
                 <span>{props.hotel.checkIn}</span>
@@ -81,7 +92,9 @@ export default function HouseRules(props) {
                 </svg>
               </div>
               <div className="me-2">
-                <span className="fw-bold">Check out :</span>
+                <span className="fw-bold">
+                  {t("HotelPage.HouseRules.Check out")}
+                </span>
               </div>
               <div>
                 <span>{props.hotel.checkOut}</span>
@@ -102,12 +115,16 @@ export default function HouseRules(props) {
                 </svg>
               </div>
               <div>
-                <span className="fw-bold">Cancellation/ prepayment :</span>
+                <span className="fw-bold">
+                  {t("HotelPage.HouseRules.Cancellation/ prepayment :")}
+                </span>
               </div>
               <div className="ms-2">
                 <span>
-                  You can cancel your reservation and get your money back in{" "}
-                  {props.hotel.cancellation} days
+                  {t(
+                    "HotelPage.HouseRules.You can cancel your reservation and get your money back in"
+                  )}{" "}
+                  {props.hotel.cancellation} {t("HotelPage.HouseRules.days")}
                 </span>
               </div>
             </div>
@@ -132,10 +149,16 @@ export default function HouseRules(props) {
                 </svg>
               </div>
               <div>
-                <span className="fw-bold">No age restriction :</span>
+                <span className="fw-bold">
+                  {t("HotelPage.HouseRules.No age restriction :")}
+                </span>
               </div>
               <div className="ms-2">
-                <span>There is no age requirement for check-in</span>
+                <span>
+                  {t(
+                    "HotelPage.HouseRules.There is no age requirement for check-in"
+                  )}
+                </span>
               </div>
             </div>
 
@@ -160,14 +183,18 @@ export default function HouseRules(props) {
                 </svg>
               </div>
               <div className="me-2">
-                <span className="fw-bold">Pets :</span>
+                <span className="fw-bold">
+                  {t("HotelPage.HouseRules.Pets :")}
+                </span>
               </div>
               <div>
                 <span>
                   {props.hotel.pets ? (
-                    <span>Pets are allowed </span>
+                    <span>{t("HotelPage.HouseRules.Pets are allowed")} </span>
                   ) : (
-                    <span className="text-muted">Pets are not allowed</span>
+                    <span className="text-muted">
+                      {t("HotelPage.HouseRules.Pets are not allowed")}
+                    </span>
                   )}
                 </span>
               </div>
@@ -187,13 +214,16 @@ export default function HouseRules(props) {
                 </svg>
               </div>
               <div>
-                <span className="fw-bold">Payments by Booking.com :</span>
+                <span className="fw-bold">
+                  {t("HotelPage.HouseRules.Payments by Booking.com :")}
+                </span>
               </div>
               <div className="me-2">
                 <span>
-                  Booking.com takes your payment on behalf of the property for
-                  this stay, but make sure you have cash for any extras once you
-                  get there.
+                  {t(
+                    "HotelPage.HouseRules.Booking.com takes your payment on behalf of the property for this stay, but make sure you have cash for any extras once you get there."
+                  )}
+                  "
                 </span>
               </div>
             </div>

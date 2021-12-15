@@ -11,9 +11,14 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { useParams } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function QuestionsAndAnswers() {
+    const { t, i18n } = useTranslation();
+    function handleClick(lang) {
+      i18n.changeLanguage(lang);
+    }
   const [maxChar, setmaxChar] = useState(300);
   const [show, setShow] = useState(false);
   const [Show, setshow] = useState(false);
@@ -51,7 +56,9 @@ export default function QuestionsAndAnswers() {
     <>
       <div className="mt-5 my-3">
         {" "}
-        <h5 className="fw-bold">Got a question?</h5>
+        <h5 className="fw-bold">
+          {t("ApartmentComponents.QuestionsAnd Answers.Got a question?")}
+        </h5>
       </div>
       <div className="border">
         <div class="d-flex mt-3">
@@ -70,10 +77,15 @@ export default function QuestionsAndAnswers() {
             </svg>
           </div>
           <div class="p-2 ">
-            <p className="fw-bold">Property questions and answers</p>
+            <p className="fw-bold">
+              {t(
+                "ApartmentComponents.QuestionsAnd Answers.Property questions and answers"
+              )}
+            </p>
             <p>
-              Looking for more info? Send a question to the property to find out
-              more.
+              {t(
+                "ApartmentComponents.QuestionsAnd Answers.Looking for more info? Send a question to the property to find out more."
+              )}
             </p>
           </div>
           <div class="ms-auto p-2 ">
@@ -85,7 +97,9 @@ export default function QuestionsAndAnswers() {
                 color="primary"
                 size="small"
               >
-                <span className="text-capitalize">Ask a questionss</span>
+                <span className="text-capitalize">
+                  {t("ApartmentComponents.QuestionsAnd Answers.Ask a question")}
+                </span>
               </Button>
             </Stack>
           </div>
@@ -98,8 +112,9 @@ export default function QuestionsAndAnswers() {
           >
             <Modal.Header closeButton>
               <h6 className="mt-2">
-                Didn't find the answer you were looking for? Ask a question
-                about the property
+                {t(
+                  "ApartmentComponents.QuestionsAnd Answers.Didn't find the answer you were looking for? Ask a question about the property"
+                )}
               </h6>
             </Modal.Header>
             <Modal.Body>
@@ -107,7 +122,11 @@ export default function QuestionsAndAnswers() {
                 className="mb-3"
                 controlId="exampleForm.ControlTextarea1"
               >
-                <Form.Label>Type your question here:</Form.Label>
+                <Form.Label>
+                  {t(
+                    "ApartmentComponents.QuestionsAnd Answers.Type your question here"
+                  )}
+                </Form.Label>
                 <Form.Control
                   name="body"
                   onChange={(e) => {
@@ -119,7 +138,12 @@ export default function QuestionsAndAnswers() {
                   maxLength="300"
                   placeholder="e.g do you offer room service"
                 />
-                <p>{maxChar} characters left</p>
+                <p>
+                  {maxChar}
+                  {t(
+                    "ApartmentComponents.QuestionsAnd Answers.characters left"
+                  )}
+                </p>
               </Form.Group>
 
               <ButtonBootStrap
@@ -131,15 +155,21 @@ export default function QuestionsAndAnswers() {
                   askQuestion();
                 }}
               >
-                Submit your question
+                {t(
+                  "ApartmentComponents.QuestionsAnd Answers.Submit your question"
+                )}
               </ButtonBootStrap>
 
               <div className="p-0">
                 <p className="mt-3">
-                  Your question will be published on Booking.com after it has
-                  been approved and answered.
+                  {t(
+                    "ApartmentComponents.QuestionsAnd Answers.Your question will be published on Booking.com after it has been approved and answered."
+                  )}
+
                   <a className="text-decoration-none fw-bold" href="#">
-                    Click here to read post guidelines.
+                    {t(
+                      "ApartmentComponents.QuestionsAnd Answers.Click here to read post guidelines."
+                    )}
                   </a>
                 </p>
               </div>
@@ -156,7 +186,12 @@ export default function QuestionsAndAnswers() {
                 color="success"
                 size="small"
               >
-                <span className="text-capitalize"> Read all questions</span>
+                <span className="text-capitalize">
+                  {" "}
+                  {t(
+                    "ApartmentComponents.QuestionsAnd Answers.Read all questions"
+                  )}
+                </span>
               </Button>
             </Stack>
           </div>
@@ -165,7 +200,9 @@ export default function QuestionsAndAnswers() {
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>
                 <span className="ms-3">
-                  Question & Answers{" "}
+                  {t(
+                    "ApartmentComponents.QuestionsAnd Answers.Question & Answers"
+                  )} {" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="25"
@@ -194,7 +231,9 @@ export default function QuestionsAndAnswers() {
           className="my-5 animate__animated animate__lightSpeedInLeft"
         >
           <Alert variant="filled" severity="success">
-            Your question has been successfully posted
+            {t(
+              "ApartmentComponents.QuestionsAnd Answers.Your question has been successfully posted"
+            )}
           </Alert>
         </Stack>
       )}

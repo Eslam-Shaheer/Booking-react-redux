@@ -10,6 +10,8 @@ import {
   Modal,
 } from "react-bootstrap";
 import { axiosInstance } from "../../../Redux/network";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function Comment(props) {
   const [postImageChange, setPostImageChange] = useState();
   const [editComment, seteditComment] = useState(false);
@@ -99,6 +101,11 @@ export default function Comment(props) {
     }
   };
 
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
+
   return (
     <Card className="mb-3 commentCard">
       <Card.Header className="bg-white commentHeader">
@@ -133,7 +140,7 @@ export default function Comment(props) {
                   size="sm"
                 >
                   <Dropdown.Item onClick={() => deleteComment(props.com._id)}>
-                    Delete comment
+                    {t("Posts.Comment.Delete comment")}
                   </Dropdown.Item>
 
                   <Dropdown.Item
@@ -142,7 +149,7 @@ export default function Comment(props) {
                       seteditComment(true);
                     }}
                   >
-                    Update comment
+                    {t("Posts.Comment.Update comment")}
                   </Dropdown.Item>
                 </DropdownButton>
               </ButtonGroup>
@@ -158,7 +165,7 @@ export default function Comment(props) {
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-custom-modal-styling-title">
-              Leave Comment
+              {t("Posts.Comment.Leave Comment")}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -173,7 +180,7 @@ export default function Comment(props) {
             </FloatingLabel>
 
             <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Upload Image</Form.Label>
+              <Form.Label>{t("Posts.Comment.Upload Image")}</Form.Label>
               <Form.Control
                 type="file"
                 name="commentImg"
@@ -188,7 +195,7 @@ export default function Comment(props) {
                 updateComment(props.com._id, props.posts._id);
               }}
             >
-              Update
+              {t("Posts.Comment.Update")}
             </Button>
           </Modal.Body>
         </Modal>

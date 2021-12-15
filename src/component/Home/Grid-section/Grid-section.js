@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../../Redux/network";
 import "./Grid-section.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function Gridsection() {
   const [sharmHotels, setSharmHotels] = useState();
@@ -8,6 +10,11 @@ export default function Gridsection() {
   const [hurghadaHotels, setHurghadaHotels] = useState();
   const [alexHotels, setAlexHotels] = useState();
   const [cairoHotels, setCairoHotels] = useState();
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   useEffect(() => {
     axiosInstance
       .get("/filter/search/hotel/egypt/sharmelshiekh")
@@ -40,7 +47,7 @@ export default function Gridsection() {
               <div className="unified-postcard__header first-img-row">
                 <h3>
                   <a href="">
-                    Sharm El Shiekh
+                    {t("Home.Grid-section.Sharm El Shiekh")}
                     <img
                       src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
                       alt="Egypt"
@@ -48,7 +55,12 @@ export default function Gridsection() {
                     />
                   </a>
                 </h3>
-                {sharmHotels && <p> {sharmHotels.length} Hotels</p>}
+                {sharmHotels && (
+                  <p>
+                    {" "}
+                    {sharmHotels.length} {t("Home.Grid-section.Hotels")}
+                  </p>
+                )}
               </div>
               <img
                 className="grid-country-img w-100 mb-4"
@@ -60,7 +72,7 @@ export default function Gridsection() {
               <div className="unified-postcard__header first-img-row">
                 <h3>
                   <a href="">
-                    Al almain
+                    {t("Home.Grid-section.Al almain")}
                     <img
                       className="ms-2"
                       src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
@@ -69,7 +81,12 @@ export default function Gridsection() {
                     />
                   </a>
                 </h3>
-                {alamainHotels && <p> {alamainHotels.length} Hotels</p>}
+                {alamainHotels && (
+                  <p>
+                    {" "}
+                    {alamainHotels.length} {t("Home.Grid-section.Hotels")}
+                  </p>
+                )}
               </div>
               <img
                 className="grid-country-img w-100 mb-4"
@@ -81,7 +98,7 @@ export default function Gridsection() {
               <div className="unified-postcard__header secound-img-row">
                 <h3>
                   <a href="">
-                    Hurghada
+                    {t("Home.Grid-section.Hurghada")}
                     <img
                       className="ms-2"
                       src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
@@ -90,7 +107,12 @@ export default function Gridsection() {
                     />
                   </a>
                 </h3>
-                {hurghadaHotels && <p> {hurghadaHotels.length} Hotels</p>}
+                {hurghadaHotels && (
+                  <p>
+                    {" "}
+                    {hurghadaHotels.length} {t("Home.Grid-section.Hotels")}
+                  </p>
+                )}
               </div>
               <img
                 className="grid-country-img2 w-100 mb-4"
@@ -103,7 +125,7 @@ export default function Gridsection() {
                 <div className="unified-postcard__header secound-img-row">
                   <h3>
                     <a href="">
-                      Alexandria
+                      {t("Home.Grid-section.Alexandria")}
                       <img
                         className="ms-2"
                         src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
@@ -112,7 +134,12 @@ export default function Gridsection() {
                       />
                     </a>
                   </h3>
-                  {alexHotels && <p> {alexHotels.length} Hotels</p>}
+                  {alexHotels && (
+                    <p>
+                      {" "}
+                      {alexHotels.length} {t("Home.Grid-section.Hotels")}
+                    </p>
+                  )}
                 </div>
                 <img
                   className="grid-country-img2 w-100 mb-4 secound-img-row"
@@ -126,7 +153,7 @@ export default function Gridsection() {
                 <div className="unified-postcard__header secound-img-row">
                   <h3>
                     <a href="">
-                      Cairo
+                      {t("Home.Grid-section.Cairo")}
                       <img
                         className="ms-2"
                         src="https://cf.bstatic.com/static/img/flags/24/eg/94c2ce480065a13673761094eee3253d71aaf5df.png"
@@ -135,7 +162,12 @@ export default function Gridsection() {
                       />
                     </a>
                   </h3>
-                  {cairoHotels && <p> {cairoHotels.length} Hotels</p>}
+                  {cairoHotels && (
+                    <p>
+                      {" "}
+                      {cairoHotels.length} {t("Home.Grid-section.Hotels")}
+                    </p>
+                  )}
                 </div>
               </div>
               <img

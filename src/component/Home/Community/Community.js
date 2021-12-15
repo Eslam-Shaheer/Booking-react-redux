@@ -2,13 +2,20 @@ import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../../Redux/network";
 import "./Community.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function Community() {
   const [uae, setUae] = useState();
   const [france, setFrance] = useState();
   const [egypt, setEgypt] = useState();
   const [allPosts, setAllPosts] = useState();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   useEffect(() => {
     axiosInstance.get("filter/posts/uae").then((result) => {
@@ -35,7 +42,10 @@ export default function Community() {
   return (
     <>
       <div className="container py-4 ">
-        <h3 className="mb-4"> Connect with other travelers</h3>
+        <h3 className="mb-4">
+          {" "}
+          {t("Home.Community.Connect with other travelers")}
+        </h3>
         <div className="d-flex justify-content-between flex-column  flex-md-row">
           <div className="card border-0 mb-3 mx-auto CustomImg">
             <img
@@ -45,11 +55,13 @@ export default function Community() {
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
-              <p className="card-title  mb-2">Egypt</p>
-              <p className="card-text text-muted mb-0">Travel community</p>
+              <p className="card-title  mb-2">{t("Home.Community.Egypt")}</p>
+              <p className="card-text text-muted mb-0">
+                {t("Home.Community.Travel community")}
+              </p>
               {egypt && (
                 <p className="card-text text-muted mb-0">
-                  {egypt.length} travelers
+                  {egypt.length} {t("Home.Community.travelers")}
                 </p>
               )}
             </div>
@@ -62,11 +74,13 @@ export default function Community() {
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
-              <p className="card-title  mb-2">France</p>
-              <p className="card-text text-muted mb-0">Travel community</p>
+              <p className="card-title  mb-2">{t("Home.Community.France")}</p>
+              <p className="card-text text-muted mb-0">
+                {t("Home.Community.Travel community")}
+              </p>
               {france && (
                 <p className="card-text text-muted mb-0">
-                  {france.length} travelers
+                  {france.length} {t("Home.Community.travelers")}
                 </p>
               )}
             </div>
@@ -79,11 +93,13 @@ export default function Community() {
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
-              <p className="card-title  mb-2">UAE</p>
-              <p className="card-text text-muted mb-0">Travel community</p>
+              <p className="card-title  mb-2">{t("Home.Community.UAE")}</p>
+              <p className="card-text text-muted mb-0">
+                {t("Home.Community.Travel community")}
+              </p>
               {uae && (
                 <p className="card-text text-muted mb-0">
-                  {uae.length} travelers
+                  {uae.length} {t("Home.Community.travelers")}
                 </p>
               )}
             </div>
@@ -96,13 +112,18 @@ export default function Community() {
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
-              <p className="card-title cardStyle mb-2" onClick={() => navigate("/post")}>
-                More communities
+              <p
+                className="card-title cardStyle mb-2"
+                onClick={() => navigate("/post")}
+              >
+                {t("Home.Community.More communities")}
               </p>
-              <p className="card-text text-muted mb-0">Travel community</p>
+              <p className="card-text text-muted mb-0">
+                {t("Home.Community.Travel community")}
+              </p>
               {allPosts && (
                 <p className="card-text text-muted mb-0">
-                  {allPosts.length} travelers
+                  {allPosts.length} {t("Home.Community.travelers")}
                 </p>
               )}
             </div>

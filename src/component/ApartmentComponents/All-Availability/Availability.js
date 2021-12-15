@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { axiosInstance } from "../../../Redux/network";
 import { useNavigate } from "react-router-dom";
 import "./Availability.css";
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
@@ -36,6 +37,15 @@ export default function Availability(props) {
       }
     }
   };
+
+ const { t, i18n } = useTranslation();
+ function handleClick(lang) {
+   i18n.changeLanguage(lang);
+ }
+
+
+
+
   const checkAvailability = () => {
     console.log(available);
     if (Object.keys(available).length < 2) {
@@ -76,12 +86,16 @@ export default function Availability(props) {
     for (let item of props.apartment.bedRooms) {
       console.log(props.apartment.bedRooms);
       let beds = [];
-      beds.push(<span className="bedType fw-bold">Bed room {index}: </span>);
+      beds.push(
+        <span className="bedType fw-bold">
+          {t("ApartmentComponents.All-Availability.Bed room")} {index}:{" "}
+        </span>
+      );
       if (item.bunkBed) {
         let bedNum = item.bunkBed;
         beds.push(
           <div className="ms-1 bedType ">
-            {bedNum} bunk bed{" "}
+            {bedNum} {t("ApartmentComponents.All-Availability.bunk bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -97,7 +111,7 @@ export default function Availability(props) {
         let bedNum = item.twinBed;
         beds.push(
           <div className="bedType ms-1">
-            {bedNum} twin bed{" "}
+            {bedNum} {t("ApartmentComponents.All-Availability.twin bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -114,7 +128,7 @@ export default function Availability(props) {
         let bedNum = item.fullBed;
         beds.push(
           <div className="bedType ms-1">
-            {bedNum} full bed{" "}
+            {bedNum} {t("ApartmentComponents.All-Availability.full bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -130,7 +144,8 @@ export default function Availability(props) {
         let bedNum = item.queenBed;
         beds.push(
           <div className="bedType ms-1">
-            {bedNum} queen bed{" "}
+            
+             {bedNum} {t("ApartmentComponents.All-Availability.queen bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -146,7 +161,8 @@ export default function Availability(props) {
         let bedNum = item.kingBed;
         beds.push(
           <div className="bedType ms-1">
-            {bedNum} king bed{" "}
+            
+            {bedNum} {t("ApartmentComponents.All-Availability.king bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -162,7 +178,8 @@ export default function Availability(props) {
         let bedNum = item.sofaBed;
         beds.push(
           <div className="bedType ms-1">
-            {bedNum} sofa bed{" "}
+            
+            {bedNum} {t("ApartmentComponents.All-Availability.sofa bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -179,7 +196,8 @@ export default function Availability(props) {
         let bedNum = item.futonBed;
         beds.push(
           <div className="bedType ms-1">
-            {bedNum} futon bed{" "}
+            {bedNum} {t("ApartmentComponents.All-Availability.futon bed")}
+            {" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -198,12 +216,17 @@ export default function Availability(props) {
     }
     for (let item of props.apartment.livingRooms) {
       let beds = [];
-      beds.push(<span className="bedType fw-bold">Livng room {i}: </span>);
+      beds.push(
+        <span className="bedType fw-bold">
+          {t("ApartmentComponents.All-Availability.Livng room")}{i}:{" "}
+        </span>
+      );
       if (item.sofaBed) {
         let bedNum = item.sofaBed;
         beds.push(
           <div className="bedType ms-1">
-            {bedNum} sofa bed{" "}
+            
+            {bedNum} {t("ApartmentComponents.All-Availability.sofa bed")}{" "}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -225,7 +248,9 @@ export default function Availability(props) {
   return (
     <>
       <div className="d-flex my-2 mt-5" id="infoPrices">
-        <h5 className="fw-bold">Availability</h5>
+        <h5 className="fw-bold">
+          {t("ApartmentComponents.All-Availability.Availability")}{" "}
+        </h5>
       </div>
       {reservationInfo && (
         <div
@@ -235,13 +260,15 @@ export default function Availability(props) {
           <div className="w-100">
             <div className="d-flex justify-content-between mb-3 ">
               <div>
-                <h6>Apartment name:</h6>
-                <h6>Country:</h6>
-                <h6>City:</h6>
-                <h6>Check in:</h6>
-                <h6>Check out:</h6>
-                <h6>Days:</h6>
-                <h6>Total price:</h6>
+                <h6>
+                  {t("ApartmentComponents.All-Availability.Apartment name")}
+                </h6>
+                <h6>{t("ApartmentComponents.All-Availability.Country")}</h6>
+                <h6>{t("ApartmentComponents.All-Availability.City")}</h6>
+                <h6>{t("ApartmentComponents.All-Availability.Check in")}</h6>
+                <h6>{t("ApartmentComponents.All-Availability.Check out")}</h6>
+                <h6>{t("ApartmentComponents.All-Availability.Days")}</h6>
+                <h6>{t("ApartmentComponents.All-Availability.Total price")}</h6>
               </div>
               <div>
                 <h6>{props.apartment.apartmentName}</h6>
@@ -258,14 +285,16 @@ export default function Availability(props) {
               className="btn btn-outline-primary w-100"
               onClick={checkout}
             >
-              Reserve
+              {t("ApartmentComponents.All-Availability.Reserve")}
             </button>
           </div>
         </div>
       )}
       {isBooked && (
         <div className="text-danger text-center my-3 fs-4">
-          Sorry this date is already booked
+          {t(
+            "ApartmentComponents.All-Availability.Sorry this date is already booked"
+          )}
         </div>
       )}
       <div className="border d-flex">
@@ -286,7 +315,7 @@ export default function Availability(props) {
                 />
               </Stack>
             </h6>
-            <h6 className="text-primary">{available && available.startAt}</h6>
+            
           </div>
         </div>
 
@@ -308,8 +337,7 @@ export default function Availability(props) {
                 />
               </Stack>
             </h6>
-            <h6 className="text-primary">{available && available.endAt}</h6>
-          </div>
+           </div>
         </div>
         <div className="d-flex ms-auto p-3">
           {isBtn ? (
@@ -317,7 +345,7 @@ export default function Availability(props) {
               className="btn btn-primary rounded-0 my-auto"
               onClick={checkAvailability}
             >
-              Check Availability
+              {t("ApartmentComponents.All-Availability.Check Availability")}
             </button>
           ) : (
             <button
@@ -325,7 +353,7 @@ export default function Availability(props) {
               className="btn btn-primary rounded-0 my-auto "
               onClick={checkAvailability}
             >
-              Check Availability
+              {t("ApartmentComponents.All-Availability.Check Availability")}
             </button>
           )}{" "}
         </div>
@@ -336,9 +364,13 @@ export default function Availability(props) {
       <div className="mt-4 TableDev">
         <table id="customers">
           <tr>
-            <th>Sleeps</th>
-            <th>Accommodation Type </th>
-            <th className="text-center">Price </th>
+            <th> {t("ApartmentComponents.All-Availability.Sleeps")}</th>
+            <th>
+              {t("ApartmentComponents.All-Availability.Accommodation Type")}{" "}
+            </th>
+            <th className="text-center">
+              {t("ApartmentComponents.All-Availability.Price")}{" "}
+            </th>
           </tr>
           <tr>
             <td>
@@ -370,7 +402,7 @@ export default function Availability(props) {
             <td className="text-success col-2 text-center">
               {props.apartment.price}${" "}
               <span className="text-muted" style={{ fontSize: "13px" }}>
-                per day
+                {t("ApartmentComponents.All-Availability.per day")}
               </span>
             </td>
           </tr>

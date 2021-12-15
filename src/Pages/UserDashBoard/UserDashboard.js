@@ -1,67 +1,73 @@
 import React, { useEffect } from "react";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
-import Profile from "../../component/UserDashBoard/Profile";
+  import Profile from "../../component/UserDashBoard/Profile";
 import Bookings from "../../component/UserDashBoard/Bookings";
  import Reviews from "../../component/UserDashBoard/Reviews";
 import Community from "../../component/UserDashBoard/Community";
 import "./style.css";
-// import PropTypes from "prop-types";
-// import Tabs from "@mui/material/Tabs";
-// import Tab from "@mui/material/Tab";
-// import Typography from "@mui/material/Typography";
-// import Box from "@mui/material/Box";
+ import PropTypes from "prop-types";
+ import SwipeableViews from "react-swipeable-views";
+ import { useTheme } from "@mui/material/styles";
+ import AppBar from "@mui/material/AppBar";
+ import Tabs from "@mui/material/Tabs";
+ import Tab from "@mui/material/Tab";
+ import Typography from "@mui/material/Typography";
+ import Box from "@mui/material/Box";
 
 
 
-
-
-
-// function TabPanel(props) {
-//   // const { children, value, index, ...other } = props;
-
-//   return (
-//     <div
-//       role="tabpanel"
-//       hidden={value !== index}
-//       id={`vertical-tabpanel-${index}`}
-//       aria-labelledby={`vertical-tab-${index}`}
-//       {...other}
-//     >
-//       {value === index && (
-//         <Box sx={{ p: 3 }}>
-//           <Typography>{children}</Typography>
-//         </Box>
-//       )}
-//     </div>
-//   );
-// }
-
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.number.isRequired,
-//   value: PropTypes.number.isRequired,
-// };
-
-// function a11yProps(index) {
-//   return {
-//     id: `vertical-tab-${index}`,
-//     "aria-controls": `vertical-tabpanel-${index}`,
-//   };
-// }
-
-
-
-
-
-
-
+  
 export default function UserDashboard() {
-  //  const [value, setValue] = React.useState(0);
+ 
 
-  //  const handleChange = (event, newValue) => {
-  //    setValue(newValue);
-  //  };
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
+}
+
+
+ const theme = useTheme();
+ const [value, setValue] = React.useState(0);
+
+ const handleChange = (event, newValue) => {
+   setValue(newValue);
+ };
+
+ const handleChangeIndex = (index) => {
+   setValue(index);
+ };
+
+
+
+
 
   useEffect(() => {
  
@@ -74,7 +80,7 @@ export default function UserDashboard() {
 
   return (
     <>
-      <div className="color ">
+      {/* <div className="color ">
         <div className="container bg-white py-3  ">
           <Tabs defaultActiveKey="Profile" id="uncontrolled-tab-example">
             <Tab className="tabs" eventKey="Profile" title="Profile">
@@ -92,45 +98,43 @@ export default function UserDashboard() {
             </Tab>
           </Tabs>
         </div>
-      </div>
-      {/* <Box
-        sx={{
-          flexGrow: 1,
-          bgcolor: "background.paper",
-          display: "flex",
-          height: "auto"
-        }}
-      >
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: "divider" }}
+      </div> */}
+
+      <Box sx={{ bgcolor: "background.paper", width: "100%" }}>
+        <AppBar position="static">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="secondary"
+            textColor="inherit"
+            variant="fullWidth"
+            aria-label="full width tabs example"
+          >
+            <Tab label="Profile" {...a11yProps(0)} />
+            <Tab label="Bookings" {...a11yProps(1)} />
+            <Tab label="Reviews" {...a11yProps(2)} />
+            <Tab label="Community" {...a11yProps(3)} />
+          </Tabs>
+        </AppBar>
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
         >
-          <Tab label="Profile" {...a11yProps(0)} />
-          <Tab label="Bookings" {...a11yProps(1)} />
-          <Tab label="Messages" {...a11yProps(2)} />
-          <Tab label="Reviews" {...a11yProps(3)} />
-          <Tab label="Community" {...a11yProps(4)} />
-        </Tabs>
-        <TabPanel value={value} index={0}>
-          <Profile />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Bookings />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Messages />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <Reviews />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <Community />
-        </TabPanel>
-      </Box> */}
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <Profile />
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <Bookings />
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            <Reviews />
+          </TabPanel>
+          <TabPanel value={value} index={3} dir={theme.direction}>
+            <Community />
+          </TabPanel>
+        </SwipeableViews>
+      </Box>
     </>
   );
 }

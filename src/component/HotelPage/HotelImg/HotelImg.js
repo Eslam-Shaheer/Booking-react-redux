@@ -3,6 +3,8 @@ import "./HotelImg.css";
 import Modal from "react-bootstrap/Modal";
 import Run from "./CustomImg/RunImg";
 import RunAllImg from "./CustomImg/RunAllImg";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function HotelImg(props) {
   const [show, setShow] = useState(false);
   let [hotel, setHotel] = useState(props.hotel);
@@ -27,12 +29,19 @@ export default function HotelImg(props) {
     setHotel(props.hotel);
   }, []);
 
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
+
   return (
     <>
       <div className="d-flex my-2">
         <div className="me-2">
           <h6 className="pt-2">
-            <span class="badge bg-secondary bg-opacity-50">Hotel</span>
+            <span class="badge bg-secondary bg-opacity-50">
+              {t("HotelPage.HotelImg.Hotel")}
+            </span>
           </h6>
         </div>
         <div className="me-2">
@@ -40,7 +49,9 @@ export default function HotelImg(props) {
         </div>
         <div className="me-2">
           <h6 className="pt-2">
-            <span class="badge bg-warning text-dark">New to Booking.com</span>
+            <span class="badge bg-warning text-dark">
+              {t("HotelPage.HotelImg.New to Booking.com")}
+            </span>
           </h6>
         </div>
         <span className="me-2 pt-1">{star}</span>
@@ -122,12 +133,15 @@ export default function HotelImg(props) {
           </svg>
         </div>
         <div className="p-2">
-          <h4 className="mt-3">Extra health & safety measures</h4>
+          <h4 className="mt-3">
+            {t("HotelPage.HotelImg.Extra health & safety measures")}
+          </h4>
           <p>
-            This property has taken extra health and hygiene measures to ensure
-            that your safety is their priority{" "}
+            {t(
+              "HotelPage.HotelImg.This property has taken extra health and hygiene measures to ensure that your safety is their priority"
+            )}{" "}
             <a className="text-decoration-none" href="#">
-              See health & safety details
+              {t("HotelPage.HotelImg.See health & safety details")}
             </a>
           </p>
         </div>

@@ -13,7 +13,15 @@ import Stack from "@mui/material/Stack";
 import Popover from "@mui/material/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 import { useNavigate } from "react-router-dom";
+// local
+import i18n from "../../i18next";
+import { useTranslation } from "react-i18next";
+import { lang } from "../../Redux/actions/lang";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
+
+ 
 const style = {
   position: "absolute",
   top: "50%",
@@ -29,38 +37,26 @@ export default function Navbar() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  // const [toggel, setToggel] = useState(0);
   const [loggedInUser, setloggedInUser] = useState();
   const [allFalseNotifications, setAllFalseNotifications] = useState(0);
   const [showNotifications, setShowNotifications] = useState();
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState();
+  const changeLang = () => {
+    localStorage.setItem("key", "arabic");
+        window.location.reload();
 
-  // const [hiddenFirstBtn, setHiddenFirstBtn] = useState(false);
-  // const [hiddenSecondBtn, setHiddenSecondBtn] = useState(true);
-
-  const [switchLang , setSwitchLang] = useState()
-
-
-  const changeLang =()=>{
- localStorage.setItem("key", "arabic");
-         
-
-  }
-
-  
-  const changeLang2 = () => {
-    console.log("object")
-    localStorage.setItem("key", "english");
   };
 
+  const changeLang2 = () => {
+    console.log("object");
+   
+    localStorage.setItem("key", "english");
+        window.location.reload();
 
-
+  };
 
   useEffect(() => {
-
-   
-
     axiosInstance.get("user/loggedin").then((result) => {
       setShowNotifications(
         result.data.data.notifications.reverse().slice(0, 20)
@@ -81,10 +77,29 @@ export default function Navbar() {
   }, []);
 
   const readNotifications = () => {
-    // // axiosInstance.get("user/read/notifications").then((res) => {
-    // //   console.log(res);
-    // });
+    axiosInstance.get("user/read/notifications").then((res) => {
+      console.log(res);
+     });
   };
+
+//Local
+const language = useSelector((state) => state.lang);
+const dispatch = useDispatch();
+const { t, i18n } = useTranslation();
+function enhandleClick() {
+  dispatch(lang("en"));
+  i18n.changeLanguage("en");
+}
+function arhandleClick() {
+  dispatch(lang("ar"));
+  i18n.changeLanguage("ar");
+}
+
+
+
+
+
+  
 
   return (
     <>
@@ -148,7 +163,7 @@ export default function Navbar() {
                     component="h2"
                     className="text-center fw-bold"
                   >
-                    Select your language
+                    {t("Navbar.Select your language")}
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     <div className="d-flex justify-content-center">
@@ -156,7 +171,7 @@ export default function Navbar() {
                         onClick={() => {
                           handleClose();
                           changeLang2();
-
+                          enhandleClick();
                         }}
                       >
                         <a className="nav-link" href="#">
@@ -172,6 +187,7 @@ export default function Navbar() {
                         onClick={() => {
                           handleClose();
                           changeLang();
+                          arhandleClick();
                         }}
                       >
                         <a className="nav-link" href="#">
@@ -355,7 +371,7 @@ export default function Navbar() {
                 to="/"
                 activeClassName="active"
               >
-                Home
+                {t("Navbar.Home")}
               </NavLink>
             </Nav.Link>
             <Nav.Link className="text-white NavStyle">
@@ -364,7 +380,7 @@ export default function Navbar() {
                 activeClassName="active"
                 to="/hotels"
               >
-                Hotels
+                {t("Navbar.Hotels")}
               </NavLink>
             </Nav.Link>
             <Nav.Link className="text-white NavStyle">
@@ -373,7 +389,7 @@ export default function Navbar() {
                 className="text-white text-decoration-none"
                 to="/apartments"
               >
-                Apartments
+                {t("Navbar.Apartments")}
               </NavLink>
             </Nav.Link>
             <Nav.Link className="text-white NavStyle">
@@ -382,7 +398,7 @@ export default function Navbar() {
                 className="text-white text-decoration-none"
                 to="/campgrounds"
               >
-                Campgrounds
+                {t("Navbar.Campgrounds")}
               </NavLink>
             </Nav.Link>
             <Nav.Link className="text-white NavStyle">
@@ -391,7 +407,7 @@ export default function Navbar() {
                 className="text-white text-decoration-none"
                 to="/post"
               >
-                Community
+                {t("Navbar.Community")}
               </NavLink>
             </Nav.Link>
           </Nav>

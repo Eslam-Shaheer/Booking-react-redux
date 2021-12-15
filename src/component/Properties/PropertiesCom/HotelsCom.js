@@ -11,6 +11,8 @@ import {
 } from "../../../Redux/actions/propsFilter";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function Properties() {
   let hotels = useSelector((state) => state.hotel.getHotels);
@@ -44,14 +46,20 @@ export default function Properties() {
     dispatch(getLowStars("hotel"));
     console.log(revProps);
   }, []);
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   return (
     <>
       <div className="col-md-9   rounded">
         <div className="text d-flex justify-content-between">
-          <h3 className="align-self-center">Austin: 473 properties found</h3>
+          <h3 className="align-self-center">
+            {t("Properties.PropertiesCom.HotelCom.Austin 473 properties found")}
+          </h3>
           <div className="mapbtn ">
             <button className="btn btn-primary fw-bold " type="button">
-              Show on map
+              {t("Properties.PropertiesCom.HotelCom.Show on map")}
             </button>
           </div>
         </div>
@@ -59,16 +67,16 @@ export default function Properties() {
         <div className="">
           <ButtonGroup className="mb-2">
             <Button variant="outline-primary" onClick={LatestHotels}>
-              Latest Hotels
+              {t("Properties.PropertiesCom.HotelCom.Latest Hotels")}
             </Button>
             <Button variant="outline-primary" onClick={TopReviewsSorting}>
-              Top Reviews
+              {t("Properties.PropertiesCom.HotelCom.Top Reviews")}
             </Button>
             <Button variant="outline-primary" onClick={TopStarsSorting}>
-              Stars (highest first)
+              {t("Properties.PropertiesCom.HotelCom.Stars (highest first)")}
             </Button>
             <Button variant="outline-primary" onClick={lowStarsSorting}>
-              Stars (Lowest first)
+              {t("Properties.PropertiesCom.HotelCom.Stars (Lowest first)")}
             </Button>
           </ButtonGroup>
         </div>

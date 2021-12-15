@@ -34,7 +34,7 @@ export default function HotelPage(props) {
     <>
       <Covid />
       <div className="container d-md-flex my-3">
-        <div className="col-md-3 me-3">
+        <div className="col-md-3 me-3 ms-3">
           <Search />
         </div>
         <div className="col-md-9">

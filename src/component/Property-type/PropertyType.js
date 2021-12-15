@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../Redux/network";
 import "./PropertyType.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18next";
 
 export default function PropertyType() {
   const navigate = useNavigate();
@@ -27,11 +29,14 @@ export default function PropertyType() {
       }
     });
   }, []);
-
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   return (
     <>
       <div className="container py-4 ">
-        <h3 className="mb-4">Browse by property type</h3>
+        <h3 className="mb-4">{t("PropertyType.Browse by property type")}</h3>
         <div className="d-flex justify-content-center  ">
           <div className="card border-0 mb-3 mx-auto CustomWodth">
             <img
@@ -44,10 +49,10 @@ export default function PropertyType() {
                 className="card-title fw-bold pStyle"
                 onClick={() => navigate("/hotels")}
               >
-                Hotels
+                {t("PropertyType.Hotels")}
               </p>
               <p className="card-text text-muted">
-                {hotel && hotel.length} hotels
+                {hotel && hotel.length} {t("PropertyType.hotels")}
               </p>
             </div>
           </div>
@@ -62,10 +67,11 @@ export default function PropertyType() {
                 onClick={() => navigate("/apartments")}
                 className="card-title fw-bold pStyle"
               >
-                Apartmetnts
+                {t("PropertyType.Apartmetnts")}
               </p>
               <p className="card-text text-muted">
-                {apartmetnt && apartmetnt.length} Apartmetnts
+                {apartmetnt && apartmetnt.length}{" "}
+                {t("PropertyType.Apartmetnts")}
               </p>
             </div>
           </div>
@@ -80,10 +86,10 @@ export default function PropertyType() {
                 className="card-title fw-bold pStyle"
                 onClick={() => navigate("/campgrounds")}
               >
-                Campground
+                {t("PropertyType.Campground")}
               </p>
               <p className="card-text text-muted">
-                {campground && campground.length} campground
+                {campground && campground.length} {t("PropertyType.campground")}
               </p>
             </div>
           </div>

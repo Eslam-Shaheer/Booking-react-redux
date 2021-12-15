@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./reservation.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18next";
 export default function Reservation(props) {
   const [campgroundWith, setcampgroundWith] = useState([]);
   const [parking, setParking] = useState();
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   useEffect(() => {
     if (props.campground.facilities.parking) {
@@ -14,7 +21,9 @@ export default function Reservation(props) {
             </span>
           </div>
           <div>
-            <p className="mt-3">Free parking!</p>
+            <p className="mt-3">
+              {t("CampgroundComponents.BodyCom.reservation.Free parking!")}
+            </p>
           </div>
         </div>
       );
@@ -46,13 +55,17 @@ export default function Reservation(props) {
             </p>
             <p>
               {" "}
-              Located in {props.campground.country} this {Name} has {props.rate}{" "}
-              location score of {props.campground.avgReviews}
+              {t("CampgroundComponents.BodyCom.reservation.Located in")}{" "}
+              {props.campground.country} this {Name} has {props.rate}{" "}
+              {t("CampgroundComponents.BodyCom.reservation.location score of")}{" "}
+              {props.campground.avgReviews}
             </p>
           </div>
 
           <div className="d-flex flex-column">
-            <h6 className="text-secondary">Food Include:</h6>
+            <h6 className="text-secondary">
+              {t("CampgroundComponents.BodyCom.reservation.Food Include")}
+            </h6>
             {props.campground.facilities.breakfast && (
               <div>
                 {" "}
@@ -78,7 +91,7 @@ export default function Reservation(props) {
                     </g>
                   </g>
                 </svg>
-                Breakfast
+                {t("CampgroundComponents.BodyCom.reservation.Breakfast")}
               </div>
             )}
             {props.campground.facilities.lunch && (
@@ -105,7 +118,7 @@ export default function Reservation(props) {
                     </g>
                   </g>
                 </svg>
-                Lunch
+                {t("CampgroundComponents.BodyCom.reservation.Lunch")}
               </div>
             )}
             {props.campground.facilities.dinner && (
@@ -129,14 +142,16 @@ export default function Reservation(props) {
                     <path d="M308.1,437.6c-50.8-62.2-106.7-129.4-161.4-198c-32-40.1-42.4-90.1-31-145.4C131,20.7,199-6.5,244.1,43.3c52.3,57.6,103.5,116.9,154.6,176.2c5.9,6.9,13.9,23.2,11.8,27.1C376.9,309.8,406.1,421.6,308.1,437.6z" />
                   </g>
                 </svg>
-                Dinner
+                {t("CampgroundComponents.BodyCom.reservation.Dinner")}
               </div>
             )}
           </div>
         </div>
         {parking}
         <div className="p-3">
-          <button className="btn btn-primary w-100 rounded-0">Reserve</button>
+          <button className="btn btn-primary w-100 rounded-0">
+            {t("CampgroundComponents.BodyCom.reservation.Reserve")}
+          </button>
         </div>
       </div>
     </>

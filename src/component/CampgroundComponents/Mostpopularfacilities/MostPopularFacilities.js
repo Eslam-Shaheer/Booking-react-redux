@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./MostPopularFacilities.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function MostPopularFacilities(props) {
   const [facilities, setFacilities] = useState([]);
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   useEffect(() => {
     let allFacilities = [];
     for (let Facilities of props.campground.facilities.popularFacilities) {
@@ -23,7 +30,9 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Free Wifi</p>
+                <p>
+                  {t("CampgroundComponents.MostPopularFacilities.Free Wifi")}
+                </p>
               </div>
             </div>
           );
@@ -46,7 +55,11 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Fitness Center</p>
+                <p>
+                  {t(
+                    "CampgroundComponents.MostPopularFacilities.Fitness Center"
+                  )}
+                </p>
               </div>
             </div>
           );
@@ -69,7 +82,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Terrace</p>
+                <p>{t("CampgroundComponents.MostPopularFacilities.Terrace")}</p>
               </div>
             </div>
           );
@@ -92,7 +105,9 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Restaurant</p>
+                <p>
+                  {t("CampgroundComponents.MostPopularFacilities.Restaurant")}
+                </p>
               </div>
             </div>
           );
@@ -115,7 +130,9 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Room service</p>
+                <p>
+                  {t("CampgroundComponents.MostPopularFacilities.Room service")}
+                </p>
               </div>
             </div>
           );
@@ -148,7 +165,9 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Family Rooms</p>
+                <p>
+                  {t("CampgroundComponents.MostPopularFacilities.Family Rooms")}
+                </p>
               </div>
             </div>
           );
@@ -158,7 +177,7 @@ export default function MostPopularFacilities(props) {
           allFacilities.push(
             <div className="d-flex justify-content-between   me-1">
               <div className="me-2">
-                <svg  
+                <svg
                   height="25"
                   width="25"
                   viewBox="0 0 128 128"
@@ -171,7 +190,11 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Airport shuttle</p>
+                <p>
+                  {t(
+                    "CampgroundComponents.MostPopularFacilities.Airport shuttle"
+                  )}
+                </p>
               </div>
             </div>
           );
@@ -210,7 +233,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Sauna</p>
+                <p>{t("CampgroundComponents.MostPopularFacilities.Sauna")}</p>
               </div>
             </div>
           );
@@ -245,7 +268,9 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Water Park</p>
+                <p>
+                  {t("CampgroundComponents.MostPopularFacilities.Water Park")}
+                </p>
               </div>
             </div>
           );
@@ -268,7 +293,11 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Swimming pool</p>
+                <p>
+                  {t(
+                    "CampgroundComponents.MostPopularFacilities.Swimming pool"
+                  )}
+                </p>
               </div>
             </div>
           );
@@ -291,7 +320,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Spa</p>
+                <p>{t("CampgroundComponents.MostPopularFacilities.Spa")}</p>
               </div>
             </div>
           );
@@ -323,7 +352,11 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>24-hour front desk</p>
+                <p>
+                  {t(
+                    "CampgroundComponents.MostPopularFacilities.24-hour front desk"
+                  )}
+                </p>
               </div>
             </div>
           );
@@ -376,7 +409,11 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Hot tub/Jacuzzi</p>
+                <p>
+                  {t(
+                    "CampgroundComponents.MostPopularFacilities.Hot tub/Jacuzzi"
+                  )}
+                </p>
               </div>
             </div>
           );
@@ -408,7 +445,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Garden</p>
+                <p>{t("CampgroundComponents.MostPopularFacilities.Garden")}</p>
               </div>
             </div>
           );
@@ -433,7 +470,11 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Air conditioning</p>
+                <p>
+                  {t(
+                    "CampgroundComponents.MostPopularFacilities.Air conditioning"
+                  )}
+                </p>
               </div>
             </div>
           );
@@ -444,13 +485,16 @@ export default function MostPopularFacilities(props) {
           break;
       }
     }
-    
   }, []);
 
   return (
     <>
       <div className="my-4">
-        <h5 className="fw-bold">Most popular facilities </h5>
+        <h5 className="fw-bold">
+          {t(
+            "CampgroundComponents.MostPopularFacilities.Most popular facilities"
+          )}{" "}
+        </h5>
       </div>
       <div className="d-flex align-items-center me-3 flex-wrap">
         {facilities.map((item) => {
@@ -482,8 +526,14 @@ export default function MostPopularFacilities(props) {
           </div>
           <div>
             <span className="text-dark">
-              <b>No credit card needed to book.</b> We'll send you an email
-              confirming your reservation
+              <b>
+                {t(
+                  "CampgroundComponents.MostPopularFacilities.No credit card needed to book."
+                )}
+              </b>{" "}
+              {t(
+                "CampgroundComponents.MostPopularFacilities.We'll send you an email confirming your reservation"
+              )}
             </span>
           </div>
         </div>
@@ -509,10 +559,14 @@ export default function MostPopularFacilities(props) {
           </div>
           <div>
             <p className="text-dark ms-3 ">
-              Lock in a great price for your upcoming stay
+              {t(
+                "CampgroundComponents.MostPopularFacilities.Lock in a great price for your upcoming stay"
+              )}
             </p>
             <p className="text-dark ms-3">
-              Prices may go up, so secure your reservation today
+              {t(
+                "CampgroundComponents.MostPopularFacilities.Prices may go up, so secure your reservation today"
+              )}
             </p>
           </div>
         </div>

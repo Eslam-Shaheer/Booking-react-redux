@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../Redux/network";
 import "./style.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18next";
 
 export default function Profile() {
   let [user, setUser] = useState({});
@@ -25,6 +27,11 @@ export default function Profile() {
       axiosInstance.put("user/" + user._id, user).then((result) => {});
     }
   };
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   return (
     <div className="main-content my-3 text-secondary">
@@ -55,7 +62,9 @@ export default function Profile() {
           <div className="col-md-8 order-12">
             <div className="">
               <div className="header ">
-                <h4 className="title fw-bold text-primary">Edit Profile</h4>
+                <h4 className="title fw-bold text-primary">
+                  {t("UserDashBoard.Profile.Edit Profile")}
+                </h4>
               </div>
               <div className="content p-2">
                 <form>
@@ -66,7 +75,7 @@ export default function Profile() {
                           className="fw-bold mt-2"
                           htmlFor="exampleInputEmail1"
                         >
-                          Email address
+                          {t("UserDashBoard.Profile.Email address")}
                         </label>
                         <input
                           type="email"
@@ -83,7 +92,9 @@ export default function Profile() {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label className="fw-bold mt-2">First Name</label>
+                        <label className="fw-bold mt-2">
+                          {t("UserDashBoard.Profile.First Name")}
+                        </label>
                         <input
                           type="text"
                           value={user.firstName}
@@ -95,7 +106,9 @@ export default function Profile() {
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label className="fw-bold mt-2">Last Name</label>
+                        <label className="fw-bold mt-2">
+                          {t("UserDashBoard.Profile.Last Name")}
+                        </label>
                         <input
                           type="text"
                           value={user.lastName}
@@ -111,7 +124,9 @@ export default function Profile() {
                   <div className="row">
                     <div className="col-md-12">
                       <div className="form-group">
-                        <label className="fw-bold mt-2">Password</label>
+                        <label className="fw-bold mt-2">
+                          {t("UserDashBoard.Profile.Password")}
+                        </label>
                         <input
                           type="password"
                           onChange={editUser}
@@ -126,7 +141,9 @@ export default function Profile() {
                   <div className="row">
                     <div className="col-md-4">
                       <div className="form-group">
-                        <label className="fw-bold mt-2">City</label>
+                        <label className="fw-bold mt-2">
+                          {t("UserDashBoard.Profile.City")}
+                        </label>
                         <input
                           type="text"
                           value={user.city}
@@ -139,7 +156,9 @@ export default function Profile() {
                     </div>
                     <div className="col-md-4">
                       <div className="form-group">
-                        <label className="fw-bold mt-2">Country</label>
+                        <label className="fw-bold mt-2">
+                          {t("UserDashBoard.Profile.Country")}
+                        </label>
                         <input
                           type="text"
                           value={user.country}
@@ -152,7 +171,9 @@ export default function Profile() {
                     </div>
                     <div className="col-md-4">
                       <div className="form-group">
-                        <label className="fw-bold mt-2">Phone</label>
+                        <label className="fw-bold mt-2">
+                          {t("UserDashBoard.Profile.Phone")}
+                        </label>
                         <input
                           type="text"
                           value={user.phone}
@@ -169,7 +190,7 @@ export default function Profile() {
                     className="btn btn-primary fw-bold btn-fill pull-right mb-2"
                     onClick={submitUser}
                   >
-                    Update Profile
+                    {t("UserDashBoard.Profile.Update Profile")}
                   </button>
                   <div className="clearfix"></div>
                 </form>

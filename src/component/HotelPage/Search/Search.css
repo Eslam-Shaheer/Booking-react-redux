@@ -68,3 +68,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+ .MuiAutocomplete-hasPopupIcon.css-dd2h8b-MuiAutocomplete-root .MuiOutlinedInput-root, .MuiAutocomplete-hasClearIcon.css-dd2h8b-MuiAutocomplete-root .MuiOutlinedInput-root {
+     
+    background-color: white;
+}

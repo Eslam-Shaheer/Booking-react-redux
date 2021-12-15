@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./MostPopularFacilities.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function MostPopularFacilities(props) {
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   const [facilities, setFacilities] = useState([]);
   useEffect(() => {
     let allFacilities = [];
@@ -23,7 +29,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Free Wifi</p>
+                <p>{t("HotelPage.MostPopularFacilities.Free Wifi")}</p>
               </div>
             </div>
           );
@@ -46,7 +52,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Fitness Center</p>
+                <p>{t("HotelPage.MostPopularFacilities.Fitness Center")}</p>
               </div>
             </div>
           );
@@ -69,7 +75,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Restaurant</p>
+                <p>{t("HotelPage.MostPopularFacilities.Restaurant")}</p>
               </div>
             </div>
           );
@@ -92,7 +98,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Room service</p>
+                <p>{t("HotelPage.MostPopularFacilities.Room service")}</p>
               </div>
             </div>
           );
@@ -115,7 +121,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Family Rooms</p>
+                <p>{t("HotelPage.MostPopularFacilities.Family Rooms")}</p>
               </div>
             </div>
           );
@@ -138,7 +144,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Airport shuttle</p>
+                <p>{t("HotelPage.MostPopularFacilities.Airport shuttle")}</p>
               </div>
             </div>
           );
@@ -178,7 +184,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Sauna</p>
+                <p>{t("HotelPage.MostPopularFacilities.Sauna")}</p>
               </div>
             </div>
           );
@@ -201,7 +207,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Water Park</p>
+                <p>{t("HotelPage.MostPopularFacilities.Water Park")}</p>
               </div>
             </div>
           );
@@ -224,7 +230,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Swimming pool</p>
+                <p>{t("HotelPage.MostPopularFacilities.Swimming pool")}</p>
               </div>
             </div>
           );
@@ -247,7 +253,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Spa</p>
+                <p>{t("HotelPage.MostPopularFacilities.Spa")}</p>
               </div>
             </div>
           );
@@ -271,7 +277,7 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Air conditioning</p>
+                <p>{t("HotelPage.MostPopularFacilities.Air conditioning")}</p>
               </div>
             </div>
           );
@@ -281,28 +287,25 @@ export default function MostPopularFacilities(props) {
           break;
       }
     }
-    
   }, []);
 
   return (
     <>
       <div className="my-4">
-        <h5 className="fw-bold">Most popular facilities </h5>
+        <h5 className="fw-bold">
+          {t("HotelPage.MostPopularFacilities.Most popular facilities")}{" "}
+        </h5>
       </div>
-      
-        <div className="d-flex align-items-center me-3 flex-wrap">
-          {facilities.map((item) => {
-            return (
-              <div className="d-flex align-items-center me-3 flex-wrap">
-                {item}
-              </div>
-            );
-          })}
 
-          
-        </div>
-
-        
+      <div className="d-flex align-items-center me-3 flex-wrap">
+        {facilities.map((item) => {
+          return (
+            <div className="d-flex align-items-center me-3 flex-wrap">
+              {item}
+            </div>
+          );
+        })}
+      </div>
 
       <div
         class="alert alert-success border border-success rounded-0 mt-5"
@@ -324,8 +327,14 @@ export default function MostPopularFacilities(props) {
           </div>
           <div>
             <span className="text-dark">
-              <b>No credit card needed to book.</b> We'll send you an email
-              confirming your reservation
+              <b>
+                {t(
+                  "HotelPage.MostPopularFacilities.No credit card needed to book."
+                )}
+              </b>{" "}
+              {t(
+                "HotelPage.MostPopularFacilities.We'll send you an email confirming your reservation"
+              )}
             </span>
           </div>
         </div>
@@ -351,10 +360,14 @@ export default function MostPopularFacilities(props) {
           </div>
           <div>
             <p className="text-dark ms-3">
-              Lock in a great price for your upcoming stay
+              {t(
+                "HotelPage.MostPopularFacilities.Lock in a great price for your upcoming stay"
+              )}
             </p>
             <p className="text-dark ms-3">
-              Prices may go up, so secure your reservation today
+              {t(
+                "HotelPage.MostPopularFacilities.Prices may go up, so secure your reservation today"
+              )}
             </p>
           </div>
         </div>

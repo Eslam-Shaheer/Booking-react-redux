@@ -7,14 +7,19 @@ import "./QuestionsAndAnswers.css";
 import "animate.css";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
- import LiveHelpIcon from "@mui/icons-material/LiveHelp";
- import Button from "@mui/material/Button";
- import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import LiveHelpIcon from "@mui/icons-material/LiveHelp";
+import Button from "@mui/material/Button";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import { useParams } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function QuestionsAndAnswers() {
-    const { id } = useParams();
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
+  const { id } = useParams();
 
   const [maxChar, setmaxChar] = useState(300);
   const [show, setShow] = useState(false);
@@ -26,7 +31,7 @@ export default function QuestionsAndAnswers() {
   const funClose = () => setshow(false);
 
   const askQuestion = () => {
-    axiosInstance.post("campground/message/" + id,  questions).then((result) => {
+    axiosInstance.post("campground/message/" + id, questions).then((result) => {
       if (!result.data.success) {
         alert(result.data.msg);
       } else {
@@ -36,11 +41,9 @@ export default function QuestionsAndAnswers() {
         }, 3000);
       }
     });
-    axiosInstance
-      .get("campground/message/" + id)
-      .then((result) => {
-        setQuestions(result.data.data);
-      });
+    axiosInstance.get("campground/message/" + id).then((result) => {
+      setQuestions(result.data.data);
+    });
   };
 
   const onChange = (e) => {
@@ -51,7 +54,9 @@ export default function QuestionsAndAnswers() {
     <>
       <div className="mt-5 my-3">
         {" "}
-        <h5 className="fw-bold">Got a question?</h5>
+        <h5 className="fw-bold">
+          {t("CampgroundComponents.QuestionAndAnswers.Got a question?")}
+        </h5>
       </div>
       <div className="border">
         <div class="d-flex mt-3">
@@ -70,10 +75,16 @@ export default function QuestionsAndAnswers() {
             </svg>
           </div>
           <div class="p-2 ">
-            <p className="fw-bold">Property questions and answers</p>
+            <p className="fw-bold">
+              {t(
+                "CampgroundComponents.QuestionAndAnswers.Property questions and answers"
+              )}
+            </p>
             <p>
-              Looking for more info? Send a question to the property to find out
-              more.
+              {t(
+                "CampgroundComponents.QuestionAndAnswers.Looking for more info? Send a question to the property to find out more."
+              )}
+              "
             </p>
           </div>
           <div class="ms-auto p-2 ">
@@ -85,7 +96,9 @@ export default function QuestionsAndAnswers() {
                 color="primary"
                 size="small"
               >
-                <span className="text-capitalize">Ask a questionss</span>
+                <span className="text-capitalize">
+                  {t("CampgroundComponents.QuestionAndAnswers.Ask a question")}
+                </span>
               </Button>
             </Stack>
           </div>
@@ -98,8 +111,9 @@ export default function QuestionsAndAnswers() {
           >
             <Modal.Header closeButton>
               <h6 className="mt-2">
-                Didn't find the answer you were looking for? Ask a question
-                about the property
+                {t(
+                  "CampgroundComponents.QuestionAndAnswers.Didn't find the answer you were looking for? Ask a question about the property"
+                )}
               </h6>
             </Modal.Header>
             <Modal.Body>
@@ -107,7 +121,11 @@ export default function QuestionsAndAnswers() {
                 className="mb-3"
                 controlId="exampleForm.ControlTextarea1"
               >
-                <Form.Label>Type your question here:</Form.Label>
+                <Form.Label>
+                  {t(
+                    "CampgroundComponents.QuestionAndAnswers.Type your question here:"
+                  )}
+                </Form.Label>
                 <Form.Control
                   name="body"
                   onChange={(e) => {
@@ -119,7 +137,10 @@ export default function QuestionsAndAnswers() {
                   maxLength="300"
                   placeholder="e.g do you offer room service"
                 />
-                <p>{maxChar} characters left</p>
+                <p>
+                  {maxChar}{" "}
+                  {t("CampgroundComponents.QuestionAndAnswers.characters left")}
+                </p>
               </Form.Group>
 
               <ButtonBootStrap
@@ -131,15 +152,20 @@ export default function QuestionsAndAnswers() {
                 type="submit"
                 variant="primary"
               >
-                Submit your question
+                {t(
+                  "CampgroundComponents.QuestionAndAnswers.Submit your question"
+                )}
               </ButtonBootStrap>
 
               <div className="p-0">
                 <p className="mt-3">
-                  Your question will be published on Booking.com after it has
-                  been approved and answered.
+                  {t(
+                    "CampgroundComponents.QuestionAndAnswers.Your question will be published on Booking.com after it has been approved and answered."
+                  )}
                   <a className="text-decoration-none fw-bold" href="#">
-                    Click here to read post guidelines.
+                    {t(
+                      "CampgroundComponents.QuestionAndAnswers.Click here to read post guidelines."
+                    )}
                   </a>
                 </p>
               </div>
@@ -156,7 +182,12 @@ export default function QuestionsAndAnswers() {
                 color="success"
                 size="small"
               >
-                <span className="text-capitalize"> Read all questions</span>
+                <span className="text-capitalize">
+                  {" "}
+                  {t(
+                    "CampgroundComponents.QuestionAndAnswers.Read all questions"
+                  )}
+                </span>
               </Button>
             </Stack>
           </div>
@@ -164,7 +195,9 @@ export default function QuestionsAndAnswers() {
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>
                 <span className="ms-3">
-                  Question & Answers{" "}
+                  {t(
+                    "CampgroundComponents.QuestionAndAnswers.Question & Answers"
+                  )}{" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="25"
@@ -190,10 +223,12 @@ export default function QuestionsAndAnswers() {
         <Stack
           sx={{ width: "100%" }}
           spacing={2}
-          className="my-5 animate__animated animate__lightSpeedInLeft"
+          className="my-5 animate_animated animate_lightSpeedInLeft"
         >
           <Alert variant="filled" severity="success">
-            Your question has been successfully posted
+            {t(
+              "CampgroundComponents.QuestionAndAnswers.Your question has been successfully posted"
+            )}
           </Alert>
         </Stack>
       )}

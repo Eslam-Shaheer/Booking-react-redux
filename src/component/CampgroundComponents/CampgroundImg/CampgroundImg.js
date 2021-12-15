@@ -3,11 +3,17 @@ import { Modal } from "react-bootstrap";
 import RunAllImg from "../../CampgroundComponents/CampgroundImg/CustomImg/RunAllImg";
 import "./CampgroundImg.css";
 import Run from "./CustomImg/RunImg";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function CampgroundImg(props) {
   const [show, setShow] = useState(false);
   let [campground, setCampground] = useState(props.campground);
 
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   useEffect(() => {
     setCampground(props.campground);
   }, []);
@@ -17,7 +23,9 @@ export default function CampgroundImg(props) {
       <div className="d-flex my-2">
         <div className="me-2">
           <h6 className="pt-2">
-            <span class="badge bg-secondary bg-opacity-50">Campground</span>
+            <span class="badge bg-secondary bg-opacity-50">
+              {t("CampgroundComponents.CampgroundImg.Campground")}
+            </span>
           </h6>
         </div>
         <div className="me-2">
@@ -25,7 +33,9 @@ export default function CampgroundImg(props) {
         </div>
         <div className="me-2">
           <h6 className="pt-2">
-            <span class="badge bg-warning text-dark">New to Booking.com</span>
+            <span class="badge bg-warning text-dark">
+              {t("CampgroundComponents.CampgroundImg.New to Booking.com")}
+            </span>
           </h6>
         </div>
         {/* <span className="me-2 pt-1">{star}</span> */}
@@ -107,12 +117,19 @@ export default function CampgroundImg(props) {
           </svg>
         </div>
         <div className="p-2">
-          <h4 className="mt-3">Extra health & safety measures</h4>
+          <h4 className="mt-3">
+            {t(
+              "CampgroundComponents.CampgroundImg.Extra health & safety measures"
+            )}
+          </h4>
           <p>
-            This property has taken extra health and hygiene measures to ensure
-            that your safety is their priority{" "}
+            {t(
+              "CampgroundComponents.CampgroundImg.This property has taken extra health and hygiene measures to ensure that your safety is their priority"
+            )}{" "}
             <a className="text-decoration-none" href="#">
-              See health & safety details
+              {t(
+                "CampgroundComponents.CampgroundImg.See health & safety details"
+              )}
             </a>
           </p>
         </div>

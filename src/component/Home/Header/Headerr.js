@@ -4,6 +4,8 @@ import "./Header.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Spinner from "react-bootstrap/Spinner";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function Header(props) {
   const [allData, setAllData] = useState();
@@ -11,6 +13,11 @@ export default function Header(props) {
   const [countries, setCountries] = useState();
 
   const [countryData, setCountryData] = useState();
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   useEffect(() => {
     axios.get("https://countriesnow.space/api/v0.1/countries").then((res) => {
@@ -47,13 +54,18 @@ export default function Header(props) {
 
   return (
     <>
-     
       <header>
         <div className="container py-5 search-container">
           <h3>
-            Where to next, {props.loggedInUser && props.loggedInUser.username}!
+            {t("Home.Header.Where to next,")}{" "}
+            {props.loggedInUser && props.loggedInUser.username}!
           </h3>
-          <p>Find exclusive Genius rewards in every corner of the world!</p>
+          <p>
+            "
+            {t(
+              "Home.Header.Find exclusive Genius rewards in every corner of the world!"
+            )}
+          </p>
 
           <div className="input-group search-group justify-content-between">
             <div className="me-2">
@@ -117,7 +129,7 @@ export default function Header(props) {
               type="button"
               className="btn btn-primary  ms-5 rounded"
             >
-              Search
+              {t("Home.Header.Search")}
             </button>
           </div>
 
@@ -129,7 +141,7 @@ export default function Header(props) {
               value="option1"
             />
             <label className="form-check-label" htmlFor="inlineCheckbox1">
-              I'm looking for an entire home or apartment
+              {t("Home.Header.I'm looking for an entire home or apartment")}
             </label>
           </div>
           <div className="form-check form-check-inline">
@@ -140,7 +152,7 @@ export default function Header(props) {
               value="option2"
             />
             <label className="form-check-label" htmlFor="inlineCheckbox2">
-              I'm traveling for work
+              {t("Home.Header.I'm traveling for work")}
             </label>
           </div>
         </div>

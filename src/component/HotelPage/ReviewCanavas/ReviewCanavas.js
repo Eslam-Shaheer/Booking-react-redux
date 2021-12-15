@@ -9,6 +9,8 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function ReviewCanavas() {
   const [review, setReview] = useState();
@@ -19,12 +21,9 @@ export default function ReviewCanavas() {
   const { id } = useParams();
 
   useEffect(() => {
-    axiosInstance
-      .get("hotel/review/" + id)
-      .then((result) => {
-        setReview(result.data.data.reverse());
-     
-      });
+    axiosInstance.get("hotel/review/" + id).then((result) => {
+      setReview(result.data.data.reverse());
+    });
   }, []);
 
   const handleRating = (rate = 0) => {
@@ -32,35 +31,31 @@ export default function ReviewCanavas() {
   };
 
   const leaveReview = () => {
- 
-      reviews.starRating = rating / 20;
-   
-     
+    reviews.starRating = rating / 20;
 
-    axiosInstance
-      .post("hotel/review/" + id, reviews)
-      .then((result) => {
-        if (!result.data.success) {
-          alert(result.data.msg);
-        } else {
-          setMsg(true);
-          setTimeout(() => {
-            setMsg(false);
-          }, 3000);
-        }
+    axiosInstance.post("hotel/review/" + id, reviews).then((result) => {
+      if (!result.data.success) {
+        alert(result.data.msg);
+      } else {
+        setMsg(true);
+        setTimeout(() => {
+          setMsg(false);
+        }, 3000);
+      }
 
-        axiosInstance
-          .get("hotel/review/" + id)
-          .then((result) => {
-            setReview(result.data.data.reverse());
-          });
+      axiosInstance.get("hotel/review/" + id).then((result) => {
+        setReview(result.data.data.reverse());
       });
+    });
   };
 
   const onChange = (e) => {
     setReviews({ ...reviews, [e.target.name]: e.target.value });
   };
-
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   return (
     <div className="containr-fluid">
       <div className="my-3">
@@ -72,7 +67,7 @@ export default function ReviewCanavas() {
             size="small"
           >
             {" "}
-            Leave Review
+            {t("HotelPage.ReviewCanavas.Leave Review")}
           </Button>
         </div>
 
@@ -80,10 +75,10 @@ export default function ReviewCanavas() {
           <Stack
             sx={{ width: "100%" }}
             spacing={2}
-            className="my-5 animate__animated animate__slideInLeft"
+            className="my-5 animate_animated animate_slideInLeft"
           >
             <Alert variant="filled" severity="success">
-              Thank you for your review
+              {t("HotelPage.ReviewCanavas.Thank you for your review")}
             </Alert>
           </Stack>
         )}
@@ -96,12 +91,16 @@ export default function ReviewCanavas() {
       >
         <Modal.Header closeButton>
           <h6 className="fw-bold mt-2">
-            Please leave a review and say what your opinion about this hotel
+            {t(
+              "HotelPage.ReviewCanavas.Please leave a review and say what your opinion about this hotel."
+            )}
           </h6>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Type your review here:</Form.Label>
+            <Form.Label>
+              {t("HotelPage.ReviewCanavas.Type your review here:")}
+            </Form.Label>
             <Form.Control
               name="body"
               as="textarea"
@@ -110,7 +109,7 @@ export default function ReviewCanavas() {
             />
           </Form.Group>
           <div className="text-center">
-            Rate by star
+            {t("HotelPage.ReviewCanavas.Rate by star")}
             <Rating
               className="my-3"
               onClick={handleRating}
@@ -128,7 +127,7 @@ export default function ReviewCanavas() {
               variant="contained"
               endIcon={<SendIcon />}
             >
-              Send
+              {t("HotelPage.ReviewCanavas.Send your review")}
             </Button>
           </Stack>
         </Modal.Body>

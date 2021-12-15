@@ -5,7 +5,16 @@ import { axiosInstance } from "../../Redux/network";
  import "animate.css";
  import Alert from "@mui/material/Alert";
  import Stack from "@mui/material/Stack";
+
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18next";
+
+
 export default function Booking(props) {
+     const { t, i18n } = useTranslation();
+     function handleClick(lang) {
+       i18n.changeLanguage(lang);
+     }
   const [checkout, setCheckout] = useState(false);
   const [reviewScore, setReviewScore] = useState();
   const [reservation, setReservation] = useState({});
@@ -88,7 +97,10 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Free Wifi</p>
+                  <p>
+                   
+                    {t("checkOut.Booking.Free Wifi")}
+                  </p>
                 </div>
               </div>
             );
@@ -111,7 +123,7 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Fitness Center</p>
+                  <p>{t("checkOut.Booking.Fitness Center")}</p>
                 </div>
               </div>
             );
@@ -134,7 +146,7 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Restaurant</p>
+                  <p>{t("checkOut.Booking.Restaurant")}</p>
                 </div>
               </div>
             );
@@ -157,7 +169,7 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Room service</p>
+                  <p>{t("checkOut.Booking.Room service")}</p>
                 </div>
               </div>
             );
@@ -180,7 +192,7 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Family Rooms</p>
+                  <p>{t("checkOut.Booking.Family Rooms")}</p>
                 </div>
               </div>
             );
@@ -203,7 +215,7 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Airport shuttle</p>
+                  <p>{t("checkOut.Booking.Airport shuttle")}</p>
                 </div>
               </div>
             );
@@ -225,7 +237,7 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Sauna</p>
+                  <p>{t("checkOut.Booking.Sauna")}</p>
                 </div>
               </div>
             );
@@ -248,7 +260,10 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Water Park</p>
+                  <p>
+               
+                    {t("checkOut.Booking.Water Park")}
+                  </p>
                 </div>
               </div>
             );
@@ -271,7 +286,10 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Swimming pool</p>
+                  <p>
+                     
+                    {t("checkOut.Booking.Swimming pool")}
+                  </p>
                 </div>
               </div>
             );
@@ -294,7 +312,7 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Spa</p>
+                  <p>{t("checkOut.Booking.Spa")}</p>
                 </div>
               </div>
             );
@@ -318,7 +336,7 @@ export default function Booking(props) {
                   </svg>
                 </div>
                 <div>
-                  <p>Air conditioning</p>
+                  <p>{t("checkOut.Booking.Air conditioning")}</p>
                 </div>
               </div>
             );
@@ -355,12 +373,13 @@ export default function Booking(props) {
           <div>
             <p>
               {" "}
-              In response to the coronavirus (COVID-19), additional safety and
-              sanitation measures are in effect at this property.
+              {t(
+                "checkOut.Booking.In response to the coronavirus (COVID-19), additional safety and sanitation measures are in effect at this property."
+              )}
             </p>
             <strong>
               <a href="#" className="text-decoration-none">
-                Read more
+                {t("checkOut.Booking.Read more")}
               </a>
             </strong>
           </div>
@@ -453,7 +472,8 @@ export default function Booking(props) {
                         >
                           <path d="M22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zm1.5 0c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12 12-5.373 12-12zm-9.75-1.5a1.5 1.5 0 0 1-1.5 1.5H10.5l.75.75v-4.5L10.5 9h2.25a1.5 1.5 0 0 1 1.5 1.5zm1.5 0a3 3 0 0 0-3-3H10.5a.75.75 0 0 0-.75.75v4.5c0 .414.336.75.75.75h2.25a3 3 0 0 0 3-3zm-4.5 6.75v-4.5a.75.75 0 0 0-1.5 0v4.5a.75.75 0 0 0 1.5 0z"></path>
                         </svg>
-                        Parking
+
+                        {t("checkOut.Booking.Parking")}
                       </span>
                     </div>
                   )}
@@ -463,7 +483,8 @@ export default function Booking(props) {
                 <div className="row">
                   <div className="reviews col-lg-8 pt-2">
                     <a className="text-muted " href="#">
-                      reviews {props.property.totalReviews}
+                      {t("checkOut.Booking.reviews")}
+                      {props.property.totalReviews}
                     </a>
                     <p>{reviewScore}</p>
                   </div>
@@ -485,7 +506,7 @@ export default function Booking(props) {
                   className="btn btn-primary  mt-3"
                   type="button"
                 >
-                  Show Details
+                  {t("checkOut.Booking.Show Details")}
                 </button>
               </div>
             </div>
@@ -493,7 +514,7 @@ export default function Booking(props) {
         </div>
 
         <div className="border p-3 ">
-          <h5>Good to know:</h5>
+          <h5>{t("checkOut.Booking.Good to know")}</h5>
           <div className="d-flex py-2">
             <svg
               className="bk-icon -streamline-checkmark_selected"
@@ -507,7 +528,7 @@ export default function Booking(props) {
             >
               <path d="M56.62 93.54a4 4 0 0 1-2.83-1.18L28.4 67a4 4 0 1 1 5.65-5.65l22.13 22.1 33-44a4 4 0 1 1 6.4 4.8L59.82 91.94a4.06 4.06 0 0 1-2.92 1.59zM128 64c0-35.346-28.654-64-64-64C28.654 0 0 28.654 0 64c0 35.346 28.654 64 64 64 35.33-.039 63.961-28.67 64-64zm-8 0c0 30.928-25.072 56-56 56S8 94.928 8 64 33.072 8 64 8c30.914.033 55.967 25.086 56 56z"></path>
             </svg>
-            <p>You'll pay by paypal.</p>
+            <p>{t("checkOut.Booking.You'll pay by paypal.")}</p>
           </div>
         </div>
 
@@ -515,17 +536,19 @@ export default function Booking(props) {
           className="Details p-3 border my-3"
           style={{ backgroundColor: "#ebf3ff" }}
         >
-          <h5>Enter your details</h5>
+          <h5>{t("checkOut.Booking.Enter your details")}</h5>
           <div
             className="d-inline-block p-1 px-2 rounded"
             style={({ color: "#006607" }, { backgroundColor: "#d2edd5" })}
           >
-            Almost done! Just fill in the <b style={{ color: "brown" }}>*</b>{" "}
-            required info
+            {t("checkOut.Booking.Almost done! Just fill in the")}{" "}
+            <b style={{ color: "brown" }}>*</b>
+            {t("checkOut.Booking.required info")}
           </div>
 
           <div>
-            <strong>Are you traveling for work?</strong> <br />
+            <strong>{t("checkOut.Booking.Are you traveling for work?")}</strong>{" "}
+            <br />
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input"
@@ -536,7 +559,7 @@ export default function Booking(props) {
                 onChange={handleResevationChange}
               />
               <label className="form-check-label" for="traveller">
-                Yes
+                {t("checkOut.Booking.Yes")}
               </label>
             </div>
             <div className="form-check form-check-inline">
@@ -549,7 +572,7 @@ export default function Booking(props) {
                 onChange={handleResevationChange}
               />
               <label className="form-check-label" for="notTraveller">
-                No
+                {t("checkOut.Booking.No")}
               </label>
             </div>
           </div>
@@ -557,7 +580,7 @@ export default function Booking(props) {
           <div className="row g-3 ">
             <div className="col-md-6">
               <label for="validationCustom01" className="form-label">
-                First name
+                {t("checkOut.Booking.First name")}
               </label>
               <input
                 type="text"
@@ -570,7 +593,7 @@ export default function Booking(props) {
             </div>
             <div className="col-md-6">
               <label for="validationCustom02" className="form-label">
-                Last name
+                {t("checkOut.Booking.Last name")}
               </label>
               <input
                 type="text"
@@ -604,8 +627,11 @@ export default function Booking(props) {
               <path d="M56.62 93.54a4 4 0 0 1-2.83-1.18L28.4 67a4 4 0 1 1 5.65-5.65l22.13 22.1 33-44a4 4 0 1 1 6.4 4.8L59.82 91.94a4.06 4.06 0 0 1-2.92 1.59zM128 64c0-35.346-28.654-64-64-64C28.654 0 0 28.654 0 64c0 35.346 28.654 64 64 64 35.33-.039 63.961-28.67 64-64zm-8 0c0 30.928-25.072 56-56 56S8 94.928 8 64 33.072 8 64 8c30.914.033 55.967 25.086 56 56z"></path>
             </svg>
             <p>
-              <span className="text-success fw-bold"> FREE cancellation</span>{" "}
-              until 11:59 PM on {cancelDate}
+              <span className="text-success fw-bold">
+                {" "}
+                {t("checkOut.Booking.FREE cancellation")}
+              </span>{" "}
+              {t("checkOut.Booking.until 11:59 PM on")} {cancelDate}
             </p>
           </div>
 
@@ -618,7 +644,7 @@ export default function Booking(props) {
 
           <div>
             <strong>
-              Guests:{" "}
+              {t("checkOut.Booking.Guests")}{" "}
               {props.type != "apartment" &&
                 [...Array(props.info.room.guestsNumber)].map((item) => {
                   return (
@@ -652,7 +678,7 @@ export default function Booking(props) {
                 >
                   <path d="M19.5 9h2.25a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 0 0 1.5h7.5A2.25 2.25 0 0 0 24 12.75v-3a2.25 2.25 0 0 0-2.25-2.25H19.5a.75.75 0 0 0 0 1.5zM5.25 13.5h-1.5l.75.75v-6L3.75 9h7.5a.75.75 0 0 0 0-1.5h-7.5a.75.75 0 0 0-.75.75v6c0 .414.336.75.75.75h1.5a.75.75 0 0 0 0-1.5zM15 12v2.25a.75.75 0 0 0 1.5 0V12a.75.75 0 0 0-1.5 0zM0 8.25v6a.75.75 0 0 0 1.5 0v-6a.75.75 0 0 0-1.5 0zm1.28 15.53l22.5-22.5A.75.75 0 0 0 22.72.22L.22 22.72a.75.75 0 1 0 1.06 1.06zM4.5.75A2.25 2.25 0 0 1 2.25 3 2.25 2.25 0 0 0 0 5.25a.75.75 0 0 0 1.5 0 .75.75 0 0 1 .75-.75A3.75 3.75 0 0 0 6 .75a.75.75 0 0 0-1.5 0z"></path>
                 </svg>{" "}
-                No smoking
+                {t("checkOut.Booking.No smoking")}
               </span>
             )}
           </div>
@@ -660,7 +686,7 @@ export default function Booking(props) {
           <div className="row g-3 mt-1 ">
             <div className="col-md-6 ">
               <label for="validationCustom01" className="form-label 6 fw-bold">
-                Full Guest Name
+                {t("checkOut.Booking.Full Guest Name")}
               </label>
               <input
                 type="text"
@@ -673,8 +699,10 @@ export default function Booking(props) {
             </div>
             <div className="col-md-6">
               <label for="validationCustom02" className="form-label 6 fw-bold">
-                Guest email{" "}
-                <span className="text-muted fw-normal"> (optional)</span>
+                {t("checkOut.Booking.Guest email")}
+                <span className="text-muted fw-normal">
+                  {t("checkOut.Booking.(optional)")}
+                </span>
               </label>
               <input
                 type="text"
@@ -686,8 +714,13 @@ export default function Booking(props) {
                 required
               />
               <small style={({ fontSize: "12px" }, { color: "gray" })}>
-                Emails are only used for sending reservation info. No commercial
-                messages – <span className="fw-bold">guaranteed.</span>
+                {t(
+                  "checkOut.Booking.Emails are only used for sending reservation info. No commercial messages – guaranteed."
+                )}
+                {t("checkOut.Booking.messages")} –{" "}
+                <span className="fw-bold">
+                  {t("checkOut.Booking.guaranteed")}
+                </span>
               </small>
             </div>
           </div>
@@ -698,7 +731,8 @@ export default function Booking(props) {
               <div className=" text-success"> {props.info.totalPrice} $</div>
               {props.type != "apartment" && (
                 <p className="text-muted">
-                  {props.info.room.guestsNumber} Guests, {props.info.days} Days
+                  {props.info.room.Guests} {t("checkOut.Booking.Guests")}
+                  {props.info.days} {t("checkOut.Booking.Days")}
                 </p>
               )}
             </div>
@@ -708,14 +742,21 @@ export default function Booking(props) {
           className="Details p-3 border my-3"
           style={{ backgroundColor: "#ebf3ff" }}
         >
-          <h5>Special requests</h5>
+          <h5>{t("checkOut.Booking.Special requests")}</h5>
           <p>
-            Special requests can't be guaranteed, but the property will do its
-            best to meet your needs. You can always make a special request after
-            your booking is complete.
+            {t(
+              "checkOut.Booking.Special requests can't be guaranteed, but the property will do its best to meet your needs. You can always make a special request after your booking is complete."
+            )}
           </p>
-          <strong>Please write your requests in English or Arabic. </strong>{" "}
-          <small className="text-muted">(optional)</small>
+          <strong>
+            {t(
+              "checkOut.Booking.Please write your requests in English or Arabic."
+            )}{" "}
+          </strong>{" "}
+          <small className="text-muted">
+            {" "}
+            {t("checkOut.Booking.(optional)")}
+          </small>
           <br />
           <div className="form-floating">
             <textarea
@@ -726,14 +767,16 @@ export default function Booking(props) {
               name="specialRequest"
               onChange={handleResevationChange}
             ></textarea>
-            <label for="floatingTextarea2">Request</label>
+            <label for="floatingTextarea2">
+              {t("checkOut.Booking.Request")}
+            </label>
           </div>
         </div>
         <div
           className="arrival p-3 border my-3"
           style={{ backgroundColor: "#ebf3ff" }}
         >
-          <h5>Your arrival time</h5>
+          <h5>{t("checkOut.Booking.Your arrival time")}</h5>
           <div className="d-flex py-2">
             <svg
               className="bk-icon -streamline-checkmark_selected"
@@ -749,7 +792,9 @@ export default function Booking(props) {
             </svg>
             <p>
               {" "}
-              Your property will be ready for check-in at{" "}
+              {t(
+                "checkOut.Booking.Your property will be ready for check-in at"
+              )}{" "}
               {props.property.checkIn}{" "}
             </p>
           </div>
@@ -766,13 +811,19 @@ export default function Booking(props) {
             >
               <path d="M14.244 14.156a6.75 6.75 0 0 0-6.75-5.906A6.747 6.747 0 0 0 .73 14.397a.75.75 0 0 0 1.494.134 5.25 5.25 0 0 1 5.27-4.781 5.253 5.253 0 0 1 5.262 4.594.75.75 0 1 0 1.488-.188zM10.125 4.125a2.625 2.625 0 1 1-5.25 0V1.5h5.25v2.625zm1.5 0V1.5a1.5 1.5 0 0 0-1.5-1.5h-5.25a1.5 1.5 0 0 0-1.5 1.5v2.625a4.125 4.125 0 0 0 8.25 0zM23.25 22.5H.75l.75.75v-7.5a.75.75 0 0 1 .75-.75h19.5a.75.75 0 0 1 .75.75v7.5l.75-.75zm0 1.5a.75.75 0 0 0 .75-.75v-7.5a2.25 2.25 0 0 0-2.25-2.25H2.25A2.25 2.25 0 0 0 0 15.75v7.5c0 .414.336.75.75.75h22.5zM4.376 5.017a9.42 9.42 0 0 1 3.12-.517 9.428 9.428 0 0 1 3.133.519.75.75 0 0 0 .49-1.418A10.917 10.917 0 0 0 7.498 3a10.91 10.91 0 0 0-3.611.6.75.75 0 0 0 .49 1.417zM15.75 14.27a3.001 3.001 0 0 1 6 .16.75.75 0 1 0 1.5.04 4.501 4.501 0 1 0-9-.24.75.75 0 1 0 1.5.04zm3.75-3.77V8.25a.75.75 0 0 0-1.5 0v2.25a.75.75 0 0 0 1.5 0zM17.25 9h3a.75.75 0 0 0 0-1.5h-3a.75.75 0 0 0 0 1.5z"></path>
             </svg>
-            <p>24-hour front desk – help whenever you need it!</p>
+            <p>
+              {t(
+                "checkOut.Booking.24-hour front desk – help whenever you need it!"
+              )}
+            </p>
           </div>
 
           <div className="bui-form__group bp-form-group bp-form-group__checkin_eta_hour  ">
             <label for="checkin_eta_hour">
-              Add your estimated arrival time
-              <span className="text-muted ms-2">(optional)</span>
+              {t("checkOut.Booking.Add your estimated arrival time")}
+              <span className="text-muted ms-2">
+                {t("checkOut.Booking.(optional)")}
+              </span>
             </label>
             <div>
               <select
@@ -783,9 +834,9 @@ export default function Booking(props) {
                 onChange={handleResevationChange}
               >
                 <option value="" disabled="" selected="">
-                  Please select
+                  {t("checkOut.Booking.Please select")}
                 </option>
-                <option value="">I don't know</option>
+                <option value="">{t("checkOut.Booking.I don't know")}</option>
                 <option value="12:00-1:00 AM">
                   12:00&nbsp;AM – 1:00&nbsp;AM{" "}
                 </option>
@@ -859,10 +910,12 @@ export default function Booking(props) {
                   11:00&nbsp;PM – 12:00&nbsp;AM{" "}
                 </option>
                 <option value="12:00-1:00 next day">
-                  12:00&nbsp;AM – 1:00&nbsp;AM (the next day)
+                  12:00&nbsp;AM – 1:00&nbsp;AM{" "}
+                  {t("checkOut.Booking.(the next day)")}
                 </option>
                 <option value="1:00-2:00 next day">
-                  1:00&nbsp;AM – 2:00&nbsp;AM (the next day)
+                  1:00&nbsp;AM – 2:00&nbsp;AM{" "}
+                  {t("checkOut.Booking.(the next day)")}
                 </option>
               </select>
             </div>
@@ -870,7 +923,8 @@ export default function Booking(props) {
               id="form-field__helper--checkin_eta_hour"
               className="bui-form__helper js-form-field__helper--checkin_eta_hour"
             >
-              Time is for {props.property.country} time zone
+              {t("checkOut.Booking.Time is for time zone")}{" "}
+              {props.property.country}
             </div>
           </div>
         </div>
@@ -884,7 +938,7 @@ export default function Booking(props) {
                 beforePaypal();
               }}
             >
-              Continue to check out
+              {t("checkOut.Booking.Continue to check out")}
             </button>
           )}
           {isReserved && (
@@ -894,8 +948,9 @@ export default function Booking(props) {
               className="my-5 animate__animated animate__fadeInLeft"
             >
               <Alert variant="filled" severity="success">
-                Congratulations, your reservation has been successfully
-                confirmed
+                {t(
+                  "checkOut.Booking.Congratulations, your reservation has been successfully confirmed"
+                )}
               </Alert>
             </Stack>
           )}
@@ -912,7 +967,6 @@ export default function Booking(props) {
           )}
         </div>
       </div>
-   
     </>
   );
 }

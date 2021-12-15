@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./MostPopularFacilities.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function MostPopularFacilities(props) {
   const [facilities, setFacilities] = useState([]);
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   useEffect(() => {
     let allFacilities = [];
 
@@ -24,7 +30,11 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Air conditioning</p>
+                <p>
+                  {t(
+                    "ApartmentComponents.MostPopularfacilitites.Air conditioning"
+                  )}
+                </p>
               </div>
             </div>
           );
@@ -48,7 +58,10 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Heating</p>
+                <p>
+                  {" "}
+                  {t("ApartmentComponents.MostPopularfacilitites.Heating")}
+                </p>
               </div>
             </div>
           );
@@ -74,7 +87,9 @@ export default function MostPopularFacilities(props) {
                 </svg>
               </div>
               <div>
-                <p>Free Wifi 5G</p>
+                <p>
+                  {t("ApartmentComponents.MostPopularfacilitites.Free Wifi 5G")}
+                </p>
               </div>
             </div>
           );
@@ -105,7 +120,11 @@ export default function MostPopularFacilities(props) {
               </div>
 
               <div>
-                <p>Electric vehicle charging station</p>
+                <p>
+                  {t(
+                    "ApartmentComponents.MostPopularfacilitites.Electric vehicle charging station"
+                  )}
+                </p>
               </div>
             </div>
           );
@@ -120,7 +139,11 @@ export default function MostPopularFacilities(props) {
   return (
     <>
       <div className="my-4">
-        <h5 className="fw-bold">Most popular facilities </h5>
+        <h5 className="fw-bold">
+          {t(
+            "ApartmentComponents.MostPopularfacilitites.Most popular facilities"
+          )}{" "}
+        </h5>
       </div>
 
       <div className="d-flex align-items-center me-3 flex-wrap">
@@ -149,8 +172,9 @@ export default function MostPopularFacilities(props) {
           </div>
           <div>
             <span className="text-dark">
-              <b>No credit card needed to book.</b> We'll send you an email
-              confirming your reservation
+              {t(
+                "ApartmentComponents.MostPopularfacilitites.No credit card needed to book"
+              )}
             </span>
           </div>
         </div>
@@ -176,10 +200,15 @@ export default function MostPopularFacilities(props) {
           </div>
           <div>
             <p className="text-dark ms-3">
-              Lock in a great price for your upcoming stay
+              {t(
+                "ApartmentComponents.MostPopularfacilitites.Lock in a great price for your upcoming stay"
+              )}
             </p>
             <p className="text-dark ms-3">
-              Prices may go up, so secure your reservation today
+ 
+              {t(
+                "ApartmentComponents.MostPopularfacilitites.Prices may go up, so secure your reservation today"
+              )}
             </p>
           </div>
         </div>

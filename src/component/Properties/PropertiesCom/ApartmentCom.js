@@ -12,6 +12,8 @@ import {
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import { axiosInstance } from "../../../Redux/network";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function Apartments(props) {
   let aparts = useSelector((state) => state.apartment.getApartments);
@@ -46,14 +48,22 @@ export default function Apartments(props) {
         });
     }
   }, []);
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   return (
     <>
       <div className="col-sm-9   rounded">
         <div className="text d-flex justify-content-between">
-          <h3 className="align-self-center">Austin: 473 properties found</h3>
+          <h3 className="align-self-center">
+            {t(
+              "Properties.PropertiesCom.ApartmentCom.Austin 473 properties found"
+            )}
+          </h3>
           <div className="mapbtn ">
             <button className="btn btn-primary fw-bold " type="button">
-              Show on map
+              {t("Properties.PropertiesCom.ApartmentCom.Show on map")}
             </button>
           </div>
         </div>
@@ -61,10 +71,10 @@ export default function Apartments(props) {
         <div className="">
           <ButtonGroup className="mb-2">
             <Button variant="outline-primary" onClick={LatestAparts}>
-              Latest Apartments
+              {t("Properties.PropertiesCom.ApartmentCom.Latest Apartments")}
             </Button>
             <Button variant="outline-primary" onClick={TopReviewsSorting}>
-              Top Reviews
+              {t("Properties.PropertiesCom.ApartmentCom.Top Reviews")}
             </Button>
           </ButtonGroup>
         </div>

@@ -1,9 +1,15 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 import { useNavigate } from "react-router-dom";
 import "./GetInspiration.css";
 
 export default function GetInspiration() {
   const navigate = useNavigate();
+ const { t, i18n } = useTranslation();
+ function handleClick(lang) {
+   i18n.changeLanguage(lang);
+ }
 
   return (
     <>
@@ -22,10 +28,12 @@ export default function GetInspiration() {
                 className=" custtomClass  text-light
                    "
               >
-                Best Coffee Cities in the US
+                {t("Home.GetInspiration.Best Coffee Cities in the US")}
+
                 <p className="fs-6 Span">
-                  Whether you like a basic brew or larger-than-life latte, here
-                  are five of the best.
+                  {t(
+                    "Home.GetInspiration.Whether you like a basic brew or larger-than-life latte, here are five of the best."
+                  )}
                 </p>
               </p>
             </div>
@@ -39,9 +47,11 @@ export default function GetInspiration() {
                 onClick={() => navigate("/LasVegas")}
                 className="  custtomClass text-light"
               >
-                Las Vegas Beyond the Casinos
+                {t("Home.GetInspiration.Las Vegas Beyond the Casinos")}
                 <p className="fs-6 Span">
-                  In Las Vegas, gambling isn’t the only way to hit the jackpot .
+                  {t(
+                    "Home.GetInspiration.In Las Vegas, gambling isn’t the only way to hit the jackpot."
+                  )}
                 </p>
               </p>
             </div>
@@ -52,14 +62,15 @@ export default function GetInspiration() {
                 alt=""
               />
               <p
-                 
                 onClick={() => navigate("/Yoga")}
                 className="custtomClass text-light"
               >
-                5 soulful yoga retreat destinations
+                {t("Home.GetInspiration.5 soulful yoga retreat destinations")}
+
                 <p className="fs-6 Span">
-                  ver the past year, many people have sought refuge in the
-                  peaceful practice of yoga.
+                  {t(
+                    "Home.GetInspiration.ver the past year, many people have sought refuge in the peaceful practice of yoga."
+                  )}
                 </p>
               </p>
             </div>
@@ -73,10 +84,13 @@ export default function GetInspiration() {
                 onClick={() => navigate("/Destination")}
                 className="  custtomClass text-light"
               >
-                Destination Inspiration: San Juan, Puerto Rico
+                {t(
+                  "Home.GetInspiration.Destination Inspiration San Juan, Puerto Rico"
+                )}
                 <p className="fs-6 Span">
-                  Worlds collide in San Juan, Puerto Rico’s vibrant capital, a
-                  simmering melting pot of indigenous, European, American.
+                  {t(
+                    "Home.GetInspiration.Worlds collide in San Juan, Puerto Rico’s vibrant capital, a simmering melting pot of indigenous, European, American."
+                  )}
                 </p>
               </p>
             </div>
@@ -92,11 +106,12 @@ export default function GetInspiration() {
                
                   "
               >
-                7 unmissable hot air balloon rides
+                {t("Home.GetInspiration.unmissable hot air balloon rides")}
+
                 <p className="fs-6 Span">
-                  Peaceful yet full of adventure, experiencing a view by hot air
-                  balloon has to be the most scenic way to take it all in. Next
-                  time you take a trip.
+                  {t(
+                    "Home.GetInspiration.Peaceful yet full of adventure, experiencing a view by hot air balloon has to be the most scenic way to take it all in. Next time you take a trip."
+                  )}
                 </p>
               </p>
             </div>

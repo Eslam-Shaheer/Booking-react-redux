@@ -4,6 +4,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./Availability.css";
 import { axiosInstance } from "../../../Redux/network";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+
 export default function Availability(props) {
   const [available, setAvailable] = useState();
   const [availableRooms, setAvailableRooms] = useState();
@@ -11,6 +16,11 @@ export default function Availability(props) {
   const [reservationInfo, setReservationInfo] = useState();
   const { id } = useParams();
   const [isBtn, setIsBtn] = useState(false);
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   const handleDateChange = (e) => {
     if (e.target.name == "startAt") {
@@ -74,7 +84,7 @@ export default function Availability(props) {
           <div className="ms-1 bedType ">
             <span className="me-2">{bedsNumber}</span>
 
-            <span className="me-2">Twin bed</span>
+            <span className="me-2">{t("HotelPage.All-Availability.Twin bed")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -91,7 +101,7 @@ export default function Availability(props) {
           <div className="bedType ms-1">
             <span className="me-2">{bedsNumber}</span>
 
-            <span className="me-2">Full bed</span>
+            <span className="me-2">{t("HotelPage.All-Availability.Full bed")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -108,7 +118,7 @@ export default function Availability(props) {
           <div className="bedType ms-1">
             <span className="me-2">{bedsNumber}</span>
 
-            <span className="me-2">Queen bed</span>
+            <span className="me-2">{t("HotelPage.All-Availability.Queen bed")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -125,7 +135,7 @@ export default function Availability(props) {
           <div className="bedType ms-1">
             <span className="me-2">{bedsNumber}</span>
 
-            <span className="me-2">King bed</span>
+            <span className="me-2">{t("HotelPage.All-Availability.King bed")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -142,7 +152,7 @@ export default function Availability(props) {
           <div className="bedType ms-1">
             <span className="me-2">{bedsNumber}</span>
 
-            <span className="me-2">Bunk bed</span>
+            <span className="me-2">{t("HotelPage.All-Availability.Bunk bed")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -159,7 +169,7 @@ export default function Availability(props) {
           <div className="bedType ms-1">
             <span className="me-2">{bedsNumber}</span>
 
-            <span className="me-2">Sofa bed</span>
+            <span className="me-2">{t("HotelPage.All-Availability.Sofa bed")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -177,7 +187,7 @@ export default function Availability(props) {
           <div className="bedType ms-1">
             <span className="me-2">{bedsNumber}</span>
 
-            <span className="me-2">Futon bed</span>
+            <span className="me-2">{t("HotelPage.All-Availability.Futon bed")}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 96 96"
@@ -195,37 +205,51 @@ export default function Availability(props) {
   return (
     <>
       <div className="d-flex my-2 mt-5" id="infoPrices">
-        <h5 className="fw-bold">Availability</h5>
+        <h5 className="fw-bold">
+          {t("HotelPage.All-Availability.Availability")}
+        </h5>
       </div>
 
       <div className="border d-flex">
         <div className="d-flex flex-column p-3">
           <div>
             <h6>
-              <p>Check In</p>
-              <input
-                name="startAt"
-                type="date"
-                class="form-control"
-                onChange={handleDateChange}
-              />
+              {/* <p>{t("HotelPage.All-Availability.Check In")}</p> */}
+              <Stack component="form" noValidate spacing={3}>
+                <TextField
+                  label="Check in"
+                  type="date"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="startAt"
+                  onChange={handleDateChange}
+                />
+              </Stack>
             </h6>
-            <h6 className="text-primary">{available && available.startAt}</h6>
+            {/* <h6 className="text-primary">{available && available.startAt}</h6> */}
           </div>
         </div>
 
         <div className="d-flex flex-column p-3">
           <div>
             <h6>
-              <p>Check Out</p>
-              <input
-                name="endAt"
-                type="date"
-                class="form-control"
-                onChange={handleDateChange}
-              />
+              {/* <p>{t("HotelPage.All-Availability.Check Out")}</p> */}
+              <Stack component="form" noValidate spacing={3}>
+                <TextField
+                  name="endAt"
+                  label="Check out"
+                  type="date"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={handleDateChange}
+                />
+              </Stack>
             </h6>
-            <h6 className="text-primary">{available && available.endAt}</h6>
+            {/* <h6 className="text-primary">{available && available.endAt}</h6> */}
           </div>
         </div>
 
@@ -235,7 +259,7 @@ export default function Availability(props) {
               className="btn btn-primary rounded-0 my-auto"
               onClick={checkAvailability}
             >
-              Check Availability
+              {t("HotelPage.All-Availability.Check Availability")}
             </button>
           ) : (
             <button
@@ -243,7 +267,7 @@ export default function Availability(props) {
               className="btn btn-primary rounded-0 my-auto"
               onClick={checkAvailability}
             >
-              Check Availability
+              {t("HotelPage.All-Availability.Check Availability")}
             </button>
           )}{" "}
         </div>
@@ -260,11 +284,11 @@ export default function Availability(props) {
             <div className="w-100">
               <div className="d-flex justify-content-between mb-3 ">
                 <div>
-                  <h6>Room type:</h6>
-                  <h6>Room name:</h6>
-                  <h6>Number of rooms:</h6>
-                  <h6>Days:</h6>
-                  <h6>Total price:</h6>
+                  <h6>{t("HotelPage.All-Availability.Room type")}</h6>
+                  <h6>{t("HotelPage.All-Availability.Room name")}</h6>
+                  <h6>{t("HotelPage.All-Availability.Number of rooms")}</h6>
+                  <h6>{t("HotelPage.All-Availability.Days")}</h6>
+                  <h6>{t("HotelPage.All-Availability.Total price")}</h6>
                 </div>
                 <div>
                   <h6>{reservationInfo.roomType}</h6>
@@ -281,19 +305,19 @@ export default function Availability(props) {
                 className="btn btn-outline-primary w-100"
                 onClick={checkout}
               >
-                Reserve
+                {t("HotelPage.All-Availability.Reserve")}
               </button>
             </div>
           </div>
         )}
         <table id="customers" className="rooms-table">
           <tr>
-            <th>Room type</th>
-            <th>Room name</th>
-            <th>Sleeps</th>
-            <th>Price</th>
-            <th>Beds Type</th>
-            <th>Select rooms</th>
+            <th>{t("HotelPage.All-Availability.Room type")}</th>
+            <th>{t("HotelPage.All-Availability.Room name")}</th>
+            <th>{t("HotelPage.All-Availability.Sleeps")}</th>
+            <th>{t("HotelPage.All-Availability.Price")}</th>
+            <th>{t("HotelPage.All-Availability.Beds Type")}</th>
+            <th>{t("HotelPage.All-Availability.Select rooms")}</th>
           </tr>
 
           {isSelect &&
@@ -320,7 +344,9 @@ export default function Availability(props) {
                   </td>
                   <td>
                     <span className="text-success">{room.price}$ </span>
-                    <span className="text-muted">per day</span>
+                    <span className="text-muted">
+                      {t("HotelPage.All-Availability.per day")}
+                    </span>
                   </td>
                   <td>
                     <td>{bedTypeFun(room.bedType, room.bedsNumber)}</td>
@@ -342,12 +368,18 @@ export default function Availability(props) {
         </table>
         {!isSelect && (
           <div className="bg-light text-center py-3">
-            <h4 className="">Choose booking date</h4>
+            <h4 className="">
+              {t("HotelPage.All-Availability.Choose booking date")}
+            </h4>
           </div>
         )}
         {isSelect && availableRooms.length == 0 && (
           <div className="bg-light text-danger text-center py-3">
-            <h4 className="">Sorry no available rooms for this date</h4>
+            <h4 className="">
+              {t(
+                "HotelPage.All-Availability.Sorry no available rooms for this date"
+              )}
+            </h4>
           </div>
         )}
       </div>

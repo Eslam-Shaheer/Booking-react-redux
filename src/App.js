@@ -23,9 +23,34 @@ import Unmissable from "./component/articles/article5/Unmissable";
 import { useEffect, useState } from "react";
 import React, { Suspense } from "react";
 
+// Loc
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+
 function App() {
+  const reduxLang = useSelector((state) => state.lang);
+  const [lang, setLang] = useState(reduxLang);
+   
+
+  useEffect(() => {
+
+ 
+if (localStorage.getItem("key")== null){
+localStorage.setItem("key", "english");
+}
+if (localStorage.getItem("key") == "arabic") {
+setLang("rtl");
+} 
+
+if (localStorage.getItem("key") == "english") {
+setLang("ltr");
+
+} 
+ 
+  }, [reduxLang]);
+
   return (
-    <div className="App">
+    <div className="App" dir={(lang)}>
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Home />} />

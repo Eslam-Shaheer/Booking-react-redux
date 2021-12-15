@@ -8,50 +8,47 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useParams } from "react-router-dom";
-
 import SendIcon from "@mui/icons-material/Send";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function ReviewCanavas() {
   const [rating, setRating] = useState(0);
   const [show, setShow] = useState(false);
-  const [reviews, setReviews] = useState();
+  const [reviews, setReviews] = useState({});
   const [review, setReview] = useState();
-  const [msg, setMsg] =useState(false)
+  const [msg, setMsg] = useState(false);
   const { id } = useParams();
 
-
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   useEffect(() => {
-    axiosInstance
-      .get("campground/review/" + id)
-      .then((result) => {
-        setReview(result.data.data.reverse());
-      });
+    axiosInstance.get("campground/review/" + id).then((result) => {
+      setReview(result.data.data.reverse());
+    });
   }, []);
 
   const handleRating = (rate = 0) => {
     setRating(rate);
-    
   };
 
   const leaveReview = () => {
     reviews.starRating = rating / 20;
-    axiosInstance
-      .post("campground/review/" + id, reviews)
-      .then((result) => {
-        if (!result.data.success) {
-          alert(result.data.msg);
-        }else{
-          setMsg(true)
-          setTimeout(() => {
-              setMsg(false);
-          }, 3000);
-        }
+    axiosInstance.post("campground/review/" + id, reviews).then((result) => {
+      if (!result.data.success) {
+        alert(result.data.msg);
+      } else {
+        setMsg(true);
+        setTimeout(() => {
+          setMsg(false);
+        }, 3000);
+      }
 
-        axiosInstance
-          .get("campground/review/" + id)
-          .then((result) => {
-            setReview(result.data.data.reverse());
-          });
+      axiosInstance.get("campground/review/" + id).then((result) => {
+        setReview(result.data.data.reverse());
       });
+    });
   };
 
   const onChange = (e) => {
@@ -70,17 +67,19 @@ export default function ReviewCanavas() {
             size="small"
           >
             {" "}
-            Leave Review
+            {t("CampgroundComponents.ReviewCanavas.Leave Review")}
           </Button>
         </div>
         {msg && (
           <Stack
             sx={{ width: "100%" }}
             spacing={2}
-            className="my-5 animate__animated animate__slideInLeft"
+            className="my-5 animate_animated animate_slideInLeft"
           >
             <Alert variant="filled" severity="success">
-              Thank you for your review
+              {t(
+                "CampgroundComponents.ReviewCanavas.Thank you for your review"
+              )}
             </Alert>
           </Stack>
         )}
@@ -93,13 +92,16 @@ export default function ReviewCanavas() {
       >
         <Modal.Header closeButton>
           <h6 className="mt-2 fw-bold">
-            Please leave a review and say what your opinion about this
-            Campground.
+            {t(
+              "CampgroundComponents.ReviewCanavas.Please leave a review and say what your opinion about this Campground."
+            )}
           </h6>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Type your review here:</Form.Label>
+            <Form.Label>
+              {t("CampgroundComponents.ReviewCanavas.Type your review here:")}
+            </Form.Label>
             <Form.Control
               name="body"
               as="textarea"
@@ -108,7 +110,7 @@ export default function ReviewCanavas() {
             />
           </Form.Group>
           <div className="my-3 text-center">
-            Rate by star
+            {t("CampgroundComponents.ReviewCanavas.Rate by star")}
             <Rating
               onClick={handleRating}
               ratingValue={rating}
@@ -116,7 +118,6 @@ export default function ReviewCanavas() {
             />
           </div>
 
-    
           <Stack direction="row" spacing={2}>
             <Button
               onClick={() => {
@@ -126,7 +127,7 @@ export default function ReviewCanavas() {
               variant="contained"
               endIcon={<SendIcon />}
             >
-              Send
+              {t("CampgroundComponents.ReviewCanavas.Send")}
             </Button>
           </Stack>
         </Modal.Body>

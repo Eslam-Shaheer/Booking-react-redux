@@ -1,11 +1,18 @@
 import React from 'react'
 import "./WhyChose.css"
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 export default function WhyChose(props) {
+   const { t, i18n } = useTranslation();
+   function handleClick(lang) {
+     i18n.changeLanguage(lang);
+   }
     return (
       <>
         <div className="my-4 mt-5">
           <h4 className="fw-bold">
-            5 Reasons to choose {props.apartment.apartmentName}
+            {t("ApartmentComponents.WhyChose.5 reasons to choose")} {" "}
+            {props.apartment.apartmentName}{" "}
           </h4>
         </div>
 
@@ -28,7 +35,9 @@ export default function WhyChose(props) {
             </div>
 
             <div className="ms-2">
-              <h5 className="mt-2">Prices you can't beat!</h5>
+              <h5 className="mt-2">
+                {t("ApartmentComponents.WhyChose.Prices you can't beat!")}
+              </h5>
             </div>
           </div>
           <div className="d-flex my-3 ms-3">
@@ -49,7 +58,9 @@ export default function WhyChose(props) {
             </div>
 
             <div className="ms-2">
-              <h5 className="mt-2">Booking is safe</h5>
+              <h5 className="mt-2">
+                {t("ApartmentComponents.WhyChose.Booking is safe")}
+              </h5>
             </div>
           </div>
           <div className="d-flex my-3 ms-3">
@@ -70,7 +81,9 @@ export default function WhyChose(props) {
             </div>
 
             <div className="ms-2">
-              <h5 className="mt-2">Manage your bookings online</h5>
+              <h5 className="mt-2">
+                {t("ApartmentComponents.WhyChose.Manage your bookings online")}
+              </h5>
             </div>
           </div>
           <div className="d-flex my-3 me-1">
@@ -92,7 +105,9 @@ export default function WhyChose(props) {
             </div>
 
             <div className="ms-2">
-              <h5 className="mt-2">The staff speak English</h5>
+              <h5 className="mt-2">
+                {t("ApartmentComponents.WhyChose.The staff speak English")}
+              </h5>
             </div>
           </div>
           <div className="d-flex my-3">
@@ -115,7 +130,9 @@ export default function WhyChose(props) {
 
             <div className="ms-2">
               <h5 className="mt-2">
-                Great location and facilities for couples
+                {t(
+                  "ApartmentComponents.WhyChose.Great location and facilities for couples"
+                )}
               </h5>
             </div>
           </div>

@@ -1,30 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { axiosInstance } from "../../../Redux/network";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function MessageOffcanvas(props) {
   const [message, setMessage] = useState();
   const [allMessage, setallMessage] = useState();
   const [msg, setMsg] = useState(false);
   const [msg1, setMsg1] = useState(true);
+  const [lenQuestions, setLenQuestions] = useState(false);
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   useEffect(() => {
-    axiosInstance
-      .get("campground/message/" + props.id)
-      .then((result) => {
-        setMessage(result.data.data.reverse().slice(0, 3));
-              
-      });
+    axiosInstance.get("campground/message/" + props.id).then((result) => {
+      if (result.data.data.length > 3) {
+        setLenQuestions(true);
+      }
+      setMessage(result.data.data.reverse().slice(0, 2));
+    });
   }, []);
 
   const readAllMessages = () => {
-    axiosInstance
-      .get("campground/message/" + props.id)
-      .then((result) => {
-        setallMessage(result.data.data.reverse());
-        setMsg(true);
-        setMsg1(false);
-      });
+    axiosInstance.get("campground/message/" + props.id).then((result) => {
+      setallMessage(result.data.data.reverse());
+      setMsg(true);
+      setMsg1(false);
+      setLenQuestions(false);
+    });
   };
 
   return (
@@ -74,7 +81,9 @@ export default function MessageOffcanvas(props) {
                                 msg.replay[0]
                               ) : (
                                 <span className="text-muted">
-                                  No answers yet
+                                  {t(
+                                    "CampgroundComponents.MessageOffcanvas.No answers yet"
+                                  )}
                                 </span>
                               )}
                             </div>
@@ -132,7 +141,9 @@ export default function MessageOffcanvas(props) {
                                 msg.replay[0]
                               ) : (
                                 <span className="text-muted">
-                                  No answers yet
+                                  {t(
+                                    "CampgroundComponents.MessageOffcanvas.No answers yet"
+                                  )}
                                 </span>
                               )}
                             </div>
@@ -145,13 +156,13 @@ export default function MessageOffcanvas(props) {
               })}
           </div>
         )}
-        {msg1 && (
+        {lenQuestions && (
           <div className="mt-3 text-center">
             <button
               className="btn btn-outline-primary"
               onClick={readAllMessages}
             >
-              Read More
+              {t("CampgroundComponents.MessageOffcanvas.Read More")}
             </button>
           </div>
         )}

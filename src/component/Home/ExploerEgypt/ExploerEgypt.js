@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { axiosInstance } from "../../../Redux/network";
 import "./ExploerEgypt.css";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 
 export default function ExploerEgypt() {
   const [portsaid, setPortsaid] = useState();
@@ -8,6 +10,11 @@ export default function ExploerEgypt() {
   const [aswan, setAswan] = useState();
   const [ainsokhna, setAinsokhna] = useState();
   const [dahab, setDahab] = useState();
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   useEffect(() => {
     axiosInstance.get("/filter/search/hotel/egypt/portsaid").then((result) => {
       if (result.data.success) setPortsaid(result.data.data);
@@ -16,7 +23,6 @@ export default function ExploerEgypt() {
       if (result.data.success) {
         setMarsaalam(result.data.data);
       }
-       
     });
     axiosInstance.get("/filter/search/hotel/egypt/aswan").then((result) => {
       if (result.data.success) setAswan(result.data.data);
@@ -31,9 +37,9 @@ export default function ExploerEgypt() {
   return (
     <>
       <div className="container py-4 ">
-        <h3 className="">Explore Egypt</h3>
+        <h3 className="">{t("Home.ExploreEgypt.Explore Egypt")}</h3>
         <h6 className="mb-4 text-muted">
-          hese popular destinations have a lot to offer
+          {t("Home.ExploreEgypt.hese popular destinations have a lot to offer")}
         </h6>
         <div className="d-flex justify-content-between flex-column flex-md-row">
           <div className="card border-0 mb-3 mx-auto CustomStyle">
@@ -43,10 +49,12 @@ export default function ExploerEgypt() {
               alt="..."
             />
             <div className="card-body my-2 p-0 ">
-              <p className="card-title fw-bold">Ain Sokhna</p>
+              <p className="card-title fw-bold">
+                {t("Home.ExploreEgypt.Ain Sokhna")}
+              </p>
               {ainsokhna && (
                 <p className="card-text text-muted">
-                  {ainsokhna.length} hotels
+                  {ainsokhna.length} {t("Home.ExploreEgypt.hotels")}
                 </p>
               )}
             </div>
@@ -58,9 +66,13 @@ export default function ExploerEgypt() {
               alt="..."
             />
             <div className="card-body my-2 p-0  ">
-              <p className="card-title fw-bold">Dahab</p>
+              <p className="card-title fw-bold">
+                {t("Home.ExploreEgypt.Dahab")}
+              </p>
               {dahab && (
-                <p className="card-text text-muted">{dahab.length} hotels</p>
+                <p className="card-text text-muted">
+                  {dahab.length} {t("Home.ExploreEgypt.hotels")}
+                </p>
               )}
             </div>
           </div>
@@ -71,9 +83,13 @@ export default function ExploerEgypt() {
               alt="..."
             />
             <div className="card-body my-2 p-0 ">
-              <p className="card-title fw-bold">Aswan</p>
+              <p className="card-title fw-bold">
+                {t("Home.ExploreEgypt.Aswan")}
+              </p>
               {aswan && (
-                <p className="card-text text-muted">{aswan.length} hotels</p>
+                <p className="card-text text-muted">
+                  {aswan.length} {t("Home.ExploreEgypt.hotels")}
+                </p>
               )}
             </div>
           </div>
@@ -84,9 +100,13 @@ export default function ExploerEgypt() {
               alt="..."
             />
             <div className="card-body my-2 p-0 ">
-              <p className="card-title fw-bold">Port said</p>
+              <p className="card-title fw-bold">
+                {t("Home.ExploreEgypt.Port said")}
+              </p>
               {portsaid && (
-                <p className="card-text text-muted">{portsaid.length} hotels</p>
+                <p className="card-text text-muted">
+                  {portsaid.length} {t("Home.ExploreEgypt.hotels")}
+                </p>
               )}
             </div>
           </div>
@@ -97,10 +117,12 @@ export default function ExploerEgypt() {
               alt="..."
             />
             <div className="card-body my-2 p-0 ">
-              <p className="card-title fw-bold">Marsa alam</p>
+              <p className="card-title fw-bold">
+                {t("Home.ExploreEgypt.Marsa alam")}
+              </p>
               {marsaalam && (
                 <p className="card-text text-muted">
-                  {marsaalam.length} hotels
+                  {marsaalam.length} {t("Home.ExploreEgypt.hotels")}
                 </p>
               )}
             </div>

@@ -3,6 +3,8 @@ import StaticHotel from "../../images/img.jpg";
 import Like from "../../images/like.svg";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18n from "../../../../i18next";
 export default function Property(props) {
   let star = [];
   const [Review, setReviewScore] = useState();
@@ -31,6 +33,10 @@ export default function Property(props) {
         <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
       </svg>
     );
+  }
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
   }
   return (
     <div className="card mb-3 p-3">
@@ -65,7 +71,7 @@ export default function Property(props) {
               <span className="dotspan "></span>{" "}
               <a href="#" className="card-text ">
                 {" "}
-                Show on map{" "}
+                "{t("Properties.PropertiesCom.Property.Hotel.Show on map")}{" "}
               </a>{" "}
               <span className="dotspan"></span>
               <p className="card-text "></p>
@@ -82,12 +88,13 @@ export default function Property(props) {
             <div className="reviews col-lg-8 ">
               <a className="text-muted " href="#">
                 <h6 className="p-0 text-success">{Review}</h6>
-                reviews {props.prop.totalReviews}
+                {t("Properties.PropertiesCom.Property.Hotel.reviews")}{" "}
+                {props.prop.totalReviews}
               </a>
             </div>
             <div className="rate col-lg-4  d-flex justify-content-center ">
               <a className="align-self-center text-decoration-none" href="#">
-                {props.prop.avgReviews}
+                {props.prop.avgReviews.toFixed(1)}
               </a>
             </div>
           </div>
@@ -100,11 +107,11 @@ export default function Property(props) {
               style={{ backgroundColor: "#0071c2" }}
               type="button"
             >
-              Show Details
+              {t("Properties.PropertiesCom.Property.Hotel.Show Details")}
             </button>
           </Link>
         </div>
       </div>
     </div>
   );
-}
+} 

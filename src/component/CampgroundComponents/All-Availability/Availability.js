@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
+import i18n from "../../../i18next";
 import "./Availability.css";
 import { axiosInstance } from "../../../Redux/network";
 import { useParams } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+
 export default function Availability(props) {
-  const [available, setAvailable] = useState();
+  const [available, setAvailable] = useState({});
   const [availableRooms, setAvailableRooms] = useState();
   const [isSelect, setIsSelect] = useState(false);
   const [reservationInfo, setReservationInfo] = useState();
   const [isBtn, setIsBtn] = useState(false);
   const { id } = useParams();
-   
+
   const checkAvailability = () => {
     axiosInstance
       .post("filter/rooms/campground/" + id, available)
@@ -22,6 +26,11 @@ export default function Availability(props) {
         setIsSelect(true);
       });
   };
+
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
 
   const handleDateChange = (e) => {
     console.log(available, "aaaa");
@@ -48,10 +57,6 @@ export default function Availability(props) {
     }
   };
 
-
-
-
-
   const handleRoomNumbChange = (event, room) => {
     let start = new Date(available.startAt).getTime();
     let end = new Date(available.endAt).getTime();
@@ -76,167 +81,193 @@ export default function Availability(props) {
     });
   };
 
-  
+  const bedTypeFun = (type, bedsNumber) => {
+    switch (type) {
+      case "Twin bed(s) / 90-130 cm wide":
+        return (
+          <div className="ms-1 bedType ">
+            <span className="me-2">{bedsNumber}</span>
 
-   const bedTypeFun = (type, bedsNumber) => {
-     switch (type) {
-       case "Twin bed(s) / 90-130 cm wide":
-         return (
-           <div className="ms-1 bedType ">
-             <span className="me-2">{bedsNumber}</span>
+            <span className="me-2">
+              {t("CampgroundComponents.All-Availability.Twin bed")}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 96 96"
+              fill="#003580"
+              width="20px"
+            >
+              <path d="M81 54.9v30.34C81 86.9 79.9 88 78.25 88s-2.75-1.1-2.75-2.76v-8.27h-55v8.27c0 1.66-1.1 2.76-2.75 2.76S15 86.9 15 85.24V10.76C15 9.1 16.1 8 17.75 8s2.75 1.1 2.75 2.76v19.3h55v-5.5c0-1.66 1.1-2.77 2.75-2.77S81 22.9 81 24.54V54.9zm-60.5-4.14v9.65h55V46.63h-55v4.14z"></path>
+            </svg>
+          </div>
+        );
 
-             <span className="me-2">Twin bed</span>
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 96 96"
-               fill="#003580"
-               width="20px"
-             >
-               <path d="M81 54.9v30.34C81 86.9 79.9 88 78.25 88s-2.75-1.1-2.75-2.76v-8.27h-55v8.27c0 1.66-1.1 2.76-2.75 2.76S15 86.9 15 85.24V10.76C15 9.1 16.1 8 17.75 8s2.75 1.1 2.75 2.76v19.3h55v-5.5c0-1.66 1.1-2.77 2.75-2.77S81 22.9 81 24.54V54.9zm-60.5-4.14v9.65h55V46.63h-55v4.14z"></path>
-             </svg>
-           </div>
-         );
+      case "Full bed(s) / 131-150 cm wide":
+        return (
+          <div className="bedType ms-1">
+            <span className="me-2">{bedsNumber}</span>
 
-       case "Full bed(s) / 131-150 cm wide":
-         return (
-           <div className="bedType ms-1">
-             <span className="me-2">{bedsNumber}</span>
+            <span className="me-2">
+              {t("CampgroundComponents.All-Availability.Full bed")}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 96 96"
+              fill="#003580"
+              width="20px"
+            >
+              <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
+            </svg>
+          </div>
+        );
 
-             <span className="me-2">Full bed</span>
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 96 96"
-               fill="#003580"
-               width="20px"
-             >
-               <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
-             </svg>
-           </div>
-         );
+      case "Queen bed(s) / 151-180 cm wide":
+        return (
+          <div className="bedType ms-1">
+            <span className="me-2">{bedsNumber}</span>
 
-       case "Queen bed(s) / 151-180 cm wide":
-         return (
-           <div className="bedType ms-1">
-             <span className="me-2">{bedsNumber}</span>
+            <span className="me-2">
+              {t("CampgroundComponents.All-Availability.Queen bed")}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 96 96"
+              fill="#003580"
+              width="20px"
+            >
+              <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
+            </svg>
+          </div>
+        );
 
-             <span className="me-2">Queen bed</span>
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 96 96"
-               fill="#003580"
-               width="20px"
-             >
-               <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
-             </svg>
-           </div>
-         );
+      case "King bed(s) / 181-210 cm wide":
+        return (
+          <div className="bedType ms-1">
+            <span className="me-2">{bedsNumber}</span>
 
-       case "King bed(s) / 181-210 cm wide":
-         return (
-           <div className="bedType ms-1">
-             <span className="me-2">{bedsNumber}</span>
+            <span className="me-2">
+              {t("CampgroundComponents.All-Availability.King bed")}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 96 96"
+              fill="#003580"
+              width="20px"
+            >
+              <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
+            </svg>
+          </div>
+        );
 
-             <span className="me-2">King bed</span>
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 96 96"
-               fill="#003580"
-               width="20px"
-             >
-               <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
-             </svg>
-           </div>
-         );
+      case "Bunk bed(s) / Variable size":
+        return (
+          <div className="bedType ms-1">
+            <span className="me-2">{bedsNumber}</span>
 
-       case "Bunk bed(s) / Variable size":
-         return (
-           <div className="bedType ms-1">
-             <span className="me-2">{bedsNumber}</span>
+            <span className="me-2">
+              {t("CampgroundComponents.All-Availability.Bunk bed")}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 96 96"
+              fill="#003580"
+              width="20px"
+            >
+              <path d="M81 54.9v30.34C81 86.9 79.9 88 78.25 88s-2.75-1.1-2.75-2.76v-8.27h-55v8.27c0 1.66-1.1 2.76-2.75 2.76S15 86.9 15 85.24V10.76C15 9.1 16.1 8 17.75 8s2.75 1.1 2.75 2.76v19.3h55v-5.5c0-1.66 1.1-2.77 2.75-2.77S81 22.9 81 24.54V54.9zm-60.5-4.14v9.65h55V46.63h-55v4.14z"></path>
+            </svg>
+          </div>
+        );
 
-             <span className="me-2">Bunk bed</span>
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 96 96"
-               fill="#003580"
-               width="20px"
-             >
-               <path d="M81 54.9v30.34C81 86.9 79.9 88 78.25 88s-2.75-1.1-2.75-2.76v-8.27h-55v8.27c0 1.66-1.1 2.76-2.75 2.76S15 86.9 15 85.24V10.76C15 9.1 16.1 8 17.75 8s2.75 1.1 2.75 2.76v19.3h55v-5.5c0-1.66 1.1-2.77 2.75-2.77S81 22.9 81 24.54V54.9zm-60.5-4.14v9.65h55V46.63h-55v4.14z"></path>
-             </svg>
-           </div>
-         );
+      case "Sofa bed(s) / Variable size":
+        return (
+          <div className="bedType ms-1">
+            <span className="me-2">{bedsNumber}</span>
 
-       case "Sofa bed(s) / Variable size":
-         return (
-           <div className="bedType ms-1">
-             <span className="me-2">{bedsNumber}</span>
+            <span className="me-2">
+              {t("CampgroundComponents.All-Availability.Sofa bed")}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 96 96"
+              fill="#003580"
+              width="22px"
+            >
+              <path d="M78.25 45.75h-5.5c-1.65 0-2.75 1.1-2.75 2.75v8.25H26V48.5c0-1.65-1.1-2.75-2.75-2.75h-5.5c-1.65 0-2.75 1.1-2.75 2.75v19.25c0 1.65 1.1 2.75 2.75 2.75h2.75v2.75c0 1.65 1.1 2.75 2.75 2.75S26 74.9 26 73.25V70.5h44v2.75C70 74.9 71.1 76 72.75 76s2.75-1.1 2.75-2.75V70.5h2.75c1.65 0 2.75-1.1 2.75-2.75V48.5c0-1.65-1.1-2.75-2.75-2.75z"></path>
+              <path d="M45.25 51.25V21h-22c-1.65 0-2.75 1.1-2.75 2.75v16.5h8.25c1.65 0 2.75 1.1 2.75 2.75v8.25h13.75zm30.25-27.5c0-1.65-1.1-2.75-2.75-2.75h-22v30.25H64.5V43c0-1.65 1.1-2.75 2.75-2.75h8.25v-16.5z"></path>
+            </svg>
+          </div>
+        );
 
-             <span className="me-2">Sofa bed</span>
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 96 96"
-               fill="#003580"
-               width="22px"
-             >
-               <path d="M78.25 45.75h-5.5c-1.65 0-2.75 1.1-2.75 2.75v8.25H26V48.5c0-1.65-1.1-2.75-2.75-2.75h-5.5c-1.65 0-2.75 1.1-2.75 2.75v19.25c0 1.65 1.1 2.75 2.75 2.75h2.75v2.75c0 1.65 1.1 2.75 2.75 2.75S26 74.9 26 73.25V70.5h44v2.75C70 74.9 71.1 76 72.75 76s2.75-1.1 2.75-2.75V70.5h2.75c1.65 0 2.75-1.1 2.75-2.75V48.5c0-1.65-1.1-2.75-2.75-2.75z"></path>
-               <path d="M45.25 51.25V21h-22c-1.65 0-2.75 1.1-2.75 2.75v16.5h8.25c1.65 0 2.75 1.1 2.75 2.75v8.25h13.75zm30.25-27.5c0-1.65-1.1-2.75-2.75-2.75h-22v30.25H64.5V43c0-1.65 1.1-2.75 2.75-2.75h8.25v-16.5z"></path>
-             </svg>
-           </div>
-         );
+      case "Futon bed(s) / Variable size":
+        return (
+          <div className="bedType ms-1">
+            <span className="me-2">{bedsNumber}</span>
 
-       case "Futon bed(s) / Variable size":
-         return (
-           <div className="bedType ms-1">
-             <span className="me-2">{bedsNumber}</span>
-
-             <span className="me-2">Futon bed</span>
-             <svg
-               xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 96 96"
-               fill="#003580"
-               width="20px"
-             >
-               <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
-             </svg>
-           </div>
-         );
-       default:
-     }
-   };
+            <span className="me-2">
+              {t("CampgroundComponents.All-Availability.Futon bed")}
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 96 96"
+              fill="#003580"
+              width="20px"
+            >
+              <path d="M89.25 48H6.75C5.1 48 4 49.1 4 50.77v30.46C4 82.9 5.1 84 6.75 84s2.75-1.1 2.75-2.77V70.15h77v11.08c0 1.66 1.1 2.77 2.75 2.77S92 82.9 92 81.23V50.77C92 49.1 90.9 48 89.25 48zm-44-27.7h-27.5v-5.53c0-1.66-1.1-2.77-2.75-2.77s-2.75 1.1-2.75 2.77v27.7h33V20.3zm38.5 2.78v-8.3c0-1.67-1.1-2.78-2.75-2.78s-2.75 1.1-2.75 2.77v5.54h-27.5v22.16h33V23.08z"></path>
+            </svg>
+          </div>
+        );
+      default:
+    }
+  };
 
   return (
     <>
       <div className="d-flex my-2 mt-5" id="infoPrices">
-        <h5 className="fw-bold">Availability</h5>
+        <h5 className="fw-bold">
+          {t("CampgroundComponents.All-Availability.Availability")}
+        </h5>
       </div>
 
       <div className="border d-flex">
         <div className="d-flex flex-column p-3">
           <div>
             <h6>
-              <p>Check In</p>
-              <input
-                name="startAt"
-                type="date"
-                class="form-control"
-                onChange={handleDateChange}
-              />
+              {/* <p>{t("CampgroundComponents.All-Availability.Check In")}</p> */}
+              <Stack component="form" noValidate spacing={3}>
+                <TextField
+                  label="Check in"
+                  type="date"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  name="startAt"
+                  onChange={handleDateChange}
+                />
+              </Stack>
             </h6>
-            <h6 className="text-primary">{available && available.startAt}</h6>
+            {/* <h6 className="text-primary">{available && available.startAt}</h6> */}
           </div>
         </div>
 
         <div className="d-flex flex-column p-3">
           <div>
             <h6>
-              <p>Check Out</p>
-              <input
-                name="endAt"
-                type="date"
-                class="form-control"
-                onChange={handleDateChange}
-              />
+              {/* <p>{t("CampgroundComponents.All-Availability.Check Out")}</p> */}
+              <Stack component="form" noValidate spacing={3}>
+                <TextField
+                  name="endAt"
+                  label="Check out"
+                  type="date"
+                  sx={{ width: 220 }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  onChange={handleDateChange}
+                />
+              </Stack>
             </h6>
-            <h6 className="text-primary">{available && available.endAt}</h6>
+            {/* <h6 className="text-primary">{available && available.endAt}</h6> */}
           </div>
         </div>
 
@@ -246,7 +277,7 @@ export default function Availability(props) {
               className="btn btn-primary rounded-0 my-auto"
               onClick={checkAvailability}
             >
-              Check Availability
+              {t("CampgroundComponents.All-Availability.Check Availability")}
             </button>
           ) : (
             <button
@@ -254,7 +285,7 @@ export default function Availability(props) {
               className="btn btn-primary rounded-0 my-auto"
               onClick={checkAvailability}
             >
-              Check Availability
+              {t("CampgroundComponents.All-Availability.Check Availability")}
             </button>
           )}{" "}
         </div>
@@ -271,11 +302,19 @@ export default function Availability(props) {
             <div className="w-100">
               <div className="d-flex justify-content-between mb-3 ">
                 <div>
-                  <h6>Room type:</h6>
-                  <h6>Room name:</h6>
-                  <h6>Number of rooms:</h6>
-                  <h6>Days:</h6>
-                  <h6>Total price:</h6>
+                  <h6>
+                    {t("CampgroundComponents.All-Availability.Room type")}
+                  </h6>
+                  <h6>
+                    {t("CampgroundComponents.All-Availability.Room name")}
+                  </h6>
+                  <h6>
+                    {t("CampgroundComponents.All-Availability.Number of rooms")}
+                  </h6>
+                  <h6>{t("CampgroundComponents.All-Availability.Days")}</h6>
+                  <h6>
+                    {t("CampgroundComponents.All-Availability.Total price")}
+                  </h6>
                 </div>
                 <div>
                   <h6>{reservationInfo.roomType}</h6>
@@ -292,19 +331,19 @@ export default function Availability(props) {
                 className="btn btn-outline-primary w-100"
                 onClick={checkout}
               >
-                Reserve
+                {t("CampgroundComponents.All-Availability.Reserve")}
               </button>
             </div>
           </div>
         )}
         <table id="customers" className="rooms-table">
           <tr>
-            <th>Room type</th>
-            <th>Room name</th>
-            <th>Sleeps</th>
-            <th>Price</th>
-            <th>Beds Type</th>
-            <th>Select rooms</th>
+            <th>{t("CampgroundComponents.All-Availability.Room type")}</th>
+            <th>{t("CampgroundComponents.All-Availability.Room name")}</th>
+            <th>{t("CampgroundComponents.All-Availability.Sleep")}</th>
+            <th>{t("CampgroundComponents.All-Availability.Price")}</th>
+            <th>{t("CampgroundComponents.All-Availability.Beds Type")}</th>
+            <th>{t("CampgroundComponents.All-Availability.Select rooms")}</th>
           </tr>
 
           {isSelect &&
@@ -331,7 +370,9 @@ export default function Availability(props) {
                   </td>
                   <td>
                     <span className="text-success">{room.price}$ </span>
-                    <span className="text-muted">per day</span>
+                    <span className="text-muted">
+                      {t("CampgroundComponents.All-Availability.per day")}
+                    </span>
                   </td>
                   <td>{bedTypeFun(room.bedType, room.bedsNumber)}</td>
                   <td>
@@ -351,12 +392,18 @@ export default function Availability(props) {
         </table>
         {!isSelect && (
           <div className="bg-light text-center py-3">
-            <h4 className="">Choose booking date</h4>
+            <h4 className="">
+              {t("CampgroundComponents.All-Availability.Choose booking date")}
+            </h4>
           </div>
         )}
         {isSelect && availableRooms.length == 0 && (
           <div className="bg-light text-danger text-center py-3">
-            <h4 className="">Sorry no available rooms for this date</h4>
+            <h4 className="">
+              {t(
+                "CampgroundComponents.All-Availability.Sorry no available rooms for this date"
+              )}
+            </h4>
           </div>
         )}
       </div>

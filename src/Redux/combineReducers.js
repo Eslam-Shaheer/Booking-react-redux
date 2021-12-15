@@ -7,17 +7,17 @@ import imagesReducer from "./reducers/images";
 import propertysFilter from "./reducers/PopsFilter";
 import commentReducer from "./reducers/comment";
 import postReducer from "./reducers/post";
- 
+ import { langReducer } from "./reducers/lang";
 const rootReducer = combineReducers({
   hotel: hotelReducer,
   apartment: apartmentReducer,
-  campGround:campGroundReducer,
+  campGround: campGroundReducer,
   user: userReducer,
   images: imagesReducer,
-  reviewSorting:propertysFilter,
+  reviewSorting: propertysFilter,
   comment: commentReducer,
-  post: postReducer
-
+  post: postReducer,
+  lang: langReducer,
 });
 
 export default rootReducer;
