@@ -52,7 +52,7 @@ export default function PropertyType() {
                 {t("PropertyType.Hotels")}
               </p>
               <p className="card-text text-muted">
-                {hotel && hotel.length} {t("PropertyType.hotels")}
+                {hotel && hotel.length} {t("PropertyType.Hotels")}
               </p>
             </div>
           </div>
@@ -89,7 +89,7 @@ export default function PropertyType() {
                 {t("PropertyType.Campground")}
               </p>
               <p className="card-text text-muted">
-                {campground && campground.length} {t("PropertyType.campground")}
+                {campground && campground.length} {t("PropertyType.Campground")}
               </p>
             </div>
           </div>
