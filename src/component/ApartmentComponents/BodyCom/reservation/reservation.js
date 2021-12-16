@@ -176,9 +176,9 @@ export default function Reservation(props) {
           </div>
 
           <div className="p-3">
-            <button className="btn btn-primary w-100 rounded-0">
+            <a className="btn btn-primary w-100 rounded-0" href="#ReV">
               {t("ApartmentComponents.BodyCom.reservation.Reserve")}
-            </button>
+            </a>
           </div>
         </div>
       </div>

@@ -65,8 +65,10 @@ export default function Properties(props) {
     <>
       <div className="col-md-9   rounded">
         <div className="text d-flex justify-content-between">
-          <h3 className="align-self-center">
-            {t("Properties.PropertiesCom.HotelCom.Austin 473 properties found")}
+          <h3>
+            {t("Properties.PropertiesCom.HotelCom.properties found")}{" "}
+            {hotels && hotels.data.length}{" "}
+            {t("Properties.PropertiesCom.HotelCom.hoteL")}
           </h3>
           <div className="mapbtn ">
             <button className="btn btn-primary fw-bold " type="button">

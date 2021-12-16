@@ -79,7 +79,7 @@ export default function Reviews() {
                   </div>
                   <div className="rev-body col-md-8 mt-4">
                     <p>{prop.review.body}</p>
-                    <span className="text-muted ">
+                    <span className="text-muted FontSize">
                       {" "}
                       {createdAt.toDateString()}
                     </span>
@@ -131,7 +131,7 @@ export default function Reviews() {
                   </div>
                   <div className="rev-body col-md-8 mt-4">
                     <p>{prop.review.body}</p>
-                    <span className="text-muted ">
+                    <span className="text-muted FontSize">
                       {" "}
                       {createdAt.toDateString()}
                     </span>
@@ -184,7 +184,7 @@ export default function Reviews() {
                   </div>
                   <div className="rev-body col-md-8 mt-4">
                     <p>{prop.review.body}</p>
-                    <span className="text-muted ">
+                    <span className="text-muted FontSize">
                       {" "}
                       {createdAt.toDateString()}
                     </span>

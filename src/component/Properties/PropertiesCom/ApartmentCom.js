@@ -59,10 +59,10 @@ export default function Apartments(props) {
     <>
       <div className="col-sm-9   rounded">
         <div className="text d-flex justify-content-between">
-          <h3 className="align-self-center">
-            {t(
-              "Properties.PropertiesCom.ApartmentCom.Austin 473 properties found"
-            )}
+          <h3>
+            {t("Properties.PropertiesCom.ApartmentCom.properties found")}{" "}
+            {aparts && aparts.data.length}{" "}
+            {t("Properties.PropertiesCom.ApartmentCom.apart")}
           </h3>
           <div className="mapbtn ">
             <button className="btn btn-primary fw-bold " type="button">

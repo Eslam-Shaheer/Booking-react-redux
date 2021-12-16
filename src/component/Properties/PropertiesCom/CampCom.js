@@ -17,6 +17,7 @@ import i18n from "../../../i18next";
 
  import { axiosInstance } from "../../../Redux/network";
 export default function CampGrounds(props) {
+   
   let camps = useSelector((state) => state.campGround.getCampGrounds);
   let revProps = useSelector((state) => state.reviewSorting);
   let [allProps, setCamps] = useState();
@@ -24,6 +25,7 @@ export default function CampGrounds(props) {
 
   const lowStarsSorting = () => {
     setCamps(revProps.getLowStars);
+
   };
   const TopStarsSorting = () => {
     setCamps(revProps.getTopStars);
@@ -42,15 +44,16 @@ export default function CampGrounds(props) {
   }, [camps]);
 
   useEffect(() => {
+    
     let city = props.city || "";
     if (!props.country && !props.city) {
       dispatch(getCampGrounds());
       dispatch(getTopRev("campground"));
-    } else {
+    } else{
       axiosInstance
         .get("filter/search/campground/" + props.country + "/" + city)
         .then((result) => {
-          console.log(result);
+          
           if (result.data.success) {
             setCamps(result.data);
           }
@@ -66,7 +69,11 @@ export default function CampGrounds(props) {
       <div className="col-sm-9   rounded">
         <div className="text d-flex justify-content-between">
           <h3 className="align-self-center">
-            {t("Properties.PropertiesCom.CampCom.Austin 473 properties found")}
+            <h3>
+              {t("Properties.PropertiesCom.CampCom.properties found")}{" "}
+              {camps && camps.data.length}{" "}
+              {t("Properties.PropertiesCom.CampCom.camP")}
+            </h3>
           </h3>
           <div className="mapbtn ">
             <button className="btn btn-primary fw-bold " type="button">

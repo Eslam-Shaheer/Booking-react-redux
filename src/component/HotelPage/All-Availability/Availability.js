@@ -10,7 +10,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 
 export default function Availability(props) {
-  const [available, setAvailable] = useState();
+  const [available, setAvailable] = useState({});
   const [availableRooms, setAvailableRooms] = useState();
   const [isSelect, setIsSelect] = useState(false);
   const [reservationInfo, setReservationInfo] = useState();
