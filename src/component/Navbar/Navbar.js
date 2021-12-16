@@ -54,8 +54,8 @@ export default function Navbar() {
 
   const logOut = () => {
     localStorage.removeItem("authentication");
-    // window.location.replace("localhost:4200/")
-    window.location.reload();
+    window.location.replace("http://localhost:4200/login");
+    // window.location.reload();
   };
 
   useEffect(() => {
@@ -204,8 +204,6 @@ export default function Navbar() {
                 </Box>
               </Modal>
 
-           
-                        
               <div className="nav-item mx-lg-2">
                 <PopupState variant="popover" popupId="demo-popup-popover">
                   {(popupState) => (
