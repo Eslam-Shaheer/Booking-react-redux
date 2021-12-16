@@ -26,7 +26,9 @@
       "Sleeps": "ينام",
       "Accommodation Type": "نوع الإقامة",
       "Price": "السعر",
-      "per day": "في اليوم"
+      "per day": "في اليوم",
+       "When would you like to stay at":"اين تحب البقاء في "
+
     },
     "ApartmentImg": {
       "Apartment": "شقة",
@@ -262,6 +264,7 @@
       "Check In": "موعد الدخول",
       "Check Out": "موعد الخروج",
       "Check Availability": "التحقق انه متاح",
+      "When would you like to stay at":"اين تحب البقاء في ",
        
       "Room name": "اسم الغرفة:",
       "Number of rooms": "عدد الغرف:",
@@ -593,6 +596,7 @@
       "Check In": "ميعاد الدخول",
       "Check Out": "ميعاد الخروج",
       "Check Availability": "التحقق من انه متاح",
+       "When would you like to stay at":"اين تحب البقاء في ",
  
       "Room name:": "اسم الغرفة:",
       "Number of rooms": "عدد من الغرف:",

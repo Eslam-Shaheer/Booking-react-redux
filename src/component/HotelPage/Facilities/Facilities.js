@@ -308,17 +308,7 @@ export default function Facilities(props) {
               })}
           </div>
         </div>
-
-        <p className="text-primary text-end">
-          {t("HotelPage.Facilities.Missing some information?")}{" "}
-          <a className="text-decoration-none fw-bold" href="#">
-            {t("HotelPage.Facilities.Yes")}
-          </a>{" "}
-          /{" "}
-          <a className="text-decoration-none fw-bold" href="#">
-            {t("HotelPage.Facilities.No")}
-          </a>
-        </p>
+ 
       </div>
     </>
   );
