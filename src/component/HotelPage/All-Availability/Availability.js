@@ -235,7 +235,9 @@ export default function Availability(props) {
           {" "}
           <h5 className=" p-2">
             {t("HotelPage.All-Availability.When would you like to stay at")}{" "}
-            {props.hotel.hotelName}
+            {  localStorage.getItem("i18nextLng") == "ar"
+              ? props.hotel.hotelNameAR
+              : props.hotel.hotelName}
           </h5>
         </div>
         <div className="d-flex">

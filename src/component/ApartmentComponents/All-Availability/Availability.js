@@ -297,7 +297,9 @@ export default function Availability(props) {
             {t(
               "ApartmentComponents.All-Availability.When would you like to stay at"
             )}{" "}
-            {props.apartment.apartmentName}
+            {  localStorage.getItem("i18nextLng") == "ar"
+              ? props.apartment.apartmentNameAR
+              : props.apartment.apartmentName}
           </h5>
         </div>
         <div className="d-flex">
