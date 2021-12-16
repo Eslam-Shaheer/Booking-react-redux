@@ -29,7 +29,12 @@ export default function CampgroundImg(props) {
           </h6>
         </div>
         <div className="me-2">
-          <h3> {props.campground.campgroundName} </h3>
+          <h3>
+            {" "}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.campground.campgroundNameAR
+              : props.campground.campgroundName}{" "}
+          </h3>
         </div>
         <div className="me-2">
           <h6 className="pt-2">
@@ -78,8 +83,17 @@ export default function CampgroundImg(props) {
             >
               <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
             </svg>
-            {props.campground.streetAddress} , {props.campground.city} ,{" "}
-            {props.campground.country}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.campground.streetAddressAR
+              : props.campground.streetAddress}{" "}
+            ,{" "}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.campground.cityAR
+              : props.campground.city}{" "}
+            ,{" "}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.campground.countryAR
+              : props.campground.country}
           </p>
         </div>
       </div>

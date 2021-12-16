@@ -57,7 +57,9 @@ export default function Property(props) {
               style={{ color: "#0071c2" }}
             >
               <h5 className="card-title mt-0">
-                {props.prop[props.type + "Name"]}
+                {localStorage.getItem("i18nextLng") == "ar"
+                  ? props.prop[props.type + "NameAR"]
+                  : props.prop[props.type + "Name"]}
               </h5>
             </NavLink>
             <div className="stars">
@@ -66,7 +68,13 @@ export default function Property(props) {
             </div>
             <div style={{ fontSize: "13px" }}>
               <a href="#" className="card-text ">
-                {props.prop.city} , {props.prop.streetAddress}
+                {localStorage.getItem("i18nextLng") == "ar"
+                  ? props.prop.cityAR
+                  : props.prop.city}{" "}
+                ,{" "}
+                {localStorage.getItem("i18nextLng") == "ar"
+                  ? props.prop.streetAddressAR
+                  : props.prop.streetAddress}
               </a>{" "}
               <span className="dotspan "></span>{" "}
               <a href="#" className="card-text ">
@@ -77,8 +85,9 @@ export default function Property(props) {
               <p className="card-text "></p>
             </div>
             <p className="p-desc">
-              {props.prop.description &&
-                props.prop.description.substring(1, 250)}
+              {localStorage.getItem("i18nextLng") == "ar"
+                ? props.prop.descriptionAR.substring(1, 250)
+                : props.prop.description.substring(1, 250)}
               ...
             </p>
           </div>
@@ -114,4 +123,4 @@ export default function Property(props) {
       </div>
     </div>
   );
-} 
+}

@@ -45,7 +45,12 @@ export default function HotelImg(props) {
           </h6>
         </div>
         <div className="me-2">
-          <h3> {props.hotel.hotelName} </h3>
+          <h3>
+            {" "}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.hotel.hotelNameAR
+              : props.hotel.hotelName}{" "}
+          </h3>
         </div>
         <div className="me-2">
           <h6 className="pt-2">
@@ -94,8 +99,17 @@ export default function HotelImg(props) {
             >
               <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
             </svg>
-            {props.hotel.streetAddress} , {props.hotel.city} ,
-            {props.hotel.country}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.hotel.streetAddressAR
+              : props.hotel.streetAddress}{" "}
+            ,{" "}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.hotel.cityAR
+              : props.hotel.city}{" "}
+            ,
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.hotel.countryAR
+              : props.hotel.country}
           </p>
         </div>
       </div>

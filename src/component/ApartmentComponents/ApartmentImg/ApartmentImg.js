@@ -7,10 +7,10 @@ import i18n from "../../../i18next";
 export default function ApartmentImg(props) {
   const [show, setShow] = useState(false);
   let [apartment, setApartment] = useState(props.apartment);
- const { t, i18n } = useTranslation();
- function handleClick(lang) {
-   i18n.changeLanguage(lang);
- }
+  const { t, i18n } = useTranslation();
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+  }
   useEffect(() => {
     setApartment(props.apartment);
   }, []);
@@ -26,7 +26,12 @@ export default function ApartmentImg(props) {
           </h6>
         </div>
         <div className="me-2">
-          <h3> {props.apartment.apartmentName} </h3>
+          <h3>
+            {" "}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.apartment.apartmentNameAR
+              : props.apartment.apartmentName}{" "}
+          </h3>
         </div>
         <div className="me-2">
           <h6 className="pt-2">
@@ -74,8 +79,17 @@ export default function ApartmentImg(props) {
             >
               <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
             </svg>
-            {props.apartment.streetAddress} , {props.apartment.city} ,{" "}
-            {props.apartment.country}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.apartment.streetAddressAR
+              : props.apartment.streetAddress}{" "}
+            ,{" "}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.apartment.cityAR
+              : props.apartment.city}{" "}
+            ,{" "}
+            {localStorage.getItem("i18nextLng") == "ar"
+              ? props.apartment.countryAR
+              : props.apartment.country}
           </p>
         </div>
       </div>
@@ -121,8 +135,7 @@ export default function ApartmentImg(props) {
           <p>
             {t(
               "ApartmentComponents.ApartmentImg.This property has taken extra health and hygiene measures to ensure that your safety is their priority"
-            )}
-            {" "}
+            )}{" "}
             <a className="text-decoration-none" href="#">
               {t(
                 "ApartmentComponents.ApartmentImg.See health & safety details"

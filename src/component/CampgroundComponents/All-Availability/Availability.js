@@ -232,7 +232,7 @@ export default function Availability(props) {
         <div>
           {" "}
           <h5 className=" p-2">
-            When would you like to stay at {props.apartment.apartmentName}
+            When would you like to stay at {props.campground.campgroundName}
           </h5>
         </div>
         <div className="d-flex">
