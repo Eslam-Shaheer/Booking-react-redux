@@ -202,7 +202,12 @@ export default function Bookings() {
                               <Tooltip id={`tooltip-${placement}`}>
                                 <span>
                                   {t(
-                                    "You Can Cancel Before( {hotelBooking.cancellation}) Days from the Start Day"
+                                    "UserDashBoard.Bookings.You Can Cancel Before"
+                                  )}{" "}
+                                  {hotelBooking.cancellation}
+                                  {" "}
+                                  {t(
+                                    "UserDashBoard.Bookings.Days from the Start Day"
                                   )}
                                 </span>
                               </Tooltip>
