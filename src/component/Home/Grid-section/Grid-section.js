@@ -16,8 +16,7 @@ export default function Gridsection() {
     i18n.changeLanguage(lang);
   }
   useEffect(() => {
-    
-    axiosInstance.get("/filter/search/hotel/Egypt/alamain").then((result) => {
+    axiosInstance.get("/filter/search/hotel/Egypt/Luxor").then((result) => {
       if (result.data.success) {
         setAlamainHotels(result.data.data);
       }
