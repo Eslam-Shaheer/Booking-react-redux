@@ -36,8 +36,7 @@ export default function Addpost(props) {
       navigate("/post/" + postLocation);
     }
   };
-  const savePost = (e) => {
-    e.preventDefault();
+  const savePost = () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append("multiple_images", selectedFile, selectedFile.name);
@@ -48,6 +47,7 @@ export default function Addpost(props) {
         setPost(newPost);
         axiosInstance.post("post/", Post).then((result) => {
           if (result.data.success) {
+            window.location.reload();
             console.log(result.data);
             props.setNewPost(result.data);
           } else {
@@ -242,9 +242,9 @@ export default function Addpost(props) {
                 </Form.Group>
                 <Button
                   className="btn btn-primary"
-                  onClick={(e) => {
-                    savePost(e);
-                    setShow(true);
+                  onClick={() => {
+                    savePost();
+                    setShow(false);
                   }}
                 >
                   {t("Posts.Addpost.Add Post")}
