@@ -26,7 +26,8 @@
       "Sleeps": "Sleeps",
       "Accommodation Type": "Accommodation Type",
       "Price": "Price",
-      "per day": "per day"
+      "per day": "per day",
+      "When would you like to stay at":"When would you like to stay at"
     },
     "ApartmentImg": {
       "Apartment": "Apartment",
@@ -261,7 +262,7 @@
   "CampgroundComponents": {
     "All-Availability": {
       "Beds Type":"Beds Type",
-      
+      "When would you like to stay at":"When would you like to stay at",
       "Availability": "Availability",
       "Check In": "Check In",
       "Check Out": "Check Out",
@@ -592,6 +593,7 @@
       "Check In": "Check In",
       "Check Out": "Check Out",
       "Check Availability": "Check Availability",
+       "When would you like to stay at":"When would you like to stay at",
       
       "Room name": "Room name:",
       "Number of rooms": "Number of rooms:",
