@@ -1,14 +1,14 @@
 import React from "react";
 import HotelsCom from "../../component/Properties/PropertiesCom/HotelsCom";
-import SearchCom from "../../component/Properties/Search/SearchCom";
-import { useParams } from "react-router-dom";
+ import { useParams } from "react-router-dom";
+import Search from "../../component/HotelPage/Search/Search";
 export default function HotelsSearch() {
   const { country, city } = useParams();
   return (
     <>
-      <div className="container-lg mt-5">
+      <div className="container mt-5">
         <div className="row">
-          <SearchCom />
+          <Search />
           <HotelsCom country={country} city={city} />
         </div>
       </div>
