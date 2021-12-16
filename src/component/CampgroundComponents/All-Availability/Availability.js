@@ -235,7 +235,9 @@ export default function Availability(props) {
             {t(
               "CampgroundComponents.All-Availability.When would you like to stay at"
             )}{" "}
-            {props.campground.campgroundName}
+            { localStorage.getItem("i18nextLng") == "ar"
+              ? props.campground.campgroundNameAR
+              : props.campground.campgroundName}{" "}
           </h5>
         </div>
         <div className="d-flex">
