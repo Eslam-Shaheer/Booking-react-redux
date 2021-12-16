@@ -631,7 +631,7 @@ export default function Booking(props) {
                 {" "}
                 {t("checkOut.Booking.FREE cancellation")}
               </span>{" "}
-              {t("checkOut.Booking.until 11:59 PM on")} {cancelDate}
+              until 11:59 PM on {cancelDate}
             </p>
           </div>
 
@@ -701,7 +701,7 @@ export default function Booking(props) {
               <label for="validationCustom02" className="form-label 6 fw-bold">
                 {t("checkOut.Booking.Guest email")}
                 <span className="text-muted fw-normal">
-                  {t("checkOut.Booking.(optional)")}
+                 
                 </span>
               </label>
               <input

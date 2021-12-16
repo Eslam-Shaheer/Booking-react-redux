@@ -124,7 +124,8 @@ export default function HouseRules(props) {
                   {t(
                     "HotelPage.HouseRules.You can cancel your reservation and get your money back in"
                   )}{" "}
-                  {props.hotel.cancellation} {t("HotelPage.HouseRules.days")}
+                  {props.hotel.cancellation} {t("HotelPage.HouseRules.days")}{" "}
+                  before your check in date
                 </span>
               </div>
             </div>

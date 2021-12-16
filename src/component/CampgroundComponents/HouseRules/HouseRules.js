@@ -128,7 +128,8 @@ export default function HouseRules(props) {
                     "CampgroundComponents.HouseRules.You can cancel your reservation and get your money back in"
                   )}{" "}
                   {props.campground.cancellation}{" "}
-                  {t("CampgroundComponents.HouseRules.days")}
+                  {t("CampgroundComponents.HouseRules.days")} before your check in date 
+
                 </span>
               </div>
             </div>

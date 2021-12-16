@@ -68,7 +68,7 @@ export default function BookingDetails(props) {
                 {props.info.roomsNum} {t("checkOut.BookingDetails.rooms")}
               </span>
             )}
-            <strong>{t("checkOut.BookingDetails.Days")}</strong>
+             
             <span>
               {props.info.days} {t("checkOut.BookingDetails.Days")}
             </span>
