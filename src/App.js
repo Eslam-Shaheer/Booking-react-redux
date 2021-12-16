@@ -121,7 +121,7 @@ function App() {
       >
         <Routes>
           <Route path="/auth/:token" element={<Auth />} />
-          {isAuthenticated() ? (
+          {isAuthenticated() && (
             <>
               <Route exact path="/" element={<Home />} />
 
@@ -165,8 +165,6 @@ function App() {
               />
               <Route path="/checkout" element={<HotelBooking />} />
             </>
-          ) : (
-            (window.location.href = "http://localhost:4200/login")
           )}
         </Routes>
       </Suspense>
