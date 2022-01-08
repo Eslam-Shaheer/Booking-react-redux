@@ -48,10 +48,16 @@ export default function HomesGustesLove(props) {
                       to={"/" + props.prop + "s/" + item._id}
                     >
                       <p className="card-title text-muted mb-0">
-                        {item[props.prop + "Name"]}
+                        {localStorage.getItem("i18nextLng") == "ar"
+                          ? item[props.prop + "NameAR"]
+                          : item[props.prop + "Name"]}
                       </p>
                     </Link>
-                    <p className="card-text text-muted mb-2">{item.country}</p>
+                    <p className="card-text text-muted mb-2">
+                      {localStorage.getItem("i18nextLng") == "ar"
+                        ? item.countryAR
+                        : item.country}
+                    </p>
 
                     <div className="d-flex justify-content-between align-items-center w-75">
                       <span className=" bg-primary_color badge-rating ">

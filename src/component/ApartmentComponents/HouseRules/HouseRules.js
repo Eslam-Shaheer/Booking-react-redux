@@ -19,7 +19,6 @@ export default function HouseRules(props) {
                 {t(
                   "ApartmentComponents.HouseRules.takes special requests - add in the next step!"
                 )}
-               
               </span>
             </div>
           </div>
@@ -55,7 +54,7 @@ export default function HouseRules(props) {
 
                 <div className="me-2">
                   <span className="fw-bold">
-                   {t("ApartmentComponents.HouseRules.Check in")}
+                    {t("ApartmentComponents.HouseRules.Check in")}
                   </span>
                 </div>
                 <div>
@@ -129,7 +128,8 @@ export default function HouseRules(props) {
                       "ApartmentComponents.HouseRules.You can cancel your reservation and get your money back in"
                     )}
                     {props.apartment.cancellation}
-                    {t("ApartmentComponents.HouseRules.days")}
+                    {t("ApartmentComponents.HouseRules.days ")} before your
+                    check in date
                   </span>
                 </div>
               </div>
@@ -233,7 +233,6 @@ export default function HouseRules(props) {
                 </div>
                 <div className="me-2">
                   <span>
-                   
                     {t(
                       "ApartmentComponents.HouseRules.Booking.com takes your payment on behalf of the property for this stay, but make sure you have cash for any extras once you get there"
                     )}

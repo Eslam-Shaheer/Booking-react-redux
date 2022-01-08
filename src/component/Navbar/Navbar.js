@@ -121,7 +121,7 @@ export default function Navbar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse " id="navbarText">
+          <div className="collapse navbar-collapse rtL" id="navbarText">
             <div className="d-flex align-items-center  ms-auto">
               <Button onClick={handleOpen}>
                 {localStorage.getItem("key") == "english" && (

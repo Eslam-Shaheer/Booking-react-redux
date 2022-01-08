@@ -83,3 +83,6 @@
 .logOut{
 	transform: translateY(5px) rotate(180deg);
 }
+ .rtL{
+	 flex-grow: 0 !important;
+ }
